@@ -1,0 +1,93 @@
+<?php
+
+namespace EBay\AccountManagement\Generated\SellAccountV1\Models;
+
+use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
+use Microsoft\Kiota\Abstractions\Serialization\Parsable;
+use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
+use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
+
+/**
+ * This type is used by the root response of the <b>getSalesTaxes</b> method.
+*/
+class SalesTaxes implements AdditionalDataHolder, Parsable 
+{
+    /**
+     * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    */
+    private ?array $additionalData = null;
+    
+    /**
+     * @var array<SalesTax>|null $salesTaxes An array of one or more sales-tax rate entries for a specified country.<br><br>If no sales-tax rate entries are set up, no response payload is returned, but an HTTP status code of <code>204 No Content</code> is returned.
+    */
+    private ?array $salesTaxes = null;
+    
+    /**
+     * Instantiates a new SalesTaxes and sets the default values.
+    */
+    public function __construct() {
+        $this->setAdditionalData([]);
+    }
+
+    /**
+     * Creates a new instance of the appropriate class based on discriminator value
+     * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
+     * @return SalesTaxes
+    */
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): SalesTaxes {
+        return new SalesTaxes();
+    }
+
+    /**
+     * Gets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @return array<string, mixed>|null
+    */
+    public function getAdditionalData(): ?array {
+        return $this->additionalData;
+    }
+
+    /**
+     * The deserialization information for the current model
+     * @return array<string, callable(ParseNode): void>
+    */
+    public function getFieldDeserializers(): array {
+        $o = $this;
+        return  [
+            'salesTaxes' => fn(ParseNode $n) => $o->setSalesTaxes($n->getCollectionOfObjectValues([SalesTax::class, 'createFromDiscriminatorValue'])),
+        ];
+    }
+
+    /**
+     * Gets the salesTaxes property value. An array of one or more sales-tax rate entries for a specified country.<br><br>If no sales-tax rate entries are set up, no response payload is returned, but an HTTP status code of <code>204 No Content</code> is returned.
+     * @return array<SalesTax>|null
+    */
+    public function getSalesTaxes(): ?array {
+        return $this->salesTaxes;
+    }
+
+    /**
+     * Serializes information the current object
+     * @param SerializationWriter $writer Serialization writer to use to serialize this model
+    */
+    public function serialize(SerializationWriter $writer): void {
+        $writer->writeCollectionOfObjectValues('salesTaxes', $this->getSalesTaxes());
+        $writer->writeAdditionalData($this->getAdditionalData());
+    }
+
+    /**
+     * Sets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @param array<string,mixed> $value Value to set for the AdditionalData property.
+    */
+    public function setAdditionalData(?array $value): void {
+        $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the salesTaxes property value. An array of one or more sales-tax rate entries for a specified country.<br><br>If no sales-tax rate entries are set up, no response payload is returned, but an HTTP status code of <code>204 No Content</code> is returned.
+     * @param array<SalesTax>|null $value Value to set for the salesTaxes property.
+    */
+    public function setSalesTaxes(?array $value): void {
+        $this->salesTaxes = $value;
+    }
+
+}
