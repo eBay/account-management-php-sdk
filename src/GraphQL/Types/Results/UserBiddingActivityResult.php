@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\Results;
 
 readonly class UserBiddingActivityResult
 {
     /**
-     * @param array<int, array<string, mixed>> $auctions Raw auction item arrays.
+     * @param AuctionItemResult[] $auctions
      */
     public function __construct(
         public array $auctions,
@@ -15,7 +16,10 @@ readonly class UserBiddingActivityResult
     public static function fromArray(array $data): self
     {
         return new self(
-            auctions:         $data['auctions'] ?? [],
+            auctions:         array_map(
+                static fn(array $item): AuctionItemResult => AuctionItemResult::fromArray($item),
+                $data['auctions'] ?? [],
+            ),
             paginationOutput: PaginationResult::fromArray($data['paginationOutput'] ?? []),
         );
     }

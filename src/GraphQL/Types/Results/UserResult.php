@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\Results;
 
@@ -13,35 +14,33 @@ readonly class UserResult
         public ?string $userCreatedAt = null,
         public ?string $registrationMarketPlace = null,
         public ?IndividualIdentityProfileResult $individualIdentityProfile = null,
-        /** @var array<string, mixed>|null Raw publicUserProfile data */
-        public ?array $publicUserProfile = null,
-        /** @var array<string, mixed>|null Raw sellerProfile data */
-        public ?array $sellerProfile = null,
-        /** @var array<string, mixed>|null Raw userStatus data */
-        public ?array $userStatus = null,
-        /** @var array<string, mixed>|null Raw userType data */
-        public ?array $userType = null,
+        public ?PublicUserProfileResult $publicUserProfile = null,
+        public ?UserStatusResult $userStatus = null,
+        public ?UserTypeResult $userType = null,
     ) {}
 
     public static function fromArray(array $data): self
     {
-        $individualProfile = isset($data['individualIdentityProfile'])
-            ? IndividualIdentityProfileResult::fromArray($data['individualIdentityProfile'])
-            : null;
-
         return new self(
-            userId:                   $data['userId'],
-            username:                 $data['username'] ?? null,
-            newUser:                  $data['newUser'] ?? null,
-            userIdChanged:            $data['userIdChanged'] ?? null,
-            userIdLastChangedAt:      $data['userIdLastChangedAt'] ?? null,
-            userCreatedAt:            $data['userCreatedAt'] ?? null,
-            registrationMarketPlace:  $data['registrationMarketPlace'] ?? null,
-            individualIdentityProfile: $individualProfile,
-            publicUserProfile:        $data['publicUserProfile'] ?? null,
-            sellerProfile:            $data['sellerProfile'] ?? null,
-            userStatus:               $data['userStatus'] ?? null,
-            userType:                 $data['userType'] ?? null,
+            userId:                    $data['userId'],
+            username:                  $data['username'] ?? null,
+            newUser:                   $data['newUser'] ?? null,
+            userIdChanged:             $data['userIdChanged'] ?? null,
+            userIdLastChangedAt:       $data['userIdLastChangedAt'] ?? null,
+            userCreatedAt:             $data['userCreatedAt'] ?? null,
+            registrationMarketPlace:   $data['registrationMarketPlace'] ?? null,
+            individualIdentityProfile: isset($data['individualIdentityProfile'])
+                ? IndividualIdentityProfileResult::fromArray($data['individualIdentityProfile'])
+                : null,
+            publicUserProfile:         isset($data['publicUserProfile'])
+                ? PublicUserProfileResult::fromArray($data['publicUserProfile'])
+                : null,
+            userStatus:                isset($data['userStatus'])
+                ? UserStatusResult::fromArray($data['userStatus'])
+                : null,
+            userType:                  isset($data['userType'])
+                ? UserTypeResult::fromArray($data['userType'])
+                : null,
         );
     }
 }
