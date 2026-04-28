@@ -2,88 +2,140 @@
 
 namespace EBay\AccountManagement\Clients\Rest;
 
+use EBay\AccountManagement\Configuration\AccountManagementConfiguration;
+use EBay\AccountManagement\Configuration\RequestOptions;
 use EBay\AccountManagement\Configuration\TokenContext;
 use EBay\AccountManagement\Generated\SellFinancesV1\SellFinancesV1ApiClient;
 
+// Request configuration classes
+use EBay\AccountManagement\Generated\SellFinancesV1\Billing_activity\Billing_activityRequestBuilderGetRequestConfiguration;
+use EBay\AccountManagement\Generated\SellFinancesV1\Order_earnings\Order_earningsRequestBuilderGetRequestConfiguration;
+use EBay\AccountManagement\Generated\SellFinancesV1\Order_earnings\Item\WithOrder_ItemRequestBuilderGetRequestConfiguration;
+use EBay\AccountManagement\Generated\SellFinancesV1\Order_earnings_summary\Order_earnings_summaryRequestBuilderGetRequestConfiguration;
+use EBay\AccountManagement\Generated\SellFinancesV1\Payout\Item\WithPayout_ItemRequestBuilderGetRequestConfiguration;
+use EBay\AccountManagement\Generated\SellFinancesV1\Payout\PayoutRequestBuilderGetRequestConfiguration;
+use EBay\AccountManagement\Generated\SellFinancesV1\Payout_summary\Payout_summaryRequestBuilderGetRequestConfiguration;
+use EBay\AccountManagement\Generated\SellFinancesV1\Seller_funds_summary\Seller_funds_summaryRequestBuilderGetRequestConfiguration;
+use EBay\AccountManagement\Generated\SellFinancesV1\Transaction\TransactionRequestBuilderGetRequestConfiguration;
+use EBay\AccountManagement\Generated\SellFinancesV1\Transaction_summary\Transaction_summaryRequestBuilderGetRequestConfiguration;
+use EBay\AccountManagement\Generated\SellFinancesV1\Transfer\Item\WithTransfer_ItemRequestBuilderGetRequestConfiguration;
+
 final class SellFinancesV1Client
 {
-    public function __construct(private readonly SellFinancesV1ApiClient $kiota) {}
+    public function __construct(
+        private readonly SellFinancesV1ApiClient $kiota,
+        private readonly AccountManagementConfiguration $config,
+    ) {}
+
+    // ── Headers helper ────────────────────────────────────────────────────
+
+    /** @return array<string,string> */
+    private function mergedHeaders(?RequestOptions $requestOptions): array
+    {
+        $headers = $this->config->defaultRequestOptions->headers;
+        if ($requestOptions !== null) {
+            $headers = array_merge($headers, $requestOptions->headers);
+        }
+        return $headers;
+    }
 
     // ── Billing Activity ──────────────────────────────────────────────────
 
-    public function getBillingActivities(?string $accessToken = null): mixed
+    public function getBillingActivities(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->billing_activity()->get()->wait();
+        return $this->kiota->billing_activity()->get(
+            new Billing_activityRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+        )->wait();
     }
 
     // ── Order Earnings ────────────────────────────────────────────────────
 
-    public function getOrderEarnings(?string $accessToken = null): mixed
+    public function getOrderEarnings(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->order_earnings()->get()->wait();
+        return $this->kiota->order_earnings()->get(
+            new Order_earningsRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+        )->wait();
     }
 
-    public function getOrderEarningsById(string $orderId, ?string $accessToken = null): mixed
+    public function getOrderEarningsById(string $orderId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->order_earnings()->byOrder_id($orderId)->get()->wait();
+        return $this->kiota->order_earnings()->byOrder_id($orderId)->get(
+            new WithOrder_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+        )->wait();
     }
 
-    public function getOrderEarningsSummary(?string $accessToken = null): mixed
+    public function getOrderEarningsSummary(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->order_earnings_summary()->get()->wait();
+        return $this->kiota->order_earnings_summary()->get(
+            new Order_earnings_summaryRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+        )->wait();
     }
 
     // ── Payout ────────────────────────────────────────────────────────────
 
-    public function getPayout(string $payoutId, ?string $accessToken = null): mixed
+    public function getPayout(string $payoutId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->payout()->byPayout_Id($payoutId)->get()->wait();
+        return $this->kiota->payout()->byPayout_Id($payoutId)->get(
+            new WithPayout_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+        )->wait();
     }
 
-    public function getPayouts(?string $accessToken = null): mixed
+    public function getPayouts(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->payout()->get()->wait();
+        return $this->kiota->payout()->get(
+            new PayoutRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+        )->wait();
     }
 
-    public function getPayoutSummary(?string $accessToken = null): mixed
+    public function getPayoutSummary(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->payout_summary()->get()->wait();
+        return $this->kiota->payout_summary()->get(
+            new Payout_summaryRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+        )->wait();
     }
 
     // ── Seller Funds Summary ──────────────────────────────────────────────
 
-    public function getSellerFundsSummary(?string $accessToken = null): mixed
+    public function getSellerFundsSummary(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->seller_funds_summary()->get()->wait();
+        return $this->kiota->seller_funds_summary()->get(
+            new Seller_funds_summaryRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+        )->wait();
     }
 
     // ── Transactions ──────────────────────────────────────────────────────
 
-    public function getTransactions(?string $accessToken = null): mixed
+    public function getTransactions(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->transaction()->get()->wait();
+        return $this->kiota->transaction()->get(
+            new TransactionRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+        )->wait();
     }
 
-    public function getTransactionSummary(?string $accessToken = null): mixed
+    public function getTransactionSummary(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->transaction_summary()->get()->wait();
+        return $this->kiota->transaction_summary()->get(
+            new Transaction_summaryRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+        )->wait();
     }
 
     // ── Transfer ──────────────────────────────────────────────────────────
 
-    public function getTransfer(string $transferId, ?string $accessToken = null): mixed
+    public function getTransfer(string $transferId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
-        return $this->kiota->transfer()->byTransfer_Id($transferId)->get()->wait();
+        return $this->kiota->transfer()->byTransfer_Id($transferId)->get(
+            new WithTransfer_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+        )->wait();
     }
 }

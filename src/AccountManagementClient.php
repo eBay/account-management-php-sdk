@@ -13,6 +13,7 @@ use EBay\AccountManagement\Generated\SellAccountV1\SellAccountV1ApiClient;
 use EBay\AccountManagement\Generated\SellAccountV2\SellAccountV2ApiClient;
 use EBay\AccountManagement\Generated\SellFinancesV1\SellFinancesV1ApiClient;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\HandlerStack;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
@@ -27,27 +28,53 @@ final class AccountManagementClient
         AccountManagementConfiguration $config,
         ?GuzzleClient $guzzle = null,
     ) {
-        $guzzle ??= new GuzzleClient([
-            'timeout'         => 30,
-            'connect_timeout' => 5,
-        ]);
+        if ($guzzle === null) {
+            $stack = HandlerStack::create();
+
+            if ($config->diagnosticLogging) {
+                $stack->push(function (callable $handler) {
+                    return function ($request, array $options) use ($handler) {
+                        return $handler($request, $options)->then(function ($response) use ($request) {
+                            if ($response->getStatusCode() >= 400) {
+                                fwrite(STDERR, sprintf(
+                                    "[REST %d] %s %s\n",
+                                    $response->getStatusCode(),
+                                    $request->getMethod(),
+                                    $request->getUri()
+                                ));
+                                $body = $response->getBody()->__toString();
+                                fwrite(STDERR, sprintf("[REST body] %s\n", $body));
+                                $response->getBody()->rewind();
+                            }
+                            return $response;
+                        });
+                    };
+                });
+            }
+
+            $guzzle = new GuzzleClient([
+                'timeout'         => 30,
+                'connect_timeout' => 5,
+                'handler'         => $stack,
+            ]);
+        }
 
         $auth = new BaseBearerTokenAuthenticationProvider(new KiotaAuthProvider($config));
 
         // ── Sell Account V1 ──────────────────────────────────────────────
         $v1Adapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $v1Adapter->setBaseUrl($config->sellAccountV1BaseUrl);
-        $this->sellAccountV1 = new SellAccountV1Client(new SellAccountV1ApiClient($v1Adapter));
+        $this->sellAccountV1 = new SellAccountV1Client(new SellAccountV1ApiClient($v1Adapter), $config);
 
         // ── Sell Account V2 ──────────────────────────────────────────────
         $v2Adapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $v2Adapter->setBaseUrl($config->sellAccountV2BaseUrl);
-        $this->sellAccountV2 = new SellAccountV2Client(new SellAccountV2ApiClient($v2Adapter));
+        $this->sellAccountV2 = new SellAccountV2Client(new SellAccountV2ApiClient($v2Adapter), $config);
 
         // ── Sell Finances V1 ─────────────────────────────────────────────
         $finAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $finAdapter->setBaseUrl($config->sellFinancesV1BaseUrl);
-        $this->sellFinances = new SellFinancesV1Client(new SellFinancesV1ApiClient($finAdapter));
+        $this->sellFinances = new SellFinancesV1Client(new SellFinancesV1ApiClient($finAdapter), $config);
 
         // ── eBay Graph (GraphQL) ─────────────────────────────────────────
         $this->graphQL = new EBayGraphClient(

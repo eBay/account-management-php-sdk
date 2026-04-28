@@ -2,6 +2,7 @@
 
 namespace EBay\AccountManagement\Clients\GraphQL;
 
+use EBay\AccountManagement\Configuration\RequestOptions;
 use EBay\AccountManagement\GraphQL\Operations\EBayGraphOperations;
 use EBay\AccountManagement\GraphQL\Types\Inputs\UserBiddingActivityInput;
 use EBay\AccountManagement\GraphQL\Types\Results\UserBiddingActivityResult;
@@ -16,12 +17,14 @@ final class EBayGraphClient
      */
     public function userBiddingActivity(
         UserBiddingActivityInput $input,
-        ?string $accessToken = null
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
     ): UserBiddingActivityResult {
         $data = $this->dynamic->execute(
             EBayGraphOperations::USER_BIDDING_ACTIVITY,
             ['input' => $input->toArray()],
-            $accessToken
+            $accessToken,
+            $requestOptions,
         );
         return UserBiddingActivityResult::fromArray($data['userBiddingActivity']);
     }
@@ -30,12 +33,13 @@ final class EBayGraphClient
      * Retrieve identity information for the authenticated user.
      * Returns null if the user query returned null.
      */
-    public function user(?string $accessToken = null): ?UserResult
+    public function user(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?UserResult
     {
         $data = $this->dynamic->execute(
             EBayGraphOperations::USER,
             [],
-            $accessToken
+            $accessToken,
+            $requestOptions,
         );
         if (empty($data['user'])) {
             return null;
@@ -48,8 +52,8 @@ final class EBayGraphClient
      *
      * @return array<string, mixed>
      */
-    public function executeRaw(string $query, array $variables = [], ?string $accessToken = null): array
+    public function executeRaw(string $query, array $variables = [], ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
     {
-        return $this->dynamic->execute($query, $variables, $accessToken);
+        return $this->dynamic->execute($query, $variables, $accessToken, $requestOptions);
     }
 }

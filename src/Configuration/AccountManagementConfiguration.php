@@ -4,13 +4,20 @@ namespace EBay\AccountManagement\Configuration;
 
 final class AccountManagementConfiguration
 {
-    public string $sellAccountV1BaseUrl   = 'https://api.ebay.com';
-    public string $sellAccountV2BaseUrl   = 'https://api.ebay.com';
-    public string $sellFinancesV1BaseUrl  = 'https://apiz.ebay.com';
-    public string $graphQLBaseUrl         = 'https://api.ebay.com/graphql';
+    public string $sellAccountV1BaseUrl  = 'https://api.ebay.com';
+    public string $sellAccountV2BaseUrl  = 'https://api.ebay.com';
+    public string $sellFinancesV1BaseUrl = 'https://apiz.ebay.com';
+    public string $graphQLBaseUrl        = 'https://api.ebay.com/graphql';
 
-    public ?string $accessToken     = null;
-    public bool $diagnosticLogging  = false;
+    public ?string $accessToken        = null;
+    public bool    $diagnosticLogging  = false;
+
+    public RequestOptions $defaultRequestOptions;
+
+    public function __construct()
+    {
+        $this->defaultRequestOptions = new RequestOptions();
+    }
 
     /** Hostnames tokens may be sent to — passed to AllowedHostsValidator. */
     public function getAllowedHosts(): array
