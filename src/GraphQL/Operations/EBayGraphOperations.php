@@ -12,28 +12,32 @@ final class EBayGraphOperations
                     itemIdRestReference
                     sku
                     auctionDataSummary {
-                        currentPrice {
-                            value
-                            currency
-                            convertedFromValue
-                            convertedFromCurrency
+                        bidStatistics {
+                            userSubmittedBidCount
                         }
-                        bidCount
-                        endTime
-                        highBidder
-                        minimumToBid {
-                            value
-                            currency
+                        bidderAuctionDetails {
+                            minimumQualifyingBidForMaxBid {
+                                original {
+                                    value
+                                    currency
+                                }
+                            }
+                            maxBid {
+                                original {
+                                    value
+                                    currency
+                                }
+                            }
+                            userBiddingStatus
+                            userPowerBids {
+                                original {
+                                    value
+                                    currency
+                                }
+                            }
                         }
-                        reserveMet
-                        startTime
-                    }
-                    itemTerms {
-                        price {
-                            value
-                            currency
-                        }
-                        quantityAvailable
+                        itemId
+                        reservePriceMet
                     }
                 }
                 paginationOutput {
@@ -59,21 +63,33 @@ final class EBayGraphOperations
                     firstName
                     lastName
                     middleName
+                    primaryPhone {
+                        phoneNumber
+                        phoneNumberType
+                        countryCode
+                        dialCode
+                    }
                 }
                 publicUserProfile {
                     businessName
                     firstName
                     lastName
                     email
+                    fax
+                    legalInvoiceProvided
                     phone {
                         phoneNumber
-                        phoneType
+                        phoneNumberType
+                        countryCode
+                        dialCode
                     }
                 }
                 userStatus {
+                    __typename
                     displayName
                 }
                 userType {
+                    __typename
                     displayName
                 }
             }

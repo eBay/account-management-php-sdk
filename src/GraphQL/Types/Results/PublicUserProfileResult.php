@@ -11,16 +11,22 @@ readonly class PublicUserProfileResult
         public ?string $lastName = null,
         public ?string $email = null,
         public ?PhoneResult $phone = null,
+        public ?string $fax = null,
+        public ?bool $legalInvoiceProvided = null,
+        public ?string $termsAndConditions = null,
     ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
-            businessName: $data['businessName'] ?? null,
-            firstName:    $data['firstName'] ?? null,
-            lastName:     $data['lastName'] ?? null,
-            email:        $data['email'] ?? null,
-            phone:        isset($data['phone']) ? PhoneResult::fromArray($data['phone']) : null,
+            businessName:          $data['businessName'] ?? null,
+            firstName:             $data['firstName'] ?? null,
+            lastName:              $data['lastName'] ?? null,
+            email:                 $data['email'] ?? null,
+            phone:                 isset($data['phone']) ? PhoneResult::fromArray($data['phone']) : null,
+            fax:                   $data['fax'] ?? null,
+            legalInvoiceProvided:  $data['legalInvoiceProvided'] ?? null,
+            termsAndConditions:    $data['termsAndConditions'] ?? null,
         );
     }
 }

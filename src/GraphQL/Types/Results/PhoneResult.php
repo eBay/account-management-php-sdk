@@ -7,14 +7,18 @@ readonly class PhoneResult
 {
     public function __construct(
         public ?string $phoneNumber = null,
-        public ?string $phoneType = null,
+        public ?string $phoneNumberType = null,
+        public ?string $countryCode = null,
+        public ?string $dialCode = null,
     ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
-            phoneNumber: $data['phoneNumber'] ?? null,
-            phoneType:   $data['phoneType'] ?? null,
+            phoneNumber:     $data['phoneNumber'] ?? null,
+            phoneNumberType: $data['phoneNumberType'] ?? null,
+            countryCode:     $data['countryCode'] ?? null,
+            dialCode:        $data['dialCode'] ?? null,
         );
     }
 }
