@@ -6,13 +6,13 @@ namespace EBay\AccountManagement\GraphQL\Types\Results;
 readonly class UserTypeResult
 {
     public function __construct(
-        public ?string $displayName = null,
+        public ?string $displayString = null,
     ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
-            displayName: $data['displayName'] ?? null,
+            displayString: $data['displayString'] ?? null,
         );
     }
 }

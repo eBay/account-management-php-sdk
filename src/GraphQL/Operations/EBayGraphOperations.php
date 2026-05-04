@@ -9,35 +9,22 @@ final class EBayGraphOperations
             userBiddingActivity(input: $input) {
                 auctions {
                     itemId
-                    itemIdRestReference
-                    sku
                     auctionDataSummary {
-                        bidStatistics {
-                            userSubmittedBidCount
-                        }
-                        bidderAuctionDetails {
-                            minimumQualifyingBidForMaxBid {
+                        leadingBid {
+                            bidAmount {
                                 original {
-                                    value
                                     currency
+                                    value
+                                }
+                                converted {
+                                    currency
+                                    value
                                 }
                             }
-                            maxBid {
-                                original {
-                                    value
-                                    currency
-                                }
-                            }
-                            userBiddingStatus
-                            userPowerBids {
-                                original {
-                                    value
-                                    currency
-                                }
+                            bidder {
+                                userId
                             }
                         }
-                        itemId
-                        reservePriceMet
                     }
                 }
                 paginationOutput {
@@ -63,6 +50,14 @@ final class EBayGraphOperations
                     firstName
                     lastName
                     middleName
+                    profileAddress {
+                        addressLine1
+                        addressLine2
+                        city
+                        stateOrProvince
+                        postalCode
+                        countryCode
+                    }
                     primaryPhone {
                         phoneNumber
                         phoneNumberType
@@ -85,12 +80,10 @@ final class EBayGraphOperations
                     }
                 }
                 userStatus {
-                    __typename
-                    displayName
+                    displayString
                 }
                 userType {
-                    __typename
-                    displayName
+                    displayString
                 }
             }
         }
