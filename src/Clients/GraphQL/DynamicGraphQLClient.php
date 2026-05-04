@@ -35,8 +35,9 @@ final class DynamicGraphQLClient
         ], $extraHeaders);
 
         $response = $this->guzzle->request('POST', $this->config->graphQLBaseUrl, [
-            'headers' => $headers,
-            'json'    => array_filter(['query' => $query, 'variables' => $variables ?: null]),
+            'headers'     => $headers,
+            'json'        => array_filter(['query' => $query, 'variables' => $variables ?: null]),
+            'http_errors' => false,
         ]);
 
         $statusCode = $response->getStatusCode();
