@@ -73,11 +73,16 @@ final class SellAccountV1Client
 
     // ── Custom Policy ─────────────────────────────────────────────────────
 
-    public function getCustomPolicies(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getCustomPolicies(?string $policyTypes = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->custom_policy()->emptyPathSegment()->get(
-            new CustomPolicyGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new CustomPolicyGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: CustomPolicyGetRequestConfiguration::createQueryParameters(
+                    policy_types: $policyTypes,
+                ),
+            )
         )->wait();
     }
 
@@ -143,29 +148,45 @@ final class SellAccountV1Client
         )->wait();
     }
 
-    public function getFulfillmentPolicies(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getFulfillmentPolicies(?string $marketplaceId = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->fulfillment_policy()->get(
-            new Fulfillment_policyRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new Fulfillment_policyRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Fulfillment_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    marketplace_id: $marketplaceId,
+                ),
+            )
         )->wait();
     }
 
-    public function getFulfillmentPolicyByName(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getFulfillmentPolicyByName(?string $marketplaceId = null, ?string $name = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->fulfillment_policy()->get_by_policy_name()->get(
-            new FulfillmentPolicyByNameGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new FulfillmentPolicyByNameGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: FulfillmentPolicyByNameGetRequestConfiguration::createQueryParameters(
+                    marketplace_id: $marketplaceId,
+                    name: $name,
+                ),
+            )
         )->wait();
     }
 
     // ── Payment Policy ────────────────────────────────────────────────────
 
-    public function getPaymentPolicies(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getPaymentPolicies(?string $marketplaceId = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->payment_policy()->get(
-            new Payment_policyRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new Payment_policyRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Payment_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    marketplace_id: $marketplaceId,
+                ),
+            )
         )->wait();
     }
 
@@ -203,11 +224,17 @@ final class SellAccountV1Client
         )->wait();
     }
 
-    public function getPaymentPolicyByName(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getPaymentPolicyByName(?string $marketplaceId = null, ?string $name = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->payment_policy()->get_by_policy_name()->get(
-            new PaymentPolicyByNameGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new PaymentPolicyByNameGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: PaymentPolicyByNameGetRequestConfiguration::createQueryParameters(
+                    marketplace_id: $marketplaceId,
+                    name: $name,
+                ),
+            )
         )->wait();
     }
 
@@ -269,21 +296,31 @@ final class SellAccountV1Client
 
     // ── Rate Table ────────────────────────────────────────────────────────
 
-    public function getRateTables(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getRateTables(?string $countryCode = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->rate_table()->get(
-            new Rate_tableRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new Rate_tableRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Rate_tableRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    country_code: $countryCode,
+                ),
+            )
         )->wait();
     }
 
     // ── Return Policy ─────────────────────────────────────────────────────
 
-    public function getReturnPolicies(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getReturnPolicies(?string $marketplaceId = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->return_policy()->get(
-            new Return_policyRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new Return_policyRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Return_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    marketplace_id: $marketplaceId,
+                ),
+            )
         )->wait();
     }
 
@@ -321,11 +358,17 @@ final class SellAccountV1Client
         )->wait();
     }
 
-    public function getReturnPolicyByName(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getReturnPolicyByName(?string $marketplaceId = null, ?string $name = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->return_policy()->get_by_policy_name()->get(
-            new ReturnPolicyByNameGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new ReturnPolicyByNameGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: ReturnPolicyByNameGetRequestConfiguration::createQueryParameters(
+                    marketplace_id: $marketplaceId,
+                    name: $name,
+                ),
+            )
         )->wait();
     }
 
@@ -365,21 +408,32 @@ final class SellAccountV1Client
         )->wait();
     }
 
-    public function getSalesTaxes(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getSalesTaxes(?string $countryCode = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->sales_tax()->get(
-            new Sales_taxRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new Sales_taxRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Sales_taxRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    country_code: $countryCode,
+                ),
+            )
         )->wait();
     }
 
     // ── Subscription ──────────────────────────────────────────────────────
 
-    public function getSubscription(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getSubscription(?string $continuationToken = null, ?string $limit = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->subscription()->get(
-            new SubscriptionRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new SubscriptionRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: SubscriptionRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    continuation_token: $continuationToken,
+                    limit: $limit,
+                ),
+            )
         )->wait();
     }
 
@@ -395,11 +449,16 @@ final class SellAccountV1Client
 
     // ── Advertising Eligibility ───────────────────────────────────────────
 
-    public function getAdvertisingEligibility(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getAdvertisingEligibility(?string $programTypes = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->advertising_eligibility()->get(
-            new Advertising_eligibilityRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new Advertising_eligibilityRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: Advertising_eligibilityRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    program_types: $programTypes,
+                ),
+            )
         )->wait();
     }
 }

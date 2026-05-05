@@ -164,11 +164,16 @@ final class SellAccountV2Client
 
     // ── User Preferences ──────────────────────────────────────────────────
 
-    public function getUserPreferences(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
+    public function getUserPreferences(?string $fieldgroups = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
         TokenContext::set($accessToken);
         return $this->kiota->user_preferences()->get(
-            new User_preferencesRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
+            new User_preferencesRequestBuilderGetRequestConfiguration(
+                headers: $this->mergedHeaders($requestOptions),
+                queryParameters: User_preferencesRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    fieldgroups: $fieldgroups,
+                ),
+            )
         )->wait();
     }
 
