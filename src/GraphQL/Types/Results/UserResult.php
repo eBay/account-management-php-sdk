@@ -15,8 +15,6 @@ readonly class UserResult
         public ?string $registrationMarketPlace = null,
         public ?IndividualIdentityProfileResult $individualIdentityProfile = null,
         public ?PublicUserProfileResult $publicUserProfile = null,
-        public ?UserStatusResult $userStatus = null,
-        public ?UserTypeResult $userType = null,
     ) {}
 
     public static function fromArray(array $data): self
@@ -34,12 +32,6 @@ readonly class UserResult
                 : null,
             publicUserProfile:         isset($data['publicUserProfile'])
                 ? PublicUserProfileResult::fromArray($data['publicUserProfile'])
-                : null,
-            userStatus:                isset($data['userStatus'])
-                ? UserStatusResult::fromArray($data['userStatus'])
-                : null,
-            userType:                  isset($data['userType'])
-                ? UserTypeResult::fromArray($data['userType'])
                 : null,
         );
     }

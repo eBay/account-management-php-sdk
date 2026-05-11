@@ -41,11 +41,5 @@ query User {
                 dialCode
             }
         }
-        userStatus {
-            displayName
-        }
-        userType {
-            displayName
-        }
     }
 }
