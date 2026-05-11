@@ -19,7 +19,7 @@ readonly class UserBiddingActivityInput
     {
         $data = [];
         if ($this->filter !== null) {
-            $data['filter'] = $this->filter->toArray();
+            $data['filter'] = (object)$this->filter->toArray();
         }
         return $data;
     }
