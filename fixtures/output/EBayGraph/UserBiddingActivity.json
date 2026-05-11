@@ -1,0 +1,50 @@
+{
+  "userBiddingActivity": {
+    "auctions": [
+      {
+        "itemId": "4aa34d0d-d028-49f0-9e6f-737f5004ef5b",
+        "auctionDataSummary": {
+          "leadingBid": {
+            "bidAmount": {
+              "original": {
+                "currency": "MAD",
+                "value": "1.00"
+              },
+              "converted": {
+                "currency": "GYD",
+                "value": "1.00"
+              }
+            },
+            "bidder": {
+              "userId": "85b94966-231a-46f9-9daa-ba1a44c25c93"
+            }
+          }
+        }
+      },
+      {
+        "itemId": "9bcd0e68-fda5-4e5c-a35f-e00d51665831",
+        "auctionDataSummary": {
+          "leadingBid": {
+            "bidAmount": {
+              "original": {
+                "currency": "CDF",
+                "value": "1.00"
+              },
+              "converted": {
+                "currency": "FKP",
+                "value": "1.00"
+              }
+            },
+            "bidder": {
+              "userId": "c3dbf0b1-7f48-42b0-baa0-47c5093cf2e2"
+            }
+          }
+        }
+      }
+    ],
+    "paginationOutput": {
+      "nextCursor": "Hello World",
+      "previousCursor": "Hello World"
+    }
+  }
+}

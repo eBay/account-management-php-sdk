@@ -11,6 +11,15 @@ readonly class BiddingActivityFilterInput
         public ?array $paginationInput = null,
     ) {}
 
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            activeAfter:     $data['activeAfter'] ?? null,
+            activeBefore:    $data['activeBefore'] ?? null,
+            paginationInput: $data['paginationInput'] ?? null,
+        );
+    }
+
     public function toArray(): array
     {
         $data = [];

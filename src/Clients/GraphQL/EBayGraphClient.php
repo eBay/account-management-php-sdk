@@ -21,7 +21,7 @@ final class EBayGraphClient
         ?RequestOptions $requestOptions = null,
     ): UserBiddingActivityResult {
         $data = $this->dynamic->execute(
-            EBayGraphOperations::USER_BIDDING_ACTIVITY,
+            EBayGraphOperations::USER_BIDDING_ACTIVITY(),
             ['input' => $input->toArray()],
             $accessToken,
             $requestOptions,
@@ -36,7 +36,7 @@ final class EBayGraphClient
     public function user(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?UserResult
     {
         $data = $this->dynamic->execute(
-            EBayGraphOperations::USER,
+            EBayGraphOperations::USER(),
             [],
             $accessToken,
             $requestOptions,

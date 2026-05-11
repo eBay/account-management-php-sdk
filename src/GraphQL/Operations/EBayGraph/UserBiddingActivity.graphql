@@ -1,0 +1,28 @@
+query UserBiddingActivity($input: UserBiddingActivityInput!) {
+    userBiddingActivity(input: $input) {
+        auctions {
+            itemId
+            auctionDataSummary {
+                leadingBid {
+                    bidAmount {
+                        original {
+                            currency
+                            value
+                        }
+                        converted {
+                            currency
+                            value
+                        }
+                    }
+                    bidder {
+                        userId
+                    }
+                }
+            }
+        }
+        paginationOutput {
+            nextCursor
+            previousCursor
+        }
+    }
+}

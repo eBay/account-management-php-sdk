@@ -1,0 +1,47 @@
+{
+  "user": {
+    "userId": "fa9c9c26-fb07-4744-9404-2b063fef0127",
+    "username": "Hello World",
+    "newUser": false,
+    "userIdChanged": false,
+    "userIdLastChangedAt": "2024-01-01T00:00:00.000Z",
+    "userCreatedAt": "2024-01-01T00:00:00.000Z",
+    "registrationMarketPlace": "EBAY_FR",
+    "individualIdentityProfile": {
+      "email": "Hello World",
+      "firstName": "Hello World",
+      "lastName": "Hello World",
+      "middleName": "Hello World",
+      "profileAddress": {
+        "addressLine1": "Hello World",
+        "addressLine2": "Hello World",
+        "city": "Hello World",
+        "stateOrProvince": "Hello World",
+        "postalCode": "Hello World",
+        "countryCode": "TC"
+      },
+      "primaryPhone": {
+        "phoneNumber": "Hello World",
+        "phoneNumberType": "Hello World",
+        "countryCode": "SM",
+        "dialCode": "Hello World"
+      }
+    },
+    "publicUserProfile": {
+      "businessName": "Hello World",
+      "firstName": "Hello World",
+      "lastName": "Hello World",
+      "email": "Hello World",
+      "fax": "Hello World",
+      "legalInvoiceProvided": false,
+      "phone": {
+        "phoneNumber": "Hello World",
+        "phoneNumberType": "Hello World",
+        "countryCode": "DE",
+        "dialCode": "Hello World"
+      }
+    },
+    "userStatus": {},
+    "userType": {}
+  }
+}
