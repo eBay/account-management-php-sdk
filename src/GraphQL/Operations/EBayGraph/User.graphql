@@ -42,10 +42,10 @@ query User {
             }
         }
         userStatus {
-            displayString
+            displayName
         }
         userType {
-            displayString
+            displayName
         }
     }
 }
