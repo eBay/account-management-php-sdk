@@ -22,7 +22,7 @@ final class EBayGraphClient
     ): UserBiddingActivityResult {
         $data = $this->dynamic->execute(
             EBayGraphOperations::USER_BIDDING_ACTIVITY(),
-            ['input' => $input->toArray()],
+            ['input' => (object)$input->toArray()],
             $accessToken,
             $requestOptions,
         );
