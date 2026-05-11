@@ -2,41 +2,41 @@
   "userBiddingActivity": {
     "auctions": [
       {
-        "itemId": "4aa34d0d-d028-49f0-9e6f-737f5004ef5b",
+        "itemId": "9f6f07c5-669d-42d7-a9a2-ea1c3f8c0514",
         "auctionDataSummary": {
           "leadingBid": {
             "bidAmount": {
               "original": {
-                "currency": "MAD",
+                "currency": "COP",
                 "value": "1.00"
               },
               "converted": {
-                "currency": "GYD",
+                "currency": "IRR",
                 "value": "1.00"
               }
             },
             "bidder": {
-              "userId": "85b94966-231a-46f9-9daa-ba1a44c25c93"
+              "userId": "b884d105-a1a1-4948-a30e-2169fc1240db"
             }
           }
         }
       },
       {
-        "itemId": "9bcd0e68-fda5-4e5c-a35f-e00d51665831",
+        "itemId": "7b461a25-104f-4aa9-b19c-a9d423469339",
         "auctionDataSummary": {
           "leadingBid": {
             "bidAmount": {
               "original": {
-                "currency": "CDF",
+                "currency": "VES",
                 "value": "1.00"
               },
               "converted": {
-                "currency": "FKP",
+                "currency": "CLP",
                 "value": "1.00"
               }
             },
             "bidder": {
-              "userId": "c3dbf0b1-7f48-42b0-baa0-47c5093cf2e2"
+              "userId": "e71de606-846b-4911-b426-9a9fc870c127"
             }
           }
         }
