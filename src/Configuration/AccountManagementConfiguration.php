@@ -4,9 +4,9 @@ namespace EBay\AccountManagement\Configuration;
 
 final class AccountManagementConfiguration
 {
-    public string $sellAccountV1BaseUrl  = 'https://api.ebay.com';
-    public string $sellAccountV2BaseUrl  = 'https://api.ebay.com';
-    public string $sellFinancesV1BaseUrl = 'https://apiz.ebay.com';
+    public string $sellAccountV1BaseUrl  = 'https://api.ebay.com/sell/account/v1';
+    public string $sellAccountV2BaseUrl  = 'https://api.ebay.com/sell/account/v2';
+    public string $sellFinancesV1BaseUrl = 'https://apiz.ebay.com/sell/finances/v1';
     public string $graphQLBaseUrl        = 'https://api.ebay.com/graphql';
 
     public ?string $accessToken        = null;
