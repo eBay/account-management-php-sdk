@@ -9,10 +9,10 @@
     },
     "userIdLastChangedAt": "2024-01-01T00:00:00.000Z",
     "userIdChanged": true,
-    "userId": "e1af36d5-463e-4599-8efe-ef78637d923a",
+    "userId": "08282abd-1090-49e7-895f-e2a2ca90ca24",
     "userCreatedAt": "2024-01-01T00:00:00.000Z",
-    "registrationMarketPlace": "EBAY_FR",
-    "newUser": true,
+    "registrationMarketPlace": "EBAY_US",
+    "newUser": false,
     "individualIdentityProfile": {
       "email": "Hello World",
       "lastName": "Hello World",
@@ -20,7 +20,7 @@
       "middleName": "Hello World",
       "primaryPhone": {
         "dialCode": "Hello World",
-        "countryCode": "BL",
+        "countryCode": "BS",
         "phoneNumber": "Hello World",
         "phoneNumberType": "Hello World"
       },
@@ -28,7 +28,7 @@
         "addressLine1": "Hello World",
         "addressLine2": "Hello World",
         "city": "Hello World",
-        "countryCode": "GS",
+        "countryCode": "SA",
         "postalCode": "Hello World",
         "stateOrProvince": "Hello World"
       }

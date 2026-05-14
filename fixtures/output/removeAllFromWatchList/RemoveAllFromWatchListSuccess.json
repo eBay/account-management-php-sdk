@@ -1,6 +1,6 @@
 {
   "removeAllFromWatchList": {
     "__typename": "RemoveAllFromWatchListSuccess",
-    "numberOfItemsUnwatched": -16
+    "numberOfItemsUnwatched": -28
   }
 }

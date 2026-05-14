@@ -3,13 +3,13 @@
     "__typename": "AddToWatchListSuccess",
     "addedItems": [
       {
-        "itemId": "56d136b6-b540-4265-b1a0-8a8e71a4b19c"
+        "itemId": "206d2e6c-7b81-408b-a1a6-0c9cb814b5bb"
       },
       {
-        "itemId": "8ef72403-73b9-47ae-ba95-baeb9b85689c"
+        "itemId": "ace4abc3-1eb7-42b4-8a14-70979115c892"
       }
     ],
     "watchListCount": 40,
-    "watchListMaximum": 95
+    "watchListMaximum": 38
   }
 }

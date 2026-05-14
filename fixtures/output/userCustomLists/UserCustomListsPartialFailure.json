@@ -3,8 +3,8 @@
     "__typename": "UserCustomListsPartialFailure",
     "customLists": [
       {
-        "customListId": "463ca517-32df-4098-90b7-2fe1c2857f57",
-        "itemCount": 93,
+        "customListId": "09c9f1a7-aaa5-450c-8ad2-e557006a659c",
+        "itemCount": -45,
         "items": {
           "pagination": {
             "nextCursor": "Hello World",
@@ -14,13 +14,13 @@
             {
               "addedAt": "2024-01-01T00:00:00.000Z",
               "item": {
-                "itemId": "e82f5c46-4a32-40cf-9635-62890aa17be4"
+                "itemId": "453adbc1-fd4c-467e-aa55-e4a19673b4ca"
               }
             },
             {
               "addedAt": "2024-01-01T00:00:00.000Z",
               "item": {
-                "itemId": "20a25392-61fb-4d9d-a8ed-2acf5aa1eaa9"
+                "itemId": "f04a214e-3d87-475a-b145-a7e1a3676cb1"
               }
             }
           ]
@@ -28,8 +28,8 @@
         "name": "Hello World"
       },
       {
-        "customListId": "8a27ff18-c604-485e-90bd-f3b3b25c47fd",
-        "itemCount": -74,
+        "customListId": "1691ad95-197d-418b-a406-032c0d3dcdf8",
+        "itemCount": 75,
         "items": {
           "pagination": {
             "nextCursor": "Hello World",
@@ -39,13 +39,13 @@
             {
               "addedAt": "2024-01-01T00:00:00.000Z",
               "item": {
-                "itemId": "8a5398a3-a294-48f2-bb7c-5924da07c7e7"
+                "itemId": "a5862939-f471-44de-85b2-a888a68ed1bf"
               }
             },
             {
               "addedAt": "2024-01-01T00:00:00.000Z",
               "item": {
-                "itemId": "84fdbfb5-32b6-427e-a787-fd3b570400c9"
+                "itemId": "eca692a9-347f-45d9-ac11-c89c54dd3c6c"
               }
             }
           ]
@@ -57,14 +57,14 @@
     "errorMessage": "Hello World",
     "failedCustomLists": [
       {
-        "customListId": "3508599b-32b8-4e94-aec9-351751a96662",
+        "customListId": "e039b1bd-e619-4226-bc23-f0d9f0ba018d",
         "reason": "CUSTOM_LIST_NOT_FOUND"
       },
       {
-        "customListId": "37b355b4-dcd0-4a61-b9ca-930dcde3b360",
+        "customListId": "96ee8547-3d4a-489e-b39a-e74249625c08",
         "reason": "CUSTOM_LIST_NOT_FOUND"
       }
     ],
-    "totalCount": 67
+    "totalCount": 34
   }
 }

@@ -6,11 +6,11 @@
           {
             "bidAmount": {
               "converted": {
-                "currency": "BWP",
+                "currency": "RSD",
                 "value": "1.00"
               },
               "original": {
-                "currency": "CLP",
+                "currency": "CAD",
                 "value": "1.00"
               }
             }
@@ -18,11 +18,11 @@
           {
             "bidAmount": {
               "converted": {
-                "currency": "MOP",
+                "currency": "HUF",
                 "value": "1.00"
               },
               "original": {
-                "currency": "KES",
+                "currency": "GYD",
                 "value": "1.00"
               }
             }
@@ -41,32 +41,32 @@
         "bidHistoryRecords": [
           {
             "bidder": {
-              "userId": "05263b1e-6dea-4aed-96ec-7a672c6108ff",
+              "userId": "a32c9c84-21a8-4f85-8276-4598bac37cf0",
               "username": "Hello World"
             },
             "bidAmount": {
               "converted": {
-                "currency": "NAD",
+                "currency": "AFN",
                 "value": "1.00"
               },
               "original": {
-                "currency": "HKD",
+                "currency": "GHS",
                 "value": "1.00"
               }
             }
           },
           {
             "bidder": {
-              "userId": "8092db7c-8b1c-45cc-937e-1dc284236660",
+              "userId": "2524c685-992c-4b30-8562-933fcd6b5c98",
               "username": "Hello World"
             },
             "bidAmount": {
               "converted": {
-                "currency": "BBD",
+                "currency": "MMK",
                 "value": "1.00"
               },
               "original": {
-                "currency": "KGS",
+                "currency": "NZD",
                 "value": "1.00"
               }
             }
@@ -82,11 +82,11 @@
           {
             "bidAmount": {
               "converted": {
-                "currency": "ARS",
+                "currency": "NOK",
                 "value": "1.00"
               },
               "original": {
-                "currency": "CVE",
+                "currency": "MMK",
                 "value": "1.00"
               }
             }
@@ -94,11 +94,11 @@
           {
             "bidAmount": {
               "converted": {
-                "currency": "LBP",
+                "currency": "INR",
                 "value": "1.00"
               },
               "original": {
-                "currency": "KMF",
+                "currency": "NAD",
                 "value": "1.00"
               }
             }
@@ -110,35 +110,35 @@
           "bidsWithSellerPercentage": "10.00",
           "itemBids": [
             {
-              "bidCount": 11,
+              "bidCount": 82,
               "mostRecentBidAt": "2024-01-01T00:00:00.000Z"
             },
             {
-              "bidCount": -66,
+              "bidCount": -14,
               "mostRecentBidAt": "2024-01-01T00:00:00.000Z"
             }
           ],
-          "totalBidCount": -97,
-          "retractedBidCount": 21,
-          "uniqueListingCategoryBidCount": -3,
-          "uniqueSellerBidCount": 41
+          "totalBidCount": 82,
+          "retractedBidCount": -27,
+          "uniqueListingCategoryBidCount": -30,
+          "uniqueSellerBidCount": -37
         },
         "bidder": {
           "username": "Hello World",
-          "userId": "773550ae-c255-4718-9fc6-6f639c1c6c32",
+          "userId": "95158c5c-eeb1-468d-8fde-8f76d18a8e26",
           "shippingZone": {
-            "countryCode": "MF",
+            "countryCode": "VU",
             "postalCode": "Hello World",
             "stateOrProvince": "Hello World"
           }
         },
         "bidAmount": {
           "converted": {
-            "currency": "JPY",
+            "currency": "RWF",
             "value": "1.00"
           },
           "original": {
-            "currency": "HTG",
+            "currency": "XPF",
             "value": "1.00"
           }
         },
@@ -148,7 +148,7 @@
       },
       "reservePriceMet": false,
       "bidStatistics": {
-        "userSubmittedBidCount": 3
+        "userSubmittedBidCount": -71
       }
     }
   }

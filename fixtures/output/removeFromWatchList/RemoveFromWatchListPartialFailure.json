@@ -6,27 +6,27 @@
     "failedItems": [
       {
         "item": {
-          "itemId": "225d1a49-c356-4692-87e0-c3977ae095f1"
+          "itemId": "10544292-f868-4230-bb4d-4c95b7812d94"
         },
         "reason": "ITEM_NOT_WATCHED"
       },
       {
         "item": {
-          "itemId": "cabc42bc-0aec-4df7-99fa-338dacba9ea0"
+          "itemId": "0ec94955-7511-4e0b-89fe-d22bb6951566"
         },
         "reason": "ITEM_NOT_WATCHED"
       }
     ],
-    "numberOfItemsUnwatched": 26,
+    "numberOfItemsUnwatched": -35,
     "removedItems": [
       {
-        "itemId": "43a9d8bd-ae7b-44ea-a16a-3e2fc84fd517"
+        "itemId": "e6a256fd-b43a-4f9a-af57-ce56cb3d36d6"
       },
       {
-        "itemId": "47d432df-91b9-45ea-9a1c-eeb3ca60bb5c"
+        "itemId": "f3978f1e-7981-4673-aebe-e12b17e83f43"
       }
     ],
-    "watchListCount": -74,
-    "watchListMaximum": -4
+    "watchListCount": -87,
+    "watchListMaximum": 33
   }
 }

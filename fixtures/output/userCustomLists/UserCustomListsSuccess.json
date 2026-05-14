@@ -3,8 +3,8 @@
     "__typename": "UserCustomListsSuccess",
     "customLists": [
       {
-        "customListId": "e3d3d781-a97e-4e58-8b3b-d6eedd1a8992",
-        "itemCount": 85,
+        "customListId": "8bedb8b8-b6f2-4411-8dd9-42cdec148490",
+        "itemCount": -13,
         "items": {
           "pagination": {
             "nextCursor": "Hello World",
@@ -14,13 +14,13 @@
             {
               "addedAt": "2024-01-01T00:00:00.000Z",
               "item": {
-                "itemId": "3ed1042a-af67-4217-92af-fca411dfd93c"
+                "itemId": "9c11aa3a-afc6-4d9a-ab12-c168dc1196e1"
               }
             },
             {
               "addedAt": "2024-01-01T00:00:00.000Z",
               "item": {
-                "itemId": "e0613d6a-82e9-4f66-90df-18671dc2c0a7"
+                "itemId": "837ec7f9-18a4-4400-b4e5-f5bc93a4c4e8"
               }
             }
           ]
@@ -28,8 +28,8 @@
         "name": "Hello World"
       },
       {
-        "customListId": "8834a9ed-221d-4f05-b3b8-8f0344413788",
-        "itemCount": -37,
+        "customListId": "f53c3117-61ba-4f38-a2cd-ebf25817273c",
+        "itemCount": 87,
         "items": {
           "pagination": {
             "nextCursor": "Hello World",
@@ -39,13 +39,13 @@
             {
               "addedAt": "2024-01-01T00:00:00.000Z",
               "item": {
-                "itemId": "b3c75dd4-f9b4-4950-8e66-2d64fcca2fec"
+                "itemId": "0f292372-ed8c-4bae-80b6-ba6635aa4a85"
               }
             },
             {
               "addedAt": "2024-01-01T00:00:00.000Z",
               "item": {
-                "itemId": "2ae701b8-df49-46c0-9bcc-5be8d43e9829"
+                "itemId": "b33142db-4051-499a-934a-cb5101f626e3"
               }
             }
           ]
@@ -53,6 +53,6 @@
         "name": "Hello World"
       }
     ],
-    "totalCount": -45
+    "totalCount": -16
   }
 }

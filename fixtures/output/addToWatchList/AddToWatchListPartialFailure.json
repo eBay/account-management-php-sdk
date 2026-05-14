@@ -3,29 +3,29 @@
     "__typename": "AddToWatchListPartialFailure",
     "addedItems": [
       {
-        "itemId": "b7be99d4-28b7-4183-8d0f-f8eafa8642ad"
+        "itemId": "58ea9cb8-adf1-4a5f-a610-13827d7b6f39"
       },
       {
-        "itemId": "ca372d8f-de30-421c-ae91-875a9b4fc8bd"
+        "itemId": "dcb10135-936c-4dc8-bb40-2b82a2c33f26"
       }
     ],
     "errorCode": "Hello World",
     "failedItems": [
       {
         "item": {
-          "itemId": "4c7ab56d-01fc-4374-a415-d4eeab806937"
+          "itemId": "48178dcd-3b8a-41f3-bb6a-f6053220ce30"
         },
-        "reason": "ITEM_ALREADY_WATCHED"
+        "reason": "ITEM_NOT_FOUND"
       },
       {
         "item": {
-          "itemId": "86a36b33-ed0d-4cb3-b4a8-4ba40ae8ab0d"
+          "itemId": "fa7403bb-6622-43e3-8002-53fabfd41097"
         },
-        "reason": "ITEM_NOT_FOUND"
+        "reason": "ITEM_ALREADY_WATCHED"
       }
     ],
     "errorMessage": "Hello World",
-    "watchListCount": -22,
-    "watchListMaximum": 5
+    "watchListCount": 90,
+    "watchListMaximum": -59
   }
 }

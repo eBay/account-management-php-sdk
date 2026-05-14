@@ -5,19 +5,19 @@
     "failedItems": [
       {
         "item": {
-          "itemId": "3e5df821-fd57-4751-ba5d-bee5d6b39181"
+          "itemId": "92c55f83-4110-4844-a982-4df8b4646823"
         },
         "reason": "ITEM_NOT_WATCHED"
       },
       {
         "item": {
-          "itemId": "d029f983-4022-4f9f-8bb8-0913ce7ef9e6"
+          "itemId": "a606ad58-7325-49ab-b4f6-9abc46779f22"
         },
         "reason": "ITEM_NOT_WATCHED"
       }
     ],
     "errorMessage": "Hello World",
-    "watchListCount": -92,
-    "watchListMaximum": -93
+    "watchListCount": 99,
+    "watchListMaximum": -25
   }
 }

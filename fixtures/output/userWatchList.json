@@ -3,44 +3,44 @@
     "items": [
       {
         "item": {
-          "itemId": "1c0f010e-9219-452f-8bcf-a7bb27ea18c2",
+          "itemId": "ce4be536-df80-4ac3-a8c9-901cd127936e",
           "userNotes": [
             {
               "note": "Hello World",
-              "orderLineItemId": "fcc22996-ff1b-4f2b-a177-b1149ff9c8db"
+              "orderLineItemId": "bf9aa312-eccb-4c05-91c1-0b2d4bea3604"
             },
             {
               "note": "Hello World",
-              "orderLineItemId": "bd8daacc-bd7b-488f-bfd8-b7114f6fa383"
+              "orderLineItemId": "5599eee0-dbd4-420d-ad4e-e07cabd23623"
             }
           ]
         },
         "startedWatchingAt": "2024-01-01T00:00:00.000Z",
         "startedWatchingPrice": {
           "original": {
-            "currency": "MWK",
+            "currency": "OMR",
             "value": "1.00"
           }
         }
       },
       {
         "item": {
-          "itemId": "3d54b3ad-1921-47de-9aa8-153fac766eb7",
+          "itemId": "2c00484d-8087-4566-8915-7c589b4f0e52",
           "userNotes": [
             {
               "note": "Hello World",
-              "orderLineItemId": "7e4404fe-a546-4dd5-a99b-552ccd471dfa"
+              "orderLineItemId": "4ecb8455-8ef0-4c20-8734-5ed971b6102e"
             },
             {
               "note": "Hello World",
-              "orderLineItemId": "8f1b74ac-39c4-4f05-907b-5978be8f1b35"
+              "orderLineItemId": "3af07eb5-93ff-4d88-97e3-1a9887fe6ed0"
             }
           ]
         },
         "startedWatchingAt": "2024-01-01T00:00:00.000Z",
         "startedWatchingPrice": {
           "original": {
-            "currency": "STN",
+            "currency": "XOF",
             "value": "1.00"
           }
         }
@@ -50,7 +50,7 @@
       "nextCursor": "Hello World",
       "previousCursor": "Hello World"
     },
-    "watchListCount": 4,
-    "watchListMaximum": 89
+    "watchListCount": -98,
+    "watchListMaximum": 14
   }
 }
