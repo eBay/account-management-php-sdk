@@ -1,0 +1,15 @@
+{
+  "addToWatchList": {
+    "__typename": "AddToWatchListSuccess",
+    "addedItems": [
+      {
+        "itemId": "56d136b6-b540-4265-b1a0-8a8e71a4b19c"
+      },
+      {
+        "itemId": "8ef72403-73b9-47ae-ba95-baeb9b85689c"
+      }
+    ],
+    "watchListCount": 40,
+    "watchListMaximum": 95
+  }
+}

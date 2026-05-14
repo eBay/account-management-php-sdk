@@ -1,0 +1,56 @@
+{
+  "userWatchList": {
+    "items": [
+      {
+        "item": {
+          "itemId": "1c0f010e-9219-452f-8bcf-a7bb27ea18c2",
+          "userNotes": [
+            {
+              "note": "Hello World",
+              "orderLineItemId": "fcc22996-ff1b-4f2b-a177-b1149ff9c8db"
+            },
+            {
+              "note": "Hello World",
+              "orderLineItemId": "bd8daacc-bd7b-488f-bfd8-b7114f6fa383"
+            }
+          ]
+        },
+        "startedWatchingAt": "2024-01-01T00:00:00.000Z",
+        "startedWatchingPrice": {
+          "original": {
+            "currency": "MWK",
+            "value": "1.00"
+          }
+        }
+      },
+      {
+        "item": {
+          "itemId": "3d54b3ad-1921-47de-9aa8-153fac766eb7",
+          "userNotes": [
+            {
+              "note": "Hello World",
+              "orderLineItemId": "7e4404fe-a546-4dd5-a99b-552ccd471dfa"
+            },
+            {
+              "note": "Hello World",
+              "orderLineItemId": "8f1b74ac-39c4-4f05-907b-5978be8f1b35"
+            }
+          ]
+        },
+        "startedWatchingAt": "2024-01-01T00:00:00.000Z",
+        "startedWatchingPrice": {
+          "original": {
+            "currency": "STN",
+            "value": "1.00"
+          }
+        }
+      }
+    ],
+    "pagination": {
+      "nextCursor": "Hello World",
+      "previousCursor": "Hello World"
+    },
+    "watchListCount": 4,
+    "watchListMaximum": 89
+  }
+}

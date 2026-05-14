@@ -1,0 +1,118 @@
+{
+  "userBiddingActivity": {
+    "auctions": [
+      {
+        "itemId": "a6766c22-3ae5-4d70-9f6e-97ef624df89b",
+        "auctionDataSummary": {
+          "bidStatistics": {
+            "userSubmittedBidCount": -67
+          },
+          "leadingBid": {
+            "bidAmount": {
+              "converted": {
+                "value": "1.00",
+                "currency": "CVE"
+              },
+              "original": {
+                "currency": "CLP",
+                "value": "1.00"
+              }
+            },
+            "bidder": {
+              "userId": "61f70819-c087-41fa-b61a-f14444be7c19",
+              "username": "Hello World"
+            }
+          },
+          "itemId": "e010ad0d-fe22-4fa8-8668-afd6c2e4f3d3",
+          "bidderAuctionDetails": {
+            "userBiddingStatus": "OUTBID",
+            "maxBid": {
+              "original": {
+                "value": "1.00",
+                "currency": "SAR"
+              }
+            },
+            "minimumQualifyingBidForMaxBid": {
+              "original": {
+                "currency": "LRD",
+                "value": "1.00"
+              }
+            },
+            "userPowerBids": [
+              {
+                "original": {
+                  "value": "1.00",
+                  "currency": "SYP"
+                }
+              },
+              {
+                "original": {
+                  "value": "1.00",
+                  "currency": "XAF"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "itemId": "9c8373af-b96b-475c-9f0e-984c2bf23450",
+        "auctionDataSummary": {
+          "bidStatistics": {
+            "userSubmittedBidCount": -79
+          },
+          "leadingBid": {
+            "bidAmount": {
+              "converted": {
+                "value": "1.00",
+                "currency": "BZD"
+              },
+              "original": {
+                "currency": "DKK",
+                "value": "1.00"
+              }
+            },
+            "bidder": {
+              "userId": "8a77462f-7ad8-4a01-b842-9247de841da9",
+              "username": "Hello World"
+            }
+          },
+          "itemId": "1dca44ae-9da7-49de-9f0f-7471162b6536",
+          "bidderAuctionDetails": {
+            "userBiddingStatus": "WINNING",
+            "maxBid": {
+              "original": {
+                "value": "1.00",
+                "currency": "GIP"
+              }
+            },
+            "minimumQualifyingBidForMaxBid": {
+              "original": {
+                "currency": "MAD",
+                "value": "1.00"
+              }
+            },
+            "userPowerBids": [
+              {
+                "original": {
+                  "value": "1.00",
+                  "currency": "AMD"
+                }
+              },
+              {
+                "original": {
+                  "value": "1.00",
+                  "currency": "PAB"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "paginationOutput": {
+      "nextCursor": "Hello World",
+      "previousCursor": "Hello World"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "addToWatchList": {
+    "__typename": "AddToWatchListFailure",
+    "errorCode": "Hello World",
+    "errorMessage": "Hello World",
+    "failedItems": [
+      {
+        "item": {
+          "itemId": "12dab32c-0d70-48c5-a4c5-33c052c851b3"
+        },
+        "reason": "ITEM_NOT_ACTIVE"
+      },
+      {
+        "item": {
+          "itemId": "08f0fd84-1710-49d9-a024-6eeb0d3b4250"
+        },
+        "reason": "WATCHLIST_FULL"
+      }
+    ],
+    "watchListCount": -92,
+    "watchListMaximum": -27
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "input": {
+    "itemsToRemove": [
+      {
+        "itemId": "mock-id"
+      }
+    ]
+  }
+}

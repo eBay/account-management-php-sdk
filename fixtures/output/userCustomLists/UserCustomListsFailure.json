@@ -1,0 +1,17 @@
+{
+  "userCustomLists": {
+    "__typename": "UserCustomListsFailure",
+    "errorCode": "Hello World",
+    "errorMessage": "Hello World",
+    "failedCustomLists": [
+      {
+        "customListId": "d079b2e2-374a-48da-aa22-84b8cbb14931",
+        "reason": "CUSTOM_LIST_NOT_FOUND"
+      },
+      {
+        "customListId": "67574379-5eb4-4420-bc4a-d949e3869946",
+        "reason": "CUSTOM_LIST_NOT_FOUND"
+      }
+    ]
+  }
+}

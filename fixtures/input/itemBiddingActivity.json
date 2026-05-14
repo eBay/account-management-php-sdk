@@ -1,0 +1,14 @@
+{
+  "input": {
+    "itemId": "mock-id"
+  },
+  "activeBidHistoryRecords_paginationInput": {
+    "maxPageSize": 0
+  },
+  "cancelledBidHistoryRecords_paginationInput": {
+    "maxPageSize": 0
+  },
+  "retractedBidHistoryRecords_paginationInput": {
+    "maxPageSize": 0
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "itemBiddingActivity": {
+    "itemBiddingActivity": {
+      "activeBidHistoryRecords": {
+        "bidHistoryRecords": [
+          {
+            "bidAmount": {
+              "converted": {
+                "currency": "BWP",
+                "value": "1.00"
+              },
+              "original": {
+                "currency": "CLP",
+                "value": "1.00"
+              }
+            }
+          },
+          {
+            "bidAmount": {
+              "converted": {
+                "currency": "MOP",
+                "value": "1.00"
+              },
+              "original": {
+                "currency": "KES",
+                "value": "1.00"
+              }
+            }
+          }
+        ],
+        "paginationOutput": {
+          "nextCursor": "Hello World",
+          "previousCursor": "Hello World"
+        }
+      },
+      "cancelledBidHistoryRecords": {
+        "paginationOutput": {
+          "nextCursor": "Hello World",
+          "previousCursor": "Hello World"
+        },
+        "bidHistoryRecords": [
+          {
+            "bidder": {
+              "userId": "05263b1e-6dea-4aed-96ec-7a672c6108ff",
+              "username": "Hello World"
+            },
+            "bidAmount": {
+              "converted": {
+                "currency": "NAD",
+                "value": "1.00"
+              },
+              "original": {
+                "currency": "HKD",
+                "value": "1.00"
+              }
+            }
+          },
+          {
+            "bidder": {
+              "userId": "8092db7c-8b1c-45cc-937e-1dc284236660",
+              "username": "Hello World"
+            },
+            "bidAmount": {
+              "converted": {
+                "currency": "BBD",
+                "value": "1.00"
+              },
+              "original": {
+                "currency": "KGS",
+                "value": "1.00"
+              }
+            }
+          }
+        ]
+      },
+      "retractedBidHistoryRecords": {
+        "paginationOutput": {
+          "nextCursor": "Hello World",
+          "previousCursor": "Hello World"
+        },
+        "bidHistoryRecords": [
+          {
+            "bidAmount": {
+              "converted": {
+                "currency": "ARS",
+                "value": "1.00"
+              },
+              "original": {
+                "currency": "CVE",
+                "value": "1.00"
+              }
+            }
+          },
+          {
+            "bidAmount": {
+              "converted": {
+                "currency": "LBP",
+                "value": "1.00"
+              },
+              "original": {
+                "currency": "KMF",
+                "value": "1.00"
+              }
+            }
+          }
+        ]
+      },
+      "leadingBid": {
+        "buyerBiddingSummary": {
+          "bidsWithSellerPercentage": "10.00",
+          "itemBids": [
+            {
+              "bidCount": 11,
+              "mostRecentBidAt": "2024-01-01T00:00:00.000Z"
+            },
+            {
+              "bidCount": -66,
+              "mostRecentBidAt": "2024-01-01T00:00:00.000Z"
+            }
+          ],
+          "totalBidCount": -97,
+          "retractedBidCount": 21,
+          "uniqueListingCategoryBidCount": -3,
+          "uniqueSellerBidCount": 41
+        },
+        "bidder": {
+          "username": "Hello World",
+          "userId": "773550ae-c255-4718-9fc6-6f639c1c6c32",
+          "shippingZone": {
+            "countryCode": "MF",
+            "postalCode": "Hello World",
+            "stateOrProvince": "Hello World"
+          }
+        },
+        "bidAmount": {
+          "converted": {
+            "currency": "JPY",
+            "value": "1.00"
+          },
+          "original": {
+            "currency": "HTG",
+            "value": "1.00"
+          }
+        },
+        "bidMetadata": {
+          "placedAt": "2024-01-01T00:00:00.000Z"
+        }
+      },
+      "reservePriceMet": false,
+      "bidStatistics": {
+        "userSubmittedBidCount": 3
+      }
+    }
+  }
+}

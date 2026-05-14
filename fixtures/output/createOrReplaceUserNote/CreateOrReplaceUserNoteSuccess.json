@@ -1,0 +1,9 @@
+{
+  "createOrReplaceUserNote": {
+    "__typename": "CreateOrReplaceUserNoteSuccess",
+    "userNote": {
+      "note": "Hello World",
+      "orderLineItemId": "90646c9b-44f1-41c0-a39d-819654be9973"
+    }
+  }
+}

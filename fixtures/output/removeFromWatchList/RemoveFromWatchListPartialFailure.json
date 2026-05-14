@@ -1,0 +1,32 @@
+{
+  "removeFromWatchList": {
+    "__typename": "RemoveFromWatchListPartialFailure",
+    "errorCode": "Hello World",
+    "errorMessage": "Hello World",
+    "failedItems": [
+      {
+        "item": {
+          "itemId": "225d1a49-c356-4692-87e0-c3977ae095f1"
+        },
+        "reason": "ITEM_NOT_WATCHED"
+      },
+      {
+        "item": {
+          "itemId": "cabc42bc-0aec-4df7-99fa-338dacba9ea0"
+        },
+        "reason": "ITEM_NOT_WATCHED"
+      }
+    ],
+    "numberOfItemsUnwatched": 26,
+    "removedItems": [
+      {
+        "itemId": "43a9d8bd-ae7b-44ea-a16a-3e2fc84fd517"
+      },
+      {
+        "itemId": "47d432df-91b9-45ea-9a1c-eeb3ca60bb5c"
+      }
+    ],
+    "watchListCount": -74,
+    "watchListMaximum": -4
+  }
+}

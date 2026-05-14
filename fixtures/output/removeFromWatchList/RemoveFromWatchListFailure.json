@@ -1,0 +1,23 @@
+{
+  "removeFromWatchList": {
+    "__typename": "RemoveFromWatchListFailure",
+    "errorCode": "Hello World",
+    "failedItems": [
+      {
+        "item": {
+          "itemId": "3e5df821-fd57-4751-ba5d-bee5d6b39181"
+        },
+        "reason": "ITEM_NOT_WATCHED"
+      },
+      {
+        "item": {
+          "itemId": "d029f983-4022-4f9f-8bb8-0913ce7ef9e6"
+        },
+        "reason": "ITEM_NOT_WATCHED"
+      }
+    ],
+    "errorMessage": "Hello World",
+    "watchListCount": -92,
+    "watchListMaximum": -93
+  }
+}

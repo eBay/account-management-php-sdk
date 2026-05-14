@@ -1,0 +1,9 @@
+{
+  "input": {
+    "itemsToAdd": [
+      {
+        "itemId": "mock-id"
+      }
+    ]
+  }
+}

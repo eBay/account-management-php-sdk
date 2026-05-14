@@ -1,0 +1,16 @@
+{
+  "removeFromWatchList": {
+    "__typename": "RemoveFromWatchListSuccess",
+    "numberOfItemsUnwatched": -82,
+    "watchListCount": -45,
+    "removedItems": [
+      {
+        "itemId": "cb3622ef-cf20-4d0f-b922-ef0d19d00563"
+      },
+      {
+        "itemId": "b8620011-d1fe-4a6a-b445-3039ac8f5241"
+      }
+    ],
+    "watchListMaximum": -92
+  }
+}

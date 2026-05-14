@@ -1,0 +1,9 @@
+{
+  "deleteUserNote": {
+    "__typename": "DeleteUserNoteSuccess",
+    "userNote": {
+      "note": "Hello World",
+      "orderLineItemId": "43729711-4a1c-4ce6-84f1-21e61726643f"
+    }
+  }
+}

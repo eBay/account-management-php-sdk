@@ -1,0 +1,31 @@
+{
+  "addToWatchList": {
+    "__typename": "AddToWatchListPartialFailure",
+    "addedItems": [
+      {
+        "itemId": "b7be99d4-28b7-4183-8d0f-f8eafa8642ad"
+      },
+      {
+        "itemId": "ca372d8f-de30-421c-ae91-875a9b4fc8bd"
+      }
+    ],
+    "errorCode": "Hello World",
+    "failedItems": [
+      {
+        "item": {
+          "itemId": "4c7ab56d-01fc-4374-a415-d4eeab806937"
+        },
+        "reason": "ITEM_ALREADY_WATCHED"
+      },
+      {
+        "item": {
+          "itemId": "86a36b33-ed0d-4cb3-b4a8-4ba40ae8ab0d"
+        },
+        "reason": "ITEM_NOT_FOUND"
+      }
+    ],
+    "errorMessage": "Hello World",
+    "watchListCount": -22,
+    "watchListMaximum": 5
+  }
+}
