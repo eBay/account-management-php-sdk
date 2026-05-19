@@ -12,3 +12,7 @@ PHP SDK for eBay Account Management APIs, combining REST and GraphQL clients.
 ## Specs
 
 OpenAPI specs and GraphQL schema are in `specs/`. Implementation not yet started.
+
+## License
+
+This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for details.
