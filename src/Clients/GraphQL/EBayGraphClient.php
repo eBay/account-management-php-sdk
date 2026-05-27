@@ -185,9 +185,17 @@ final class EBayGraphClient
     }
 
     /**
+     * Execute an arbitrary GraphQL query string and return the raw `data` payload.
+     *
+     * **WARNING — injection risk.** Never interpolate user-supplied input directly into
+     * `$query`. Always pass dynamic values via `$variables` so the server handles
+     * escaping. Treat this like a raw SQL string: safe only with static,
+     * developer-controlled query text.
+     *
+     * @param array<string, mixed> $variables
      * @return array<string, mixed>
      */
-    public function executeRaw(string $query, array $variables = [], ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
+    public function executeRawUnsafe(string $query, array $variables = [], ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
     {
         return $this->dynamic->execute($query, $variables, $accessToken, $requestOptions);
     }
