@@ -54,7 +54,7 @@ final class AccountManagementClient
                                     "[REST %d] %s %s\n",
                                     $response->getStatusCode(),
                                     $request->getMethod(),
-                                    $request->getUri()
+                                    str_replace(["\r", "\n"], ' ', (string) $request->getUri())
                                 ));
                                 $body = $response->getBody()->__toString();
                                 fwrite(STDERR, sprintf("[REST body] %s\n", $body));
