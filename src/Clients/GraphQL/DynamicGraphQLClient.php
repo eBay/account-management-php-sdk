@@ -36,6 +36,11 @@ final class DynamicGraphQLClient
             ?? throw new \RuntimeException(
                 'No access token. Pass $accessToken or set AccountManagementConfiguration::$accessToken.'
             );
+        if (empty($token)) {
+            throw new \RuntimeException(
+                'No access token. Pass $accessToken per-call or set AccountManagementConfiguration::$accessToken.'
+            );
+        }
 
         // Merge default headers + per-request headers
         $extraHeaders = $this->config->defaultRequestOptions->headers;
