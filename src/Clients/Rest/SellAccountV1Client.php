@@ -89,96 +89,86 @@ final class SellAccountV1Client
 
     public function getCustomPolicies(?string $policyTypes = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->custom_policy()->emptyPathSegment()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->custom_policy()->emptyPathSegment()->get(
             new CustomPolicyGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: CustomPolicyGetRequestConfiguration::createQueryParameters(
                     policy_types: $policyTypes,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function createCustomPolicy(CustomPolicyCreateRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->custom_policy()->emptyPathSegment()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->custom_policy()->emptyPathSegment()->post(
             $body,
             new CustomPolicyPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getCustomPolicy(string $customPolicyId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->custom_policy()->byCustom_policy_id($customPolicyId)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->custom_policy()->byCustom_policy_id($customPolicyId)->get(
             new WithCustom_policy_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function updateCustomPolicy(string $customPolicyId, CustomPolicyRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->custom_policy()->byCustom_policy_id($customPolicyId)->put(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->custom_policy()->byCustom_policy_id($customPolicyId)->put(
             $body,
             new WithCustom_policy_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Fulfillment Policy ────────────────────────────────────────────────
 
     public function createFulfillmentPolicy(FulfillmentPolicyRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->fulfillment_policy()->emptyPathSegment()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->fulfillment_policy()->emptyPathSegment()->post(
             $body,
             new FulfillmentPolicyPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getFulfillmentPolicy(string $fulfillmentPolicyId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->fulfillment_policy()->byFulfillmentPolicyId($fulfillmentPolicyId)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->fulfillment_policy()->byFulfillmentPolicyId($fulfillmentPolicyId)->get(
             new WithFulfillmentPolicyItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function updateFulfillmentPolicy(string $fulfillmentPolicyId, FulfillmentPolicyRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->fulfillment_policy()->byFulfillmentPolicyId($fulfillmentPolicyId)->put(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->fulfillment_policy()->byFulfillmentPolicyId($fulfillmentPolicyId)->put(
             $body,
             new WithFulfillmentPolicyItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function deleteFulfillmentPolicy(string $fulfillmentPolicyId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->fulfillment_policy()->byFulfillmentPolicyId($fulfillmentPolicyId)->delete(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->fulfillment_policy()->byFulfillmentPolicyId($fulfillmentPolicyId)->delete(
             new WithFulfillmentPolicyItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getFulfillmentPolicies(?string $marketplaceId = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->fulfillment_policy()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->fulfillment_policy()->get(
             new Fulfillment_policyRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: Fulfillment_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
                     marketplace_id: $marketplaceId,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function getFulfillmentPolicyByName(?string $marketplaceId = null, ?string $name = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->fulfillment_policy()->get_by_policy_name()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->fulfillment_policy()->get_by_policy_name()->get(
             new FulfillmentPolicyByNameGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: FulfillmentPolicyByNameGetRequestConfiguration::createQueryParameters(
@@ -186,62 +176,56 @@ final class SellAccountV1Client
                     name: $name,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     // ── Payment Policy ────────────────────────────────────────────────────
 
     public function getPaymentPolicies(?string $marketplaceId = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->payment_policy()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->payment_policy()->get(
             new Payment_policyRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: Payment_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
                     marketplace_id: $marketplaceId,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function createPaymentPolicy(PaymentPolicyRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->payment_policy()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->payment_policy()->post(
             $body,
             new Payment_policyRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getPaymentPolicy(string $paymentPolicyId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->payment_policy()->byPayment_policy_id($paymentPolicyId)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->payment_policy()->byPayment_policy_id($paymentPolicyId)->get(
             new WithPayment_policy_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function updatePaymentPolicy(string $paymentPolicyId, PaymentPolicyRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->payment_policy()->byPayment_policy_id($paymentPolicyId)->put(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->payment_policy()->byPayment_policy_id($paymentPolicyId)->put(
             $body,
             new WithPayment_policy_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function deletePaymentPolicy(string $paymentPolicyId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->payment_policy()->byPayment_policy_id($paymentPolicyId)->delete(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->payment_policy()->byPayment_policy_id($paymentPolicyId)->delete(
             new WithPayment_policy_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getPaymentPolicyByName(?string $marketplaceId = null, ?string $name = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->payment_policy()->get_by_policy_name()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->payment_policy()->get_by_policy_name()->get(
             new PaymentPolicyByNameGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: PaymentPolicyByNameGetRequestConfiguration::createQueryParameters(
@@ -249,133 +233,120 @@ final class SellAccountV1Client
                     name: $name,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     // ── Payments Program ──────────────────────────────────────────────────
 
     public function getPaymentsProgram(string $marketplaceId, string $paymentsProgramType, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->payments_program()->byMarketplace_id($marketplaceId)->byPayments_program_type($paymentsProgramType)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->payments_program()->byMarketplace_id($marketplaceId)->byPayments_program_type($paymentsProgramType)->get(
             new WithPayments_program_typeItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getPaymentsProgramOnboarding(string $marketplaceId, string $paymentsProgramType, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->payments_program()->byMarketplace_id($marketplaceId)->byPayments_program_type($paymentsProgramType)->onboarding()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->payments_program()->byMarketplace_id($marketplaceId)->byPayments_program_type($paymentsProgramType)->onboarding()->get(
             new OnboardingRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Privilege ─────────────────────────────────────────────────────────
 
     public function getPrivileges(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->privilege()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->privilege()->get(
             new PrivilegeRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Program ───────────────────────────────────────────────────────────
 
     public function getOptedInPrograms(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->program()->get_opted_in_programs()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->program()->get_opted_in_programs()->get(
             new Get_opted_in_programsRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function optInToProgram(mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->program()->opt_in()->post(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->program()->opt_in()->post(
             $body,
             new Opt_inRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function optOutOfProgram(mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->program()->opt_out()->post(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->program()->opt_out()->post(
             $body,
             new Opt_outRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Rate Table ────────────────────────────────────────────────────────
 
     public function getRateTables(?string $countryCode = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->rate_table()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->rate_table()->get(
             new Rate_tableRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: Rate_tableRequestBuilderGetRequestConfiguration::createQueryParameters(
                     country_code: $countryCode,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     // ── Return Policy ─────────────────────────────────────────────────────
 
     public function getReturnPolicies(?string $marketplaceId = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->return_policy()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->return_policy()->get(
             new Return_policyRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: Return_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
                     marketplace_id: $marketplaceId,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     public function createReturnPolicy(ReturnPolicyRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->return_policy()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->return_policy()->post(
             $body,
             new Return_policyRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getReturnPolicy(string $returnPolicyId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->return_policy()->byReturn_policy_id($returnPolicyId)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->return_policy()->byReturn_policy_id($returnPolicyId)->get(
             new WithReturn_policy_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function updateReturnPolicy(string $returnPolicyId, ReturnPolicyRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->return_policy()->byReturn_policy_id($returnPolicyId)->put(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->return_policy()->byReturn_policy_id($returnPolicyId)->put(
             $body,
             new WithReturn_policy_ItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function deleteReturnPolicy(string $returnPolicyId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->return_policy()->byReturn_policy_id($returnPolicyId)->delete(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->return_policy()->byReturn_policy_id($returnPolicyId)->delete(
             new WithReturn_policy_ItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getReturnPolicyByName(?string $marketplaceId = null, ?string $name = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->return_policy()->get_by_policy_name()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->return_policy()->get_by_policy_name()->get(
             new ReturnPolicyByNameGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: ReturnPolicyByNameGetRequestConfiguration::createQueryParameters(
@@ -383,64 +354,58 @@ final class SellAccountV1Client
                     name: $name,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     // ── Sales Tax ─────────────────────────────────────────────────────────
 
     public function bulkCreateOrReplaceSalesTax(BulkSalesTaxInput $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->bulk_create_or_replace_sales_tax()->post(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->bulk_create_or_replace_sales_tax()->post(
             $body,
             new Bulk_create_or_replace_sales_taxRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getSalesTax(string $countryCode, string $jurisdictionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->sales_tax()->byCountryCode($countryCode)->byJurisdictionId($jurisdictionId)->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->sales_tax()->byCountryCode($countryCode)->byJurisdictionId($jurisdictionId)->get(
             new WithJurisdictionItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function createOrReplaceSalesTax(string $countryCode, string $jurisdictionId, mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->sales_tax()->byCountryCode($countryCode)->byJurisdictionId($jurisdictionId)->put(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->sales_tax()->byCountryCode($countryCode)->byJurisdictionId($jurisdictionId)->put(
             $body,
             new WithJurisdictionItemRequestBuilderPutRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function deleteSalesTax(string $countryCode, string $jurisdictionId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::set($accessToken);
-        $this->kiota->sales_tax()->byCountryCode($countryCode)->byJurisdictionId($jurisdictionId)->delete(
+        TokenContext::runWith($accessToken, fn() => $this->kiota->sales_tax()->byCountryCode($countryCode)->byJurisdictionId($jurisdictionId)->delete(
             new WithJurisdictionItemRequestBuilderDeleteRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     public function getSalesTaxes(?string $countryCode = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->sales_tax()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->sales_tax()->get(
             new Sales_taxRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: Sales_taxRequestBuilderGetRequestConfiguration::createQueryParameters(
                     country_code: $countryCode,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     // ── Subscription ──────────────────────────────────────────────────────
 
     public function getSubscription(?string $continuationToken = null, ?string $limit = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->subscription()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->subscription()->get(
             new SubscriptionRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: SubscriptionRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -448,31 +413,29 @@ final class SellAccountV1Client
                     limit: $limit,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 
     // ── KYC ───────────────────────────────────────────────────────────────
 
     public function getKYC(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->kyc()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->kyc()->get(
             new KycRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait();
+        )->wait());
     }
 
     // ── Advertising Eligibility ───────────────────────────────────────────
 
     public function getAdvertisingEligibility(?string $programTypes = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        TokenContext::set($accessToken);
-        return $this->kiota->advertising_eligibility()->get(
+        return TokenContext::runWith($accessToken, fn() => $this->kiota->advertising_eligibility()->get(
             new Advertising_eligibilityRequestBuilderGetRequestConfiguration(
                 headers: $this->mergedHeaders($requestOptions),
                 queryParameters: Advertising_eligibilityRequestBuilderGetRequestConfiguration::createQueryParameters(
                     program_types: $programTypes,
                 ),
             )
-        )->wait();
+        )->wait());
     }
 }
