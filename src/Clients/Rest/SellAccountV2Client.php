@@ -58,11 +58,10 @@ final class SellAccountV2Client
     /** @return array<string,string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
     {
-        $headers = $this->config->defaultRequestOptions->headers;
-        if ($requestOptions !== null) {
-            $headers = array_merge($headers, $requestOptions->headers);
-        }
-        return $headers;
+        return array_merge(
+            $this->config->defaultRequestOptions->headers,
+            $requestOptions?->headers ?? []
+        );
     }
 
     // ── Rate Table ────────────────────────────────────────────────────────
