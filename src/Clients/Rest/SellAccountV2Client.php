@@ -17,8 +17,8 @@
 namespace EBay\AccountManagement\Clients\Rest;
 
 use EBay\AccountManagement\Configuration\AccountManagementConfiguration;
+use EBay\AccountManagement\Configuration\KiotaAuthProvider;
 use EBay\AccountManagement\Configuration\RequestOptions;
-use EBay\AccountManagement\Configuration\TokenContext;
 use EBay\AccountManagement\Generated\SellAccountV2\SellAccountV2ApiClient;
 use EBay\AccountManagement\Generated\SellAccountV2\Models\CreateCalculatedShippingRulesRequest;
 use EBay\AccountManagement\Generated\SellAccountV2\Models\CreateFlatShippingRulesRequest;
@@ -29,6 +29,9 @@ use EBay\AccountManagement\Generated\SellAccountV2\Models\UpdateCombinedPayments
 use EBay\AccountManagement\Generated\SellAccountV2\Models\UpdateFlatShippingRulesRequest;
 use EBay\AccountManagement\Generated\SellAccountV2\Models\UpdatePayoutPercentageRequest;
 use EBay\AccountManagement\Generated\SellAccountV2\Models\UpdatePromotionalShippingRuleRequest;
+use GuzzleHttp\Client as GuzzleClient;
+use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
+use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 // Request configuration classes
 use EBay\AccountManagement\Generated\SellAccountV2\Combined_shipping_rules\Combined_shipping_rulesRequestBuilderGetRequestConfiguration;
@@ -49,9 +52,28 @@ use EBay\AccountManagement\Generated\SellAccountV2\User_preferences\User_prefere
 final class SellAccountV2Client
 {
     public function __construct(
-        private readonly SellAccountV2ApiClient $kiota,
+        private readonly GuzzleClient $guzzle,
         private readonly AccountManagementConfiguration $config,
     ) {}
+
+    // ── Adapter factory ───────────────────────────────────────────────────
+
+    private function call(?string $accessToken, callable $op): mixed
+    {
+        $token = $accessToken ?? $this->config->accessToken
+            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set AccountManagementConfiguration::$accessToken.');
+        return $op($this->buildApiClient($token));
+    }
+
+    private function buildApiClient(string $token): SellAccountV2ApiClient
+    {
+        $auth = new BaseBearerTokenAuthenticationProvider(
+            new KiotaAuthProvider($token, $this->config->getAllowedHosts())
+        );
+        $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
+        $adapter->setBaseUrl($this->config->sellAccountV2BaseUrl);
+        return new SellAccountV2ApiClient($adapter);
+    }
 
     // ── Headers helper ────────────────────────────────────────────────────
 
@@ -68,120 +90,162 @@ final class SellAccountV2Client
 
     public function getRateTable(string $rateTableId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->rate_table()->byRate_table_id($rateTableId)->get(
-            new WithRate_table_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->rate_table()->byRate_table_id($rateTableId)->get(
+                new WithRate_table_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function updateShippingCost(string $rateTableId, RateTableUpdate $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->rate_table()->byRate_table_id($rateTableId)->update_shipping_cost()->post(
-            $body,
-            new Update_shipping_costRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->rate_table()->byRate_table_id($rateTableId)->update_shipping_cost()->post(
+                $body,
+                new Update_shipping_costRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     // ── Payout Settings ───────────────────────────────────────────────────
 
     public function getPayoutSettings(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->payout_settings()->get(
-            new Payout_settingsRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->payout_settings()->get(
+                new Payout_settingsRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function updatePayoutPercentage(UpdatePayoutPercentageRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->payout_settings()->update_percentage()->post(
-            $body,
-            new Update_percentageRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->payout_settings()->update_percentage()->post(
+                $body,
+                new Update_percentageRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     // ── Combined Shipping Rules ───────────────────────────────────────────
 
     public function createCalculatedShippingRules(CreateCalculatedShippingRulesRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->combined_shipping_rules()->create_calculated_shipping_rules()->post(
-            $body,
-            new Create_calculated_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->combined_shipping_rules()->create_calculated_shipping_rules()->post(
+                $body,
+                new Create_calculated_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function createFlatShippingRules(CreateFlatShippingRulesRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->combined_shipping_rules()->create_flat_shipping_rules()->post(
-            $body,
-            new Create_flat_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->combined_shipping_rules()->create_flat_shipping_rules()->post(
+                $body,
+                new Create_flat_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function createPromotionalShippingRule(CreatePromotionalShippingRuleRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->combined_shipping_rules()->create_promotional_shipping_rule()->post(
-            $body,
-            new Create_promotional_shipping_ruleRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->combined_shipping_rules()->create_promotional_shipping_rule()->post(
+                $body,
+                new Create_promotional_shipping_ruleRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function getCombinedShippingRules(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->combined_shipping_rules()->get(
-            new Combined_shipping_rulesRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->combined_shipping_rules()->get(
+                new Combined_shipping_rulesRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function updateCalculatedShippingRules(UpdateCalculatedShippingRulesRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->combined_shipping_rules()->update_calculated_shipping_rules()->post(
-            $body,
-            new Update_calculated_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->combined_shipping_rules()->update_calculated_shipping_rules()->post(
+                $body,
+                new Update_calculated_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function updateCombinedPayments(UpdateCombinedPaymentsRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->combined_shipping_rules()->update_combined_payments()->post(
-            $body,
-            new Update_combined_paymentsRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->combined_shipping_rules()->update_combined_payments()->post(
+                $body,
+                new Update_combined_paymentsRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function updateFlatShippingRules(UpdateFlatShippingRulesRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->combined_shipping_rules()->update_flat_shipping_rules()->post(
-            $body,
-            new Update_flat_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->combined_shipping_rules()->update_flat_shipping_rules()->post(
+                $body,
+                new Update_flat_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function updatePromotionalShippingRule(UpdatePromotionalShippingRuleRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->combined_shipping_rules()->update_promotional_shipping_rule()->post(
-            $body,
-            new Update_promotional_shipping_ruleRequestBuilderPostRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->combined_shipping_rules()->update_promotional_shipping_rule()->post(
+                $body,
+                new Update_promotional_shipping_ruleRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     // ── User Preferences ──────────────────────────────────────────────────
 
     public function getUserPreferences(?string $fieldgroups = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->user_preferences()->get(
-            new User_preferencesRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: User_preferencesRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    fieldgroups: $fieldgroups,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->user_preferences()->get(
+                new User_preferencesRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: User_preferencesRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        fieldgroups: $fieldgroups,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function setUserPreferences(mixed $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): void
     {
-        TokenContext::runWith($accessToken, fn() => $this->kiota->user_preferences()->patch(
-            $body,
-            new User_preferencesRequestBuilderPatchRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        $this->call($accessToken, fn($api) =>
+            $api->user_preferences()->patch(
+                $body,
+                new User_preferencesRequestBuilderPatchRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 }

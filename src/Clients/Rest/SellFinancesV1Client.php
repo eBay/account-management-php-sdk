@@ -17,9 +17,12 @@
 namespace EBay\AccountManagement\Clients\Rest;
 
 use EBay\AccountManagement\Configuration\AccountManagementConfiguration;
+use EBay\AccountManagement\Configuration\KiotaAuthProvider;
 use EBay\AccountManagement\Configuration\RequestOptions;
-use EBay\AccountManagement\Configuration\TokenContext;
 use EBay\AccountManagement\Generated\SellFinancesV1\SellFinancesV1ApiClient;
+use GuzzleHttp\Client as GuzzleClient;
+use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
+use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 // Request configuration classes
 use EBay\AccountManagement\Generated\SellFinancesV1\Billing_activity\Billing_activityRequestBuilderGetRequestConfiguration;
@@ -37,9 +40,28 @@ use EBay\AccountManagement\Generated\SellFinancesV1\Transfer\Item\WithTransfer_I
 final class SellFinancesV1Client
 {
     public function __construct(
-        private readonly SellFinancesV1ApiClient $kiota,
+        private readonly GuzzleClient $guzzle,
         private readonly AccountManagementConfiguration $config,
     ) {}
+
+    // ── Adapter factory ───────────────────────────────────────────────────
+
+    private function call(?string $accessToken, callable $op): mixed
+    {
+        $token = $accessToken ?? $this->config->accessToken
+            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set AccountManagementConfiguration::$accessToken.');
+        return $op($this->buildApiClient($token));
+    }
+
+    private function buildApiClient(string $token): SellFinancesV1ApiClient
+    {
+        $auth = new BaseBearerTokenAuthenticationProvider(
+            new KiotaAuthProvider($token, $this->config->getAllowedHosts())
+        );
+        $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
+        $adapter->setBaseUrl($this->config->sellFinancesV1BaseUrl);
+        return new SellFinancesV1ApiClient($adapter);
+    }
 
     // ── Headers helper ────────────────────────────────────────────────────
 
@@ -56,135 +78,168 @@ final class SellFinancesV1Client
 
     public function getBillingActivities(?string $filter = null, ?string $limit = null, ?string $offset = null, ?string $sort = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->billing_activity()->get(
-            new Billing_activityRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Billing_activityRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    filter: $filter,
-                    limit: $limit,
-                    offset: $offset,
-                    sort: $sort,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->billing_activity()->get(
+                new Billing_activityRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Billing_activityRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        filter: $filter,
+                        limit: $limit,
+                        offset: $offset,
+                        sort: $sort,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     // ── Order Earnings ────────────────────────────────────────────────────
 
     public function getOrderEarnings(?string $filter = null, ?string $limit = null, ?string $offset = null, ?string $sort = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->order_earnings()->get(
-            new Order_earningsRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Order_earningsRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    filter: $filter,
-                    limit: $limit,
-                    offset: $offset,
-                    sort: $sort,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->order_earnings()->get(
+                new Order_earningsRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Order_earningsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        filter: $filter,
+                        limit: $limit,
+                        offset: $offset,
+                        sort: $sort,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function getOrderEarningsById(string $orderId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->order_earnings()->byOrder_id($orderId)->get(
-            new WithOrder_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->order_earnings()->byOrder_id($orderId)->get(
+                new WithOrder_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function getOrderEarningsSummary(?string $filter = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->order_earnings_summary()->get(
-            new Order_earnings_summaryRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Order_earnings_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    filter: $filter,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->order_earnings_summary()->get(
+                new Order_earnings_summaryRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Order_earnings_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        filter: $filter,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     // ── Payout ────────────────────────────────────────────────────────────
 
     public function getPayout(string $payoutId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->payout()->byPayout_Id($payoutId)->get(
-            new WithPayout_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->payout()->byPayout_Id($payoutId)->get(
+                new WithPayout_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     public function getPayouts(?string $filter = null, ?string $limit = null, ?string $offset = null, ?string $sort = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->payout()->get(
-            new PayoutRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: PayoutRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    filter: $filter,
-                    limit: $limit,
-                    offset: $offset,
-                    sort: $sort,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->payout()->get(
+                new PayoutRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: PayoutRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        filter: $filter,
+                        limit: $limit,
+                        offset: $offset,
+                        sort: $sort,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function getPayoutSummary(?string $filter = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->payout_summary()->get(
-            new Payout_summaryRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Payout_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    filter: $filter,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->payout_summary()->get(
+                new Payout_summaryRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Payout_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        filter: $filter,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     // ── Seller Funds Summary ──────────────────────────────────────────────
 
     public function getSellerFundsSummary(?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->seller_funds_summary()->get(
-            new Seller_funds_summaryRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->seller_funds_summary()->get(
+                new Seller_funds_summaryRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 
     // ── Transactions ──────────────────────────────────────────────────────
 
     public function getTransactions(?string $filter = null, ?string $limit = null, ?string $offset = null, ?string $sort = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->transaction()->get(
-            new TransactionRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: TransactionRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    filter: $filter,
-                    limit: $limit,
-                    offset: $offset,
-                    sort: $sort,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->transaction()->get(
+                new TransactionRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: TransactionRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        filter: $filter,
+                        limit: $limit,
+                        offset: $offset,
+                        sort: $sort,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     public function getTransactionSummary(?string $filter = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->transaction_summary()->get(
-            new Transaction_summaryRequestBuilderGetRequestConfiguration(
-                headers: $this->mergedHeaders($requestOptions),
-                queryParameters: Transaction_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
-                    filter: $filter,
-                ),
-            )
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->transaction_summary()->get(
+                new Transaction_summaryRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Transaction_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        filter: $filter,
+                    ),
+                )
+            )->wait()
+        );
     }
 
     // ── Transfer ──────────────────────────────────────────────────────────
 
     public function getTransfer(string $transferId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): mixed
     {
-        return TokenContext::runWith($accessToken, fn() => $this->kiota->transfer()->byTransfer_Id($transferId)->get(
-            new WithTransfer_ItemRequestBuilderGetRequestConfiguration(headers: $this->mergedHeaders($requestOptions))
-        )->wait());
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->transfer()->byTransfer_Id($transferId)->get(
+                new WithTransfer_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
     }
 }
