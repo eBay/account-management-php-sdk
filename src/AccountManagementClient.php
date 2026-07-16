@@ -14,6 +14,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+declare(strict_types=1);
+
 namespace EBay\AccountManagement;
 
 use EBay\AccountManagement\Clients\GraphQL\DynamicGraphQLClient;
@@ -22,14 +24,8 @@ use EBay\AccountManagement\Clients\Rest\SellAccountV1Client;
 use EBay\AccountManagement\Clients\Rest\SellAccountV2Client;
 use EBay\AccountManagement\Clients\Rest\SellFinancesV1Client;
 use EBay\AccountManagement\Configuration\AccountManagementConfiguration;
-use EBay\AccountManagement\Configuration\KiotaAuthProvider;
-use EBay\AccountManagement\Generated\SellAccountV1\SellAccountV1ApiClient;
-use EBay\AccountManagement\Generated\SellAccountV2\SellAccountV2ApiClient;
-use EBay\AccountManagement\Generated\SellFinancesV1\SellFinancesV1ApiClient;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\HandlerStack;
-use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
-use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 final class AccountManagementClient
 {
@@ -73,26 +69,9 @@ final class AccountManagementClient
             ]);
         }
 
-        $auth = new BaseBearerTokenAuthenticationProvider(new KiotaAuthProvider($config));
-
-        // ── Sell Account V1 ──────────────────────────────────────────────
-        $v1Adapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $v1Adapter->setBaseUrl($config->sellAccountV1BaseUrl);
-        $this->sellAccountV1 = new SellAccountV1Client(new SellAccountV1ApiClient($v1Adapter), $config);
-
-        // ── Sell Account V2 ──────────────────────────────────────────────
-        $v2Adapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $v2Adapter->setBaseUrl($config->sellAccountV2BaseUrl);
-        $this->sellAccountV2 = new SellAccountV2Client(new SellAccountV2ApiClient($v2Adapter), $config);
-
-        // ── Sell Finances V1 ─────────────────────────────────────────────
-        $finAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $finAdapter->setBaseUrl($config->sellFinancesV1BaseUrl);
-        $this->sellFinances = new SellFinancesV1Client(new SellFinancesV1ApiClient($finAdapter), $config);
-
-        // ── eBay Graph (GraphQL) ─────────────────────────────────────────
-        $this->graphQL = new EBayGraphClient(
-            new DynamicGraphQLClient($guzzle, $config)
-        );
+        $this->sellAccountV1 = new SellAccountV1Client($guzzle, $config);
+        $this->sellAccountV2 = new SellAccountV2Client($guzzle, $config);
+        $this->sellFinances  = new SellFinancesV1Client($guzzle, $config);
+        $this->graphQL       = new EBayGraphClient(new DynamicGraphQLClient($guzzle, $config));
     }
 }
