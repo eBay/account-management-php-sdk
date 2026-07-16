@@ -18,18 +18,16 @@ namespace EBay\AccountManagement\Configuration;
 
 final class AccountManagementConfiguration
 {
-    public string $sellAccountV1BaseUrl  = 'https://api.ebay.com/sell/account/v1';
-    public string $sellAccountV2BaseUrl  = 'https://api.ebay.com/sell/account/v2';
-    public string $sellFinancesV1BaseUrl = 'https://apiz.ebay.com/sell/finances/v1';
-    public string $graphQLBaseUrl        = 'https://api.ebay.com/graphql';
+    public readonly RequestOptions $defaultRequestOptions;
 
-    public ?string $accessToken        = null;
-    public bool    $diagnosticLogging  = false;
-
-    public RequestOptions $defaultRequestOptions;
-
-    public function __construct()
-    {
+    public function __construct(
+        public readonly string  $sellAccountV1BaseUrl  = 'https://api.ebay.com/sell/account/v1',
+        public readonly string  $sellAccountV2BaseUrl  = 'https://api.ebay.com/sell/account/v2',
+        public readonly string  $sellFinancesV1BaseUrl = 'https://apiz.ebay.com/sell/finances/v1',
+        public readonly string  $graphQLBaseUrl        = 'https://api.ebay.com/graphql',
+        public readonly ?string $accessToken           = null,
+        public readonly bool    $diagnosticLogging     = false,
+    ) {
         $this->defaultRequestOptions = new RequestOptions();
     }
 
