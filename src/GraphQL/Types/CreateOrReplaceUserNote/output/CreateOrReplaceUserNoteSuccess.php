@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\CreateOrReplaceUserNote\Output;
 
-readonly class CreateOrReplaceUserNoteSuccess extends CreateOrReplaceUserNoteOutput
+final readonly class CreateOrReplaceUserNoteSuccess extends CreateOrReplaceUserNoteOutput
 {
     public function __construct(
         public ?UserNote $userNote = null,
@@ -29,6 +29,7 @@ readonly class CreateOrReplaceUserNoteSuccess extends CreateOrReplaceUserNoteOut
         return 'CreateOrReplaceUserNoteSuccess';
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

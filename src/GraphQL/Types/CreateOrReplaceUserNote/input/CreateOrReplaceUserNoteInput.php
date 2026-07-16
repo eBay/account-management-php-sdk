@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\CreateOrReplaceUserNote\Input;
 
-readonly class CreateOrReplaceUserNoteInput
+final readonly class CreateOrReplaceUserNoteInput
 {
     public function __construct(
         public string $itemId,
@@ -26,15 +26,17 @@ readonly class CreateOrReplaceUserNoteInput
         public ?string $orderLineItemId = null,
     ) {}
 
-    public static function fromArray(array $data): static
+    /** @param array<string, mixed> $data */
+    public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             itemId:          $data['itemId'],
             userNote:        $data['userNote'],
             orderLineItemId: $data['orderLineItemId'] ?? null,
         );
     }
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return array_filter([

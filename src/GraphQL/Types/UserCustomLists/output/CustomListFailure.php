@@ -18,13 +18,14 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
-readonly class CustomListFailure
+final readonly class CustomListFailure
 {
     public function __construct(
         public ?string $customListId = null,
         public ?string $reason = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

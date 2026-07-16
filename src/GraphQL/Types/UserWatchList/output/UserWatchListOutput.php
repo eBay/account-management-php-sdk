@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserWatchList\Output;
 
-readonly class UserWatchListOutput
+final readonly class UserWatchListOutput
 {
     /**
      * @param WatchedItem[] $items
@@ -30,6 +30,7 @@ readonly class UserWatchListOutput
         public ?int $watchListMaximum = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

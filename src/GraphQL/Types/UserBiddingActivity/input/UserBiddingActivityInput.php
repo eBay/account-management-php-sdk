@@ -18,19 +18,21 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserBiddingActivity\Input;
 
-readonly class UserBiddingActivityInput
+final readonly class UserBiddingActivityInput
 {
     public function __construct(
         public ?BiddingActivityFilter $filter = null,
     ) {}
 
-    public static function fromArray(array $data): static
+    /** @param array<string, mixed> $data */
+    public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             filter: isset($data['filter']) ? BiddingActivityFilter::fromArray($data['filter']) : null,
         );
     }
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         $data = [];

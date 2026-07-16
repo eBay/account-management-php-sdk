@@ -18,13 +18,14 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\AddToWatchList\Output;
 
-readonly class WatchListAddFailure
+final readonly class WatchListAddFailure
 {
     public function __construct(
         public ?Item $item = null,
         public ?string $reason = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

@@ -18,7 +18,6 @@ namespace EBay\AccountManagement\Clients\GraphQL;
 
 use EBay\AccountManagement\Configuration\AccountManagementConfiguration;
 use EBay\AccountManagement\Configuration\RequestOptions;
-use EBay\AccountManagement\Configuration\TokenContext;
 use EBay\AccountManagement\Exceptions\GraphQLException;
 use GuzzleHttp\ClientInterface;
 
@@ -29,18 +28,16 @@ final class DynamicGraphQLClient
         private readonly AccountManagementConfiguration $config,
     ) {}
 
-    /** @return array<string, mixed> The `data` field of the GraphQL response. */
+    /**
+     * @param array<string, mixed> $variables
+     * @return array<string, mixed> The `data` field of the GraphQL response.
+     */
     public function execute(string $query, array $variables = [], ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
     {
-        $token = $accessToken ?? TokenContext::get() ?? $this->config->accessToken
+        $token = $accessToken ?? $this->config->accessToken
             ?? throw new \RuntimeException(
                 'No access token. Pass $accessToken or set AccountManagementConfiguration::$accessToken.'
             );
-        if (empty($token)) {
-            throw new \RuntimeException(
-                'No access token. Pass $accessToken per-call or set AccountManagementConfiguration::$accessToken.'
-            );
-        }
 
         // Merge default headers + per-request headers
         $extraHeaders = $this->config->defaultRequestOptions->headers;

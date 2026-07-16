@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Output;
 
-readonly class LeadingBidRecord
+final readonly class LeadingBidRecord
 {
     public function __construct(
         public ?BuyerBiddingSummary $buyerBiddingSummary = null,
@@ -27,6 +27,7 @@ readonly class LeadingBidRecord
         public ?BidMetadata $bidMetadata = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

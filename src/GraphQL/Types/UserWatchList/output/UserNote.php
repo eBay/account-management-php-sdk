@@ -18,13 +18,14 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserWatchList\Output;
 
-readonly class UserNote
+final readonly class UserNote
 {
     public function __construct(
         public ?string $note = null,
         public ?string $orderLineItemId = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Output;
 
-readonly class AuctionData
+final readonly class AuctionData
 {
     public function __construct(
         public ?BidHistoryRecordsPaginated $activeBidHistoryRecords = null,
@@ -29,6 +29,7 @@ readonly class AuctionData
         public ?BidStatistics $bidStatistics = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

@@ -18,10 +18,10 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\DeleteUserNote\Output;
 
-readonly class ReferenceArgumentsNotFound extends DeleteUserNoteOutput
+final readonly class ReferenceArgumentsNotFound extends DeleteUserNoteOutput
 {
     /**
-     * @var string[]
+     * @param string[] $argumentNames
      */
     public function __construct(
         public array $argumentNames = [],
@@ -34,6 +34,7 @@ readonly class ReferenceArgumentsNotFound extends DeleteUserNoteOutput
         return 'ReferenceArgumentsNotFound';
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

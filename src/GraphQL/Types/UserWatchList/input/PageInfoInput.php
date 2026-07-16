@@ -18,21 +18,23 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserWatchList\Input;
 
-readonly class PageInfoInput
+final readonly class PageInfoInput
 {
     public function __construct(
         public int $maxPageSize,
         public ?string $pageCursor = null,
     ) {}
 
-    public static function fromArray(array $data): static
+    /** @param array<string, mixed> $data */
+    public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             maxPageSize: (int)$data['maxPageSize'],
             pageCursor:  $data['pageCursor'] ?? null,
         );
     }
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return array_filter([

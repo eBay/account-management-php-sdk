@@ -18,21 +18,23 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\DeleteUserNote\Input;
 
-readonly class DeleteUserNoteInput
+final readonly class DeleteUserNoteInput
 {
     public function __construct(
         public string $itemId,
         public ?string $orderLineItemId = null,
     ) {}
 
-    public static function fromArray(array $data): static
+    /** @param array<string, mixed> $data */
+    public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             itemId:          $data['itemId'],
             orderLineItemId: $data['orderLineItemId'] ?? null,
         );
     }
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return array_filter([

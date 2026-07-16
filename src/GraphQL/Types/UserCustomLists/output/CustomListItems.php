@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
-readonly class CustomListItems
+final readonly class CustomListItems
 {
     /**
      * @param CustomListItem[] $results
@@ -28,6 +28,7 @@ readonly class CustomListItems
         public array $results = [],
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\User\Output;
 
-readonly class UserOutput
+final readonly class UserOutput
 {
     public function __construct(
         public ?string $username = null,
@@ -33,6 +33,7 @@ readonly class UserOutput
         public ?IndividualIdentityProfile $individualIdentityProfile = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

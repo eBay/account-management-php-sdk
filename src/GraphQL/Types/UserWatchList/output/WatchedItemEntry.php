@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserWatchList\Output;
 
-readonly class WatchedItemEntry
+final readonly class WatchedItemEntry
 {
     /**
      * @param UserNote[] $userNotes
@@ -28,6 +28,7 @@ readonly class WatchedItemEntry
         public array $userNotes = [],
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

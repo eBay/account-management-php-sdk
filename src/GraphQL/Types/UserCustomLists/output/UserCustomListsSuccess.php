@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
-readonly class UserCustomListsSuccess extends UserCustomListsOutput
+final readonly class UserCustomListsSuccess extends UserCustomListsOutput
 {
     /**
      * @param UserCustomList[] $customLists
@@ -33,6 +33,7 @@ readonly class UserCustomListsSuccess extends UserCustomListsOutput
         return 'UserCustomListsSuccess';
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

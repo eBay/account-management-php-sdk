@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Output;
 
-readonly class BuyerBiddingSummary
+final readonly class BuyerBiddingSummary
 {
     /**
      * @param ItemBid[] $itemBids
@@ -32,6 +32,7 @@ readonly class BuyerBiddingSummary
         public ?int $uniqueSellerBidCount = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

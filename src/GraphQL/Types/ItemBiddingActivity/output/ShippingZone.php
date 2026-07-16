@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Output;
 
-readonly class ShippingZone
+final readonly class ShippingZone
 {
     public function __construct(
         public ?string $countryCode = null,
@@ -26,6 +26,7 @@ readonly class ShippingZone
         public ?string $stateOrProvince = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

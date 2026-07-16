@@ -18,13 +18,14 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserBiddingActivity\Output;
 
-readonly class MoneyAmount
+final readonly class MoneyAmount
 {
     public function __construct(
         public ?string $value = null,
         public ?string $currency = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

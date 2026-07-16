@@ -18,19 +18,21 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\RemoveFromWatchList\Input;
 
-readonly class WatchListEntryToRemove
+final readonly class WatchListEntryToRemove
 {
     public function __construct(
         public string $itemId,
     ) {}
 
-    public static function fromArray(array $data): static
+    /** @param array<string, mixed> $data */
+    public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             itemId: $data['itemId'],
         );
     }
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return ['itemId' => $this->itemId];

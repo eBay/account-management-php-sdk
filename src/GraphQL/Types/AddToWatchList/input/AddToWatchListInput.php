@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\AddToWatchList\Input;
 
-readonly class AddToWatchListInput
+final readonly class AddToWatchListInput
 {
     /**
      * @param WatchListEntryToAdd[] $itemsToAdd
@@ -27,9 +27,10 @@ readonly class AddToWatchListInput
         public array $itemsToAdd,
     ) {}
 
-    public static function fromArray(array $data): static
+    /** @param array<string, mixed> $data */
+    public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             itemsToAdd: array_map(
                 static fn(array $e): WatchListEntryToAdd => WatchListEntryToAdd::fromArray($e),
                 $data['itemsToAdd'] ?? [],
@@ -37,6 +38,7 @@ readonly class AddToWatchListInput
         );
     }
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return [

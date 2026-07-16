@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserBiddingActivity\Input;
 
-readonly class BiddingActivityFilter
+final readonly class BiddingActivityFilter
 {
     public function __construct(
         public ?string $activeAfter = null,
@@ -26,9 +26,10 @@ readonly class BiddingActivityFilter
         public ?PageInfoInput $paginationInput = null,
     ) {}
 
-    public static function fromArray(array $data): static
+    /** @param array<string, mixed> $data */
+    public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             activeAfter:     $data['activeAfter'] ?? null,
             activeBefore:    $data['activeBefore'] ?? null,
             paginationInput: isset($data['paginationInput'])
@@ -37,6 +38,7 @@ readonly class BiddingActivityFilter
         );
     }
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return array_filter([

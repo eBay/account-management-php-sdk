@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
-readonly class UserCustomListsFailure extends UserCustomListsOutput
+final readonly class UserCustomListsFailure extends UserCustomListsOutput
 {
     /**
      * @param CustomListFailure[] $failedCustomLists
@@ -34,6 +34,7 @@ readonly class UserCustomListsFailure extends UserCustomListsOutput
         return 'UserCustomListsFailure';
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

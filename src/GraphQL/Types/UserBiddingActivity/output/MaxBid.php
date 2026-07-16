@@ -18,12 +18,13 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserBiddingActivity\Output;
 
-readonly class MaxBid
+final readonly class MaxBid
 {
     public function __construct(
         public ?MoneyAmount $original = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\User\Output;
 
-readonly class ProfileAddress
+final readonly class ProfileAddress
 {
     public function __construct(
         public ?string $addressLine1 = null,
@@ -29,6 +29,7 @@ readonly class ProfileAddress
         public ?string $stateOrProvince = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

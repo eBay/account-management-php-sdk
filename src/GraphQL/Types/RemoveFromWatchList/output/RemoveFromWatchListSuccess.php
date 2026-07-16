@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\RemoveFromWatchList\Output;
 
-readonly class RemoveFromWatchListSuccess extends RemoveFromWatchListOutput
+final readonly class RemoveFromWatchListSuccess extends RemoveFromWatchListOutput
 {
     /**
      * @param Item[] $removedItems
@@ -35,6 +35,7 @@ readonly class RemoveFromWatchListSuccess extends RemoveFromWatchListOutput
         return 'RemoveFromWatchListSuccess';
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

@@ -18,13 +18,14 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserWatchList\Output;
 
-readonly class MoneyAmount
+final readonly class MoneyAmount
 {
     public function __construct(
         public ?string $currency = null,
         public ?string $value = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

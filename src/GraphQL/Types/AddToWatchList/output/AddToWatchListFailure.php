@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\AddToWatchList\Output;
 
-readonly class AddToWatchListFailure extends AddToWatchListOutput
+final readonly class AddToWatchListFailure extends AddToWatchListOutput
 {
     /**
      * @param WatchListAddFailure[] $failedItems
@@ -36,6 +36,7 @@ readonly class AddToWatchListFailure extends AddToWatchListOutput
         return 'AddToWatchListFailure';
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

@@ -18,10 +18,10 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserBiddingActivity\Output;
 
-readonly class BidderAuctionDetails
+final readonly class BidderAuctionDetails
 {
     /**
-     * @var BidAmount[]
+     * @param MaxBid[] $userPowerBids
      */
     public function __construct(
         public ?string $userBiddingStatus = null,
@@ -30,6 +30,7 @@ readonly class BidderAuctionDetails
         public array $userPowerBids = [],
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

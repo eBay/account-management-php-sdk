@@ -18,12 +18,13 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\User\Output;
 
-readonly class UserStatus
+final readonly class UserStatus
 {
     public function __construct(
         public ?string $displayName = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

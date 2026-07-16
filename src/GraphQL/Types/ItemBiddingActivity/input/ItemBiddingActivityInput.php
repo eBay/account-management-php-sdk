@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Input;
 
-readonly class ItemBiddingActivityInput
+final readonly class ItemBiddingActivityInput
 {
     public function __construct(
         public string $itemId,
@@ -27,10 +27,11 @@ readonly class ItemBiddingActivityInput
         public ?PageInfoInput $retractedBidHistoryRecordsPaginationInput = null,
     ) {}
 
-    public static function fromArray(array $data): static
+    /** @param array<string, mixed> $data */
+    public static function fromArray(array $data): self
     {
         $itemId = $data['input']['itemId'] ?? $data['itemId'];
-        return new static(
+        return new self(
             itemId: $itemId,
             activeBidHistoryRecordsPaginationInput: isset($data['activeBidHistoryRecords_paginationInput'])
                 ? PageInfoInput::fromArray($data['activeBidHistoryRecords_paginationInput'])
@@ -44,6 +45,7 @@ readonly class ItemBiddingActivityInput
         );
     }
 
+    /** @return array<string, mixed> */
     public function toVariables(): array
     {
         return array_filter([

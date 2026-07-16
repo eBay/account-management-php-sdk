@@ -18,19 +18,21 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserWatchList\Input;
 
-readonly class UserWatchListInput
+final readonly class UserWatchListInput
 {
     public function __construct(
         public ?PageInfoInput $pagination = null,
     ) {}
 
-    public static function fromArray(array $data): static
+    /** @param array<string, mixed> $data */
+    public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             pagination: isset($data['pagination']) ? PageInfoInput::fromArray($data['pagination']) : null,
         );
     }
 
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         $data = [];

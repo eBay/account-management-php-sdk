@@ -18,12 +18,13 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Output;
 
-readonly class BidMetadata
+final readonly class BidMetadata
 {
     public function __construct(
         public ?string $placedAt = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

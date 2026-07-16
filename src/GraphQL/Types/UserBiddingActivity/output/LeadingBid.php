@@ -18,13 +18,14 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserBiddingActivity\Output;
 
-readonly class LeadingBid
+final readonly class LeadingBid
 {
     public function __construct(
         public ?BidAmount $bidAmount = null,
         public ?Bidder $bidder = null,
     ) {}
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(

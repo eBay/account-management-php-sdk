@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\AddToWatchList\Output;
 
-readonly class AddToWatchListSuccess extends AddToWatchListOutput
+final readonly class AddToWatchListSuccess extends AddToWatchListOutput
 {
     /**
      * @param Item[] $addedItems
@@ -34,6 +34,7 @@ readonly class AddToWatchListSuccess extends AddToWatchListOutput
         return 'AddToWatchListSuccess';
     }
 
+    /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
