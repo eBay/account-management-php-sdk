@@ -84,7 +84,7 @@ final class SellAccountV2Client
     {
         return array_merge(
             $this->config->defaultRequestOptions->headers,
-            $requestOptions?->headers ?? []
+            $requestOptions !== null ? $requestOptions->headers : []
         );
     }
 
