@@ -1,5 +1,6 @@
 {
     "name": "ebay/account-management-php-sdk",
+    "version": "0.1.0",
     "description": "AccountManagement PHP SDK",
     "type": "library",
     "require": {
