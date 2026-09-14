@@ -52,40 +52,6 @@ use EBay\AccountManagement\Generated\AccountV1\Models\SetPaymentPolicyResponse;
 use EBay\AccountManagement\Generated\AccountV1\Models\SetReturnPolicyResponse;
 use EBay\AccountManagement\Generated\AccountV1\Models\SubscriptionResponse;
 use EBay\AccountManagement\Generated\AccountV1\Models\UpdatedSalesTaxResponse;
-use EBay\AccountManagement\Generated\AccountV1\Advertising_eligibility\Advertising_eligibilityRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Bulk_create_or_replace_sales_tax\Bulk_create_or_replace_sales_taxRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Custom_policy\EmptyPathSegmentRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Custom_policy\Item\WithCustom_policy_ItemRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Custom_policy\Item\WithCustom_policy_ItemRequestBuilderPutRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\EmptyPathSegmentRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Fulfillment_policyRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Item\WithFulfillmentPolicyItemRequestBuilderDeleteRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Item\WithFulfillmentPolicyItemRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Item\WithFulfillmentPolicyItemRequestBuilderPutRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Kyc\KycRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Payment_policy\Item\WithPayment_policy_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Payment_policy\Item\WithPayment_policy_ItemRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Payment_policy\Item\WithPayment_policy_ItemRequestBuilderPutRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Payment_policy\Payment_policyRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Payment_policy\Payment_policyRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Payments_program\Item\Item\Onboarding\OnboardingRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Payments_program\Item\Item\WithPayments_program_typeItemRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Privilege\PrivilegeRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Program\Get_opted_in_programs\Get_opted_in_programsRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Program\Opt_in\Opt_inRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Program\Opt_out\Opt_outRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Rate_table\Rate_tableRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Return_policy\Get_by_policy_name\Get_by_policy_nameRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Return_policy\Item\WithReturn_policy_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Return_policy\Item\WithReturn_policy_ItemRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Return_policy\Item\WithReturn_policy_ItemRequestBuilderPutRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Return_policy\Return_policyRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Return_policy\Return_policyRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Sales_tax\Item\Item\WithJurisdictionItemRequestBuilderDeleteRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Sales_tax\Item\Item\WithJurisdictionItemRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Sales_tax\Item\Item\WithJurisdictionItemRequestBuilderPutRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Sales_tax\Sales_taxRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV1\Subscription\SubscriptionRequestBuilderGetRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -111,9 +77,9 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->custom_policy()->emptyPathSegment()->get(
-                new EmptyPathSegmentRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV1\Custom_policy\EmptyPathSegmentRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: EmptyPathSegmentRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV1\Custom_policy\EmptyPathSegmentRequestBuilderGetRequestConfiguration::createQueryParameters(
                         policy_types: $policyTypes,
                     ),
                 )
@@ -127,7 +93,7 @@ final class AccountV1Client
         return $this->call($accessToken, fn($api) =>
             $api->custom_policy()->emptyPathSegment()->post(
                 $body,
-                new EmptyPathSegmentRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Custom_policy\EmptyPathSegmentRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -137,7 +103,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->custom_policy()->byCustom_policy_id($customPolicyId)->get(
-                new WithCustom_policy_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Custom_policy\Item\WithCustom_policy_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -153,7 +119,7 @@ final class AccountV1Client
         $this->call($accessToken, fn($api) =>
             $api->custom_policy()->byCustom_policy_id($customPolicyId)->put(
                 $body,
-                new WithCustom_policy_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Custom_policy\Item\WithCustom_policy_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -164,7 +130,7 @@ final class AccountV1Client
         return $this->call($accessToken, fn($api) =>
             $api->fulfillment_policy()->emptyPathSegment()->post(
                 $body,
-                new EmptyPathSegmentRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\EmptyPathSegmentRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -174,7 +140,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->fulfillment_policy()->byFulfillmentPolicyId($fulfillmentPolicyId)->get(
-                new WithFulfillmentPolicyItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Item\WithFulfillmentPolicyItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -190,7 +156,7 @@ final class AccountV1Client
         return $this->call($accessToken, fn($api) =>
             $api->fulfillment_policy()->byFulfillmentPolicyId($fulfillmentPolicyId)->put(
                 $body,
-                new WithFulfillmentPolicyItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Item\WithFulfillmentPolicyItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -200,7 +166,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->fulfillment_policy()->byFulfillmentPolicyId($fulfillmentPolicyId)->delete(
-                new WithFulfillmentPolicyItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Item\WithFulfillmentPolicyItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -210,9 +176,9 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->fulfillment_policy()->get(
-                new Fulfillment_policyRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Fulfillment_policyRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Fulfillment_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Fulfillment_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
                         marketplace_id: $marketplaceId,
                     ),
                 )
@@ -230,9 +196,9 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->fulfillment_policy()->get_by_policy_name()->get(
-                new Get_by_policy_nameRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Get_by_policy_name\Get_by_policy_nameRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Get_by_policy_nameRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Get_by_policy_name\Get_by_policy_nameRequestBuilderGetRequestConfiguration::createQueryParameters(
                         marketplace_id: $marketplaceId,
                         name: $name,
                     ),
@@ -246,9 +212,9 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->payment_policy()->get(
-                new Payment_policyRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV1\Payment_policy\Payment_policyRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Payment_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV1\Payment_policy\Payment_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
                         marketplace_id: $marketplaceId,
                     ),
                 )
@@ -262,7 +228,7 @@ final class AccountV1Client
         return $this->call($accessToken, fn($api) =>
             $api->payment_policy()->post(
                 $body,
-                new Payment_policyRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Payment_policy\Payment_policyRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -272,7 +238,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->payment_policy()->byPayment_policy_id($paymentPolicyId)->get(
-                new WithPayment_policy_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Payment_policy\Item\WithPayment_policy_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -288,7 +254,7 @@ final class AccountV1Client
         return $this->call($accessToken, fn($api) =>
             $api->payment_policy()->byPayment_policy_id($paymentPolicyId)->put(
                 $body,
-                new WithPayment_policy_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Payment_policy\Item\WithPayment_policy_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -298,7 +264,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->payment_policy()->byPayment_policy_id($paymentPolicyId)->delete(
-                new WithPayment_policy_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Payment_policy\Item\WithPayment_policy_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -313,9 +279,9 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->payment_policy()->get_by_policy_name()->get(
-                new Get_by_policy_nameRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV1\Payment_policy\Get_by_policy_name\Get_by_policy_nameRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Get_by_policy_nameRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV1\Payment_policy\Get_by_policy_name\Get_by_policy_nameRequestBuilderGetRequestConfiguration::createQueryParameters(
                         marketplace_id: $marketplaceId,
                         name: $name,
                     ),
@@ -334,7 +300,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->payments_program()->byMarketplace_id($marketplaceId)->byPayments_program_type($paymentsProgramType)->get(
-                new WithPayments_program_typeItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Payments_program\Item\Item\WithPayments_program_typeItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -349,7 +315,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->payments_program()->byMarketplace_id($marketplaceId)->byPayments_program_type($paymentsProgramType)->onboarding()->get(
-                new OnboardingRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Payments_program\Item\Item\Onboarding\OnboardingRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -359,7 +325,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->privilege()->get(
-                new PrivilegeRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Privilege\PrivilegeRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -369,7 +335,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->program()->get_opted_in_programs()->get(
-                new Get_opted_in_programsRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Program\Get_opted_in_programs\Get_opted_in_programsRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -380,7 +346,7 @@ final class AccountV1Client
         return $this->call($accessToken, fn($api) =>
             $api->program()->opt_in()->post(
                 $body,
-                new Opt_inRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Program\Opt_in\Opt_inRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -391,7 +357,7 @@ final class AccountV1Client
         return $this->call($accessToken, fn($api) =>
             $api->program()->opt_out()->post(
                 $body,
-                new Opt_outRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Program\Opt_out\Opt_outRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -401,9 +367,9 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->rate_table()->get(
-                new Rate_tableRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV1\Rate_table\Rate_tableRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Rate_tableRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV1\Rate_table\Rate_tableRequestBuilderGetRequestConfiguration::createQueryParameters(
                         country_code: $countryCode,
                     ),
                 )
@@ -416,9 +382,9 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->return_policy()->get(
-                new Return_policyRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV1\Return_policy\Return_policyRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Return_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV1\Return_policy\Return_policyRequestBuilderGetRequestConfiguration::createQueryParameters(
                         marketplace_id: $marketplaceId,
                     ),
                 )
@@ -432,7 +398,7 @@ final class AccountV1Client
         return $this->call($accessToken, fn($api) =>
             $api->return_policy()->post(
                 $body,
-                new Return_policyRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Return_policy\Return_policyRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -442,7 +408,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->return_policy()->byReturn_policy_id($returnPolicyId)->get(
-                new WithReturn_policy_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Return_policy\Item\WithReturn_policy_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -458,7 +424,7 @@ final class AccountV1Client
         return $this->call($accessToken, fn($api) =>
             $api->return_policy()->byReturn_policy_id($returnPolicyId)->put(
                 $body,
-                new WithReturn_policy_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Return_policy\Item\WithReturn_policy_ItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -468,7 +434,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->return_policy()->byReturn_policy_id($returnPolicyId)->delete(
-                new WithReturn_policy_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Return_policy\Item\WithReturn_policy_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -483,9 +449,9 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->return_policy()->get_by_policy_name()->get(
-                new Get_by_policy_nameRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV1\Return_policy\Get_by_policy_name\Get_by_policy_nameRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Get_by_policy_nameRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV1\Return_policy\Get_by_policy_name\Get_by_policy_nameRequestBuilderGetRequestConfiguration::createQueryParameters(
                         marketplace_id: $marketplaceId,
                         name: $name,
                     ),
@@ -500,7 +466,7 @@ final class AccountV1Client
         return $this->call($accessToken, fn($api) =>
             $api->bulk_create_or_replace_sales_tax()->post(
                 $body,
-                new Bulk_create_or_replace_sales_taxRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Bulk_create_or_replace_sales_tax\Bulk_create_or_replace_sales_taxRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -515,7 +481,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->sales_tax()->byCountryCode($countryCode)->byJurisdictionId($jurisdictionId)->get(
-                new WithJurisdictionItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Sales_tax\Item\Item\WithJurisdictionItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -532,7 +498,7 @@ final class AccountV1Client
         $this->call($accessToken, fn($api) =>
             $api->sales_tax()->byCountryCode($countryCode)->byJurisdictionId($jurisdictionId)->put(
                 $body,
-                new WithJurisdictionItemRequestBuilderPutRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Sales_tax\Item\Item\WithJurisdictionItemRequestBuilderPutRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -547,7 +513,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->sales_tax()->byCountryCode($countryCode)->byJurisdictionId($jurisdictionId)->delete(
-                new WithJurisdictionItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Sales_tax\Item\Item\WithJurisdictionItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -557,9 +523,9 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->sales_tax()->get(
-                new Sales_taxRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV1\Sales_tax\Sales_taxRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Sales_taxRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV1\Sales_tax\Sales_taxRequestBuilderGetRequestConfiguration::createQueryParameters(
                         country_code: $countryCode,
                     ),
                 )
@@ -577,9 +543,9 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->subscription()->get(
-                new SubscriptionRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV1\Subscription\SubscriptionRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: SubscriptionRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV1\Subscription\SubscriptionRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         continuation_token: $continuationToken,
                     ),
@@ -593,7 +559,7 @@ final class AccountV1Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->kyc()->get(
-                new KycRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV1\Kyc\KycRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -611,9 +577,9 @@ final class AccountV1Client
         }
         return $this->call($accessToken, fn($api) =>
             $api->advertising_eligibility()->get(
-                new Advertising_eligibilityRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV1\Advertising_eligibility\Advertising_eligibilityRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Advertising_eligibilityRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV1\Advertising_eligibility\Advertising_eligibilityRequestBuilderGetRequestConfiguration::createQueryParameters(
                         program_types: $programTypes,
                     ),
                 )

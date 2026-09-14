@@ -32,9 +32,9 @@ class MeasureType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $unit This field defines the unit of measure (e.g., kilograms, pounds) associated with the value field. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:WeightUnitOfMeasureEnum'>eBay API documentation</a>
+     * @var WeightUnitOfMeasureEnum|null $unit This field defines the unit of measure (e.g., kilograms, pounds) associated with the value field.
     */
-    private ?string $unit = null;
+    private ?WeightUnitOfMeasureEnum $unit = null;
     
     /**
      * @var string|null $value This field defines the numeric value representing the measurement, weight, in the specified unit.
@@ -72,16 +72,16 @@ class MeasureType implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'unit' => fn(ParseNode $n) => $o->setUnit($n->getStringValue()),
+            'unit' => fn(ParseNode $n) => $o->setUnit($n->getEnumValue(WeightUnitOfMeasureEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the unit property value. This field defines the unit of measure (e.g., kilograms, pounds) associated with the value field. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:WeightUnitOfMeasureEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the unit property value. This field defines the unit of measure (e.g., kilograms, pounds) associated with the value field.
+     * @return WeightUnitOfMeasureEnum|null
     */
-    public function getUnit(): ?string {
+    public function getUnit(): ?WeightUnitOfMeasureEnum {
         return $this->unit;
     }
 
@@ -98,7 +98,7 @@ class MeasureType implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('unit', $this->getUnit());
+        $writer->writeEnumValue('unit', $this->getUnit());
         $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class MeasureType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the unit property value. This field defines the unit of measure (e.g., kilograms, pounds) associated with the value field. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:WeightUnitOfMeasureEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the unit property.
+     * Sets the unit property value. This field defines the unit of measure (e.g., kilograms, pounds) associated with the value field.
+     * @param WeightUnitOfMeasureEnum|null $value Value to set for the unit property.
     */
-    public function setUnit(?string $value): void {
+    public function setUnit(?WeightUnitOfMeasureEnum $value): void {
         $this->unit = $value;
     }
 

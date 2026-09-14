@@ -42,12 +42,12 @@ class CombinedShippingRule implements AdditionalDataHolder, Parsable
     private ?string $combinedShippingRuleName = null;
     
     /**
-     * @var Amount|null $eachAdditionalAmount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $eachAdditionalAmount This containter defines the additional monetary charge applied for each extra item when multiple items are shipped together.
     */
     private ?Amount $eachAdditionalAmount = null;
     
     /**
-     * @var Amount|null $eachAdditionalAmountOffShippingCost A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $eachAdditionalAmountOffShippingCost This container defines the fixed discount amount deducted from the total shipping cost for each additional item.
     */
     private ?Amount $eachAdditionalAmountOffShippingCost = null;
     
@@ -62,7 +62,7 @@ class CombinedShippingRule implements AdditionalDataHolder, Parsable
     private ?string $mappedCombinedShippingRuleId = null;
     
     /**
-     * @var MeasureType|null $weightOffTotalWeight This type displays measurement type with value, unit, and measurement system.
+     * @var MeasureType|null $weightOffTotalWeight This container specifies the total weight reduction applied when combining multiple items into one shipment.
     */
     private ?MeasureType $weightOffTotalWeight = null;
     
@@ -107,7 +107,7 @@ class CombinedShippingRule implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the eachAdditionalAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the eachAdditionalAmount property value. This containter defines the additional monetary charge applied for each extra item when multiple items are shipped together.
      * @return Amount|null
     */
     public function getEachAdditionalAmount(): ?Amount {
@@ -115,7 +115,7 @@ class CombinedShippingRule implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the eachAdditionalAmountOffShippingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the eachAdditionalAmountOffShippingCost property value. This container defines the fixed discount amount deducted from the total shipping cost for each additional item.
      * @return Amount|null
     */
     public function getEachAdditionalAmountOffShippingCost(): ?Amount {
@@ -156,7 +156,7 @@ class CombinedShippingRule implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the weightOffTotalWeight property value. This type displays measurement type with value, unit, and measurement system.
+     * Gets the weightOffTotalWeight property value. This container specifies the total weight reduction applied when combining multiple items into one shipment.
      * @return MeasureType|null
     */
     public function getWeightOffTotalWeight(): ?MeasureType {
@@ -203,7 +203,7 @@ class CombinedShippingRule implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the eachAdditionalAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the eachAdditionalAmount property value. This containter defines the additional monetary charge applied for each extra item when multiple items are shipped together.
      * @param Amount|null $value Value to set for the eachAdditionalAmount property.
     */
     public function setEachAdditionalAmount(?Amount $value): void {
@@ -211,7 +211,7 @@ class CombinedShippingRule implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the eachAdditionalAmountOffShippingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the eachAdditionalAmountOffShippingCost property value. This container defines the fixed discount amount deducted from the total shipping cost for each additional item.
      * @param Amount|null $value Value to set for the eachAdditionalAmountOffShippingCost property.
     */
     public function setEachAdditionalAmountOffShippingCost(?Amount $value): void {
@@ -235,7 +235,7 @@ class CombinedShippingRule implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the weightOffTotalWeight property value. This type displays measurement type with value, unit, and measurement system.
+     * Sets the weightOffTotalWeight property value. This container specifies the total weight reduction applied when combining multiple items into one shipment.
      * @param MeasureType|null $value Value to set for the weightOffTotalWeight property.
     */
     public function setWeightOffTotalWeight(?MeasureType $value): void {

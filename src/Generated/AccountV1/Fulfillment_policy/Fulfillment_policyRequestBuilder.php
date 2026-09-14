@@ -18,6 +18,7 @@ namespace EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy;
 
 use EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Get_by_policy_name\Get_by_policy_nameRequestBuilder;
 use EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Item\WithFulfillmentPolicyItemRequestBuilder;
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\FulfillmentPolicyResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -47,7 +48,7 @@ class Fulfillment_policyRequestBuilder extends BaseRequestBuilder
     
     /**
      * Gets an item from the EBay/AccountManagement/Generated/AccountV1.fulfillment_policy.item collection
-     * @param string $fulfillmentPolicyId This path parameter specifies the ID of the fulfillment policy you want to retrieve.<br><br> This ID can be retrieved for a fulfillment policy by using the <a href="/api-docs/sell/account/resources/fulfillment_policy/methods/getFulfillmentPolicies" target="_blank ">getFulfillmentPolicies</a> method.
+     * @param string $fulfillmentPolicyId This path parameter specifies the ID of the fulfillment policy you want to retrieve.<br><br> This ID can be retrieved for a fulfillment policy by using the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-fulfillment_policy-getfulfillmentpolicies" target="_blank ">getFulfillmentPolicies</a> method.
      * @return WithFulfillmentPolicyItemRequestBuilder
     */
     public function byFulfillmentPolicyId(string $fulfillmentPolicyId): WithFulfillmentPolicyItemRequestBuilder {
@@ -78,7 +79,11 @@ class Fulfillment_policyRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Fulfillment_policyRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [FulfillmentPolicyResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [FulfillmentPolicyResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

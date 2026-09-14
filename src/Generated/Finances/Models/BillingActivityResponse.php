@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * BillingActivityResponse
+ * This type is the base response type used by the <b>getBillingActivities</b> method. 
 */
 class BillingActivityResponse implements AdditionalDataHolder, Parsable 
 {

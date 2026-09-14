@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * This type is used to request a list of custom policies.
+*/
 class CustomPolicyRequest implements AdditionalDataHolder, Parsable 
 {
     /**
@@ -29,17 +32,17 @@ class CustomPolicyRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $description Contains the seller specified policy and policy terms.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 15,000
+     * @var string|null $description Contains the seller specified policy and policy terms.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="develop/api/sell/account_api_v1#sell-account_api_v1-custom_policy-getcustompolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 15,000
     */
     private ?string $description = null;
     
     /**
-     * @var string|null $label Customer-facing label shown on View Item pages for items to which the policy applies. This seller-defined string is displayed as a system-generated hyperlink pointing to seller specified policy information.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
+     * @var string|null $label Customer-facing label shown on View Item pages for items to which the policy applies. This seller-defined string is displayed as a system-generated hyperlink pointing to seller specified policy information.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="develop/api/sell/account_api_v1#sell-account_api_v1-custom_policy-getcustompolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
     */
     private ?string $label = null;
     
     /**
-     * @var string|null $name The seller-defined name for the custom policy. Names must be unique for policies assigned to the same seller and policy type.<br><br><span class="tablenote"><strong>Note:</strong> This field is visible only to the seller. </span><br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
+     * @var string|null $name The seller-defined name for the custom policy. Names must be unique for policies assigned to the same seller and policy type.<br><br><span class="tablenote"><strong>Note:</strong> This field is visible only to the seller.</span><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="develop/api/sell/account_api_v1#sell-account_api_v1-custom_policy-getcustompolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
     */
     private ?string $name = null;
     
@@ -68,7 +71,7 @@ class CustomPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the description property value. Contains the seller specified policy and policy terms.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 15,000
+     * Gets the description property value. Contains the seller specified policy and policy terms.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="develop/api/sell/account_api_v1#sell-account_api_v1-custom_policy-getcustompolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 15,000
      * @return string|null
     */
     public function getDescription(): ?string {
@@ -89,7 +92,7 @@ class CustomPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the label property value. Customer-facing label shown on View Item pages for items to which the policy applies. This seller-defined string is displayed as a system-generated hyperlink pointing to seller specified policy information.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
+     * Gets the label property value. Customer-facing label shown on View Item pages for items to which the policy applies. This seller-defined string is displayed as a system-generated hyperlink pointing to seller specified policy information.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="develop/api/sell/account_api_v1#sell-account_api_v1-custom_policy-getcustompolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
      * @return string|null
     */
     public function getLabel(): ?string {
@@ -97,7 +100,7 @@ class CustomPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the name property value. The seller-defined name for the custom policy. Names must be unique for policies assigned to the same seller and policy type.<br><br><span class="tablenote"><strong>Note:</strong> This field is visible only to the seller. </span><br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
+     * Gets the name property value. The seller-defined name for the custom policy. Names must be unique for policies assigned to the same seller and policy type.<br><br><span class="tablenote"><strong>Note:</strong> This field is visible only to the seller.</span><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="develop/api/sell/account_api_v1#sell-account_api_v1-custom_policy-getcustompolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
      * @return string|null
     */
     public function getName(): ?string {
@@ -124,7 +127,7 @@ class CustomPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the description property value. Contains the seller specified policy and policy terms.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 15,000
+     * Sets the description property value. Contains the seller specified policy and policy terms.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="develop/api/sell/account_api_v1#sell-account_api_v1-custom_policy-getcustompolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 15,000
      * @param string|null $value Value to set for the description property.
     */
     public function setDescription(?string $value): void {
@@ -132,7 +135,7 @@ class CustomPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the label property value. Customer-facing label shown on View Item pages for items to which the policy applies. This seller-defined string is displayed as a system-generated hyperlink pointing to seller specified policy information.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
+     * Sets the label property value. Customer-facing label shown on View Item pages for items to which the policy applies. This seller-defined string is displayed as a system-generated hyperlink pointing to seller specified policy information.<br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="develop/api/sell/account_api_v1#sell-account_api_v1-custom_policy-getcustompolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
      * @param string|null $value Value to set for the label property.
     */
     public function setLabel(?string $value): void {
@@ -140,7 +143,7 @@ class CustomPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the name property value. The seller-defined name for the custom policy. Names must be unique for policies assigned to the same seller and policy type.<br><br><span class="tablenote"><strong>Note:</strong> This field is visible only to the seller. </span><br><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="/api-docs/sell/account/resources/custom_policy/methods/getCustomPolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
+     * Sets the name property value. The seller-defined name for the custom policy. Names must be unique for policies assigned to the same seller and policy type.<br><br><span class="tablenote"><strong>Note:</strong> This field is visible only to the seller.</span><br><span class="tablenote"><strong>Note:</strong> Always supply this field. If this field is not specified, any previous value is removed. Call the <a href="develop/api/sell/account_api_v1#sell-account_api_v1-custom_policy-getcustompolicy">getCustomPolicy</a> method to return the present field value for this policy.</span><br><b>Max length:</b> 65
      * @param string|null $value Value to set for the name property.
     */
     public function setName(?string $value): void {

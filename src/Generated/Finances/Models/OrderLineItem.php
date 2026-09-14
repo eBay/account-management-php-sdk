@@ -37,7 +37,7 @@ class OrderLineItem implements AdditionalDataHolder, Parsable
     private ?array $donations = null;
     
     /**
-     * @var Amount|null $feeBasisAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $feeBasisAmount This amount is the order's total amount and equals what the buyer has paid. This value includes <b>transactions.amount</b>, <b>totalFeeAmount</b>, <b>eBayCollectedTaxAmount</b>, and shipping charges (if any).
     */
     private ?Amount $feeBasisAmount = null;
     
@@ -84,7 +84,7 @@ class OrderLineItem implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feeBasisAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the feeBasisAmount property value. This amount is the order's total amount and equals what the buyer has paid. This value includes <b>transactions.amount</b>, <b>totalFeeAmount</b>, <b>eBayCollectedTaxAmount</b>, and shipping charges (if any).
      * @return Amount|null
     */
     public function getFeeBasisAmount(): ?Amount {
@@ -150,7 +150,7 @@ class OrderLineItem implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feeBasisAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the feeBasisAmount property value. This amount is the order's total amount and equals what the buyer has paid. This value includes <b>transactions.amount</b>, <b>totalFeeAmount</b>, <b>eBayCollectedTaxAmount</b>, and shipping charges (if any).
      * @param Amount|null $value Value to set for the feeBasisAmount property.
     */
     public function setFeeBasisAmount(?Amount $value): void {

@@ -28,7 +28,7 @@ use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 class Rate implements AdditionalDataHolder, Parsable 
 {
     /**
-     * @var Amount|null $additionalCost A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $additionalCost An additional shipping cost added to the base shipping rate (i.e., <b>shippingCost</b>).<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li><li><b>SURCHARGE</b>: This is a flat amount that is added to the base shipping rate.</li></ul>This field is returned only when it is applicable to the specified rate ID.
     */
     private ?Amount $additionalCost = null;
     
@@ -43,12 +43,12 @@ class Rate implements AdditionalDataHolder, Parsable
     private ?string $rateId = null;
     
     /**
-     * @var string|null $shippingCategory Indicates the level of shipping service to which the shipping rate information applies.<br/><br/>Available shipping categories are:<ul><li><b>ONE_DAY</b>: <i>This option is not supported when <b>shippingOptionType</b> is INTERNATIONAL.</i> </li><li><b>EXPEDITED</b></li><li><b>STANDARD</b></li><li><b>ECONOMY</b></li><li><b>EXPRESS</b>: <i>This option is supported only when <b>MarketplaceId</b> is <code>EBAY_DE</code> (Germany)</i></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingCategoryEnum'>eBay API documentation</a>
+     * @var ShippingCategoryEnum|null $shippingCategory Indicates the level of shipping service to which the shipping rate information applies.<br/><br/>Available shipping categories are:<ul><li><b>ONE_DAY</b>: <i>This option is not supported when <b>shippingOptionType</b> is INTERNATIONAL.</i> </li><li><b>EXPEDITED</b></li><li><b>STANDARD</b></li><li><b>ECONOMY</b></li><li><b>EXPRESS</b>: <i>This option is supported only when <b>MarketplaceId</b> is <code>EBAY_DE</code> (Germany)</i></li></ul>
     */
-    private ?string $shippingCategory = null;
+    private ?ShippingCategoryEnum $shippingCategory = null;
     
     /**
-     * @var Amount|null $shippingCost A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $shippingCost Specifies the base shipping rate for an item.<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>ITEM</b>: This is a flat rate shipping cost per item being shipped.</li><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li></ul>
     */
     private ?Amount $shippingCost = null;
     
@@ -79,7 +79,7 @@ class Rate implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the additionalCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the additionalCost property value. An additional shipping cost added to the base shipping rate (i.e., <b>shippingCost</b>).<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li><li><b>SURCHARGE</b>: This is a flat amount that is added to the base shipping rate.</li></ul>This field is returned only when it is applicable to the specified rate ID.
      * @return Amount|null
     */
     public function getAdditionalCost(): ?Amount {
@@ -103,7 +103,7 @@ class Rate implements AdditionalDataHolder, Parsable
         return  [
             'additionalCost' => fn(ParseNode $n) => $o->setAdditionalCost($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'rateId' => fn(ParseNode $n) => $o->setRateId($n->getStringValue()),
-            'shippingCategory' => fn(ParseNode $n) => $o->setShippingCategory($n->getStringValue()),
+            'shippingCategory' => fn(ParseNode $n) => $o->setShippingCategory($n->getEnumValue(ShippingCategoryEnum::class)),
             'shippingCost' => fn(ParseNode $n) => $o->setShippingCost($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'shippingRegionNames' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
@@ -126,15 +126,15 @@ class Rate implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingCategory property value. Indicates the level of shipping service to which the shipping rate information applies.<br/><br/>Available shipping categories are:<ul><li><b>ONE_DAY</b>: <i>This option is not supported when <b>shippingOptionType</b> is INTERNATIONAL.</i> </li><li><b>EXPEDITED</b></li><li><b>STANDARD</b></li><li><b>ECONOMY</b></li><li><b>EXPRESS</b>: <i>This option is supported only when <b>MarketplaceId</b> is <code>EBAY_DE</code> (Germany)</i></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingCategoryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the shippingCategory property value. Indicates the level of shipping service to which the shipping rate information applies.<br/><br/>Available shipping categories are:<ul><li><b>ONE_DAY</b>: <i>This option is not supported when <b>shippingOptionType</b> is INTERNATIONAL.</i> </li><li><b>EXPEDITED</b></li><li><b>STANDARD</b></li><li><b>ECONOMY</b></li><li><b>EXPRESS</b>: <i>This option is supported only when <b>MarketplaceId</b> is <code>EBAY_DE</code> (Germany)</i></li></ul>
+     * @return ShippingCategoryEnum|null
     */
-    public function getShippingCategory(): ?string {
+    public function getShippingCategory(): ?ShippingCategoryEnum {
         return $this->shippingCategory;
     }
 
     /**
-     * Gets the shippingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the shippingCost property value. Specifies the base shipping rate for an item.<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>ITEM</b>: This is a flat rate shipping cost per item being shipped.</li><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li></ul>
      * @return Amount|null
     */
     public function getShippingCost(): ?Amount {
@@ -164,7 +164,7 @@ class Rate implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('additionalCost', $this->getAdditionalCost());
         $writer->writeStringValue('rateId', $this->getRateId());
-        $writer->writeStringValue('shippingCategory', $this->getShippingCategory());
+        $writer->writeEnumValue('shippingCategory', $this->getShippingCategory());
         $writer->writeObjectValue('shippingCost', $this->getShippingCost());
         $writer->writeCollectionOfPrimitiveValues('shippingRegionNames', $this->getShippingRegionNames());
         $writer->writeStringValue('shippingServiceCode', $this->getShippingServiceCode());
@@ -172,7 +172,7 @@ class Rate implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the additionalCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the additionalCost property value. An additional shipping cost added to the base shipping rate (i.e., <b>shippingCost</b>).<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li><li><b>SURCHARGE</b>: This is a flat amount that is added to the base shipping rate.</li></ul>This field is returned only when it is applicable to the specified rate ID.
      * @param Amount|null $value Value to set for the additionalCost property.
     */
     public function setAdditionalCost(?Amount $value): void {
@@ -196,15 +196,15 @@ class Rate implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingCategory property value. Indicates the level of shipping service to which the shipping rate information applies.<br/><br/>Available shipping categories are:<ul><li><b>ONE_DAY</b>: <i>This option is not supported when <b>shippingOptionType</b> is INTERNATIONAL.</i> </li><li><b>EXPEDITED</b></li><li><b>STANDARD</b></li><li><b>ECONOMY</b></li><li><b>EXPRESS</b>: <i>This option is supported only when <b>MarketplaceId</b> is <code>EBAY_DE</code> (Germany)</i></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingCategoryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the shippingCategory property.
+     * Sets the shippingCategory property value. Indicates the level of shipping service to which the shipping rate information applies.<br/><br/>Available shipping categories are:<ul><li><b>ONE_DAY</b>: <i>This option is not supported when <b>shippingOptionType</b> is INTERNATIONAL.</i> </li><li><b>EXPEDITED</b></li><li><b>STANDARD</b></li><li><b>ECONOMY</b></li><li><b>EXPRESS</b>: <i>This option is supported only when <b>MarketplaceId</b> is <code>EBAY_DE</code> (Germany)</i></li></ul>
+     * @param ShippingCategoryEnum|null $value Value to set for the shippingCategory property.
     */
-    public function setShippingCategory(?string $value): void {
+    public function setShippingCategory(?ShippingCategoryEnum $value): void {
         $this->shippingCategory = $value;
     }
 
     /**
-     * Sets the shippingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the shippingCost property value. Specifies the base shipping rate for an item.<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>ITEM</b>: This is a flat rate shipping cost per item being shipped.</li><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li></ul>
      * @param Amount|null $value Value to set for the shippingCost property.
     */
     public function setShippingCost(?Amount $value): void {

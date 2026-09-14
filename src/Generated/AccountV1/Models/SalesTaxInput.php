@@ -34,7 +34,7 @@ class SalesTaxInput implements AdditionalDataHolder, Parsable
     private ?string $countryCode = null;
     
     /**
-     * @var string|null $salesTaxJurisdictionId This parameter specifies the ID of the tax jurisdiction for which a sales-tax table entry is to be created or updated.<br><br>Valid jurisdiction IDs can be retrieved using the <a href="/api-docs/sell/metadata/resources/country/methods/getSalesTaxJurisdictions" target="_blank ">getSalesTaxJurisdiction</a> method of the Metadata API.<br><br><span class="tablenote"><b>Note:</b> When <code>countryCode</code> is set to <code>US</code>, the only supported values for <code>jurisdictionId</code> are:<ul><li><code>AS</code> (American Samoa)</li><li><code>GU</code> (Guam)</li><li><code>MP</code> (Northern Mariana Islands)</li><li><code>PW</code> (Palau)</li><li><code>VI</code> (US Virgin Islands)</li></ul></span>
+     * @var string|null $salesTaxJurisdictionId This parameter specifies the ID of the tax jurisdiction for which a sales-tax table entry is to be created or updated.<br><br>Valid jurisdiction IDs can be retrieved using the <a href="/develop/api/sell/metadata_api#sell-metadata_api-country-getsalestaxjurisdictions" target="_blank ">getSalesTaxJurisdiction</a> method of the Metadata API.<br><br><span class="tablenote"><b>Note:</b> When <code>countryCode</code> is set to <code>US</code>, the only supported values for <code>jurisdictionId</code> are:<ul><li><code>AS</code> (American Samoa)</li><li><code>GU</code> (Guam)</li><li><code>MP</code> (Northern Mariana Islands)</li><li><code>PW</code> (Palau)</li><li><code>VI</code> (US Virgin Islands)</li></ul></span>
     */
     private ?string $salesTaxJurisdictionId = null;
     
@@ -95,7 +95,7 @@ class SalesTaxInput implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the salesTaxJurisdictionId property value. This parameter specifies the ID of the tax jurisdiction for which a sales-tax table entry is to be created or updated.<br><br>Valid jurisdiction IDs can be retrieved using the <a href="/api-docs/sell/metadata/resources/country/methods/getSalesTaxJurisdictions" target="_blank ">getSalesTaxJurisdiction</a> method of the Metadata API.<br><br><span class="tablenote"><b>Note:</b> When <code>countryCode</code> is set to <code>US</code>, the only supported values for <code>jurisdictionId</code> are:<ul><li><code>AS</code> (American Samoa)</li><li><code>GU</code> (Guam)</li><li><code>MP</code> (Northern Mariana Islands)</li><li><code>PW</code> (Palau)</li><li><code>VI</code> (US Virgin Islands)</li></ul></span>
+     * Gets the salesTaxJurisdictionId property value. This parameter specifies the ID of the tax jurisdiction for which a sales-tax table entry is to be created or updated.<br><br>Valid jurisdiction IDs can be retrieved using the <a href="/develop/api/sell/metadata_api#sell-metadata_api-country-getsalestaxjurisdictions" target="_blank ">getSalesTaxJurisdiction</a> method of the Metadata API.<br><br><span class="tablenote"><b>Note:</b> When <code>countryCode</code> is set to <code>US</code>, the only supported values for <code>jurisdictionId</code> are:<ul><li><code>AS</code> (American Samoa)</li><li><code>GU</code> (Guam)</li><li><code>MP</code> (Northern Mariana Islands)</li><li><code>PW</code> (Palau)</li><li><code>VI</code> (US Virgin Islands)</li></ul></span>
      * @return string|null
     */
     public function getSalesTaxJurisdictionId(): ?string {
@@ -147,7 +147,7 @@ class SalesTaxInput implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the salesTaxJurisdictionId property value. This parameter specifies the ID of the tax jurisdiction for which a sales-tax table entry is to be created or updated.<br><br>Valid jurisdiction IDs can be retrieved using the <a href="/api-docs/sell/metadata/resources/country/methods/getSalesTaxJurisdictions" target="_blank ">getSalesTaxJurisdiction</a> method of the Metadata API.<br><br><span class="tablenote"><b>Note:</b> When <code>countryCode</code> is set to <code>US</code>, the only supported values for <code>jurisdictionId</code> are:<ul><li><code>AS</code> (American Samoa)</li><li><code>GU</code> (Guam)</li><li><code>MP</code> (Northern Mariana Islands)</li><li><code>PW</code> (Palau)</li><li><code>VI</code> (US Virgin Islands)</li></ul></span>
+     * Sets the salesTaxJurisdictionId property value. This parameter specifies the ID of the tax jurisdiction for which a sales-tax table entry is to be created or updated.<br><br>Valid jurisdiction IDs can be retrieved using the <a href="/develop/api/sell/metadata_api#sell-metadata_api-country-getsalestaxjurisdictions" target="_blank ">getSalesTaxJurisdiction</a> method of the Metadata API.<br><br><span class="tablenote"><b>Note:</b> When <code>countryCode</code> is set to <code>US</code>, the only supported values for <code>jurisdictionId</code> are:<ul><li><code>AS</code> (American Samoa)</li><li><code>GU</code> (Guam)</li><li><code>MP</code> (Northern Mariana Islands)</li><li><code>PW</code> (Palau)</li><li><code>VI</code> (US Virgin Islands)</li></ul></span>
      * @param string|null $value Value to set for the salesTaxJurisdictionId property.
     */
     public function setSalesTaxJurisdictionId(?string $value): void {

@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Get_by_policy_name;
 
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\FulfillmentPolicy;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,11 @@ class Get_by_policy_nameRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Get_by_policy_nameRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [FulfillmentPolicy::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [FulfillmentPolicy::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

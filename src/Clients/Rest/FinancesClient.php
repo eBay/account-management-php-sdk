@@ -33,17 +33,6 @@ use EBay\AccountManagement\Generated\Finances\Models\SellerFundsSummaryResponse;
 use EBay\AccountManagement\Generated\Finances\Models\TransactionSummaryResponse;
 use EBay\AccountManagement\Generated\Finances\Models\Transactions;
 use EBay\AccountManagement\Generated\Finances\Models\Transfer;
-use EBay\AccountManagement\Generated\Finances\Billing_activity\Billing_activityRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\Finances\Order_earnings_summary\Order_earnings_summaryRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\Finances\Order_earnings\Item\WithOrder_ItemRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\Finances\Order_earnings\Order_earningsRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\Finances\Payout_summary\Payout_summaryRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\Finances\Payout\Item\WithPayout_ItemRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\Finances\Payout\PayoutRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\Finances\Seller_funds_summary\Seller_funds_summaryRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\Finances\Transaction_summary\Transaction_summaryRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\Finances\Transaction\TransactionRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\Finances\Transfer\Item\WithTransfer_ItemRequestBuilderGetRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -64,11 +53,15 @@ final class FinancesClient
         );
     }
 
+    /**
+     * @param array<string>|null $filter
+     * @param array<string>|null $sort
+     */
     public function getOrderEarnings(
-        ?string $filter = null,
-        ?string $limit = null,
-        ?string $offset = null,
-        ?string $sort = null,
+        ?array $filter = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
         ?string $xEBAYCMARKETPLACEID = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
@@ -80,9 +73,9 @@ final class FinancesClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->order_earnings()->get(
-                new Order_earningsRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\Finances\Order_earnings\Order_earningsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Order_earningsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\Finances\Order_earnings\Order_earningsRequestBuilderGetRequestConfiguration::createQueryParameters(
                         filter: $filter,
                         limit: $limit,
                         offset: $offset,
@@ -106,13 +99,16 @@ final class FinancesClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->order_earnings()->byOrder_id($orderId)->get(
-                new WithOrder_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\Finances\Order_earnings\Item\WithOrder_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
+    /**
+     * @param array<string>|null $filter
+     */
     public function getOrderEarningsSummary(
-        ?string $filter = null,
+        ?array $filter = null,
         ?string $xEBAYCMARKETPLACEID = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
@@ -124,9 +120,9 @@ final class FinancesClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->order_earnings_summary()->get(
-                new Order_earnings_summaryRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\Finances\Order_earnings_summary\Order_earnings_summaryRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Order_earnings_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\Finances\Order_earnings_summary\Order_earnings_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
                         filter: $filter,
                     ),
                 )
@@ -147,16 +143,20 @@ final class FinancesClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->payout()->byPayout_Id($payoutId)->get(
-                new WithPayout_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\Finances\Payout\Item\Payout_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
+    /**
+     * @param array<string>|null $filter
+     * @param array<string>|null $sort
+     */
     public function getPayouts(
-        ?string $filter = null,
-        ?string $limit = null,
-        ?string $offset = null,
-        ?string $sort = null,
+        ?array $filter = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
         ?string $xEBAYCMARKETPLACEID = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
@@ -168,9 +168,9 @@ final class FinancesClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->payout()->get(
-                new PayoutRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\Finances\Payout\PayoutRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: PayoutRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\Finances\Payout\PayoutRequestBuilderGetRequestConfiguration::createQueryParameters(
                         filter: $filter,
                         limit: $limit,
                         offset: $offset,
@@ -181,8 +181,11 @@ final class FinancesClient
         );
     }
 
+    /**
+     * @param array<string>|null $filter
+     */
     public function getPayoutSummary(
-        ?string $filter = null,
+        ?array $filter = null,
         ?string $xEBAYCMARKETPLACEID = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
@@ -194,9 +197,9 @@ final class FinancesClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->payout_summary()->get(
-                new Payout_summaryRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\Finances\Payout_summary\Payout_summaryRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Payout_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\Finances\Payout_summary\Payout_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
                         filter: $filter,
                     ),
                 )
@@ -212,16 +215,20 @@ final class FinancesClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->seller_funds_summary()->get(
-                new Seller_funds_summaryRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\Finances\Seller_funds_summary\Seller_funds_summaryRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
 
+    /**
+     * @param array<string>|null $filter
+     * @param array<string>|null $sort
+     */
     public function getTransactions(
-        ?string $filter = null,
-        ?string $limit = null,
-        ?string $offset = null,
-        ?string $sort = null,
+        ?array $filter = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
         ?string $xEBAYCMARKETPLACEID = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
@@ -233,9 +240,9 @@ final class FinancesClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->transaction()->get(
-                new TransactionRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\Finances\Transaction\TransactionRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: TransactionRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\Finances\Transaction\TransactionRequestBuilderGetRequestConfiguration::createQueryParameters(
                         filter: $filter,
                         limit: $limit,
                         offset: $offset,
@@ -246,8 +253,11 @@ final class FinancesClient
         );
     }
 
+    /**
+     * @param array<string>|null $filter
+     */
     public function getTransactionSummary(
-        ?string $filter = null,
+        ?array $filter = null,
         ?string $xEBAYCMARKETPLACEID = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
@@ -259,9 +269,9 @@ final class FinancesClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->transaction_summary()->get(
-                new Transaction_summaryRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\Finances\Transaction_summary\Transaction_summaryRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Transaction_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\Finances\Transaction_summary\Transaction_summaryRequestBuilderGetRequestConfiguration::createQueryParameters(
                         filter: $filter,
                     ),
                 )
@@ -282,7 +292,7 @@ final class FinancesClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->transfer()->byTransfer_Id($transferId)->get(
-                new WithTransfer_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\Finances\Transfer\Item\Transfer_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -303,9 +313,9 @@ final class FinancesClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->billing_activity()->get(
-                new Billing_activityRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\Finances\Billing_activity\Billing_activityRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Billing_activityRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\Finances\Billing_activity\Billing_activityRequestBuilderGetRequestConfiguration::createQueryParameters(
                         filter: $filter,
                         limit: $limit,
                         offset: $offset,

@@ -32,7 +32,7 @@ class UpdatePayoutPercentage implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $instrumentId The unique reference identifier for a payout instrument. This value is returned in the <a href="/api-docs/sell/account/v2/resources/payout_settings/methods/getPayoutSettings" target="_blank ">getPayoutSettings</a> response and is needed to change split-payout percentages through an <b>updatePayoutPercentage</b> request.
+     * @var string|null $instrumentId The unique reference identifier for a payout instrument. This value is returned in the <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-payout_settings-getpayoutsettings" target="_blank">getPayoutSettings</a> response and is needed to change split-payout percentages through an <b>updatePayoutPercentage</b> request.
     */
     private ?string $instrumentId = null;
     
@@ -78,7 +78,7 @@ class UpdatePayoutPercentage implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the instrumentId property value. The unique reference identifier for a payout instrument. This value is returned in the <a href="/api-docs/sell/account/v2/resources/payout_settings/methods/getPayoutSettings" target="_blank ">getPayoutSettings</a> response and is needed to change split-payout percentages through an <b>updatePayoutPercentage</b> request.
+     * Gets the instrumentId property value. The unique reference identifier for a payout instrument. This value is returned in the <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-payout_settings-getpayoutsettings" target="_blank">getPayoutSettings</a> response and is needed to change split-payout percentages through an <b>updatePayoutPercentage</b> request.
      * @return string|null
     */
     public function getInstrumentId(): ?string {
@@ -112,7 +112,7 @@ class UpdatePayoutPercentage implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the instrumentId property value. The unique reference identifier for a payout instrument. This value is returned in the <a href="/api-docs/sell/account/v2/resources/payout_settings/methods/getPayoutSettings" target="_blank ">getPayoutSettings</a> response and is needed to change split-payout percentages through an <b>updatePayoutPercentage</b> request.
+     * Sets the instrumentId property value. The unique reference identifier for a payout instrument. This value is returned in the <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-payout_settings-getpayoutsettings" target="_blank">getPayoutSettings</a> response and is needed to change split-payout percentages through an <b>updatePayoutPercentage</b> request.
      * @param string|null $value Value to set for the instrumentId property.
     */
     public function setInstrumentId(?string $value): void {

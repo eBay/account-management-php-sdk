@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV1\Program\Opt_in;
 
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\Program;
 use Exception;
 use Http\Promise\Promise;
@@ -44,7 +45,7 @@ class Opt_inRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method opts the seller in to an eBay seller program. Refer to the <a href="/api-docs/sell/account/overview.html#opt-in" target="_blank">Account API overview</a> for information about available eBay seller programs.<br><br><span class="tablenote"><b>Note:</b> It can take up to 24-hours for eBay to process your request to opt-in to a Seller Program. Use the <a href="/api-docs/sell/account/resources/program/methods/getOptedInPrograms" target="_blank">getOptedInPrograms</a> call to check the status of your request after the processing period has passed.</span>
+     * This method opts the seller in to an eBay seller program. Refer to the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-program-optintoprogram.programtypeenum" target="_blank">ProgramTypeEnum</a> for information about available eBay seller programs.<br><br><span class="tablenote"><b>Note:</b> It can take up to 24-hours for eBay to process your request to opt-in to a Seller Program. Use the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-program-getoptedinprograms" target="_blank">getOptedInPrograms</a> call to check the status of your request after the processing period has passed.</span>
      * @param Program $body The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request.
      * @param Opt_inRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<Opt_inPostResponse|null>
@@ -52,11 +53,17 @@ class Opt_inRequestBuilder extends BaseRequestBuilder
     */
     public function post(Program $body, ?Opt_inRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [Opt_inPostResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [Opt_inPostResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method opts the seller in to an eBay seller program. Refer to the <a href="/api-docs/sell/account/overview.html#opt-in" target="_blank">Account API overview</a> for information about available eBay seller programs.<br><br><span class="tablenote"><b>Note:</b> It can take up to 24-hours for eBay to process your request to opt-in to a Seller Program. Use the <a href="/api-docs/sell/account/resources/program/methods/getOptedInPrograms" target="_blank">getOptedInPrograms</a> call to check the status of your request after the processing period has passed.</span>
+     * This method opts the seller in to an eBay seller program. Refer to the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-program-optintoprogram.programtypeenum" target="_blank">ProgramTypeEnum</a> for information about available eBay seller programs.<br><br><span class="tablenote"><b>Note:</b> It can take up to 24-hours for eBay to process your request to opt-in to a Seller Program. Use the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-program-getoptedinprograms" target="_blank">getOptedInPrograms</a> call to check the status of your request after the processing period has passed.</span>
      * @param Program $body The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request.
      * @param Opt_inRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation

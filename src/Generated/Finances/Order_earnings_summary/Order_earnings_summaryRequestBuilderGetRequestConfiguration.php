@@ -42,10 +42,10 @@ class Order_earnings_summaryRequestBuilderGetRequestConfiguration extends BaseRe
 
     /**
      * Instantiates a new Order_earnings_summaryRequestBuilderGetQueryParameters.
-     * @param string|null $filter This parameter can be used to filter orders created within a specified date range. The filter uses the <code>orderCreationDate</code> field, which works similarly to the <code>transactionDate</code> filter used by the Transactions API. Currently, <code>orderCreationDate</code> is the only supported filter value.<p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>All dates must be input using UTC format (<code>YYYY-MM-DDTHH:MM:SS.SSSZ</code>) and should be adjusted accordingly for the local timezone of the user.</span></p><p><b>Default</b>: If no value is specified, results from the past year will be returned.</p> For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/finances/types/cos:FilterField
+     * @param array<string>|null $filter This parameter can be used to filter orders created within a specified date range. The filter uses the <code>orderCreationDate</code> field, which works similarly to the <code>transactionDate</code> filter used by the Transactions API. Currently, <code>orderCreationDate</code> is the only supported filter value.<p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>All dates must be input using UTC format (<code>YYYY-MM-DDTHH:MM:SS.SSSZ</code>) and should be adjusted accordingly for the local timezone of the user.</span></p><p><b>Default</b>: If no value is specified, results from the past year will be returned.</p> 
      * @return Order_earnings_summaryRequestBuilderGetQueryParameters
     */
-    public static function createQueryParameters(?string $filter = null): Order_earnings_summaryRequestBuilderGetQueryParameters {
+    public static function createQueryParameters(?array $filter = null): Order_earnings_summaryRequestBuilderGetQueryParameters {
         return new Order_earnings_summaryRequestBuilderGetQueryParameters($filter);
     }
 

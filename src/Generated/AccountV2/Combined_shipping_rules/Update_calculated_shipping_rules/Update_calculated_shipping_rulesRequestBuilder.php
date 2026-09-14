@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_calculated_shipping_rules;
 
+use EBay\AccountManagement\Generated\AccountV2\Models\Error;
 use EBay\AccountManagement\Generated\AccountV2\Models\UpdateCalculatedShippingRulesRequest;
 use Exception;
 use Http\Promise\Promise;
@@ -45,19 +46,23 @@ class Update_calculated_shipping_rulesRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method updates previously defined calculated shipping rules to modify discount percentages, weight offsets, or amount parameters for the seller.
-     * @param UpdateCalculatedShippingRulesRequest $body This type is used to update calculated shipping rules.
+     * @param UpdateCalculatedShippingRulesRequest $body This type is used for creating and updating calculated combined-shipping rules.
      * @param Update_calculated_shipping_rulesRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(UpdateCalculatedShippingRulesRequest $body, ?Update_calculated_shipping_rulesRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
      * This method updates previously defined calculated shipping rules to modify discount percentages, weight offsets, or amount parameters for the seller.
-     * @param UpdateCalculatedShippingRulesRequest $body This type is used to update calculated shipping rules.
+     * @param UpdateCalculatedShippingRulesRequest $body This type is used for creating and updating calculated combined-shipping rules.
      * @param Update_calculated_shipping_rulesRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -70,6 +75,7 @@ class Update_calculated_shipping_rulesRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

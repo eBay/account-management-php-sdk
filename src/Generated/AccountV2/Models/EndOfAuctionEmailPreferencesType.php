@@ -42,9 +42,9 @@ class EndOfAuctionEmailPreferencesType implements AdditionalDataHolder, Parsable
     private ?bool $logoCustomized = null;
     
     /**
-     * @var string|null $logoType This enum indicates the type of logo that is used in the email that is sent to winning bidders. See EndOfAuctionLogoTypeEnum type for descriptions of the different logo types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:EndOfAuctionLogoTypeEnum'>eBay API documentation</a>
+     * @var EndOfAuctionLogoTypeEnum|null $logoType This enum indicates the type of logo that is used in the email that is sent to winning bidders. See EndOfAuctionLogoTypeEnum type for descriptions of the different logo types.
     */
-    private ?string $logoType = null;
+    private ?EndOfAuctionLogoTypeEnum $logoType = null;
     
     /**
      * @var string|null $logoUrl This field shows the URL path to a seller’s custom logo image that is being used in the email sent to winning bidders. This field is only returned if the seller is using a customized logo in emails.
@@ -102,7 +102,7 @@ class EndOfAuctionEmailPreferencesType implements AdditionalDataHolder, Parsable
         return  [
             'emailCustomized' => fn(ParseNode $n) => $o->setEmailCustomized($n->getBooleanValue()),
             'logoCustomized' => fn(ParseNode $n) => $o->setLogoCustomized($n->getBooleanValue()),
-            'logoType' => fn(ParseNode $n) => $o->setLogoType($n->getStringValue()),
+            'logoType' => fn(ParseNode $n) => $o->setLogoType($n->getEnumValue(EndOfAuctionLogoTypeEnum::class)),
             'logoUrl' => fn(ParseNode $n) => $o->setLogoUrl($n->getStringValue()),
             'templateText' => fn(ParseNode $n) => $o->setTemplateText($n->getStringValue()),
             'textCustomized' => fn(ParseNode $n) => $o->setTextCustomized($n->getBooleanValue()),
@@ -118,10 +118,10 @@ class EndOfAuctionEmailPreferencesType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the logoType property value. This enum indicates the type of logo that is used in the email that is sent to winning bidders. See EndOfAuctionLogoTypeEnum type for descriptions of the different logo types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:EndOfAuctionLogoTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the logoType property value. This enum indicates the type of logo that is used in the email that is sent to winning bidders. See EndOfAuctionLogoTypeEnum type for descriptions of the different logo types.
+     * @return EndOfAuctionLogoTypeEnum|null
     */
-    public function getLogoType(): ?string {
+    public function getLogoType(): ?EndOfAuctionLogoTypeEnum {
         return $this->logoType;
     }
 
@@ -156,7 +156,7 @@ class EndOfAuctionEmailPreferencesType implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeBooleanValue('emailCustomized', $this->getEmailCustomized());
         $writer->writeBooleanValue('logoCustomized', $this->getLogoCustomized());
-        $writer->writeStringValue('logoType', $this->getLogoType());
+        $writer->writeEnumValue('logoType', $this->getLogoType());
         $writer->writeStringValue('logoUrl', $this->getLogoUrl());
         $writer->writeStringValue('templateText', $this->getTemplateText());
         $writer->writeBooleanValue('textCustomized', $this->getTextCustomized());
@@ -188,10 +188,10 @@ class EndOfAuctionEmailPreferencesType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the logoType property value. This enum indicates the type of logo that is used in the email that is sent to winning bidders. See EndOfAuctionLogoTypeEnum type for descriptions of the different logo types. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:EndOfAuctionLogoTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the logoType property.
+     * Sets the logoType property value. This enum indicates the type of logo that is used in the email that is sent to winning bidders. See EndOfAuctionLogoTypeEnum type for descriptions of the different logo types.
+     * @param EndOfAuctionLogoTypeEnum|null $value Value to set for the logoType property.
     */
-    public function setLogoType(?string $value): void {
+    public function setLogoType(?EndOfAuctionLogoTypeEnum $value): void {
         $this->logoType = $value;
     }
 

@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy\Item;
 
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\FulfillmentPolicy;
 use EBay\AccountManagement\Generated\AccountV1\Models\FulfillmentPolicyRequest;
 use EBay\AccountManagement\Generated\AccountV1\Models\SetFulfillmentPolicyResponse;
@@ -53,7 +54,13 @@ class WithFulfillmentPolicyItemRequestBuilder extends BaseRequestBuilder
     */
     public function delete(?WithFulfillmentPolicyItemRequestBuilderDeleteRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toDeleteRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
@@ -64,7 +71,12 @@ class WithFulfillmentPolicyItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?WithFulfillmentPolicyItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [FulfillmentPolicy::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [FulfillmentPolicy::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -76,7 +88,12 @@ class WithFulfillmentPolicyItemRequestBuilder extends BaseRequestBuilder
     */
     public function put(FulfillmentPolicyRequest $body, ?WithFulfillmentPolicyItemRequestBuilderPutRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPutRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SetFulfillmentPolicyResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SetFulfillmentPolicyResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -93,6 +110,7 @@ class WithFulfillmentPolicyItemRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         return $requestInfo;
     }
 

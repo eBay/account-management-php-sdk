@@ -32,7 +32,7 @@ class OrderEarning implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var BuyerWithId|null $buyer This type defines identifying information about the buyer associated with an order.
+     * @var BuyerWithId|null $buyer Information about the buyer associated with the order. Includes buyer name and public user id.
     */
     private ?BuyerWithId $buyer = null;
     
@@ -42,7 +42,7 @@ class OrderEarning implements AdditionalDataHolder, Parsable
     private ?string $orderCreationDate = null;
     
     /**
-     * @var EarningsSummary|null $orderEarningsSummary This type defines a summarized view of earnings information derived from one order. It defines fields that provides a summarized view of earnings information derived from one order including aggregated financial values for gross amount, expenses, earnings, and refunds. 
+     * @var EarningsSummary|null $orderEarningsSummary This container defines a summarized view of earnings information derived from one order. It provides aggregated financial values for order earnings, gross amount, expenses, and refunds. Order earnings includes earnings after deducting expenses and refunds from the gross amount.
     */
     private ?EarningsSummary $orderEarningsSummary = null;
     
@@ -57,7 +57,7 @@ class OrderEarning implements AdditionalDataHolder, Parsable
     private ?string $orderLastModifiedDate = null;
     
     /**
-     * @var OrderSummary|null $orderSummary This type provides order cost details, including line item subtotal, shipping and handling, seller-collected taxes, and any seller applied discounts. Always provided in the listing currency.
+     * @var OrderSummary|null $orderSummary The container for order cost details, including line item subtotal, shipping and handling, seller-collected taxes, and any seller applied discounts. Always provided in the listing currency.
     */
     private ?OrderSummary $orderSummary = null;
     
@@ -86,7 +86,7 @@ class OrderEarning implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the buyer property value. This type defines identifying information about the buyer associated with an order.
+     * Gets the buyer property value. Information about the buyer associated with the order. Includes buyer name and public user id.
      * @return BuyerWithId|null
     */
     public function getBuyer(): ?BuyerWithId {
@@ -118,7 +118,7 @@ class OrderEarning implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the orderEarningsSummary property value. This type defines a summarized view of earnings information derived from one order. It defines fields that provides a summarized view of earnings information derived from one order including aggregated financial values for gross amount, expenses, earnings, and refunds. 
+     * Gets the orderEarningsSummary property value. This container defines a summarized view of earnings information derived from one order. It provides aggregated financial values for order earnings, gross amount, expenses, and refunds. Order earnings includes earnings after deducting expenses and refunds from the gross amount.
      * @return EarningsSummary|null
     */
     public function getOrderEarningsSummary(): ?EarningsSummary {
@@ -142,7 +142,7 @@ class OrderEarning implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the orderSummary property value. This type provides order cost details, including line item subtotal, shipping and handling, seller-collected taxes, and any seller applied discounts. Always provided in the listing currency.
+     * Gets the orderSummary property value. The container for order cost details, including line item subtotal, shipping and handling, seller-collected taxes, and any seller applied discounts. Always provided in the listing currency.
      * @return OrderSummary|null
     */
     public function getOrderSummary(): ?OrderSummary {
@@ -172,7 +172,7 @@ class OrderEarning implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the buyer property value. This type defines identifying information about the buyer associated with an order.
+     * Sets the buyer property value. Information about the buyer associated with the order. Includes buyer name and public user id.
      * @param BuyerWithId|null $value Value to set for the buyer property.
     */
     public function setBuyer(?BuyerWithId $value): void {
@@ -188,7 +188,7 @@ class OrderEarning implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the orderEarningsSummary property value. This type defines a summarized view of earnings information derived from one order. It defines fields that provides a summarized view of earnings information derived from one order including aggregated financial values for gross amount, expenses, earnings, and refunds. 
+     * Sets the orderEarningsSummary property value. This container defines a summarized view of earnings information derived from one order. It provides aggregated financial values for order earnings, gross amount, expenses, and refunds. Order earnings includes earnings after deducting expenses and refunds from the gross amount.
      * @param EarningsSummary|null $value Value to set for the orderEarningsSummary property.
     */
     public function setOrderEarningsSummary(?EarningsSummary $value): void {
@@ -212,7 +212,7 @@ class OrderEarning implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the orderSummary property value. This type provides order cost details, including line item subtotal, shipping and handling, seller-collected taxes, and any seller applied discounts. Always provided in the listing currency.
+     * Sets the orderSummary property value. The container for order cost details, including line item subtotal, shipping and handling, seller-collected taxes, and any seller applied discounts. Always provided in the listing currency.
      * @param OrderSummary|null $value Value to set for the orderSummary property.
     */
     public function setOrderSummary(?OrderSummary $value): void {

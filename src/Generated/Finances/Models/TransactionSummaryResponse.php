@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type is the base response type of the <strong>getTransactionSummary</strong> method, and based on the filters that are used in the <strong>getTransactionSummary</strong> call URI, the response may include  total count and amount of the seller's sales and credits, total count and amount of buyer refunds, and total count and amount of seller payment holds.
+ * This type is the base response type of the <strong>getTransactionSummary</strong> method, and based on the filters that are used in the <strong>getTransactionSummary</strong> call URI, the response may include total count and amount of the seller's sales and credits, total count and amount of buyer refunds, and total count and amount of seller payment holds.
 */
 class TransactionSummaryResponse implements AdditionalDataHolder, Parsable 
 {
@@ -32,14 +32,14 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $adjustmentAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $adjustmentAmount Total adjustment amount for given payee within a specified period.
     */
     private ?Amount $adjustmentAmount = null;
     
     /**
-     * @var string|null $adjustmentBookingEntry The credit debit sign indicator for adjustment. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $adjustmentBookingEntry The credit debit sign indicator for adjustment.
     */
-    private ?string $adjustmentBookingEntry = null;
+    private ?BookingEntryEnum $adjustmentBookingEntry = null;
     
     /**
      * @var int|null $adjustmentCount Total adjustment count for given payee within a specified period.
@@ -47,14 +47,14 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     private ?int $adjustmentCount = null;
     
     /**
-     * @var Amount|null $balanceTransferAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $balanceTransferAmount The total balance transfer amount for given payee within the specified period.
     */
     private ?Amount $balanceTransferAmount = null;
     
     /**
-     * @var string|null $balanceTransferBookingEntry The credit debit sign indicator for the balance transfer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $balanceTransferBookingEntry The credit debit sign indicator for the balance transfer.
     */
-    private ?string $balanceTransferBookingEntry = null;
+    private ?BookingEntryEnum $balanceTransferBookingEntry = null;
     
     /**
      * @var int|null $balanceTransferCount The total balance transfer count for given payee within the specified period.
@@ -62,59 +62,59 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     private ?int $balanceTransferCount = null;
     
     /**
-     * @var Amount|null $creditAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $creditAmount This amount is the total dollar value of all the seller's sales and/or credits that match the input criteria.
     */
     private ?Amount $creditAmount = null;
     
     /**
-     * @var string|null $creditBookingEntry The enumeration value indicates whether the dollar amount in the <strong>creditAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>CREDIT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $creditBookingEntry The enumeration value indicates whether the dollar amount in the <strong>creditAmount</strong> field is a charge (debit) to the seller or a credit.
     */
-    private ?string $creditBookingEntry = null;
+    private ?BookingEntryEnum $creditBookingEntry = null;
     
     /**
-     * @var int|null $creditCount This integer value indicates the total number of the seller's sales and/or credits that match the input criteria. <br><br><span class="tablenote"><strong>Note:</strong> Unless the <b>transactionType</b> filter is used in the request to retrieve a specific type of monetary transaction (sale, buyer refund, or seller credit), the <b>creditCount</b> and <b>creditAmount</b> fields account for both order sales and seller credits (the count and value is not distinguished between the two monetary transaction types).</span><br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to either <code>REFUND</code>, <code>DISPUTE</code>, or <code>SHIPPING_LABEL</code>.
+     * @var int|null $creditCount This integer value indicates the total number of the seller's sales and/or credits that match the input criteria.
     */
     private ?int $creditCount = null;
     
     /**
-     * @var Amount|null $disputeAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $disputeAmount This amount is the total dollar value associated with any existing payment disputes.
     */
     private ?Amount $disputeAmount = null;
     
     /**
-     * @var string|null $disputeBookingEntry The enumeration value indicates whether the dollar amount in the <strong>disputeAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code>, but its possible that <code>CREDIT</code> could be returned if the seller contested one or more payment disputes and won the dispute. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $disputeBookingEntry The enumeration value indicates whether the dollar amount in the <strong>disputeAmount</strong> field is a charge (debit) to the seller or a credit.
     */
-    private ?string $disputeBookingEntry = null;
+    private ?BookingEntryEnum $disputeBookingEntry = null;
     
     /**
-     * @var int|null $disputeCount This integer value indicates the total number of payment disputes that have been initiated by one or more buyers. Only the orders that match the input criteria are considered. The Payment Disputes methods in the Fulfillment API can be used by the seller to retrieve more information about any payment disputes. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>DISPUTE</code>.
+     * @var int|null $disputeCount This integer value indicates the total number of payment disputes.
     */
     private ?int $disputeCount = null;
     
     /**
-     * @var Amount|null $loanRepaymentAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $loanRepaymentAmount The sum of all <code>LOAN_REPAYMENT</code> transactions (i.e., debit and credit,) that match the input criteria.
     */
     private ?Amount $loanRepaymentAmount = null;
     
     /**
-     * @var string|null $loanRepaymentBookingEntry The enumeration value indicates whether the <code>loanRepaymentAmount</code> is a <code>DEBIT</code> against, or a <code>CREDIT</code> to, the sellers's account.<br><br>For most <code>loanRepaymentAmount</code> transactions, <code>loanRepaymentBookingEntry</code> will be <b>DEBIT</b>. However, if a loan repayment transaction is reversed, that transaction will be shown as a <b>CREDIT</b>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $loanRepaymentBookingEntry The enumeration value indicates whether the <code>loanRepaymentAmount</code> is a <code>DEBIT</code> against, or a <code>CREDIT</code> to, the sellers's account.
     */
-    private ?string $loanRepaymentBookingEntry = null;
+    private ?BookingEntryEnum $loanRepaymentBookingEntry = null;
     
     /**
-     * @var int|null $loanRepaymentCount This integer value indicates the total number of <code>LOAN_REPAYMENT</code> transactions (i.e., <code>DEBIT</code> and <code>CREDIT</code>,) that match the input criteria.<br><br>This field is generally returned even if it equals <b>0</b>. However it will not be returned if a <code>transactionType</code> filter is used and its value has been set to any enumeration value other than <code>LOAN_REPAYMENT</code>.
+     * @var int|null $loanRepaymentCount This integer value indicates the total number of <code>LOAN_REPAYMENT</code> transactions.
     */
     private ?int $loanRepaymentCount = null;
     
     /**
-     * @var Amount|null $nonSaleChargeAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $nonSaleChargeAmount The total non-sale charge amount for given payee within a specified period.
     */
     private ?Amount $nonSaleChargeAmount = null;
     
     /**
-     * @var string|null $nonSaleChargeBookingEntry The credit/debit sign indicator for the non-sale charge. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $nonSaleChargeBookingEntry The credit/debit sign indicator for the non-sale charge.
     */
-    private ?string $nonSaleChargeBookingEntry = null;
+    private ?BookingEntryEnum $nonSaleChargeBookingEntry = null;
     
     /**
      * @var int|null $nonSaleChargeCount The total non-sale charge count for given payee within a specified period.
@@ -122,92 +122,92 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     private ?int $nonSaleChargeCount = null;
     
     /**
-     * @var Amount|null $onHoldAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $onHoldAmount This amount is the total dollar value of order sales where the associated funds are on hold.
     */
     private ?Amount $onHoldAmount = null;
     
     /**
-     * @var string|null $onHoldBookingEntry The enumeration value indicates whether the dollar amount in the <strong>onHoldAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>CREDIT</code>, since on-hold funds should eventually be released as part of a payout to the seller once the hold is cleared. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $onHoldBookingEntry The enumeration value indicates whether the dollar amount in the <strong>onHoldAmount</strong> field is a charge (debit) to the seller or a credit.
     */
-    private ?string $onHoldBookingEntry = null;
+    private ?BookingEntryEnum $onHoldBookingEntry = null;
     
     /**
-     * @var int|null $onHoldCount This integer value indicates the total number of order sales where the associated funds are on hold. Only the orders that match the input criteria are considered.<br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionStatus</strong> filter is used, and its value is set to any value other than <code>FUNDS_ON_HOLD</code>.
+     * @var int|null $onHoldCount This integer value indicates the total number of order sales where the associated funds are on hold.
     */
     private ?int $onHoldCount = null;
     
     /**
-     * @var Amount|null $purchaseAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $purchaseAmount <span class="tablenote"><b>Note:</b> The <code>PURCHASE</code> transaction type is currently only applicable in the US marketplace.</span><br>This amount is the total dollar value of all the purchases that have been initiated by a seller using spendable funds.
     */
     private ?Amount $purchaseAmount = null;
     
     /**
-     * @var string|null $purchaseBookingEntry <span class="tablenote"><b>Note:</b> The <code>PURCHASE</code> transaction type is currently only applicable in the US marketplace.</span><br>This enumeration value indicates whether the dollar amount in the <b>purchase</b> field is a charge (debit) to the seller or a credit. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $purchaseBookingEntry This enumeration value indicates whether the dollar amount in the <b>purchase</b> field is a charge (debit) to the seller or a credit.
     */
-    private ?string $purchaseBookingEntry = null;
+    private ?BookingEntryEnum $purchaseBookingEntry = null;
     
     /**
-     * @var int|null $purchaseCount <span class="tablenote"><b>Note:</b> The <code>PURCHASE</code> transaction type is currently only applicable in the US marketplace.</span><br>This integer value indicates the total number of purchases that have been initiated by a seller using spendable funds that match the input criteria.<br><br>This field is generally returned, even if it equals <code>0</code>. However, it will not be returned if a <code>transactionType</code> filter is used and its value has been set to any enumeration value other than <code>PURCHASE</code>.
+     * @var int|null $purchaseCount This integer value indicates the total number of purchases initiated by a seller using spendable funds.
     */
     private ?int $purchaseCount = null;
     
     /**
-     * @var Amount|null $refundAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $refundAmount This amount is the total dollar value of buyer refunds that match the input criteria.
     */
     private ?Amount $refundAmount = null;
     
     /**
-     * @var string|null $refundBookingEntry The enumeration value indicates whether the dollar amount in the <strong>refundAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code> since this a refund from the seller to the buyer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $refundBookingEntry The enumeration value indicates whether the dollar amount in the <strong>refundAmount</strong> field is a charge (debit) to the seller or a credit.
     */
-    private ?string $refundBookingEntry = null;
+    private ?BookingEntryEnum $refundBookingEntry = null;
     
     /**
-     * @var int|null $refundCount This integer value indicates the total number of buyer refunds that match the input criteria. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>REFUND</code>.
+     * @var int|null $refundCount This integer value indicates the total number of buyer refunds that match the input criteria.
     */
     private ?int $refundCount = null;
     
     /**
-     * @var Amount|null $shippingLabelAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $shippingLabelAmount This is the total dollar value of the eBay shipping labels purchased by the seller.
     */
     private ?Amount $shippingLabelAmount = null;
     
     /**
-     * @var string|null $shippingLabelBookingEntry The enumeration value indicates whether the dollar amount in the <strong>shippingLabelAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code>, as eBay will charge the seller when eBay shipping labels are purchased, but it can be <code>CREDIT</code> if the seller was refunded for a shipping label or was possibly overcharged for a shipping label. <br><br><span class="tablenote"><b>Note:</b> eBay SHIPPING_LABEL transactions paid through PayPal are not currently supported by the Finances API, so those transactions will not be reflected in this field.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $shippingLabelBookingEntry The enumeration value indicates whether the dollar amount in the <strong>shippingLabelAmount</strong> field is a charge (debit) to the seller or a credit.
     */
-    private ?string $shippingLabelBookingEntry = null;
+    private ?BookingEntryEnum $shippingLabelBookingEntry = null;
     
     /**
-     * @var int|null $shippingLabelCount This is the total number of eBay shipping labels purchased by the seller. The count returned here may depend on the specified input criteria.<br><br><span class="tablenote"><b>Note:</b> eBay SHIPPING_LABEL transactions paid through PayPal are not currently supported by the Finances API, so those transactions will not be reflected in the count returned in this container.</span>
+     * @var int|null $shippingLabelCount This is the total number of eBay shipping labels purchased by the seller.
     */
     private ?int $shippingLabelCount = null;
     
     /**
-     * @var Amount|null $transferAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $transferAmount This amount is the total dollar value of buyer refund transfers that match the input criteria.
     */
     private ?Amount $transferAmount = null;
     
     /**
-     * @var string|null $transferBookingEntry The enumeration value indicates whether the dollar amount in the <strong>transferAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code> since this a seller reimbursement to eBay for buyer refunds. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $transferBookingEntry The enumeration value indicates whether the dollar amount in the <strong>transferAmount</strong> field is a charge (debit) to the seller or a credit.
     */
-    private ?string $transferBookingEntry = null;
+    private ?BookingEntryEnum $transferBookingEntry = null;
     
     /**
-     * @var int|null $transferCount This integer value indicates the total number of buyer refund transfers that match the input criteria. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>TRANSFER</code>.
+     * @var int|null $transferCount This integer value indicates the total number of buyer refund transfers that match the input criteria.
     */
     private ?int $transferCount = null;
     
     /**
-     * @var Amount|null $withdrawalAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $withdrawalAmount This amount is the total dollar value of on-demand payouts (withdrawals) that match the input criteria.
     */
     private ?Amount $withdrawalAmount = null;
     
     /**
-     * @var string|null $withdrawalBookingEntry The enumeration value indicates whether the dollar amount in the <strong>withdrawalAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code> since this transaction involves a debit to the seller's available payout funds. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $withdrawalBookingEntry The enumeration value indicates whether the dollar amount in the <strong>withdrawalAmount</strong> field is a charge (debit) to the seller or a credit.
     */
-    private ?string $withdrawalBookingEntry = null;
+    private ?BookingEntryEnum $withdrawalBookingEntry = null;
     
     /**
-     * @var int|null $withdrawalCount This integer value indicates the total number of on-demand payouts (withdrawals) that match the input criteria. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>WITHDRAWAL</code>.
+     * @var int|null $withdrawalCount This integer value indicates the total number of on-demand payouts (withdrawals) that match the input criteria.
     */
     private ?int $withdrawalCount = null;
     
@@ -236,7 +236,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adjustmentAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the adjustmentAmount property value. Total adjustment amount for given payee within a specified period.
      * @return Amount|null
     */
     public function getAdjustmentAmount(): ?Amount {
@@ -244,10 +244,10 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adjustmentBookingEntry property value. The credit debit sign indicator for adjustment. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the adjustmentBookingEntry property value. The credit debit sign indicator for adjustment.
+     * @return BookingEntryEnum|null
     */
-    public function getAdjustmentBookingEntry(): ?string {
+    public function getAdjustmentBookingEntry(): ?BookingEntryEnum {
         return $this->adjustmentBookingEntry;
     }
 
@@ -260,7 +260,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the balanceTransferAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the balanceTransferAmount property value. The total balance transfer amount for given payee within the specified period.
      * @return Amount|null
     */
     public function getBalanceTransferAmount(): ?Amount {
@@ -268,10 +268,10 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the balanceTransferBookingEntry property value. The credit debit sign indicator for the balance transfer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the balanceTransferBookingEntry property value. The credit debit sign indicator for the balance transfer.
+     * @return BookingEntryEnum|null
     */
-    public function getBalanceTransferBookingEntry(): ?string {
+    public function getBalanceTransferBookingEntry(): ?BookingEntryEnum {
         return $this->balanceTransferBookingEntry;
     }
 
@@ -284,7 +284,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the creditAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the creditAmount property value. This amount is the total dollar value of all the seller's sales and/or credits that match the input criteria.
      * @return Amount|null
     */
     public function getCreditAmount(): ?Amount {
@@ -292,15 +292,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the creditBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>creditAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>CREDIT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the creditBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>creditAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @return BookingEntryEnum|null
     */
-    public function getCreditBookingEntry(): ?string {
+    public function getCreditBookingEntry(): ?BookingEntryEnum {
         return $this->creditBookingEntry;
     }
 
     /**
-     * Gets the creditCount property value. This integer value indicates the total number of the seller's sales and/or credits that match the input criteria. <br><br><span class="tablenote"><strong>Note:</strong> Unless the <b>transactionType</b> filter is used in the request to retrieve a specific type of monetary transaction (sale, buyer refund, or seller credit), the <b>creditCount</b> and <b>creditAmount</b> fields account for both order sales and seller credits (the count and value is not distinguished between the two monetary transaction types).</span><br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to either <code>REFUND</code>, <code>DISPUTE</code>, or <code>SHIPPING_LABEL</code>.
+     * Gets the creditCount property value. This integer value indicates the total number of the seller's sales and/or credits that match the input criteria.
      * @return int|null
     */
     public function getCreditCount(): ?int {
@@ -308,7 +308,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the disputeAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the disputeAmount property value. This amount is the total dollar value associated with any existing payment disputes.
      * @return Amount|null
     */
     public function getDisputeAmount(): ?Amount {
@@ -316,15 +316,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the disputeBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>disputeAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code>, but its possible that <code>CREDIT</code> could be returned if the seller contested one or more payment disputes and won the dispute. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the disputeBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>disputeAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @return BookingEntryEnum|null
     */
-    public function getDisputeBookingEntry(): ?string {
+    public function getDisputeBookingEntry(): ?BookingEntryEnum {
         return $this->disputeBookingEntry;
     }
 
     /**
-     * Gets the disputeCount property value. This integer value indicates the total number of payment disputes that have been initiated by one or more buyers. Only the orders that match the input criteria are considered. The Payment Disputes methods in the Fulfillment API can be used by the seller to retrieve more information about any payment disputes. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>DISPUTE</code>.
+     * Gets the disputeCount property value. This integer value indicates the total number of payment disputes.
      * @return int|null
     */
     public function getDisputeCount(): ?int {
@@ -339,46 +339,46 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'adjustmentAmount' => fn(ParseNode $n) => $o->setAdjustmentAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'adjustmentBookingEntry' => fn(ParseNode $n) => $o->setAdjustmentBookingEntry($n->getStringValue()),
+            'adjustmentBookingEntry' => fn(ParseNode $n) => $o->setAdjustmentBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'adjustmentCount' => fn(ParseNode $n) => $o->setAdjustmentCount($n->getIntegerValue()),
             'balanceTransferAmount' => fn(ParseNode $n) => $o->setBalanceTransferAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'balanceTransferBookingEntry' => fn(ParseNode $n) => $o->setBalanceTransferBookingEntry($n->getStringValue()),
+            'balanceTransferBookingEntry' => fn(ParseNode $n) => $o->setBalanceTransferBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'balanceTransferCount' => fn(ParseNode $n) => $o->setBalanceTransferCount($n->getIntegerValue()),
             'creditAmount' => fn(ParseNode $n) => $o->setCreditAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'creditBookingEntry' => fn(ParseNode $n) => $o->setCreditBookingEntry($n->getStringValue()),
+            'creditBookingEntry' => fn(ParseNode $n) => $o->setCreditBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'creditCount' => fn(ParseNode $n) => $o->setCreditCount($n->getIntegerValue()),
             'disputeAmount' => fn(ParseNode $n) => $o->setDisputeAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'disputeBookingEntry' => fn(ParseNode $n) => $o->setDisputeBookingEntry($n->getStringValue()),
+            'disputeBookingEntry' => fn(ParseNode $n) => $o->setDisputeBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'disputeCount' => fn(ParseNode $n) => $o->setDisputeCount($n->getIntegerValue()),
             'loanRepaymentAmount' => fn(ParseNode $n) => $o->setLoanRepaymentAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'loanRepaymentBookingEntry' => fn(ParseNode $n) => $o->setLoanRepaymentBookingEntry($n->getStringValue()),
+            'loanRepaymentBookingEntry' => fn(ParseNode $n) => $o->setLoanRepaymentBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'loanRepaymentCount' => fn(ParseNode $n) => $o->setLoanRepaymentCount($n->getIntegerValue()),
             'nonSaleChargeAmount' => fn(ParseNode $n) => $o->setNonSaleChargeAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'nonSaleChargeBookingEntry' => fn(ParseNode $n) => $o->setNonSaleChargeBookingEntry($n->getStringValue()),
+            'nonSaleChargeBookingEntry' => fn(ParseNode $n) => $o->setNonSaleChargeBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'nonSaleChargeCount' => fn(ParseNode $n) => $o->setNonSaleChargeCount($n->getIntegerValue()),
             'onHoldAmount' => fn(ParseNode $n) => $o->setOnHoldAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'onHoldBookingEntry' => fn(ParseNode $n) => $o->setOnHoldBookingEntry($n->getStringValue()),
+            'onHoldBookingEntry' => fn(ParseNode $n) => $o->setOnHoldBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'onHoldCount' => fn(ParseNode $n) => $o->setOnHoldCount($n->getIntegerValue()),
             'purchaseAmount' => fn(ParseNode $n) => $o->setPurchaseAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'purchaseBookingEntry' => fn(ParseNode $n) => $o->setPurchaseBookingEntry($n->getStringValue()),
+            'purchaseBookingEntry' => fn(ParseNode $n) => $o->setPurchaseBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'purchaseCount' => fn(ParseNode $n) => $o->setPurchaseCount($n->getIntegerValue()),
             'refundAmount' => fn(ParseNode $n) => $o->setRefundAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'refundBookingEntry' => fn(ParseNode $n) => $o->setRefundBookingEntry($n->getStringValue()),
+            'refundBookingEntry' => fn(ParseNode $n) => $o->setRefundBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'refundCount' => fn(ParseNode $n) => $o->setRefundCount($n->getIntegerValue()),
             'shippingLabelAmount' => fn(ParseNode $n) => $o->setShippingLabelAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'shippingLabelBookingEntry' => fn(ParseNode $n) => $o->setShippingLabelBookingEntry($n->getStringValue()),
+            'shippingLabelBookingEntry' => fn(ParseNode $n) => $o->setShippingLabelBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'shippingLabelCount' => fn(ParseNode $n) => $o->setShippingLabelCount($n->getIntegerValue()),
             'transferAmount' => fn(ParseNode $n) => $o->setTransferAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'transferBookingEntry' => fn(ParseNode $n) => $o->setTransferBookingEntry($n->getStringValue()),
+            'transferBookingEntry' => fn(ParseNode $n) => $o->setTransferBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'transferCount' => fn(ParseNode $n) => $o->setTransferCount($n->getIntegerValue()),
             'withdrawalAmount' => fn(ParseNode $n) => $o->setWithdrawalAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'withdrawalBookingEntry' => fn(ParseNode $n) => $o->setWithdrawalBookingEntry($n->getStringValue()),
+            'withdrawalBookingEntry' => fn(ParseNode $n) => $o->setWithdrawalBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'withdrawalCount' => fn(ParseNode $n) => $o->setWithdrawalCount($n->getIntegerValue()),
         ];
     }
 
     /**
-     * Gets the loanRepaymentAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the loanRepaymentAmount property value. The sum of all <code>LOAN_REPAYMENT</code> transactions (i.e., debit and credit,) that match the input criteria.
      * @return Amount|null
     */
     public function getLoanRepaymentAmount(): ?Amount {
@@ -386,15 +386,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the loanRepaymentBookingEntry property value. The enumeration value indicates whether the <code>loanRepaymentAmount</code> is a <code>DEBIT</code> against, or a <code>CREDIT</code> to, the sellers's account.<br><br>For most <code>loanRepaymentAmount</code> transactions, <code>loanRepaymentBookingEntry</code> will be <b>DEBIT</b>. However, if a loan repayment transaction is reversed, that transaction will be shown as a <b>CREDIT</b>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the loanRepaymentBookingEntry property value. The enumeration value indicates whether the <code>loanRepaymentAmount</code> is a <code>DEBIT</code> against, or a <code>CREDIT</code> to, the sellers's account.
+     * @return BookingEntryEnum|null
     */
-    public function getLoanRepaymentBookingEntry(): ?string {
+    public function getLoanRepaymentBookingEntry(): ?BookingEntryEnum {
         return $this->loanRepaymentBookingEntry;
     }
 
     /**
-     * Gets the loanRepaymentCount property value. This integer value indicates the total number of <code>LOAN_REPAYMENT</code> transactions (i.e., <code>DEBIT</code> and <code>CREDIT</code>,) that match the input criteria.<br><br>This field is generally returned even if it equals <b>0</b>. However it will not be returned if a <code>transactionType</code> filter is used and its value has been set to any enumeration value other than <code>LOAN_REPAYMENT</code>.
+     * Gets the loanRepaymentCount property value. This integer value indicates the total number of <code>LOAN_REPAYMENT</code> transactions.
      * @return int|null
     */
     public function getLoanRepaymentCount(): ?int {
@@ -402,7 +402,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the nonSaleChargeAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the nonSaleChargeAmount property value. The total non-sale charge amount for given payee within a specified period.
      * @return Amount|null
     */
     public function getNonSaleChargeAmount(): ?Amount {
@@ -410,10 +410,10 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the nonSaleChargeBookingEntry property value. The credit/debit sign indicator for the non-sale charge. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the nonSaleChargeBookingEntry property value. The credit/debit sign indicator for the non-sale charge.
+     * @return BookingEntryEnum|null
     */
-    public function getNonSaleChargeBookingEntry(): ?string {
+    public function getNonSaleChargeBookingEntry(): ?BookingEntryEnum {
         return $this->nonSaleChargeBookingEntry;
     }
 
@@ -426,7 +426,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the onHoldAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the onHoldAmount property value. This amount is the total dollar value of order sales where the associated funds are on hold.
      * @return Amount|null
     */
     public function getOnHoldAmount(): ?Amount {
@@ -434,15 +434,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the onHoldBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>onHoldAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>CREDIT</code>, since on-hold funds should eventually be released as part of a payout to the seller once the hold is cleared. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the onHoldBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>onHoldAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @return BookingEntryEnum|null
     */
-    public function getOnHoldBookingEntry(): ?string {
+    public function getOnHoldBookingEntry(): ?BookingEntryEnum {
         return $this->onHoldBookingEntry;
     }
 
     /**
-     * Gets the onHoldCount property value. This integer value indicates the total number of order sales where the associated funds are on hold. Only the orders that match the input criteria are considered.<br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionStatus</strong> filter is used, and its value is set to any value other than <code>FUNDS_ON_HOLD</code>.
+     * Gets the onHoldCount property value. This integer value indicates the total number of order sales where the associated funds are on hold.
      * @return int|null
     */
     public function getOnHoldCount(): ?int {
@@ -450,7 +450,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the purchaseAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the purchaseAmount property value. <span class="tablenote"><b>Note:</b> The <code>PURCHASE</code> transaction type is currently only applicable in the US marketplace.</span><br>This amount is the total dollar value of all the purchases that have been initiated by a seller using spendable funds.
      * @return Amount|null
     */
     public function getPurchaseAmount(): ?Amount {
@@ -458,15 +458,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the purchaseBookingEntry property value. <span class="tablenote"><b>Note:</b> The <code>PURCHASE</code> transaction type is currently only applicable in the US marketplace.</span><br>This enumeration value indicates whether the dollar amount in the <b>purchase</b> field is a charge (debit) to the seller or a credit. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the purchaseBookingEntry property value. This enumeration value indicates whether the dollar amount in the <b>purchase</b> field is a charge (debit) to the seller or a credit.
+     * @return BookingEntryEnum|null
     */
-    public function getPurchaseBookingEntry(): ?string {
+    public function getPurchaseBookingEntry(): ?BookingEntryEnum {
         return $this->purchaseBookingEntry;
     }
 
     /**
-     * Gets the purchaseCount property value. <span class="tablenote"><b>Note:</b> The <code>PURCHASE</code> transaction type is currently only applicable in the US marketplace.</span><br>This integer value indicates the total number of purchases that have been initiated by a seller using spendable funds that match the input criteria.<br><br>This field is generally returned, even if it equals <code>0</code>. However, it will not be returned if a <code>transactionType</code> filter is used and its value has been set to any enumeration value other than <code>PURCHASE</code>.
+     * Gets the purchaseCount property value. This integer value indicates the total number of purchases initiated by a seller using spendable funds.
      * @return int|null
     */
     public function getPurchaseCount(): ?int {
@@ -474,7 +474,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the refundAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the refundAmount property value. This amount is the total dollar value of buyer refunds that match the input criteria.
      * @return Amount|null
     */
     public function getRefundAmount(): ?Amount {
@@ -482,15 +482,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the refundBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>refundAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code> since this a refund from the seller to the buyer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the refundBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>refundAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @return BookingEntryEnum|null
     */
-    public function getRefundBookingEntry(): ?string {
+    public function getRefundBookingEntry(): ?BookingEntryEnum {
         return $this->refundBookingEntry;
     }
 
     /**
-     * Gets the refundCount property value. This integer value indicates the total number of buyer refunds that match the input criteria. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>REFUND</code>.
+     * Gets the refundCount property value. This integer value indicates the total number of buyer refunds that match the input criteria.
      * @return int|null
     */
     public function getRefundCount(): ?int {
@@ -498,7 +498,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingLabelAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the shippingLabelAmount property value. This is the total dollar value of the eBay shipping labels purchased by the seller.
      * @return Amount|null
     */
     public function getShippingLabelAmount(): ?Amount {
@@ -506,15 +506,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingLabelBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>shippingLabelAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code>, as eBay will charge the seller when eBay shipping labels are purchased, but it can be <code>CREDIT</code> if the seller was refunded for a shipping label or was possibly overcharged for a shipping label. <br><br><span class="tablenote"><b>Note:</b> eBay SHIPPING_LABEL transactions paid through PayPal are not currently supported by the Finances API, so those transactions will not be reflected in this field.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the shippingLabelBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>shippingLabelAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @return BookingEntryEnum|null
     */
-    public function getShippingLabelBookingEntry(): ?string {
+    public function getShippingLabelBookingEntry(): ?BookingEntryEnum {
         return $this->shippingLabelBookingEntry;
     }
 
     /**
-     * Gets the shippingLabelCount property value. This is the total number of eBay shipping labels purchased by the seller. The count returned here may depend on the specified input criteria.<br><br><span class="tablenote"><b>Note:</b> eBay SHIPPING_LABEL transactions paid through PayPal are not currently supported by the Finances API, so those transactions will not be reflected in the count returned in this container.</span>
+     * Gets the shippingLabelCount property value. This is the total number of eBay shipping labels purchased by the seller.
      * @return int|null
     */
     public function getShippingLabelCount(): ?int {
@@ -522,7 +522,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the transferAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the transferAmount property value. This amount is the total dollar value of buyer refund transfers that match the input criteria.
      * @return Amount|null
     */
     public function getTransferAmount(): ?Amount {
@@ -530,15 +530,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the transferBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>transferAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code> since this a seller reimbursement to eBay for buyer refunds. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the transferBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>transferAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @return BookingEntryEnum|null
     */
-    public function getTransferBookingEntry(): ?string {
+    public function getTransferBookingEntry(): ?BookingEntryEnum {
         return $this->transferBookingEntry;
     }
 
     /**
-     * Gets the transferCount property value. This integer value indicates the total number of buyer refund transfers that match the input criteria. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>TRANSFER</code>.
+     * Gets the transferCount property value. This integer value indicates the total number of buyer refund transfers that match the input criteria.
      * @return int|null
     */
     public function getTransferCount(): ?int {
@@ -546,7 +546,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the withdrawalAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the withdrawalAmount property value. This amount is the total dollar value of on-demand payouts (withdrawals) that match the input criteria.
      * @return Amount|null
     */
     public function getWithdrawalAmount(): ?Amount {
@@ -554,15 +554,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the withdrawalBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>withdrawalAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code> since this transaction involves a debit to the seller's available payout funds. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the withdrawalBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>withdrawalAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @return BookingEntryEnum|null
     */
-    public function getWithdrawalBookingEntry(): ?string {
+    public function getWithdrawalBookingEntry(): ?BookingEntryEnum {
         return $this->withdrawalBookingEntry;
     }
 
     /**
-     * Gets the withdrawalCount property value. This integer value indicates the total number of on-demand payouts (withdrawals) that match the input criteria. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>WITHDRAWAL</code>.
+     * Gets the withdrawalCount property value. This integer value indicates the total number of on-demand payouts (withdrawals) that match the input criteria.
      * @return int|null
     */
     public function getWithdrawalCount(): ?int {
@@ -575,40 +575,40 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('adjustmentAmount', $this->getAdjustmentAmount());
-        $writer->writeStringValue('adjustmentBookingEntry', $this->getAdjustmentBookingEntry());
+        $writer->writeEnumValue('adjustmentBookingEntry', $this->getAdjustmentBookingEntry());
         $writer->writeIntegerValue('adjustmentCount', $this->getAdjustmentCount());
         $writer->writeObjectValue('balanceTransferAmount', $this->getBalanceTransferAmount());
-        $writer->writeStringValue('balanceTransferBookingEntry', $this->getBalanceTransferBookingEntry());
+        $writer->writeEnumValue('balanceTransferBookingEntry', $this->getBalanceTransferBookingEntry());
         $writer->writeIntegerValue('balanceTransferCount', $this->getBalanceTransferCount());
         $writer->writeObjectValue('creditAmount', $this->getCreditAmount());
-        $writer->writeStringValue('creditBookingEntry', $this->getCreditBookingEntry());
+        $writer->writeEnumValue('creditBookingEntry', $this->getCreditBookingEntry());
         $writer->writeIntegerValue('creditCount', $this->getCreditCount());
         $writer->writeObjectValue('disputeAmount', $this->getDisputeAmount());
-        $writer->writeStringValue('disputeBookingEntry', $this->getDisputeBookingEntry());
+        $writer->writeEnumValue('disputeBookingEntry', $this->getDisputeBookingEntry());
         $writer->writeIntegerValue('disputeCount', $this->getDisputeCount());
         $writer->writeObjectValue('loanRepaymentAmount', $this->getLoanRepaymentAmount());
-        $writer->writeStringValue('loanRepaymentBookingEntry', $this->getLoanRepaymentBookingEntry());
+        $writer->writeEnumValue('loanRepaymentBookingEntry', $this->getLoanRepaymentBookingEntry());
         $writer->writeIntegerValue('loanRepaymentCount', $this->getLoanRepaymentCount());
         $writer->writeObjectValue('nonSaleChargeAmount', $this->getNonSaleChargeAmount());
-        $writer->writeStringValue('nonSaleChargeBookingEntry', $this->getNonSaleChargeBookingEntry());
+        $writer->writeEnumValue('nonSaleChargeBookingEntry', $this->getNonSaleChargeBookingEntry());
         $writer->writeIntegerValue('nonSaleChargeCount', $this->getNonSaleChargeCount());
         $writer->writeObjectValue('onHoldAmount', $this->getOnHoldAmount());
-        $writer->writeStringValue('onHoldBookingEntry', $this->getOnHoldBookingEntry());
+        $writer->writeEnumValue('onHoldBookingEntry', $this->getOnHoldBookingEntry());
         $writer->writeIntegerValue('onHoldCount', $this->getOnHoldCount());
         $writer->writeObjectValue('purchaseAmount', $this->getPurchaseAmount());
-        $writer->writeStringValue('purchaseBookingEntry', $this->getPurchaseBookingEntry());
+        $writer->writeEnumValue('purchaseBookingEntry', $this->getPurchaseBookingEntry());
         $writer->writeIntegerValue('purchaseCount', $this->getPurchaseCount());
         $writer->writeObjectValue('refundAmount', $this->getRefundAmount());
-        $writer->writeStringValue('refundBookingEntry', $this->getRefundBookingEntry());
+        $writer->writeEnumValue('refundBookingEntry', $this->getRefundBookingEntry());
         $writer->writeIntegerValue('refundCount', $this->getRefundCount());
         $writer->writeObjectValue('shippingLabelAmount', $this->getShippingLabelAmount());
-        $writer->writeStringValue('shippingLabelBookingEntry', $this->getShippingLabelBookingEntry());
+        $writer->writeEnumValue('shippingLabelBookingEntry', $this->getShippingLabelBookingEntry());
         $writer->writeIntegerValue('shippingLabelCount', $this->getShippingLabelCount());
         $writer->writeObjectValue('transferAmount', $this->getTransferAmount());
-        $writer->writeStringValue('transferBookingEntry', $this->getTransferBookingEntry());
+        $writer->writeEnumValue('transferBookingEntry', $this->getTransferBookingEntry());
         $writer->writeIntegerValue('transferCount', $this->getTransferCount());
         $writer->writeObjectValue('withdrawalAmount', $this->getWithdrawalAmount());
-        $writer->writeStringValue('withdrawalBookingEntry', $this->getWithdrawalBookingEntry());
+        $writer->writeEnumValue('withdrawalBookingEntry', $this->getWithdrawalBookingEntry());
         $writer->writeIntegerValue('withdrawalCount', $this->getWithdrawalCount());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -622,7 +622,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adjustmentAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the adjustmentAmount property value. Total adjustment amount for given payee within a specified period.
      * @param Amount|null $value Value to set for the adjustmentAmount property.
     */
     public function setAdjustmentAmount(?Amount $value): void {
@@ -630,10 +630,10 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adjustmentBookingEntry property value. The credit debit sign indicator for adjustment. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the adjustmentBookingEntry property.
+     * Sets the adjustmentBookingEntry property value. The credit debit sign indicator for adjustment.
+     * @param BookingEntryEnum|null $value Value to set for the adjustmentBookingEntry property.
     */
-    public function setAdjustmentBookingEntry(?string $value): void {
+    public function setAdjustmentBookingEntry(?BookingEntryEnum $value): void {
         $this->adjustmentBookingEntry = $value;
     }
 
@@ -646,7 +646,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the balanceTransferAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the balanceTransferAmount property value. The total balance transfer amount for given payee within the specified period.
      * @param Amount|null $value Value to set for the balanceTransferAmount property.
     */
     public function setBalanceTransferAmount(?Amount $value): void {
@@ -654,10 +654,10 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the balanceTransferBookingEntry property value. The credit debit sign indicator for the balance transfer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the balanceTransferBookingEntry property.
+     * Sets the balanceTransferBookingEntry property value. The credit debit sign indicator for the balance transfer.
+     * @param BookingEntryEnum|null $value Value to set for the balanceTransferBookingEntry property.
     */
-    public function setBalanceTransferBookingEntry(?string $value): void {
+    public function setBalanceTransferBookingEntry(?BookingEntryEnum $value): void {
         $this->balanceTransferBookingEntry = $value;
     }
 
@@ -670,7 +670,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the creditAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the creditAmount property value. This amount is the total dollar value of all the seller's sales and/or credits that match the input criteria.
      * @param Amount|null $value Value to set for the creditAmount property.
     */
     public function setCreditAmount(?Amount $value): void {
@@ -678,15 +678,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the creditBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>creditAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>CREDIT</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the creditBookingEntry property.
+     * Sets the creditBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>creditAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @param BookingEntryEnum|null $value Value to set for the creditBookingEntry property.
     */
-    public function setCreditBookingEntry(?string $value): void {
+    public function setCreditBookingEntry(?BookingEntryEnum $value): void {
         $this->creditBookingEntry = $value;
     }
 
     /**
-     * Sets the creditCount property value. This integer value indicates the total number of the seller's sales and/or credits that match the input criteria. <br><br><span class="tablenote"><strong>Note:</strong> Unless the <b>transactionType</b> filter is used in the request to retrieve a specific type of monetary transaction (sale, buyer refund, or seller credit), the <b>creditCount</b> and <b>creditAmount</b> fields account for both order sales and seller credits (the count and value is not distinguished between the two monetary transaction types).</span><br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to either <code>REFUND</code>, <code>DISPUTE</code>, or <code>SHIPPING_LABEL</code>.
+     * Sets the creditCount property value. This integer value indicates the total number of the seller's sales and/or credits that match the input criteria.
      * @param int|null $value Value to set for the creditCount property.
     */
     public function setCreditCount(?int $value): void {
@@ -694,7 +694,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the disputeAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the disputeAmount property value. This amount is the total dollar value associated with any existing payment disputes.
      * @param Amount|null $value Value to set for the disputeAmount property.
     */
     public function setDisputeAmount(?Amount $value): void {
@@ -702,15 +702,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the disputeBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>disputeAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code>, but its possible that <code>CREDIT</code> could be returned if the seller contested one or more payment disputes and won the dispute. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the disputeBookingEntry property.
+     * Sets the disputeBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>disputeAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @param BookingEntryEnum|null $value Value to set for the disputeBookingEntry property.
     */
-    public function setDisputeBookingEntry(?string $value): void {
+    public function setDisputeBookingEntry(?BookingEntryEnum $value): void {
         $this->disputeBookingEntry = $value;
     }
 
     /**
-     * Sets the disputeCount property value. This integer value indicates the total number of payment disputes that have been initiated by one or more buyers. Only the orders that match the input criteria are considered. The Payment Disputes methods in the Fulfillment API can be used by the seller to retrieve more information about any payment disputes. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>DISPUTE</code>.
+     * Sets the disputeCount property value. This integer value indicates the total number of payment disputes.
      * @param int|null $value Value to set for the disputeCount property.
     */
     public function setDisputeCount(?int $value): void {
@@ -718,7 +718,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the loanRepaymentAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the loanRepaymentAmount property value. The sum of all <code>LOAN_REPAYMENT</code> transactions (i.e., debit and credit,) that match the input criteria.
      * @param Amount|null $value Value to set for the loanRepaymentAmount property.
     */
     public function setLoanRepaymentAmount(?Amount $value): void {
@@ -726,15 +726,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the loanRepaymentBookingEntry property value. The enumeration value indicates whether the <code>loanRepaymentAmount</code> is a <code>DEBIT</code> against, or a <code>CREDIT</code> to, the sellers's account.<br><br>For most <code>loanRepaymentAmount</code> transactions, <code>loanRepaymentBookingEntry</code> will be <b>DEBIT</b>. However, if a loan repayment transaction is reversed, that transaction will be shown as a <b>CREDIT</b>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the loanRepaymentBookingEntry property.
+     * Sets the loanRepaymentBookingEntry property value. The enumeration value indicates whether the <code>loanRepaymentAmount</code> is a <code>DEBIT</code> against, or a <code>CREDIT</code> to, the sellers's account.
+     * @param BookingEntryEnum|null $value Value to set for the loanRepaymentBookingEntry property.
     */
-    public function setLoanRepaymentBookingEntry(?string $value): void {
+    public function setLoanRepaymentBookingEntry(?BookingEntryEnum $value): void {
         $this->loanRepaymentBookingEntry = $value;
     }
 
     /**
-     * Sets the loanRepaymentCount property value. This integer value indicates the total number of <code>LOAN_REPAYMENT</code> transactions (i.e., <code>DEBIT</code> and <code>CREDIT</code>,) that match the input criteria.<br><br>This field is generally returned even if it equals <b>0</b>. However it will not be returned if a <code>transactionType</code> filter is used and its value has been set to any enumeration value other than <code>LOAN_REPAYMENT</code>.
+     * Sets the loanRepaymentCount property value. This integer value indicates the total number of <code>LOAN_REPAYMENT</code> transactions.
      * @param int|null $value Value to set for the loanRepaymentCount property.
     */
     public function setLoanRepaymentCount(?int $value): void {
@@ -742,7 +742,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the nonSaleChargeAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the nonSaleChargeAmount property value. The total non-sale charge amount for given payee within a specified period.
      * @param Amount|null $value Value to set for the nonSaleChargeAmount property.
     */
     public function setNonSaleChargeAmount(?Amount $value): void {
@@ -750,10 +750,10 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the nonSaleChargeBookingEntry property value. The credit/debit sign indicator for the non-sale charge. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the nonSaleChargeBookingEntry property.
+     * Sets the nonSaleChargeBookingEntry property value. The credit/debit sign indicator for the non-sale charge.
+     * @param BookingEntryEnum|null $value Value to set for the nonSaleChargeBookingEntry property.
     */
-    public function setNonSaleChargeBookingEntry(?string $value): void {
+    public function setNonSaleChargeBookingEntry(?BookingEntryEnum $value): void {
         $this->nonSaleChargeBookingEntry = $value;
     }
 
@@ -766,7 +766,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the onHoldAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the onHoldAmount property value. This amount is the total dollar value of order sales where the associated funds are on hold.
      * @param Amount|null $value Value to set for the onHoldAmount property.
     */
     public function setOnHoldAmount(?Amount $value): void {
@@ -774,15 +774,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the onHoldBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>onHoldAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>CREDIT</code>, since on-hold funds should eventually be released as part of a payout to the seller once the hold is cleared. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the onHoldBookingEntry property.
+     * Sets the onHoldBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>onHoldAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @param BookingEntryEnum|null $value Value to set for the onHoldBookingEntry property.
     */
-    public function setOnHoldBookingEntry(?string $value): void {
+    public function setOnHoldBookingEntry(?BookingEntryEnum $value): void {
         $this->onHoldBookingEntry = $value;
     }
 
     /**
-     * Sets the onHoldCount property value. This integer value indicates the total number of order sales where the associated funds are on hold. Only the orders that match the input criteria are considered.<br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionStatus</strong> filter is used, and its value is set to any value other than <code>FUNDS_ON_HOLD</code>.
+     * Sets the onHoldCount property value. This integer value indicates the total number of order sales where the associated funds are on hold.
      * @param int|null $value Value to set for the onHoldCount property.
     */
     public function setOnHoldCount(?int $value): void {
@@ -790,7 +790,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the purchaseAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the purchaseAmount property value. <span class="tablenote"><b>Note:</b> The <code>PURCHASE</code> transaction type is currently only applicable in the US marketplace.</span><br>This amount is the total dollar value of all the purchases that have been initiated by a seller using spendable funds.
      * @param Amount|null $value Value to set for the purchaseAmount property.
     */
     public function setPurchaseAmount(?Amount $value): void {
@@ -798,15 +798,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the purchaseBookingEntry property value. <span class="tablenote"><b>Note:</b> The <code>PURCHASE</code> transaction type is currently only applicable in the US marketplace.</span><br>This enumeration value indicates whether the dollar amount in the <b>purchase</b> field is a charge (debit) to the seller or a credit. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the purchaseBookingEntry property.
+     * Sets the purchaseBookingEntry property value. This enumeration value indicates whether the dollar amount in the <b>purchase</b> field is a charge (debit) to the seller or a credit.
+     * @param BookingEntryEnum|null $value Value to set for the purchaseBookingEntry property.
     */
-    public function setPurchaseBookingEntry(?string $value): void {
+    public function setPurchaseBookingEntry(?BookingEntryEnum $value): void {
         $this->purchaseBookingEntry = $value;
     }
 
     /**
-     * Sets the purchaseCount property value. <span class="tablenote"><b>Note:</b> The <code>PURCHASE</code> transaction type is currently only applicable in the US marketplace.</span><br>This integer value indicates the total number of purchases that have been initiated by a seller using spendable funds that match the input criteria.<br><br>This field is generally returned, even if it equals <code>0</code>. However, it will not be returned if a <code>transactionType</code> filter is used and its value has been set to any enumeration value other than <code>PURCHASE</code>.
+     * Sets the purchaseCount property value. This integer value indicates the total number of purchases initiated by a seller using spendable funds.
      * @param int|null $value Value to set for the purchaseCount property.
     */
     public function setPurchaseCount(?int $value): void {
@@ -814,7 +814,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the refundAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the refundAmount property value. This amount is the total dollar value of buyer refunds that match the input criteria.
      * @param Amount|null $value Value to set for the refundAmount property.
     */
     public function setRefundAmount(?Amount $value): void {
@@ -822,15 +822,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the refundBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>refundAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code> since this a refund from the seller to the buyer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the refundBookingEntry property.
+     * Sets the refundBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>refundAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @param BookingEntryEnum|null $value Value to set for the refundBookingEntry property.
     */
-    public function setRefundBookingEntry(?string $value): void {
+    public function setRefundBookingEntry(?BookingEntryEnum $value): void {
         $this->refundBookingEntry = $value;
     }
 
     /**
-     * Sets the refundCount property value. This integer value indicates the total number of buyer refunds that match the input criteria. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>REFUND</code>.
+     * Sets the refundCount property value. This integer value indicates the total number of buyer refunds that match the input criteria.
      * @param int|null $value Value to set for the refundCount property.
     */
     public function setRefundCount(?int $value): void {
@@ -838,7 +838,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingLabelAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the shippingLabelAmount property value. This is the total dollar value of the eBay shipping labels purchased by the seller.
      * @param Amount|null $value Value to set for the shippingLabelAmount property.
     */
     public function setShippingLabelAmount(?Amount $value): void {
@@ -846,15 +846,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingLabelBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>shippingLabelAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code>, as eBay will charge the seller when eBay shipping labels are purchased, but it can be <code>CREDIT</code> if the seller was refunded for a shipping label or was possibly overcharged for a shipping label. <br><br><span class="tablenote"><b>Note:</b> eBay SHIPPING_LABEL transactions paid through PayPal are not currently supported by the Finances API, so those transactions will not be reflected in this field.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the shippingLabelBookingEntry property.
+     * Sets the shippingLabelBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>shippingLabelAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @param BookingEntryEnum|null $value Value to set for the shippingLabelBookingEntry property.
     */
-    public function setShippingLabelBookingEntry(?string $value): void {
+    public function setShippingLabelBookingEntry(?BookingEntryEnum $value): void {
         $this->shippingLabelBookingEntry = $value;
     }
 
     /**
-     * Sets the shippingLabelCount property value. This is the total number of eBay shipping labels purchased by the seller. The count returned here may depend on the specified input criteria.<br><br><span class="tablenote"><b>Note:</b> eBay SHIPPING_LABEL transactions paid through PayPal are not currently supported by the Finances API, so those transactions will not be reflected in the count returned in this container.</span>
+     * Sets the shippingLabelCount property value. This is the total number of eBay shipping labels purchased by the seller.
      * @param int|null $value Value to set for the shippingLabelCount property.
     */
     public function setShippingLabelCount(?int $value): void {
@@ -862,7 +862,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the transferAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the transferAmount property value. This amount is the total dollar value of buyer refund transfers that match the input criteria.
      * @param Amount|null $value Value to set for the transferAmount property.
     */
     public function setTransferAmount(?Amount $value): void {
@@ -870,15 +870,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the transferBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>transferAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code> since this a seller reimbursement to eBay for buyer refunds. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the transferBookingEntry property.
+     * Sets the transferBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>transferAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @param BookingEntryEnum|null $value Value to set for the transferBookingEntry property.
     */
-    public function setTransferBookingEntry(?string $value): void {
+    public function setTransferBookingEntry(?BookingEntryEnum $value): void {
         $this->transferBookingEntry = $value;
     }
 
     /**
-     * Sets the transferCount property value. This integer value indicates the total number of buyer refund transfers that match the input criteria. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>TRANSFER</code>.
+     * Sets the transferCount property value. This integer value indicates the total number of buyer refund transfers that match the input criteria.
      * @param int|null $value Value to set for the transferCount property.
     */
     public function setTransferCount(?int $value): void {
@@ -886,7 +886,7 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the withdrawalAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the withdrawalAmount property value. This amount is the total dollar value of on-demand payouts (withdrawals) that match the input criteria.
      * @param Amount|null $value Value to set for the withdrawalAmount property.
     */
     public function setWithdrawalAmount(?Amount $value): void {
@@ -894,15 +894,15 @@ class TransactionSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the withdrawalBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>withdrawalAmount</strong> field is a charge (debit) to the seller or a credit. Typically, the enumeration value returned here will be <code>DEBIT</code> since this transaction involves a debit to the seller's available payout funds. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the withdrawalBookingEntry property.
+     * Sets the withdrawalBookingEntry property value. The enumeration value indicates whether the dollar amount in the <strong>withdrawalAmount</strong> field is a charge (debit) to the seller or a credit.
+     * @param BookingEntryEnum|null $value Value to set for the withdrawalBookingEntry property.
     */
-    public function setWithdrawalBookingEntry(?string $value): void {
+    public function setWithdrawalBookingEntry(?BookingEntryEnum $value): void {
         $this->withdrawalBookingEntry = $value;
     }
 
     /**
-     * Sets the withdrawalCount property value. This integer value indicates the total number of on-demand payouts (withdrawals) that match the input criteria. <br><br>This field is generally returned, even if <code>0</code>, but it will not be returned if a <strong>transactionType</strong> filter is used, and its value is set to any value other than <code>WITHDRAWAL</code>.
+     * Sets the withdrawalCount property value. This integer value indicates the total number of on-demand payouts (withdrawals) that match the input criteria.
      * @param int|null $value Value to set for the withdrawalCount property.
     */
     public function setWithdrawalCount(?int $value): void {

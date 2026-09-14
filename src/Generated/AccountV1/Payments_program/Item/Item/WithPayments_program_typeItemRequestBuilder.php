@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV1\Payments_program\Item\Item;
 
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\PaymentsProgramResponse;
 use EBay\AccountManagement\Generated\AccountV1\Payments_program\Item\Item\Onboarding\OnboardingRequestBuilder;
 use Exception;
@@ -59,7 +60,12 @@ class WithPayments_program_typeItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?WithPayments_program_typeItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [PaymentsProgramResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [PaymentsProgramResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

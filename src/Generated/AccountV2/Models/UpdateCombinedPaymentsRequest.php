@@ -32,9 +32,9 @@ class UpdateCombinedPaymentsRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $combinedDuration This field specifies the duration within which multiple unpaid orders may be combined into a single invoice. <br><br>One of the values in the CombinedPaymentPeriodEnum type must be used in this field. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
+     * @var CombinedPaymentPeriodEnum|null $combinedDuration This field specifies the duration within which multiple unpaid orders may be combined into a single invoice. <br><br>One of the values in <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a> must be used in this field.
     */
-    private ?string $combinedDuration = null;
+    private ?CombinedPaymentPeriodEnum $combinedDuration = null;
     
     /**
      * Instantiates a new UpdateCombinedPaymentsRequest and sets the default values.
@@ -61,10 +61,10 @@ class UpdateCombinedPaymentsRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the combinedDuration property value. This field specifies the duration within which multiple unpaid orders may be combined into a single invoice. <br><br>One of the values in the CombinedPaymentPeriodEnum type must be used in this field. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the combinedDuration property value. This field specifies the duration within which multiple unpaid orders may be combined into a single invoice. <br><br>One of the values in <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a> must be used in this field.
+     * @return CombinedPaymentPeriodEnum|null
     */
-    public function getCombinedDuration(): ?string {
+    public function getCombinedDuration(): ?CombinedPaymentPeriodEnum {
         return $this->combinedDuration;
     }
 
@@ -75,7 +75,7 @@ class UpdateCombinedPaymentsRequest implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'combinedDuration' => fn(ParseNode $n) => $o->setCombinedDuration($n->getStringValue()),
+            'combinedDuration' => fn(ParseNode $n) => $o->setCombinedDuration($n->getEnumValue(CombinedPaymentPeriodEnum::class)),
         ];
     }
 
@@ -84,7 +84,7 @@ class UpdateCombinedPaymentsRequest implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('combinedDuration', $this->getCombinedDuration());
+        $writer->writeEnumValue('combinedDuration', $this->getCombinedDuration());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -97,10 +97,10 @@ class UpdateCombinedPaymentsRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the combinedDuration property value. This field specifies the duration within which multiple unpaid orders may be combined into a single invoice. <br><br>One of the values in the CombinedPaymentPeriodEnum type must be used in this field. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the combinedDuration property.
+     * Sets the combinedDuration property value. This field specifies the duration within which multiple unpaid orders may be combined into a single invoice. <br><br>One of the values in <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a> must be used in this field.
+     * @param CombinedPaymentPeriodEnum|null $value Value to set for the combinedDuration property.
     */
-    public function setCombinedDuration(?string $value): void {
+    public function setCombinedDuration(?CombinedPaymentPeriodEnum $value): void {
         $this->combinedDuration = $value;
     }
 

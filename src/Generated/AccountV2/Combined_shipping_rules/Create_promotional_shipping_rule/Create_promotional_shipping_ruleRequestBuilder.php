@@ -17,6 +17,7 @@
 namespace EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Create_promotional_shipping_rule;
 
 use EBay\AccountManagement\Generated\AccountV2\Models\CreatePromotionalShippingRuleRequest;
+use EBay\AccountManagement\Generated\AccountV2\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -45,19 +46,23 @@ class Create_promotional_shipping_ruleRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method defines promotional shipping rules such as discounts or free-shipping thresholds, configurable by marketplace for the seller.
-     * @param CreatePromotionalShippingRuleRequest $body This type represents the request schema for creating promotional shipping rules with combined payment durations.
+     * @param CreatePromotionalShippingRuleRequest $body This type is used to define and configure the promotional combined shipping rule and/or change the combined payment duration.
      * @param Create_promotional_shipping_ruleRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(CreatePromotionalShippingRuleRequest $body, ?Create_promotional_shipping_ruleRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
      * This method defines promotional shipping rules such as discounts or free-shipping thresholds, configurable by marketplace for the seller.
-     * @param CreatePromotionalShippingRuleRequest $body This type represents the request schema for creating promotional shipping rules with combined payment durations.
+     * @param CreatePromotionalShippingRuleRequest $body This type is used to define and configure the promotional combined shipping rule and/or change the combined payment duration.
      * @param Create_promotional_shipping_ruleRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -70,6 +75,7 @@ class Create_promotional_shipping_ruleRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

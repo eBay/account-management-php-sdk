@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\Finances\Seller_funds_summary;
 
+use EBay\AccountManagement\Generated\Finances\Models\Error;
 use EBay\AccountManagement\Generated\Finances\Models\SellerFundsSummaryResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,12 @@ class Seller_funds_summaryRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Seller_funds_summaryRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SellerFundsSummaryResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SellerFundsSummaryResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

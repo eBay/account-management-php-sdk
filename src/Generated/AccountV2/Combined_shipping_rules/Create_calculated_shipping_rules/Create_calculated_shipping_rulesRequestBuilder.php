@@ -17,6 +17,7 @@
 namespace EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Create_calculated_shipping_rules;
 
 use EBay\AccountManagement\Generated\AccountV2\Models\CreateCalculatedShippingRulesRequest;
+use EBay\AccountManagement\Generated\AccountV2\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -45,19 +46,23 @@ class Create_calculated_shipping_rulesRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method creates or registers calculated shipping rules that determine combined shipping costs based on weight, item count, or cost parameters for an authenticated seller. <br><br> This shipping rule will apply to eBay listings that use the calculated shipping model.
-     * @param CreateCalculatedShippingRulesRequest $body This type defines the structure of a request to create calculated shipping rules, including handling, duration, and rule type details.
+     * @param CreateCalculatedShippingRulesRequest $body This type is used to define and configure calculated combined shipping and handling rules and/or change the combined payment duration.
      * @param Create_calculated_shipping_rulesRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(CreateCalculatedShippingRulesRequest $body, ?Create_calculated_shipping_rulesRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
      * This method creates or registers calculated shipping rules that determine combined shipping costs based on weight, item count, or cost parameters for an authenticated seller. <br><br> This shipping rule will apply to eBay listings that use the calculated shipping model.
-     * @param CreateCalculatedShippingRulesRequest $body This type defines the structure of a request to create calculated shipping rules, including handling, duration, and rule type details.
+     * @param CreateCalculatedShippingRulesRequest $body This type is used to define and configure calculated combined shipping and handling rules and/or change the combined payment duration.
      * @param Create_calculated_shipping_rulesRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -70,6 +75,7 @@ class Create_calculated_shipping_rulesRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

@@ -42,7 +42,7 @@ class Rate_tableRequestBuilderGetRequestConfiguration extends BaseRequestConfigu
 
     /**
      * Instantiates a new Rate_tableRequestBuilderGetQueryParameters.
-     * @param string|null $country_code This query parameter specifies the two-letter <a href="https://www.iso.org/iso-3166-country-codes.html " title="https://www.iso.org " target="_blank">ISO 3166</a> code of country for which you want shipping rate table information. If you do not specify a country code, the request returns all of the seller's defined shipping rate tables for all eBay marketplaces. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:CountryCodeEnum
+     * @param string|null $country_code This query parameter specifies the two-letter <a href="https://www.iso.org/iso-3166-country-codes.html " title="https://www.iso.org " target="_blank">ISO 3166</a> code of country for which you want shipping rate table information. If you do not specify a country code, the request returns all of the seller's defined shipping rate tables for all eBay marketplaces. For implementation help, refer to eBay API documentation at https://developer.ebay.com/develop/api/sell/account_api_v1#sell-account_api_v1-rate_table-getratetables.countrycodeenum
      * @return Rate_tableRequestBuilderGetQueryParameters
     */
     public static function createQueryParameters(?string $country_code = null): Rate_tableRequestBuilderGetQueryParameters {

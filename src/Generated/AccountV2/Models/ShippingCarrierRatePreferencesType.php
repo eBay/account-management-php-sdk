@@ -32,14 +32,14 @@ class ShippingCarrierRatePreferencesType implements AdditionalDataHolder, Parsab
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $fedexRateOption This enum is included if the seller wishes to add or modify the FedEx shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:FedexRateOptionEnum'>eBay API documentation</a>
+     * @var FedexRateOptionEnum|null $fedexRateOption This enum is included if the seller wishes to add or modify the FedEx shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace.
     */
-    private ?string $fedexRateOption = null;
+    private ?FedexRateOptionEnum $fedexRateOption = null;
     
     /**
-     * @var string|null $upsRateOption This enum is included if the seller wishes to add or modify the UPS shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:UPSRateOptionEnum'>eBay API documentation</a>
+     * @var UPSRateOptionEnum|null $upsRateOption This enum is included if the seller wishes to add or modify the UPS shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace.
     */
-    private ?string $upsRateOption = null;
+    private ?UPSRateOptionEnum $upsRateOption = null;
     
     /**
      * Instantiates a new ShippingCarrierRatePreferencesType and sets the default values.
@@ -66,10 +66,10 @@ class ShippingCarrierRatePreferencesType implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Gets the fedexRateOption property value. This enum is included if the seller wishes to add or modify the FedEx shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:FedexRateOptionEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the fedexRateOption property value. This enum is included if the seller wishes to add or modify the FedEx shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace.
+     * @return FedexRateOptionEnum|null
     */
-    public function getFedexRateOption(): ?string {
+    public function getFedexRateOption(): ?FedexRateOptionEnum {
         return $this->fedexRateOption;
     }
 
@@ -80,16 +80,16 @@ class ShippingCarrierRatePreferencesType implements AdditionalDataHolder, Parsab
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'fedexRateOption' => fn(ParseNode $n) => $o->setFedexRateOption($n->getStringValue()),
-            'upsRateOption' => fn(ParseNode $n) => $o->setUpsRateOption($n->getStringValue()),
+            'fedexRateOption' => fn(ParseNode $n) => $o->setFedexRateOption($n->getEnumValue(FedexRateOptionEnum::class)),
+            'upsRateOption' => fn(ParseNode $n) => $o->setUpsRateOption($n->getEnumValue(UPSRateOptionEnum::class)),
         ];
     }
 
     /**
-     * Gets the upsRateOption property value. This enum is included if the seller wishes to add or modify the UPS shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:UPSRateOptionEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the upsRateOption property value. This enum is included if the seller wishes to add or modify the UPS shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace.
+     * @return UPSRateOptionEnum|null
     */
-    public function getUpsRateOption(): ?string {
+    public function getUpsRateOption(): ?UPSRateOptionEnum {
         return $this->upsRateOption;
     }
 
@@ -98,8 +98,8 @@ class ShippingCarrierRatePreferencesType implements AdditionalDataHolder, Parsab
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('fedexRateOption', $this->getFedexRateOption());
-        $writer->writeStringValue('upsRateOption', $this->getUpsRateOption());
+        $writer->writeEnumValue('fedexRateOption', $this->getFedexRateOption());
+        $writer->writeEnumValue('upsRateOption', $this->getUpsRateOption());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -112,18 +112,18 @@ class ShippingCarrierRatePreferencesType implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Sets the fedexRateOption property value. This enum is included if the seller wishes to add or modify the FedEx shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:FedexRateOptionEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the fedexRateOption property.
+     * Sets the fedexRateOption property value. This enum is included if the seller wishes to add or modify the FedEx shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace.
+     * @param FedexRateOptionEnum|null $value Value to set for the fedexRateOption property.
     */
-    public function setFedexRateOption(?string $value): void {
+    public function setFedexRateOption(?FedexRateOptionEnum $value): void {
         $this->fedexRateOption = $value;
     }
 
     /**
-     * Sets the upsRateOption property value. This enum is included if the seller wishes to add or modify the UPS shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:UPSRateOptionEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the upsRateOption property.
+     * Sets the upsRateOption property value. This enum is included if the seller wishes to add or modify the UPS shipping carrier rate. </br><b>Note</b>: This preference is only applicable to the eBay US marketplace.
+     * @param UPSRateOptionEnum|null $value Value to set for the upsRateOption property.
     */
-    public function setUpsRateOption(?string $value): void {
+    public function setUpsRateOption(?UPSRateOptionEnum $value): void {
         $this->upsRateOption = $value;
     }
 

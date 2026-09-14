@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * The response payload for requests that return a list of custom policies.
+*/
 class CustomPolicyResponse implements AdditionalDataHolder, Parsable 
 {
     /**

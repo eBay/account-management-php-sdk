@@ -32,9 +32,9 @@ class PromotionalShippingRuleType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $combinedShippingRuleType This field specifies the type of combined-shipping rule applied, such as flat-rate or cost-based, <br><br>as defined in the CombinedShippingRuleTypeEnum. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeEnum'>eBay API documentation</a>
+     * @var CombinedShippingRuleTypeEnum|null $combinedShippingRuleType This field specifies the type of combined-shipping rule applied, such as flat-rate or cost-based, as defined in the <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.flatshippingruletype.combinedshippingruletype" target="_blank">CombinedShippingRuleTypeEnum</a>.
     */
-    private ?string $combinedShippingRuleType = null;
+    private ?CombinedShippingRuleTypeEnum $combinedShippingRuleType = null;
     
     /**
      * @var int|null $itemCount This integer indicates the quantity of items that must be purchased by the buyer in order for that buyer to qualify for the promotional discount.
@@ -42,12 +42,12 @@ class PromotionalShippingRuleType implements AdditionalDataHolder, Parsable
     private ?int $itemCount = null;
     
     /**
-     * @var Amount|null $orderAmount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $orderAmount This container specifies the minimum order amount required to qualify for the associated discount or promotional rule.
     */
     private ?Amount $orderAmount = null;
     
     /**
-     * @var Amount|null $shippingCost A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $shippingCost This container represents the total shipping cost or discounted shipping charge for the combined order.
     */
     private ?Amount $shippingCost = null;
     
@@ -76,10 +76,10 @@ class PromotionalShippingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the combinedShippingRuleType property value. This field specifies the type of combined-shipping rule applied, such as flat-rate or cost-based, <br><br>as defined in the CombinedShippingRuleTypeEnum. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the combinedShippingRuleType property value. This field specifies the type of combined-shipping rule applied, such as flat-rate or cost-based, as defined in the <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.flatshippingruletype.combinedshippingruletype" target="_blank">CombinedShippingRuleTypeEnum</a>.
+     * @return CombinedShippingRuleTypeEnum|null
     */
-    public function getCombinedShippingRuleType(): ?string {
+    public function getCombinedShippingRuleType(): ?CombinedShippingRuleTypeEnum {
         return $this->combinedShippingRuleType;
     }
 
@@ -90,7 +90,7 @@ class PromotionalShippingRuleType implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'combinedShippingRuleType' => fn(ParseNode $n) => $o->setCombinedShippingRuleType($n->getStringValue()),
+            'combinedShippingRuleType' => fn(ParseNode $n) => $o->setCombinedShippingRuleType($n->getEnumValue(CombinedShippingRuleTypeEnum::class)),
             'itemCount' => fn(ParseNode $n) => $o->setItemCount($n->getIntegerValue()),
             'orderAmount' => fn(ParseNode $n) => $o->setOrderAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'shippingCost' => fn(ParseNode $n) => $o->setShippingCost($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
@@ -106,7 +106,7 @@ class PromotionalShippingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the orderAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the orderAmount property value. This container specifies the minimum order amount required to qualify for the associated discount or promotional rule.
      * @return Amount|null
     */
     public function getOrderAmount(): ?Amount {
@@ -114,7 +114,7 @@ class PromotionalShippingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the shippingCost property value. This container represents the total shipping cost or discounted shipping charge for the combined order.
      * @return Amount|null
     */
     public function getShippingCost(): ?Amount {
@@ -126,7 +126,7 @@ class PromotionalShippingRuleType implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('combinedShippingRuleType', $this->getCombinedShippingRuleType());
+        $writer->writeEnumValue('combinedShippingRuleType', $this->getCombinedShippingRuleType());
         $writer->writeIntegerValue('itemCount', $this->getItemCount());
         $writer->writeObjectValue('orderAmount', $this->getOrderAmount());
         $writer->writeObjectValue('shippingCost', $this->getShippingCost());
@@ -142,10 +142,10 @@ class PromotionalShippingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the combinedShippingRuleType property value. This field specifies the type of combined-shipping rule applied, such as flat-rate or cost-based, <br><br>as defined in the CombinedShippingRuleTypeEnum. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the combinedShippingRuleType property.
+     * Sets the combinedShippingRuleType property value. This field specifies the type of combined-shipping rule applied, such as flat-rate or cost-based, as defined in the <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.flatshippingruletype.combinedshippingruletype" target="_blank">CombinedShippingRuleTypeEnum</a>.
+     * @param CombinedShippingRuleTypeEnum|null $value Value to set for the combinedShippingRuleType property.
     */
-    public function setCombinedShippingRuleType(?string $value): void {
+    public function setCombinedShippingRuleType(?CombinedShippingRuleTypeEnum $value): void {
         $this->combinedShippingRuleType = $value;
     }
 
@@ -158,7 +158,7 @@ class PromotionalShippingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the orderAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the orderAmount property value. This container specifies the minimum order amount required to qualify for the associated discount or promotional rule.
      * @param Amount|null $value Value to set for the orderAmount property.
     */
     public function setOrderAmount(?Amount $value): void {
@@ -166,7 +166,7 @@ class PromotionalShippingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the shippingCost property value. This container represents the total shipping cost or discounted shipping charge for the combined order.
      * @param Amount|null $value Value to set for the shippingCost property.
     */
     public function setShippingCost(?Amount $value): void {

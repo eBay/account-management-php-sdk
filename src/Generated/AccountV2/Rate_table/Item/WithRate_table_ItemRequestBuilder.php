@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV2\Rate_table\Item;
 
+use EBay\AccountManagement\Generated\AccountV2\Models\Error;
 use EBay\AccountManagement\Generated\AccountV2\Models\RateTableDetails;
 use EBay\AccountManagement\Generated\AccountV2\Rate_table\Item\Update_shipping_cost\Update_shipping_costRequestBuilder;
 use Exception;
@@ -59,7 +60,12 @@ class WithRate_table_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?WithRate_table_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [RateTableDetails::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [RateTableDetails::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

@@ -32,14 +32,14 @@ class Tax implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $amount The monetary amount of the tax applied.
     */
     private ?Amount $amount = null;
     
     /**
-     * @var string|null $taxType The type of tax applied to the transaction. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:TaxTypeEnum'>eBay API documentation</a>
+     * @var TaxTypeEnum|null $taxType The type of tax applied to the transaction.
     */
-    private ?string $taxType = null;
+    private ?TaxTypeEnum $taxType = null;
     
     /**
      * Instantiates a new Tax and sets the default values.
@@ -66,7 +66,7 @@ class Tax implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the amount property value. The monetary amount of the tax applied.
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -81,15 +81,15 @@ class Tax implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'amount' => fn(ParseNode $n) => $o->setAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'taxType' => fn(ParseNode $n) => $o->setTaxType($n->getStringValue()),
+            'taxType' => fn(ParseNode $n) => $o->setTaxType($n->getEnumValue(TaxTypeEnum::class)),
         ];
     }
 
     /**
-     * Gets the taxType property value. The type of tax applied to the transaction. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:TaxTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the taxType property value. The type of tax applied to the transaction.
+     * @return TaxTypeEnum|null
     */
-    public function getTaxType(): ?string {
+    public function getTaxType(): ?TaxTypeEnum {
         return $this->taxType;
     }
 
@@ -99,7 +99,7 @@ class Tax implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('amount', $this->getAmount());
-        $writer->writeStringValue('taxType', $this->getTaxType());
+        $writer->writeEnumValue('taxType', $this->getTaxType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -112,7 +112,7 @@ class Tax implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the amount property value. The monetary amount of the tax applied.
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {
@@ -120,10 +120,10 @@ class Tax implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the taxType property value. The type of tax applied to the transaction. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:TaxTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the taxType property.
+     * Sets the taxType property value. The type of tax applied to the transaction.
+     * @param TaxTypeEnum|null $value Value to set for the taxType property.
     */
-    public function setTaxType(?string $value): void {
+    public function setTaxType(?TaxTypeEnum $value): void {
         $this->taxType = $value;
     }
 

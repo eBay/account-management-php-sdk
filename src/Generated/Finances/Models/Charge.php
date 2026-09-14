@@ -32,7 +32,7 @@ class Charge implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $cancellationId The unique identifier of an order cancellation. This field is only applicable and returned if the charge is related to an order  cancellation.
+     * @var string|null $cancellationId The unique identifier of an order cancellation. This field is only applicable and returned if the charge is related to an order cancellation.
     */
     private ?string $cancellationId = null;
     
@@ -42,7 +42,7 @@ class Charge implements AdditionalDataHolder, Parsable
     private ?string $caseId = null;
     
     /**
-     * @var Amount|null $chargeNetAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $chargeNetAmount This container shows the net amount of the charge, which is the total amount of the charge minus the total amount of fees credited towards this refund as per eBay policy. It is possible for there to be multiple charges from multiple orders with one transfer. The net aggregate amount for all charges found in the <b>charges</b> array can be found in the <b>transferDetail.totalChargeNetAmount</b> container.
     */
     private ?Amount $chargeNetAmount = null;
     
@@ -96,7 +96,7 @@ class Charge implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the cancellationId property value. The unique identifier of an order cancellation. This field is only applicable and returned if the charge is related to an order  cancellation.
+     * Gets the cancellationId property value. The unique identifier of an order cancellation. This field is only applicable and returned if the charge is related to an order cancellation.
      * @return string|null
     */
     public function getCancellationId(): ?string {
@@ -112,7 +112,7 @@ class Charge implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the chargeNetAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the chargeNetAmount property value. This container shows the net amount of the charge, which is the total amount of the charge minus the total amount of fees credited towards this refund as per eBay policy. It is possible for there to be multiple charges from multiple orders with one transfer. The net aggregate amount for all charges found in the <b>charges</b> array can be found in the <b>transferDetail.totalChargeNetAmount</b> container.
      * @return Amount|null
     */
     public function getChargeNetAmount(): ?Amount {
@@ -202,7 +202,7 @@ class Charge implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the cancellationId property value. The unique identifier of an order cancellation. This field is only applicable and returned if the charge is related to an order  cancellation.
+     * Sets the cancellationId property value. The unique identifier of an order cancellation. This field is only applicable and returned if the charge is related to an order cancellation.
      * @param string|null $value Value to set for the cancellationId property.
     */
     public function setCancellationId(?string $value): void {
@@ -218,7 +218,7 @@ class Charge implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the chargeNetAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the chargeNetAmount property value. This container shows the net amount of the charge, which is the total amount of the charge minus the total amount of fees credited towards this refund as per eBay policy. It is possible for there to be multiple charges from multiple orders with one transfer. The net aggregate amount for all charges found in the <b>charges</b> array can be found in the <b>transferDetail.totalChargeNetAmount</b> container.
      * @param Amount|null $value Value to set for the chargeNetAmount property.
     */
     public function setChargeNetAmount(?Amount $value): void {

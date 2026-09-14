@@ -37,9 +37,9 @@ class Reference implements AdditionalDataHolder, Parsable
     private ?string $referenceId = null;
     
     /**
-     * @var string|null $referenceType An enumeration value that identifies the reference type associated with the <strong>referenceId</strong>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:ReferenceTypeEnum'>eBay API documentation</a>
+     * @var ReferenceTypeEnum|null $referenceType An enumeration value that identifies the reference type associated with the <strong>referenceId</strong>.
     */
-    private ?string $referenceType = null;
+    private ?ReferenceTypeEnum $referenceType = null;
     
     /**
      * Instantiates a new Reference and sets the default values.
@@ -73,7 +73,7 @@ class Reference implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'referenceId' => fn(ParseNode $n) => $o->setReferenceId($n->getStringValue()),
-            'referenceType' => fn(ParseNode $n) => $o->setReferenceType($n->getStringValue()),
+            'referenceType' => fn(ParseNode $n) => $o->setReferenceType($n->getEnumValue(ReferenceTypeEnum::class)),
         ];
     }
 
@@ -86,10 +86,10 @@ class Reference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the referenceType property value. An enumeration value that identifies the reference type associated with the <strong>referenceId</strong>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:ReferenceTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the referenceType property value. An enumeration value that identifies the reference type associated with the <strong>referenceId</strong>.
+     * @return ReferenceTypeEnum|null
     */
-    public function getReferenceType(): ?string {
+    public function getReferenceType(): ?ReferenceTypeEnum {
         return $this->referenceType;
     }
 
@@ -99,7 +99,7 @@ class Reference implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('referenceId', $this->getReferenceId());
-        $writer->writeStringValue('referenceType', $this->getReferenceType());
+        $writer->writeEnumValue('referenceType', $this->getReferenceType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class Reference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the referenceType property value. An enumeration value that identifies the reference type associated with the <strong>referenceId</strong>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:ReferenceTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the referenceType property.
+     * Sets the referenceType property value. An enumeration value that identifies the reference type associated with the <strong>referenceId</strong>.
+     * @param ReferenceTypeEnum|null $value Value to set for the referenceType property.
     */
-    public function setReferenceType(?string $value): void {
+    public function setReferenceType(?ReferenceTypeEnum $value): void {
         $this->referenceType = $value;
     }
 

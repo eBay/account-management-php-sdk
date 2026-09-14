@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV1\Payment_policy;
 
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\PaymentPolicyRequest;
 use EBay\AccountManagement\Generated\AccountV1\Models\PaymentPolicyResponse;
 use EBay\AccountManagement\Generated\AccountV1\Models\SetPaymentPolicyResponse;
@@ -42,7 +43,7 @@ class Payment_policyRequestBuilder extends BaseRequestBuilder
     
     /**
      * Gets an item from the EBay/AccountManagement/Generated/AccountV1.payment_policy.item collection
-     * @param string $payment_policy_id This path parameter specifies the ID of the payment policy you want to retrieve. <br><br> This ID can be retrieved for a payment policy by using the <a href="/api-docs/sell/account/resources/payment_policy/methods/getPaymentPolicies" target="_blank ">getPaymentPolices</a> method.
+     * @param string $payment_policy_id This path parameter specifies the ID of the payment policy you want to retrieve. <br><br> This ID can be retrieved for a payment policy by using the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-payment_policy-getpaymentpolicies" target="_blank ">getPaymentPolices</a> method.
      * @return WithPayment_policy_ItemRequestBuilder
     */
     public function byPayment_policy_id(string $payment_policy_id): WithPayment_policy_ItemRequestBuilder {
@@ -57,7 +58,7 @@ class Payment_policyRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/payment_policy?marketplace_id={marketplace_id}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/payment_policy');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {
@@ -73,7 +74,11 @@ class Payment_policyRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Payment_policyRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [PaymentPolicyResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [PaymentPolicyResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -85,7 +90,11 @@ class Payment_policyRequestBuilder extends BaseRequestBuilder
     */
     public function post(PaymentPolicyRequest $body, ?Payment_policyRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SetPaymentPolicyResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SetPaymentPolicyResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -95,7 +104,7 @@ class Payment_policyRequestBuilder extends BaseRequestBuilder
     */
     public function toGetRequestInformation(?Payment_policyRequestBuilderGetRequestConfiguration $requestConfiguration = null): RequestInformation {
         $requestInfo = new RequestInformation();
-        $requestInfo->urlTemplate = $this->urlTemplate;
+        $requestInfo->urlTemplate = '{+baseurl}/payment_policy?marketplace_id={marketplace_id}';
         $requestInfo->pathParameters = $this->pathParameters;
         $requestInfo->httpMethod = HttpMethod::GET;
         if ($requestConfiguration !== null) {
@@ -117,7 +126,7 @@ class Payment_policyRequestBuilder extends BaseRequestBuilder
     */
     public function toPostRequestInformation(PaymentPolicyRequest $body, ?Payment_policyRequestBuilderPostRequestConfiguration $requestConfiguration = null): RequestInformation {
         $requestInfo = new RequestInformation();
-        $requestInfo->urlTemplate = '{+baseurl}/payment_policy';
+        $requestInfo->urlTemplate = $this->urlTemplate;
         $requestInfo->pathParameters = $this->pathParameters;
         $requestInfo->httpMethod = HttpMethod::POST;
         if ($requestConfiguration !== null) {

@@ -37,7 +37,7 @@ class PayoutInstrument implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $instrumentType This value indicates the type of account that received the payout. The value returned in this field may be:<br><ul><li><code>BANK</code>: indicates that the payout was made to a seller's bank account.</li><li><code>CARD</code>: indicates that the payout went to a seller's debit card</li><li>The name of a digital wallet provider or payment processor (e.g., <code>PAYONEER</code>)</li></ul><br><br><span class="tablenote"><b>Note:</b> Only Payoneer is currently supported for sellers in mainland China. Card payouts are not currently available for sellers in mainland China.</span>
+     * @var string|null $instrumentType This value indicates the type of account that received the payout. The value returned in this field may be:<br><ul><li><code>BANK</code>: indicates that the payout was made to a seller's bank account.</li><li><code>CARD</code>: indicates that the payout went to a seller's debit card</li><li>The name of a digital wallet provider or payment processor (e.g., <code>PAYONEER</code>)</li></ul><span class="tablenote"><b>Note:</b> Only Payoneer is currently supported for sellers in mainland China. Card payouts are not currently available for sellers in mainland China.</span>
     */
     private ?string $instrumentType = null;
     
@@ -98,7 +98,7 @@ class PayoutInstrument implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the instrumentType property value. This value indicates the type of account that received the payout. The value returned in this field may be:<br><ul><li><code>BANK</code>: indicates that the payout was made to a seller's bank account.</li><li><code>CARD</code>: indicates that the payout went to a seller's debit card</li><li>The name of a digital wallet provider or payment processor (e.g., <code>PAYONEER</code>)</li></ul><br><br><span class="tablenote"><b>Note:</b> Only Payoneer is currently supported for sellers in mainland China. Card payouts are not currently available for sellers in mainland China.</span>
+     * Gets the instrumentType property value. This value indicates the type of account that received the payout. The value returned in this field may be:<br><ul><li><code>BANK</code>: indicates that the payout was made to a seller's bank account.</li><li><code>CARD</code>: indicates that the payout went to a seller's debit card</li><li>The name of a digital wallet provider or payment processor (e.g., <code>PAYONEER</code>)</li></ul><span class="tablenote"><b>Note:</b> Only Payoneer is currently supported for sellers in mainland China. Card payouts are not currently available for sellers in mainland China.</span>
      * @return string|null
     */
     public function getInstrumentType(): ?string {
@@ -150,7 +150,7 @@ class PayoutInstrument implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the instrumentType property value. This value indicates the type of account that received the payout. The value returned in this field may be:<br><ul><li><code>BANK</code>: indicates that the payout was made to a seller's bank account.</li><li><code>CARD</code>: indicates that the payout went to a seller's debit card</li><li>The name of a digital wallet provider or payment processor (e.g., <code>PAYONEER</code>)</li></ul><br><br><span class="tablenote"><b>Note:</b> Only Payoneer is currently supported for sellers in mainland China. Card payouts are not currently available for sellers in mainland China.</span>
+     * Sets the instrumentType property value. This value indicates the type of account that received the payout. The value returned in this field may be:<br><ul><li><code>BANK</code>: indicates that the payout was made to a seller's bank account.</li><li><code>CARD</code>: indicates that the payout went to a seller's debit card</li><li>The name of a digital wallet provider or payment processor (e.g., <code>PAYONEER</code>)</li></ul><span class="tablenote"><b>Note:</b> Only Payoneer is currently supported for sellers in mainland China. Card payouts are not currently available for sellers in mainland China.</span>
      * @param string|null $value Value to set for the instrumentType property.
     */
     public function setInstrumentType(?string $value): void {

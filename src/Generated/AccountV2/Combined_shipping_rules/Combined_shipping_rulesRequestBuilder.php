@@ -23,6 +23,7 @@ use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_ca
 use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_combined_payments\Update_combined_paymentsRequestBuilder;
 use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_flat_shipping_rules\Update_flat_shipping_rulesRequestBuilder;
 use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_promotional_shipping_rule\Update_promotional_shipping_ruleRequestBuilder;
+use EBay\AccountManagement\Generated\AccountV2\Models\Error;
 use EBay\AccountManagement\Generated\AccountV2\Models\GetCombinedShippingRulesPublicApiResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -107,7 +108,11 @@ class Combined_shipping_rulesRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Combined_shipping_rulesRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetCombinedShippingRulesPublicApiResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetCombinedShippingRulesPublicApiResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

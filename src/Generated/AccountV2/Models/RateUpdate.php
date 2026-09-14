@@ -27,7 +27,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 class RateUpdate implements AdditionalDataHolder, Parsable 
 {
     /**
-     * @var Amount|null $additionalCost A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $additionalCost An additional shipping cost added to the base shipping rate (i.e., <b>shippingCost</b>).<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li><li><b>SURCHARGE</b>: This is a flat amount that is added to the base shipping rate.</li></ul>This field is returned only when it is applicable to the specified rate ID.
     */
     private ?Amount $additionalCost = null;
     
@@ -42,7 +42,7 @@ class RateUpdate implements AdditionalDataHolder, Parsable
     private ?string $rateId = null;
     
     /**
-     * @var Amount|null $shippingCost A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $shippingCost This is the base shipping rate for an item.<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>ITEM</b>: This is a flat rate shipping cost per item being shipped.</li><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li></ul>
     */
     private ?Amount $shippingCost = null;
     
@@ -63,7 +63,7 @@ class RateUpdate implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the additionalCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the additionalCost property value. An additional shipping cost added to the base shipping rate (i.e., <b>shippingCost</b>).<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li><li><b>SURCHARGE</b>: This is a flat amount that is added to the base shipping rate.</li></ul>This field is returned only when it is applicable to the specified rate ID.
      * @return Amount|null
     */
     public function getAdditionalCost(): ?Amount {
@@ -100,7 +100,7 @@ class RateUpdate implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the shippingCost property value. This is the base shipping rate for an item.<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>ITEM</b>: This is a flat rate shipping cost per item being shipped.</li><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li></ul>
      * @return Amount|null
     */
     public function getShippingCost(): ?Amount {
@@ -119,7 +119,7 @@ class RateUpdate implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the additionalCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the additionalCost property value. An additional shipping cost added to the base shipping rate (i.e., <b>shippingCost</b>).<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li><li><b>SURCHARGE</b>: This is a flat amount that is added to the base shipping rate.</li></ul>This field is returned only when it is applicable to the specified rate ID.
      * @param Amount|null $value Value to set for the additionalCost property.
     */
     public function setAdditionalCost(?Amount $value): void {
@@ -143,7 +143,7 @@ class RateUpdate implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the shippingCost property value. This is the base shipping rate for an item.<br/><br/>This amount applies only to the following <b>rateTableBasis</b> options:<ul><li><b>ITEM</b>: This is a flat rate shipping cost per item being shipped.</li><li><b>WEIGHT</b>: This is a cost per unit weight and is calculated using the weight of the item(s) being shipped.</li></ul>
      * @param Amount|null $value Value to set for the shippingCost property.
     */
     public function setShippingCost(?Amount $value): void {

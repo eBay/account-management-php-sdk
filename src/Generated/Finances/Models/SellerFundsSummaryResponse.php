@@ -32,22 +32,22 @@ class SellerFundsSummaryResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $availableFunds This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $availableFunds This field represents the total amount of order funds that are available for a payout, but processing for a seller payout has not yet begun. If a seller wants to get more details on sales transactions that have yet to be processed, the seller can use the <strong>getTransactions</strong> method, and use the <strong>transactionStatus</strong> filter with its value set to <code>FUNDS_AVAILABLE_FOR_PAYOUT</code>.<br><br>This container will return 0.0 with the appropriate payout currency if there are no funds available to be processed for a payout.
     */
     private ?Amount $availableFunds = null;
     
     /**
-     * @var Amount|null $fundsOnHold This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $fundsOnHold This field represents the total amount of order funds on hold. Seller payment holds can occur for different reasons. If a seller wants to get more details on sales transactions where funds are currently on hold, the seller can use the <strong>getTransactions</strong> method, and use the <strong>transactionStatus</strong> filter with its value set to <code>FUNDS_ON_HOLD</code>.<br><br>This container will return 0.0 with the appropriate payout currency if there are no seller payment holds that will eventually be processed for a payout.
     */
     private ?Amount $fundsOnHold = null;
     
     /**
-     * @var Amount|null $processingFunds This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $processingFunds This field represents the total amount of order funds being prepared and processed for a seller payout. If a seller wants to get more details on sales transactions that are being processed, the seller can use the <strong>getTransactions</strong> method, and use the <strong>transactionStatus</strong> filter with its value set to <code>FUNDS_PROCESSING</code>.<br><br>This container will return 0.0 with the appropriate payout currency if there are no funds available to be processed for a payout.
     */
     private ?Amount $processingFunds = null;
     
     /**
-     * @var Amount|null $totalFunds This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $totalFunds This field represents the total amount of order funds still due to be distributed to the seller through a seller payout. This field should equal the sum of the amounts returned in the following fields:<br><ul><li><b>processingFunds</b></li><li><b>availableFunds</b></li><li><b>fundsOnHold</b></li></ul><br>If no payout funds are due to the seller, a <code>204 - No Content</code>  status code will be returned along with an empty payload.
     */
     private ?Amount $totalFunds = null;
     
@@ -76,7 +76,7 @@ class SellerFundsSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the availableFunds property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the availableFunds property value. This field represents the total amount of order funds that are available for a payout, but processing for a seller payout has not yet begun. If a seller wants to get more details on sales transactions that have yet to be processed, the seller can use the <strong>getTransactions</strong> method, and use the <strong>transactionStatus</strong> filter with its value set to <code>FUNDS_AVAILABLE_FOR_PAYOUT</code>.<br><br>This container will return 0.0 with the appropriate payout currency if there are no funds available to be processed for a payout.
      * @return Amount|null
     */
     public function getAvailableFunds(): ?Amount {
@@ -98,7 +98,7 @@ class SellerFundsSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the fundsOnHold property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the fundsOnHold property value. This field represents the total amount of order funds on hold. Seller payment holds can occur for different reasons. If a seller wants to get more details on sales transactions where funds are currently on hold, the seller can use the <strong>getTransactions</strong> method, and use the <strong>transactionStatus</strong> filter with its value set to <code>FUNDS_ON_HOLD</code>.<br><br>This container will return 0.0 with the appropriate payout currency if there are no seller payment holds that will eventually be processed for a payout.
      * @return Amount|null
     */
     public function getFundsOnHold(): ?Amount {
@@ -106,7 +106,7 @@ class SellerFundsSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the processingFunds property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the processingFunds property value. This field represents the total amount of order funds being prepared and processed for a seller payout. If a seller wants to get more details on sales transactions that are being processed, the seller can use the <strong>getTransactions</strong> method, and use the <strong>transactionStatus</strong> filter with its value set to <code>FUNDS_PROCESSING</code>.<br><br>This container will return 0.0 with the appropriate payout currency if there are no funds available to be processed for a payout.
      * @return Amount|null
     */
     public function getProcessingFunds(): ?Amount {
@@ -114,7 +114,7 @@ class SellerFundsSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the totalFunds property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the totalFunds property value. This field represents the total amount of order funds still due to be distributed to the seller through a seller payout. This field should equal the sum of the amounts returned in the following fields:<br><ul><li><b>processingFunds</b></li><li><b>availableFunds</b></li><li><b>fundsOnHold</b></li></ul><br>If no payout funds are due to the seller, a <code>204 - No Content</code>  status code will be returned along with an empty payload.
      * @return Amount|null
     */
     public function getTotalFunds(): ?Amount {
@@ -142,7 +142,7 @@ class SellerFundsSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the availableFunds property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the availableFunds property value. This field represents the total amount of order funds that are available for a payout, but processing for a seller payout has not yet begun. If a seller wants to get more details on sales transactions that have yet to be processed, the seller can use the <strong>getTransactions</strong> method, and use the <strong>transactionStatus</strong> filter with its value set to <code>FUNDS_AVAILABLE_FOR_PAYOUT</code>.<br><br>This container will return 0.0 with the appropriate payout currency if there are no funds available to be processed for a payout.
      * @param Amount|null $value Value to set for the availableFunds property.
     */
     public function setAvailableFunds(?Amount $value): void {
@@ -150,7 +150,7 @@ class SellerFundsSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the fundsOnHold property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the fundsOnHold property value. This field represents the total amount of order funds on hold. Seller payment holds can occur for different reasons. If a seller wants to get more details on sales transactions where funds are currently on hold, the seller can use the <strong>getTransactions</strong> method, and use the <strong>transactionStatus</strong> filter with its value set to <code>FUNDS_ON_HOLD</code>.<br><br>This container will return 0.0 with the appropriate payout currency if there are no seller payment holds that will eventually be processed for a payout.
      * @param Amount|null $value Value to set for the fundsOnHold property.
     */
     public function setFundsOnHold(?Amount $value): void {
@@ -158,7 +158,7 @@ class SellerFundsSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the processingFunds property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the processingFunds property value. This field represents the total amount of order funds being prepared and processed for a seller payout. If a seller wants to get more details on sales transactions that are being processed, the seller can use the <strong>getTransactions</strong> method, and use the <strong>transactionStatus</strong> filter with its value set to <code>FUNDS_PROCESSING</code>.<br><br>This container will return 0.0 with the appropriate payout currency if there are no funds available to be processed for a payout.
      * @param Amount|null $value Value to set for the processingFunds property.
     */
     public function setProcessingFunds(?Amount $value): void {
@@ -166,7 +166,7 @@ class SellerFundsSummaryResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the totalFunds property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the totalFunds property value. This field represents the total amount of order funds still due to be distributed to the seller through a seller payout. This field should equal the sum of the amounts returned in the following fields:<br><ul><li><b>processingFunds</b></li><li><b>availableFunds</b></li><li><b>fundsOnHold</b></li></ul><br>If no payout funds are due to the seller, a <code>204 - No Content</code>  status code will be returned along with an empty payload.
      * @param Amount|null $value Value to set for the totalFunds property.
     */
     public function setTotalFunds(?Amount $value): void {

@@ -42,7 +42,7 @@ class Return_policyRequestBuilderGetRequestConfiguration extends BaseRequestConf
 
     /**
      * Instantiates a new Return_policyRequestBuilderGetQueryParameters.
-     * @param string|null $marketplace_id This query parameter specifies the ID of the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
+     * @param string|null $marketplace_id This query parameter specifies the ID of the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/develop/api/sell/account_api_v1#sell-account_api_v1-payment_policy-getpaymentpolicies.marketplaceidenum
      * @return Return_policyRequestBuilderGetQueryParameters
     */
     public static function createQueryParameters(?string $marketplace_id = null): Return_policyRequestBuilderGetQueryParameters {

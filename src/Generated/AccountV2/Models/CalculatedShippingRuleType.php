@@ -37,9 +37,9 @@ class CalculatedShippingRuleType implements AdditionalDataHolder, Parsable
     private ?array $combinedShippingRules = null;
     
     /**
-     * @var string|null $combinedShippingRuleType This container defines the type of combined-shipping rule applied to calculate discounts, such as weight-based, percentage-based, or flat-rate models. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeEnum'>eBay API documentation</a>
+     * @var CombinedShippingRuleTypeEnum|null $combinedShippingRuleType This container defines the type of combined-shipping rule applied to calculate discounts, such as weight-based, percentage-based, or flat-rate models.
     */
-    private ?string $combinedShippingRuleType = null;
+    private ?CombinedShippingRuleTypeEnum $combinedShippingRuleType = null;
     
     /**
      * Instantiates a new CalculatedShippingRuleType and sets the default values.
@@ -74,10 +74,10 @@ class CalculatedShippingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the combinedShippingRuleType property value. This container defines the type of combined-shipping rule applied to calculate discounts, such as weight-based, percentage-based, or flat-rate models. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the combinedShippingRuleType property value. This container defines the type of combined-shipping rule applied to calculate discounts, such as weight-based, percentage-based, or flat-rate models.
+     * @return CombinedShippingRuleTypeEnum|null
     */
-    public function getCombinedShippingRuleType(): ?string {
+    public function getCombinedShippingRuleType(): ?CombinedShippingRuleTypeEnum {
         return $this->combinedShippingRuleType;
     }
 
@@ -89,7 +89,7 @@ class CalculatedShippingRuleType implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'combinedShippingRules' => fn(ParseNode $n) => $o->setCombinedShippingRules($n->getCollectionOfObjectValues([CombinedShippingRule::class, 'createFromDiscriminatorValue'])),
-            'combinedShippingRuleType' => fn(ParseNode $n) => $o->setCombinedShippingRuleType($n->getStringValue()),
+            'combinedShippingRuleType' => fn(ParseNode $n) => $o->setCombinedShippingRuleType($n->getEnumValue(CombinedShippingRuleTypeEnum::class)),
         ];
     }
 
@@ -99,7 +99,7 @@ class CalculatedShippingRuleType implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfObjectValues('combinedShippingRules', $this->getCombinedShippingRules());
-        $writer->writeStringValue('combinedShippingRuleType', $this->getCombinedShippingRuleType());
+        $writer->writeEnumValue('combinedShippingRuleType', $this->getCombinedShippingRuleType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class CalculatedShippingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the combinedShippingRuleType property value. This container defines the type of combined-shipping rule applied to calculate discounts, such as weight-based, percentage-based, or flat-rate models. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the combinedShippingRuleType property.
+     * Sets the combinedShippingRuleType property value. This container defines the type of combined-shipping rule applied to calculate discounts, such as weight-based, percentage-based, or flat-rate models.
+     * @param CombinedShippingRuleTypeEnum|null $value Value to set for the combinedShippingRuleType property.
     */
-    public function setCombinedShippingRuleType(?string $value): void {
+    public function setCombinedShippingRuleType(?CombinedShippingRuleTypeEnum $value): void {
         $this->combinedShippingRuleType = $value;
     }
 
