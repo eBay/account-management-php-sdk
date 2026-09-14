@@ -18,36 +18,26 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\AddToWatchList\Output;
 
-final readonly class AddToWatchListFailure extends AddToWatchListOutput
+readonly class AddToWatchListFailure
 {
-    /**
-     * @param WatchListAddFailure[] $failedItems
-     */
     public function __construct(
         public ?string $errorCode = null,
         public ?string $errorMessage = null,
+        /** @var WatchListAddFailure[] */
         public array $failedItems = [],
         public ?int $watchListCount = null,
         public ?int $watchListMaximum = null,
     ) {}
 
-    public function getTypename(): string
-    {
-        return 'AddToWatchListFailure';
-    }
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            errorCode:      $data['errorCode'] ?? null,
-            errorMessage:   $data['errorMessage'] ?? null,
-            failedItems:    array_map(
-                static fn(array $f): WatchListAddFailure => WatchListAddFailure::fromArray($f),
-                $data['failedItems'] ?? [],
-            ),
-            watchListCount:   isset($data['watchListCount']) ? (int)$data['watchListCount'] : null,
-            watchListMaximum: isset($data['watchListMaximum']) ? (int)$data['watchListMaximum'] : null,
+            errorCode: $data['errorCode'] ?? null,
+            errorMessage: $data['errorMessage'] ?? null,
+            failedItems: array_map(fn($item) => WatchListAddFailure::fromArray($item), $data['failedItems'] ?? []),
+            watchListCount: $data['watchListCount'] ?? null,
+            watchListMaximum: $data['watchListMaximum'] ?? null,
         );
     }
 }

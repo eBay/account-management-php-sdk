@@ -23,12 +23,12 @@ final class AccountManagementConfiguration
     public readonly RequestOptions $defaultRequestOptions;
 
     public function __construct(
-        public readonly string  $sellAccountV1BaseUrl  = 'https://api.ebay.com/sell/account/v1',
-        public readonly string  $sellAccountV2BaseUrl  = 'https://api.ebay.com/sell/account/v2',
-        public readonly string  $sellFinancesV1BaseUrl = 'https://apiz.ebay.com/sell/finances/v1',
-        public readonly string  $graphQLBaseUrl        = 'https://api.ebay.com/graphql',
-        public readonly ?string $accessToken           = null,
-        public readonly bool    $diagnosticLogging     = false,
+        public readonly string $accountV1BaseUrl = 'https://api.ebay.com/sell/account/v1',
+        public readonly string $accountV2BaseUrl = 'https://api.ebay.com/sell/account/v2',
+        public readonly string $financesBaseUrl = 'https://apiz.ebay.com/sell/finances/v1',
+        public readonly string $graphQLBaseUrl = 'https://api.ebay.com/graphql',
+        public readonly ?string $accessToken = null,
+        public readonly bool $diagnosticLogging = false,
     ) {
         $this->defaultRequestOptions = new RequestOptions();
     }
@@ -41,7 +41,7 @@ final class AccountManagementConfiguration
     }
 
     /**
-     * Hostnames tokens may be sent to — passed to AllowedHostsValidator.
+     * Hostnames tokens may be sent to. Passed to AllowedHostsValidator.
      *
      * @return string[]
      */
@@ -50,9 +50,9 @@ final class AccountManagementConfiguration
         return array_values(array_unique(array_filter(array_map(
             fn(string $url) => parse_url($url, PHP_URL_HOST),
             [
-                $this->sellAccountV1BaseUrl,
-                $this->sellAccountV2BaseUrl,
-                $this->sellFinancesV1BaseUrl,
+                $this->accountV1BaseUrl,
+                $this->accountV2BaseUrl,
+                $this->financesBaseUrl,
                 $this->graphQLBaseUrl,
             ]
         ), 'is_string')));

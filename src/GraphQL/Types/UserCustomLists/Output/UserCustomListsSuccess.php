@@ -18,30 +18,20 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
-final readonly class UserCustomListsSuccess extends UserCustomListsOutput
+readonly class UserCustomListsSuccess
 {
-    /**
-     * @param UserCustomList[] $customLists
-     */
     public function __construct(
+        /** @var UserCustomList[] */
         public array $customLists = [],
         public ?int $totalCount = null,
     ) {}
-
-    public function getTypename(): string
-    {
-        return 'UserCustomListsSuccess';
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            customLists: array_map(
-                static fn(array $l): UserCustomList => UserCustomList::fromArray($l),
-                $data['customLists'] ?? [],
-            ),
-            totalCount: isset($data['totalCount']) ? (int)$data['totalCount'] : null,
+            customLists: array_map(fn($item) => UserCustomList::fromArray($item), $data['customLists'] ?? []),
+            totalCount: $data['totalCount'] ?? null,
         );
     }
 }

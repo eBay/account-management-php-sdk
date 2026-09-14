@@ -20,15 +20,15 @@ namespace EBay\AccountManagement\GraphQL\Types\DeleteUserNote\Output;
 
 abstract readonly class DeleteUserNoteOutput
 {
-    abstract public function getTypename(): string;
-
     /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): DeleteUserNoteSuccess|ReferenceArgumentsNotFound
     {
         return match ($data['__typename'] ?? null) {
-            'DeleteUserNoteSuccess'      => DeleteUserNoteSuccess::fromArray($data),
+            'DeleteUserNoteSuccess' => DeleteUserNoteSuccess::fromArray($data),
             'ReferenceArgumentsNotFound' => ReferenceArgumentsNotFound::fromArray($data),
-            default => throw new \UnexpectedValueException('Unknown __typename: ' . ($data['__typename'] ?? 'null')),
+            default => throw new \UnexpectedValueException(
+                'Unknown __typename for DeleteUserNoteOutput: ' . ($data['__typename'] ?? 'null')
+            ),
         };
     }
 }

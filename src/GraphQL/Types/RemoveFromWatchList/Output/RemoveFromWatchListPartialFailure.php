@@ -18,44 +18,31 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\RemoveFromWatchList\Output;
 
-final readonly class RemoveFromWatchListPartialFailure extends RemoveFromWatchListOutput
+readonly class RemoveFromWatchListPartialFailure
 {
-    /**
-     * @param WatchListRemoveFailure[] $failedItems
-     * @param Item[] $removedItems
-     */
     public function __construct(
         public ?string $errorCode = null,
         public ?string $errorMessage = null,
+        /** @var WatchListRemoveFailure[] */
         public array $failedItems = [],
         public ?int $numberOfItemsUnwatched = null,
+        /** @var Item[] */
         public array $removedItems = [],
         public ?int $watchListCount = null,
         public ?int $watchListMaximum = null,
     ) {}
 
-    public function getTypename(): string
-    {
-        return 'RemoveFromWatchListPartialFailure';
-    }
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            errorCode:    $data['errorCode'] ?? null,
+            errorCode: $data['errorCode'] ?? null,
             errorMessage: $data['errorMessage'] ?? null,
-            failedItems:  array_map(
-                static fn(array $f): WatchListRemoveFailure => WatchListRemoveFailure::fromArray($f),
-                $data['failedItems'] ?? [],
-            ),
-            numberOfItemsUnwatched: isset($data['numberOfItemsUnwatched']) ? (int)$data['numberOfItemsUnwatched'] : null,
-            removedItems: array_map(
-                static fn(array $i): Item => Item::fromArray($i),
-                $data['removedItems'] ?? [],
-            ),
-            watchListCount:  isset($data['watchListCount']) ? (int)$data['watchListCount'] : null,
-            watchListMaximum: isset($data['watchListMaximum']) ? (int)$data['watchListMaximum'] : null,
+            failedItems: array_map(fn($item) => WatchListRemoveFailure::fromArray($item), $data['failedItems'] ?? []),
+            numberOfItemsUnwatched: $data['numberOfItemsUnwatched'] ?? null,
+            removedItems: array_map(fn($item) => Item::fromArray($item), $data['removedItems'] ?? []),
+            watchListCount: $data['watchListCount'] ?? null,
+            watchListMaximum: $data['watchListMaximum'] ?? null,
         );
     }
 }

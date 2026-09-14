@@ -18,16 +18,11 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\DeleteUserNote\Output;
 
-final readonly class DeleteUserNoteSuccess extends DeleteUserNoteOutput
+readonly class DeleteUserNoteSuccess
 {
     public function __construct(
         public ?UserNote $userNote = null,
     ) {}
-
-    public function getTypename(): string
-    {
-        return 'DeleteUserNoteSuccess';
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self

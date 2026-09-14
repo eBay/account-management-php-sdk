@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserBiddingActivity\Input;
 
-final readonly class UserBiddingActivityInput
+readonly class UserBiddingActivityInput
 {
     public function __construct(
         public ?BiddingActivityFilter $filter = null,
@@ -27,6 +27,9 @@ final readonly class UserBiddingActivityInput
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
+        if (isset($data['input']) && is_array($data['input'])) {
+            $data = array_merge($data['input'], $data);
+        }
         return new self(
             filter: isset($data['filter']) ? BiddingActivityFilter::fromArray($data['filter']) : null,
         );
@@ -35,10 +38,11 @@ final readonly class UserBiddingActivityInput
     /** @return array<string, mixed> */
     public function toArray(): array
     {
-        $data = [];
-        if ($this->filter !== null) {
-            $data['filter'] = (object)$this->filter->toArray();
-        }
-        return $data;
+        return array_filter(
+            [
+                'filter' => $this->filter !== null ? (object)$this->filter->toArray() : null,
+            ],
+            static fn($value) => $value !== null,
+        );
     }
 }

@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\DeleteUserNote\Input;
 
-final readonly class DeleteUserNoteInput
+readonly class DeleteUserNoteInput
 {
     public function __construct(
         public string $itemId,
@@ -28,8 +28,11 @@ final readonly class DeleteUserNoteInput
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
+        if (isset($data['input']) && is_array($data['input'])) {
+            $data = array_merge($data['input'], $data);
+        }
         return new self(
-            itemId:          $data['itemId'],
+            itemId: $data['itemId'],
             orderLineItemId: $data['orderLineItemId'] ?? null,
         );
     }
@@ -37,9 +40,12 @@ final readonly class DeleteUserNoteInput
     /** @return array<string, mixed> */
     public function toArray(): array
     {
-        return array_filter([
-            'itemId'          => $this->itemId,
-            'orderLineItemId' => $this->orderLineItemId,
-        ], static fn($v) => $v !== null);
+        return array_filter(
+            [
+                'itemId' => $this->itemId,
+                'orderLineItemId' => $this->orderLineItemId,
+            ],
+            static fn($value) => $value !== null,
+        );
     }
 }

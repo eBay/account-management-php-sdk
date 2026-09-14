@@ -20,15 +20,15 @@ namespace EBay\AccountManagement\GraphQL\Types\CreateOrReplaceUserNote\Output;
 
 abstract readonly class CreateOrReplaceUserNoteOutput
 {
-    abstract public function getTypename(): string;
-
     /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): CreateOrReplaceUserNoteSuccess|ReferenceArgumentsNotFound
     {
         return match ($data['__typename'] ?? null) {
             'CreateOrReplaceUserNoteSuccess' => CreateOrReplaceUserNoteSuccess::fromArray($data),
-            'ReferenceArgumentsNotFound'     => ReferenceArgumentsNotFound::fromArray($data),
-            default => throw new \UnexpectedValueException('Unknown __typename: ' . ($data['__typename'] ?? 'null')),
+            'ReferenceArgumentsNotFound' => ReferenceArgumentsNotFound::fromArray($data),
+            default => throw new \UnexpectedValueException(
+                'Unknown __typename for CreateOrReplaceUserNoteOutput: ' . ($data['__typename'] ?? 'null')
+            ),
         };
     }
 }

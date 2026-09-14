@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\DeleteUserNote\Output;
 
-final readonly class UserNote
+readonly class UserNote
 {
     public function __construct(
         public ?string $note = null,
@@ -29,7 +29,7 @@ final readonly class UserNote
     public static function fromArray(array $data): self
     {
         return new self(
-            note:            $data['note'] ?? null,
+            note: $data['note'] ?? null,
             orderLineItemId: $data['orderLineItemId'] ?? null,
         );
     }

@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\User\Output;
 
-final readonly class IndividualIdentityProfile
+readonly class IndividualIdentityProfile
 {
     public function __construct(
         public ?string $email = null,
@@ -33,11 +33,11 @@ final readonly class IndividualIdentityProfile
     public static function fromArray(array $data): self
     {
         return new self(
-            email:          $data['email'] ?? null,
-            lastName:       $data['lastName'] ?? null,
-            firstName:      $data['firstName'] ?? null,
-            middleName:     $data['middleName'] ?? null,
-            primaryPhone:   isset($data['primaryPhone']) ? Phone::fromArray($data['primaryPhone']) : null,
+            email: $data['email'] ?? null,
+            lastName: $data['lastName'] ?? null,
+            firstName: $data['firstName'] ?? null,
+            middleName: $data['middleName'] ?? null,
+            primaryPhone: isset($data['primaryPhone']) ? Phone::fromArray($data['primaryPhone']) : null,
             profileAddress: isset($data['profileAddress']) ? ProfileAddress::fromArray($data['profileAddress']) : null,
         );
     }

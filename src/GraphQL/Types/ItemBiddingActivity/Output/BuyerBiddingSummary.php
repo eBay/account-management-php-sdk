@@ -18,13 +18,11 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Output;
 
-final readonly class BuyerBiddingSummary
+readonly class BuyerBiddingSummary
 {
-    /**
-     * @param ItemBid[] $itemBids
-     */
     public function __construct(
         public ?string $bidsWithSellerPercentage = null,
+        /** @var BuyerBidDetailsOnItem[] */
         public array $itemBids = [],
         public ?int $totalBidCount = null,
         public ?int $retractedBidCount = null,
@@ -36,15 +34,12 @@ final readonly class BuyerBiddingSummary
     public static function fromArray(array $data): self
     {
         return new self(
-            bidsWithSellerPercentage:       $data['bidsWithSellerPercentage'] ?? null,
-            itemBids: array_map(
-                static fn(array $b): ItemBid => ItemBid::fromArray($b),
-                $data['itemBids'] ?? [],
-            ),
-            totalBidCount:                  isset($data['totalBidCount']) ? (int)$data['totalBidCount'] : null,
-            retractedBidCount:              isset($data['retractedBidCount']) ? (int)$data['retractedBidCount'] : null,
-            uniqueListingCategoryBidCount:  isset($data['uniqueListingCategoryBidCount']) ? (int)$data['uniqueListingCategoryBidCount'] : null,
-            uniqueSellerBidCount:           isset($data['uniqueSellerBidCount']) ? (int)$data['uniqueSellerBidCount'] : null,
+            bidsWithSellerPercentage: $data['bidsWithSellerPercentage'] ?? null,
+            itemBids: array_map(fn($item) => BuyerBidDetailsOnItem::fromArray($item), $data['itemBids'] ?? []),
+            totalBidCount: $data['totalBidCount'] ?? null,
+            retractedBidCount: $data['retractedBidCount'] ?? null,
+            uniqueListingCategoryBidCount: $data['uniqueListingCategoryBidCount'] ?? null,
+            uniqueSellerBidCount: $data['uniqueSellerBidCount'] ?? null,
         );
     }
 }

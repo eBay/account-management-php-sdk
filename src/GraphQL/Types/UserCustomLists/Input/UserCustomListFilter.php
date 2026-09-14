@@ -18,12 +18,10 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Input;
 
-final readonly class UserCustomListFilter
+readonly class UserCustomListFilter
 {
-    /**
-     * @param string[] $customListIds
-     */
     public function __construct(
+        /** @var array<int, mixed> */
         public array $customListIds,
     ) {}
 
@@ -31,13 +29,15 @@ final readonly class UserCustomListFilter
     public static function fromArray(array $data): self
     {
         return new self(
-            customListIds: $data['customListIds'] ?? [],
+            customListIds: $data['customListIds'],
         );
     }
 
     /** @return array<string, mixed> */
     public function toArray(): array
     {
-        return ['customListIds' => $this->customListIds];
+        return [
+                'customListIds' => $this->customListIds,
+        ];
     }
 }

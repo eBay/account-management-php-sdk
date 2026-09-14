@@ -18,32 +18,22 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
-final readonly class UserCustomListsFailure extends UserCustomListsOutput
+readonly class UserCustomListsFailure
 {
-    /**
-     * @param CustomListFailure[] $failedCustomLists
-     */
     public function __construct(
         public ?string $errorCode = null,
         public ?string $errorMessage = null,
+        /** @var CustomListFailure[] */
         public array $failedCustomLists = [],
     ) {}
-
-    public function getTypename(): string
-    {
-        return 'UserCustomListsFailure';
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            errorCode:        $data['errorCode'] ?? null,
-            errorMessage:     $data['errorMessage'] ?? null,
-            failedCustomLists: array_map(
-                static fn(array $f): CustomListFailure => CustomListFailure::fromArray($f),
-                $data['failedCustomLists'] ?? [],
-            ),
+            errorCode: $data['errorCode'] ?? null,
+            errorMessage: $data['errorMessage'] ?? null,
+            failedCustomLists: array_map(fn($item) => CustomListFailure::fromArray($item), $data['failedCustomLists'] ?? []),
         );
     }
 }

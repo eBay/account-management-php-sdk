@@ -18,27 +18,20 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserBiddingActivity\Output;
 
-final readonly class UserBiddingActivityOutput
+readonly class UserBiddingActivityOutput
 {
-    /**
-     * @param Auction[] $auctions
-     */
     public function __construct(
+        /** @var Item[] */
         public array $auctions = [],
-        public ?PaginationOutput $paginationOutput = null,
+        public ?Pagination $paginationOutput = null,
     ) {}
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            auctions: array_map(
-                static fn(array $a): Auction => Auction::fromArray($a),
-                $data['auctions'] ?? [],
-            ),
-            paginationOutput: isset($data['paginationOutput'])
-                ? PaginationOutput::fromArray($data['paginationOutput'])
-                : null,
+            auctions: array_map(fn($item) => Item::fromArray($item), $data['auctions'] ?? []),
+            paginationOutput: isset($data['paginationOutput']) ? Pagination::fromArray($data['paginationOutput']) : null,
         );
     }
 }

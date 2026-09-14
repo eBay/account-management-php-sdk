@@ -18,29 +18,22 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\CreateOrReplaceUserNote\Output;
 
-final readonly class ReferenceArgumentsNotFound extends CreateOrReplaceUserNoteOutput
+readonly class ReferenceArgumentsNotFound
 {
-    /**
-     * @param string[] $argumentNames
-     */
     public function __construct(
+        /** @var array<int, mixed> */
         public array $argumentNames = [],
         public ?string $errorCode = null,
         public ?string $errorMessage = null,
     ) {}
-
-    public function getTypename(): string
-    {
-        return 'ReferenceArgumentsNotFound';
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
             argumentNames: $data['argumentNames'] ?? [],
-            errorCode:     $data['errorCode'] ?? null,
-            errorMessage:  $data['errorMessage'] ?? null,
+            errorCode: $data['errorCode'] ?? null,
+            errorMessage: $data['errorMessage'] ?? null,
         );
     }
 }

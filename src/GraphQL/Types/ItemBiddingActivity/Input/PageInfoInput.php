@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Input;
 
-final readonly class PageInfoInput
+readonly class PageInfoInput
 {
     public function __construct(
         public int $maxPageSize,
@@ -29,17 +29,20 @@ final readonly class PageInfoInput
     public static function fromArray(array $data): self
     {
         return new self(
-            maxPageSize: (int)$data['maxPageSize'],
-            pageCursor:  $data['pageCursor'] ?? null,
+            maxPageSize: $data['maxPageSize'],
+            pageCursor: $data['pageCursor'] ?? null,
         );
     }
 
     /** @return array<string, mixed> */
     public function toArray(): array
     {
-        return array_filter([
-            'maxPageSize' => $this->maxPageSize,
-            'pageCursor'  => $this->pageCursor,
-        ], static fn($v) => $v !== null);
+        return array_filter(
+            [
+                'maxPageSize' => $this->maxPageSize,
+                'pageCursor' => $this->pageCursor,
+            ],
+            static fn($value) => $value !== null,
+        );
     }
 }

@@ -18,23 +18,21 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserWatchList\Output;
 
-final readonly class WatchedItem
+readonly class WatchedItem
 {
     public function __construct(
-        public ?WatchedItemEntry $item = null,
+        public ?Item $item = null,
         public ?string $startedWatchingAt = null,
-        public ?StartedWatchingPrice $startedWatchingPrice = null,
+        public ?ConvertedAmount $startedWatchingPrice = null,
     ) {}
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            item:                 isset($data['item']) ? WatchedItemEntry::fromArray($data['item']) : null,
-            startedWatchingAt:    $data['startedWatchingAt'] ?? null,
-            startedWatchingPrice: isset($data['startedWatchingPrice'])
-                ? StartedWatchingPrice::fromArray($data['startedWatchingPrice'])
-                : null,
+            item: isset($data['item']) ? Item::fromArray($data['item']) : null,
+            startedWatchingAt: $data['startedWatchingAt'] ?? null,
+            startedWatchingPrice: isset($data['startedWatchingPrice']) ? ConvertedAmount::fromArray($data['startedWatchingPrice']) : null,
         );
     }
 }

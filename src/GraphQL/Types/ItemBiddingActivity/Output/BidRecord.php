@@ -18,19 +18,23 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Output;
 
-final readonly class BidRecord
+readonly class BidRecord
 {
     public function __construct(
-        public ?BidAmount $bidAmount = null,
-        public ?Bidder $bidder = null,
+        public ?ConvertedAmount $bidAmount = null,
+        public ?User $bidder = null,
+        public ?BuyerBiddingSummary $buyerBiddingSummary = null,
+        public ?BidMetadata $bidMetadata = null,
     ) {}
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            bidAmount: isset($data['bidAmount']) ? BidAmount::fromArray($data['bidAmount']) : null,
-            bidder:    isset($data['bidder']) ? Bidder::fromArray($data['bidder']) : null,
+            bidAmount: isset($data['bidAmount']) ? ConvertedAmount::fromArray($data['bidAmount']) : null,
+            bidder: isset($data['bidder']) ? User::fromArray($data['bidder']) : null,
+            buyerBiddingSummary: isset($data['buyerBiddingSummary']) ? BuyerBiddingSummary::fromArray($data['buyerBiddingSummary']) : null,
+            bidMetadata: isset($data['bidMetadata']) ? BidMetadata::fromArray($data['bidMetadata']) : null,
         );
     }
 }

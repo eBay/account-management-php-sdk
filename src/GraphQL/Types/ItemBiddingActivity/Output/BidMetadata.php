@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Output;
 
-final readonly class BidMetadata
+readonly class BidMetadata
 {
     public function __construct(
         public ?string $placedAt = null,

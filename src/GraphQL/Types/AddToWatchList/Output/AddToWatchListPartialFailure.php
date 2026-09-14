@@ -18,42 +18,29 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\AddToWatchList\Output;
 
-final readonly class AddToWatchListPartialFailure extends AddToWatchListOutput
+readonly class AddToWatchListPartialFailure
 {
-    /**
-     * @param Item[] $addedItems
-     * @param WatchListAddFailure[] $failedItems
-     */
     public function __construct(
+        /** @var Item[] */
         public array $addedItems = [],
         public ?string $errorCode = null,
+        /** @var WatchListAddFailure[] */
         public array $failedItems = [],
         public ?string $errorMessage = null,
         public ?int $watchListCount = null,
         public ?int $watchListMaximum = null,
     ) {}
 
-    public function getTypename(): string
-    {
-        return 'AddToWatchListPartialFailure';
-    }
-
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            addedItems:  array_map(
-                static fn(array $i): Item => Item::fromArray($i),
-                $data['addedItems'] ?? [],
-            ),
-            errorCode:    $data['errorCode'] ?? null,
-            failedItems:  array_map(
-                static fn(array $f): WatchListAddFailure => WatchListAddFailure::fromArray($f),
-                $data['failedItems'] ?? [],
-            ),
-            errorMessage:    $data['errorMessage'] ?? null,
-            watchListCount:  isset($data['watchListCount']) ? (int)$data['watchListCount'] : null,
-            watchListMaximum: isset($data['watchListMaximum']) ? (int)$data['watchListMaximum'] : null,
+            addedItems: array_map(fn($item) => Item::fromArray($item), $data['addedItems'] ?? []),
+            errorCode: $data['errorCode'] ?? null,
+            failedItems: array_map(fn($item) => WatchListAddFailure::fromArray($item), $data['failedItems'] ?? []),
+            errorMessage: $data['errorMessage'] ?? null,
+            watchListCount: $data['watchListCount'] ?? null,
+            watchListMaximum: $data['watchListMaximum'] ?? null,
         );
     }
 }

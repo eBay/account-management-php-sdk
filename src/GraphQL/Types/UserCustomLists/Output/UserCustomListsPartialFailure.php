@@ -18,40 +18,27 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
-final readonly class UserCustomListsPartialFailure extends UserCustomListsOutput
+readonly class UserCustomListsPartialFailure
 {
-    /**
-     * @param UserCustomList[] $customLists
-     * @param CustomListFailure[] $failedCustomLists
-     */
     public function __construct(
+        /** @var UserCustomList[] */
         public array $customLists = [],
         public ?string $errorCode = null,
         public ?string $errorMessage = null,
+        /** @var CustomListFailure[] */
         public array $failedCustomLists = [],
         public ?int $totalCount = null,
     ) {}
-
-    public function getTypename(): string
-    {
-        return 'UserCustomListsPartialFailure';
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            customLists: array_map(
-                static fn(array $l): UserCustomList => UserCustomList::fromArray($l),
-                $data['customLists'] ?? [],
-            ),
-            errorCode:    $data['errorCode'] ?? null,
+            customLists: array_map(fn($item) => UserCustomList::fromArray($item), $data['customLists'] ?? []),
+            errorCode: $data['errorCode'] ?? null,
             errorMessage: $data['errorMessage'] ?? null,
-            failedCustomLists: array_map(
-                static fn(array $f): CustomListFailure => CustomListFailure::fromArray($f),
-                $data['failedCustomLists'] ?? [],
-            ),
-            totalCount: isset($data['totalCount']) ? (int)$data['totalCount'] : null,
+            failedCustomLists: array_map(fn($item) => CustomListFailure::fromArray($item), $data['failedCustomLists'] ?? []),
+            totalCount: $data['totalCount'] ?? null,
         );
     }
 }

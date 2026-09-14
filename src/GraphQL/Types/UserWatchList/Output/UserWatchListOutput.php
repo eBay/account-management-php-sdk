@@ -18,12 +18,10 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserWatchList\Output;
 
-final readonly class UserWatchListOutput
+readonly class UserWatchListOutput
 {
-    /**
-     * @param WatchedItem[] $items
-     */
     public function __construct(
+        /** @var WatchedItem[] */
         public array $items = [],
         public ?Pagination $pagination = null,
         public ?int $watchListCount = null,
@@ -34,13 +32,10 @@ final readonly class UserWatchListOutput
     public static function fromArray(array $data): self
     {
         return new self(
-            items: array_map(
-                static fn(array $i): WatchedItem => WatchedItem::fromArray($i),
-                $data['items'] ?? [],
-            ),
-            pagination:      isset($data['pagination']) ? Pagination::fromArray($data['pagination']) : null,
-            watchListCount:  isset($data['watchListCount']) ? (int)$data['watchListCount'] : null,
-            watchListMaximum: isset($data['watchListMaximum']) ? (int)$data['watchListMaximum'] : null,
+            items: array_map(fn($item) => WatchedItem::fromArray($item), $data['items'] ?? []),
+            pagination: isset($data['pagination']) ? Pagination::fromArray($data['pagination']) : null,
+            watchListCount: $data['watchListCount'] ?? null,
+            watchListMaximum: $data['watchListMaximum'] ?? null,
         );
     }
 }

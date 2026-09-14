@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Input;
 
-final readonly class UserCustomListsInput
+readonly class UserCustomListsInput
 {
     public function __construct(
         public ?UserCustomListFilter $filter = null,
@@ -27,6 +27,9 @@ final readonly class UserCustomListsInput
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
+        if (isset($data['input']) && is_array($data['input'])) {
+            $data = array_merge($data['input'], $data);
+        }
         return new self(
             filter: isset($data['filter']) ? UserCustomListFilter::fromArray($data['filter']) : null,
         );
@@ -35,10 +38,11 @@ final readonly class UserCustomListsInput
     /** @return array<string, mixed> */
     public function toArray(): array
     {
-        $data = [];
-        if ($this->filter !== null) {
-            $data['filter'] = (object)$this->filter->toArray();
-        }
-        return $data;
+        return array_filter(
+            [
+                'filter' => $this->filter !== null ? (object)$this->filter->toArray() : null,
+            ],
+            static fn($value) => $value !== null,
+        );
     }
 }
