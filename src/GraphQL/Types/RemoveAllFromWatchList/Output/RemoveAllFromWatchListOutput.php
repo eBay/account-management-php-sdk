@@ -20,14 +20,14 @@ namespace EBay\AccountManagement\GraphQL\Types\RemoveAllFromWatchList\Output;
 
 abstract readonly class RemoveAllFromWatchListOutput
 {
-    abstract public function getTypename(): string;
-
     /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): RemoveAllFromWatchListSuccess
     {
         return match ($data['__typename'] ?? null) {
             'RemoveAllFromWatchListSuccess' => RemoveAllFromWatchListSuccess::fromArray($data),
-            default => throw new \UnexpectedValueException('Unknown __typename: ' . ($data['__typename'] ?? 'null')),
+            default => throw new \UnexpectedValueException(
+                'Unknown __typename for RemoveAllFromWatchListOutput: ' . ($data['__typename'] ?? 'null')
+            ),
         };
     }
 }

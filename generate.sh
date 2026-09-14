@@ -19,26 +19,27 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "Regenerating REST clients via Kiota..."
+rm -rf src/Generated
 
 kiota generate -l php \
   -d specs/openapi/account-v1.yaml \
-  -c SellAccountV1ApiClient \
-  -n 'EBay\AccountManagement\Generated\SellAccountV1' \
-  -o src/Generated/SellAccountV1 \
+  -c AccountV1ApiClient \
+  -n 'EBay\AccountManagement\Generated\AccountV1' \
+  -o src/Generated/AccountV1 \
   --ebc --co
 
 kiota generate -l php \
   -d specs/openapi/account-v2.yaml \
-  -c SellAccountV2ApiClient \
-  -n 'EBay\AccountManagement\Generated\SellAccountV2' \
-  -o src/Generated/SellAccountV2 \
+  -c AccountV2ApiClient \
+  -n 'EBay\AccountManagement\Generated\AccountV2' \
+  -o src/Generated/AccountV2 \
   --ebc --co
 
 kiota generate -l php \
   -d specs/openapi/finances.yaml \
-  -c SellFinancesV1ApiClient \
-  -n 'EBay\AccountManagement\Generated\SellFinancesV1' \
-  -o src/Generated/SellFinancesV1 \
+  -c FinancesApiClient \
+  -n 'EBay\AccountManagement\Generated\Finances' \
+  -o src/Generated/Finances \
   --ebc --co
 
 echo "Adding license headers to generated files..."

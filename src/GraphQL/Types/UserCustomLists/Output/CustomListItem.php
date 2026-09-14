@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
-final readonly class CustomListItem
+readonly class CustomListItem
 {
     public function __construct(
         public ?string $addedAt = null,
@@ -30,7 +30,7 @@ final readonly class CustomListItem
     {
         return new self(
             addedAt: $data['addedAt'] ?? null,
-            item:    isset($data['item']) ? Item::fromArray($data['item']) : null,
+            item: isset($data['item']) ? Item::fromArray($data['item']) : null,
         );
     }
 }

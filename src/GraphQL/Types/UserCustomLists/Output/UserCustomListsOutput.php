@@ -20,16 +20,16 @@ namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
 abstract readonly class UserCustomListsOutput
 {
-    abstract public function getTypename(): string;
-
     /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): UserCustomListsFailure|UserCustomListsPartialFailure|UserCustomListsSuccess
     {
         return match ($data['__typename'] ?? null) {
-            'UserCustomListsFailure'        => UserCustomListsFailure::fromArray($data),
+            'UserCustomListsFailure' => UserCustomListsFailure::fromArray($data),
             'UserCustomListsPartialFailure' => UserCustomListsPartialFailure::fromArray($data),
-            'UserCustomListsSuccess'        => UserCustomListsSuccess::fromArray($data),
-            default => throw new \UnexpectedValueException('Unknown __typename: ' . ($data['__typename'] ?? 'null')),
+            'UserCustomListsSuccess' => UserCustomListsSuccess::fromArray($data),
+            default => throw new \UnexpectedValueException(
+                'Unknown __typename for UserCustomListsOutput: ' . ($data['__typename'] ?? 'null')
+            ),
         };
     }
 }

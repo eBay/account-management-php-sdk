@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\User\Output;
 
-final readonly class Phone
+readonly class Phone
 {
     public function __construct(
         public ?string $dialCode = null,
@@ -31,9 +31,9 @@ final readonly class Phone
     public static function fromArray(array $data): self
     {
         return new self(
-            dialCode:        $data['dialCode'] ?? null,
-            countryCode:     $data['countryCode'] ?? null,
-            phoneNumber:     $data['phoneNumber'] ?? null,
+            dialCode: $data['dialCode'] ?? null,
+            countryCode: $data['countryCode'] ?? null,
+            phoneNumber: $data['phoneNumber'] ?? null,
             phoneNumberType: $data['phoneNumberType'] ?? null,
         );
     }

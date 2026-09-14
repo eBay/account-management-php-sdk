@@ -18,27 +18,20 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Output;
 
-final readonly class BidHistoryRecordsPaginated
+readonly class BidHistoryRecordsPaginated
 {
-    /**
-     * @param BidRecord[] $bidHistoryRecords
-     */
     public function __construct(
+        /** @var BidRecord[] */
         public array $bidHistoryRecords = [],
-        public ?PaginationOutput $paginationOutput = null,
+        public ?Pagination $paginationOutput = null,
     ) {}
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            bidHistoryRecords: array_map(
-                static fn(array $r): BidRecord => BidRecord::fromArray($r),
-                $data['bidHistoryRecords'] ?? [],
-            ),
-            paginationOutput: isset($data['paginationOutput'])
-                ? PaginationOutput::fromArray($data['paginationOutput'])
-                : null,
+            bidHistoryRecords: array_map(fn($item) => BidRecord::fromArray($item), $data['bidHistoryRecords'] ?? []),
+            paginationOutput: isset($data['paginationOutput']) ? Pagination::fromArray($data['paginationOutput']) : null,
         );
     }
 }

@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\ItemBiddingActivity\Input;
 
-final readonly class ItemBiddingActivityInput
+readonly class ItemBiddingActivityInput
 {
     public function __construct(
         public string $itemId,
@@ -30,35 +30,36 @@ final readonly class ItemBiddingActivityInput
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
-        $itemId = $data['input']['itemId'] ?? $data['itemId'];
+        if (isset($data['input']) && is_array($data['input'])) {
+            $data = array_merge($data['input'], $data);
+        }
         return new self(
-            itemId: $itemId,
-            activeBidHistoryRecordsPaginationInput: isset($data['activeBidHistoryRecords_paginationInput'])
-                ? PageInfoInput::fromArray($data['activeBidHistoryRecords_paginationInput'])
-                : null,
-            cancelledBidHistoryRecordsPaginationInput: isset($data['cancelledBidHistoryRecords_paginationInput'])
-                ? PageInfoInput::fromArray($data['cancelledBidHistoryRecords_paginationInput'])
-                : null,
-            retractedBidHistoryRecordsPaginationInput: isset($data['retractedBidHistoryRecords_paginationInput'])
-                ? PageInfoInput::fromArray($data['retractedBidHistoryRecords_paginationInput'])
-                : null,
+            itemId: $data['itemId'],
+            activeBidHistoryRecordsPaginationInput: isset($data['activeBidHistoryRecords_paginationInput']) ? PageInfoInput::fromArray($data['activeBidHistoryRecords_paginationInput']) : null,
+            cancelledBidHistoryRecordsPaginationInput: isset($data['cancelledBidHistoryRecords_paginationInput']) ? PageInfoInput::fromArray($data['cancelledBidHistoryRecords_paginationInput']) : null,
+            retractedBidHistoryRecordsPaginationInput: isset($data['retractedBidHistoryRecords_paginationInput']) ? PageInfoInput::fromArray($data['retractedBidHistoryRecords_paginationInput']) : null,
         );
+    }
+
+    /** @return array<string, mixed> */
+    public function toArray(): array
+    {
+        return [
+                'itemId' => $this->itemId,
+        ];
     }
 
     /** @return array<string, mixed> */
     public function toVariables(): array
     {
-        return array_filter([
-            'input'                                        => (object)['itemId' => $this->itemId],
-            'activeBidHistoryRecords_paginationInput'      => $this->activeBidHistoryRecordsPaginationInput
-                ? (object)$this->activeBidHistoryRecordsPaginationInput->toArray()
-                : null,
-            'cancelledBidHistoryRecords_paginationInput'   => $this->cancelledBidHistoryRecordsPaginationInput
-                ? (object)$this->cancelledBidHistoryRecordsPaginationInput->toArray()
-                : null,
-            'retractedBidHistoryRecords_paginationInput'   => $this->retractedBidHistoryRecordsPaginationInput
-                ? (object)$this->retractedBidHistoryRecordsPaginationInput->toArray()
-                : null,
-        ], static fn($v) => $v !== null);
+        return array_filter(
+            [
+                'input' => (object)$this->toArray(),
+            'activeBidHistoryRecords_paginationInput' => $this->activeBidHistoryRecordsPaginationInput !== null ? (object)$this->activeBidHistoryRecordsPaginationInput->toArray() : null,
+            'cancelledBidHistoryRecords_paginationInput' => $this->cancelledBidHistoryRecordsPaginationInput !== null ? (object)$this->cancelledBidHistoryRecordsPaginationInput->toArray() : null,
+            'retractedBidHistoryRecords_paginationInput' => $this->retractedBidHistoryRecordsPaginationInput !== null ? (object)$this->retractedBidHistoryRecordsPaginationInput->toArray() : null,
+            ],
+            static fn($value) => $value !== null,
+        );
     }
 }

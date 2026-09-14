@@ -18,13 +18,11 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
-final readonly class CustomListItems
+readonly class CustomListItems
 {
-    /**
-     * @param CustomListItem[] $results
-     */
     public function __construct(
         public ?Pagination $pagination = null,
+        /** @var CustomListItem[] */
         public array $results = [],
     ) {}
 
@@ -33,10 +31,7 @@ final readonly class CustomListItems
     {
         return new self(
             pagination: isset($data['pagination']) ? Pagination::fromArray($data['pagination']) : null,
-            results:    array_map(
-                static fn(array $r): CustomListItem => CustomListItem::fromArray($r),
-                $data['results'] ?? [],
-            ),
+            results: array_map(fn($item) => CustomListItem::fromArray($item), $data['results'] ?? []),
         );
     }
 }

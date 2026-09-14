@@ -18,34 +18,24 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\RemoveFromWatchList\Output;
 
-final readonly class RemoveFromWatchListSuccess extends RemoveFromWatchListOutput
+readonly class RemoveFromWatchListSuccess
 {
-    /**
-     * @param Item[] $removedItems
-     */
     public function __construct(
         public ?int $numberOfItemsUnwatched = null,
         public ?int $watchListCount = null,
+        /** @var Item[] */
         public array $removedItems = [],
         public ?int $watchListMaximum = null,
     ) {}
-
-    public function getTypename(): string
-    {
-        return 'RemoveFromWatchListSuccess';
-    }
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
         return new self(
-            numberOfItemsUnwatched: isset($data['numberOfItemsUnwatched']) ? (int)$data['numberOfItemsUnwatched'] : null,
-            watchListCount:  isset($data['watchListCount']) ? (int)$data['watchListCount'] : null,
-            removedItems: array_map(
-                static fn(array $i): Item => Item::fromArray($i),
-                $data['removedItems'] ?? [],
-            ),
-            watchListMaximum: isset($data['watchListMaximum']) ? (int)$data['watchListMaximum'] : null,
+            numberOfItemsUnwatched: $data['numberOfItemsUnwatched'] ?? null,
+            watchListCount: $data['watchListCount'] ?? null,
+            removedItems: array_map(fn($item) => Item::fromArray($item), $data['removedItems'] ?? []),
+            watchListMaximum: $data['watchListMaximum'] ?? null,
         );
     }
 }

@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserWatchList\Output;
 
-final readonly class Pagination
+readonly class Pagination
 {
     public function __construct(
         public ?string $nextCursor = null,
@@ -29,7 +29,7 @@ final readonly class Pagination
     public static function fromArray(array $data): self
     {
         return new self(
-            nextCursor:     $data['nextCursor'] ?? null,
+            nextCursor: $data['nextCursor'] ?? null,
             previousCursor: $data['previousCursor'] ?? null,
         );
     }

@@ -18,23 +18,21 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\RemoveFromWatchList\Input;
 
-final readonly class RemoveFromWatchListInput
+readonly class RemoveFromWatchListInput
 {
-    /**
-     * @param WatchListEntryToRemove[] $itemsToRemove
-     */
     public function __construct(
+        /** @var WatchListEntryToRemove[] */
         public array $itemsToRemove,
     ) {}
 
     /** @param array<string, mixed> $data */
     public static function fromArray(array $data): self
     {
+        if (isset($data['input']) && is_array($data['input'])) {
+            $data = array_merge($data['input'], $data);
+        }
         return new self(
-            itemsToRemove: array_map(
-                static fn(array $e): WatchListEntryToRemove => WatchListEntryToRemove::fromArray($e),
-                $data['itemsToRemove'] ?? [],
-            ),
+            itemsToRemove: array_map(fn($item) => WatchListEntryToRemove::fromArray($item), $data['itemsToRemove']),
         );
     }
 
@@ -42,7 +40,7 @@ final readonly class RemoveFromWatchListInput
     public function toArray(): array
     {
         return [
-            'itemsToRemove' => array_map(fn($e) => $e->toArray(), $this->itemsToRemove),
+                'itemsToRemove' => array_map(fn(WatchListEntryToRemove $item) => $item->toArray(), $this->itemsToRemove),
         ];
     }
 }

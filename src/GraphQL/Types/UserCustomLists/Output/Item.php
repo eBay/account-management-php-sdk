@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
-final readonly class Item
+readonly class Item
 {
     public function __construct(
         public ?string $itemId = null,

@@ -22,6 +22,7 @@ use EBay\AccountManagement\Configuration\AccountManagementConfiguration;
 use EBay\AccountManagement\Configuration\RequestOptions;
 use EBay\AccountManagement\Exceptions\GraphQLException;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\RequestException;
 
 final class DynamicGraphQLClient
 {
@@ -31,44 +32,69 @@ final class DynamicGraphQLClient
     ) {}
 
     /**
+     * Execute any GraphQL query or mutation.
+     *
      * @param array<string, mixed> $variables
      * @return array<string, mixed> The `data` field of the GraphQL response.
+     * @throws GraphQLException When the response contains GraphQL errors or an HTTP error occurs.
      */
     public function execute(string $query, array $variables = [], ?string $accessToken = null, ?RequestOptions $requestOptions = null): array
     {
-        $token = $accessToken ?? $this->config->accessToken
-            ?? throw new \RuntimeException(
-                'No access token. Pass $accessToken or set AccountManagementConfiguration::$accessToken.'
+        $token = ($accessToken ?? $this->config->accessToken)
+            ?: throw new \RuntimeException(
+                'No access token. Pass $accessToken per-call or set AccountManagementConfiguration::$accessToken.'
             );
 
-        // Merge default headers + per-request headers
-        $extraHeaders = $this->config->defaultRequestOptions->headers;
-        if ($requestOptions !== null) {
-            $extraHeaders = array_merge($extraHeaders, $requestOptions->headers);
+        $payload = ['query' => $query];
+        if (!empty($variables)) {
+            $payload['variables'] = $variables;
         }
 
-        $headers = array_merge([
+        $headers = [
             'Authorization' => 'Bearer ' . $token,
             'Content-Type'  => 'application/json',
-        ], $extraHeaders);
-
-        $response = $this->guzzle->request('POST', $this->config->graphQLBaseUrl, [
-            'headers'     => $headers,
-            'json'        => array_filter(['query' => $query, 'variables' => $variables ?: null]),
-            'http_errors' => false,
-        ]);
-
-        $statusCode = $response->getStatusCode();
-
-        if ($statusCode < 200 || $statusCode >= 300) {
-            $body = $response->getBody()->getContents();
-            throw new GraphQLException([$body], $statusCode);
+        ];
+        foreach ($this->config->defaultRequestOptions->headers as $key => $value) {
+            if (!array_key_exists($key, $headers)) {
+                $headers[$key] = $value;
+            }
+        }
+        foreach ($requestOptions !== null ? $requestOptions->headers : [] as $key => $value) {
+            if (!array_key_exists($key, $headers)) {
+                $headers[$key] = $value;
+            }
         }
 
-        $body = json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
+        try {
+            $response = $this->guzzle->request('POST', $this->config->graphQLBaseUrl, [
+                'headers' => $headers,
+                'json'    => $payload,
+            ]);
+        } catch (RequestException $e) {
+            $status = $e->getResponse()?->getStatusCode() ?? 0;
+            $body   = $e->getResponse()?->getBody()->getContents() ?? $e->getMessage();
+            throw new GraphQLException(["HTTP $status: $body"]);
+        }
+
+        $statusCode = $response->getStatusCode();
+        if ($statusCode < 200 || $statusCode >= 300) {
+            $body = $response->getBody()->getContents();
+            throw new GraphQLException(["HTTP $statusCode: $body"]);
+        }
+
+        $body = json_decode(
+            $response->getBody()->getContents(),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
 
         if (!empty($body['errors'])) {
-            throw new GraphQLException(array_column($body['errors'], 'message'));
+            $messages = array_map(
+                static fn(array $e): string => $e['message'] ?? 'Unknown GraphQL error',
+                $body['errors']
+            );
+            throw new GraphQLException($messages);
         }
 
         return $body['data'] ?? [];

@@ -20,16 +20,16 @@ namespace EBay\AccountManagement\GraphQL\Types\AddToWatchList\Output;
 
 abstract readonly class AddToWatchListOutput
 {
-    abstract public function getTypename(): string;
-
     /** @param array<string, mixed> $data */
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): AddToWatchListFailure|AddToWatchListPartialFailure|AddToWatchListSuccess
     {
         return match ($data['__typename'] ?? null) {
-            'AddToWatchListFailure'        => AddToWatchListFailure::fromArray($data),
+            'AddToWatchListFailure' => AddToWatchListFailure::fromArray($data),
             'AddToWatchListPartialFailure' => AddToWatchListPartialFailure::fromArray($data),
-            'AddToWatchListSuccess'        => AddToWatchListSuccess::fromArray($data),
-            default => throw new \UnexpectedValueException('Unknown __typename: ' . ($data['__typename'] ?? 'null')),
+            'AddToWatchListSuccess' => AddToWatchListSuccess::fromArray($data),
+            default => throw new \UnexpectedValueException(
+                'Unknown __typename for AddToWatchListOutput: ' . ($data['__typename'] ?? 'null')
+            ),
         };
     }
 }

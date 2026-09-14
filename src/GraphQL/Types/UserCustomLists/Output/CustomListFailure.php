@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\UserCustomLists\Output;
 
-final readonly class CustomListFailure
+readonly class CustomListFailure
 {
     public function __construct(
         public ?string $customListId = null,
@@ -30,7 +30,7 @@ final readonly class CustomListFailure
     {
         return new self(
             customListId: $data['customListId'] ?? null,
-            reason:       $data['reason'] ?? null,
+            reason: $data['reason'] ?? null,
         );
     }
 }

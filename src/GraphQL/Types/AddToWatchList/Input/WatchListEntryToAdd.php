@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace EBay\AccountManagement\GraphQL\Types\AddToWatchList\Input;
 
-final readonly class WatchListEntryToAdd
+readonly class WatchListEntryToAdd
 {
     public function __construct(
         public string $itemId,
@@ -35,6 +35,8 @@ final readonly class WatchListEntryToAdd
     /** @return array<string, mixed> */
     public function toArray(): array
     {
-        return ['itemId' => $this->itemId];
+        return [
+                'itemId' => $this->itemId,
+        ];
     }
 }
