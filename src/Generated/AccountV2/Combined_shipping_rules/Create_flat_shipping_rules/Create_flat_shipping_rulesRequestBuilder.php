@@ -17,6 +17,7 @@
 namespace EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Create_flat_shipping_rules;
 
 use EBay\AccountManagement\Generated\AccountV2\Models\CreateFlatShippingRulesRequest;
+use EBay\AccountManagement\Generated\AccountV2\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -45,19 +46,23 @@ class Create_flat_shipping_rulesRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method is used to create fixed-rate (flat) shipping rules that apply standard combined shipping costs for a seller’s listings.
-     * @param CreateFlatShippingRulesRequest $body This type represents a request to configure flat-rate combined shipping rules with specified durations and conditions.
+     * @param CreateFlatShippingRulesRequest $body This type is used to define and configure flat-rate combined shipping rules and/or change the combined payment duration.
      * @param Create_flat_shipping_rulesRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(CreateFlatShippingRulesRequest $body, ?Create_flat_shipping_rulesRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
      * This method is used to create fixed-rate (flat) shipping rules that apply standard combined shipping costs for a seller’s listings.
-     * @param CreateFlatShippingRulesRequest $body This type represents a request to configure flat-rate combined shipping rules with specified durations and conditions.
+     * @param CreateFlatShippingRulesRequest $body This type is used to define and configure flat-rate combined shipping rules and/or change the combined payment duration.
      * @param Create_flat_shipping_rulesRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -70,6 +75,7 @@ class Create_flat_shipping_rulesRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

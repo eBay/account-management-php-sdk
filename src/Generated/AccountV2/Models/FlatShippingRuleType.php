@@ -37,9 +37,9 @@ class FlatShippingRuleType implements AdditionalDataHolder, Parsable
     private ?array $combinedShippingRules = null;
     
     /**
-     * @var string|null $combinedShippingRuleType This container defines the type of discount rule applied (e.g., percentage-based, fixed-rate). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeEnum'>eBay API documentation</a>
+     * @var CombinedShippingRuleTypeEnum|null $combinedShippingRuleType This container defines the type of discount rule applied (e.g., percentage-based, fixed-rate).
     */
-    private ?string $combinedShippingRuleType = null;
+    private ?CombinedShippingRuleTypeEnum $combinedShippingRuleType = null;
     
     /**
      * Instantiates a new FlatShippingRuleType and sets the default values.
@@ -74,10 +74,10 @@ class FlatShippingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the combinedShippingRuleType property value. This container defines the type of discount rule applied (e.g., percentage-based, fixed-rate). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the combinedShippingRuleType property value. This container defines the type of discount rule applied (e.g., percentage-based, fixed-rate).
+     * @return CombinedShippingRuleTypeEnum|null
     */
-    public function getCombinedShippingRuleType(): ?string {
+    public function getCombinedShippingRuleType(): ?CombinedShippingRuleTypeEnum {
         return $this->combinedShippingRuleType;
     }
 
@@ -89,7 +89,7 @@ class FlatShippingRuleType implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'combinedShippingRules' => fn(ParseNode $n) => $o->setCombinedShippingRules($n->getCollectionOfObjectValues([CombinedShippingRule::class, 'createFromDiscriminatorValue'])),
-            'combinedShippingRuleType' => fn(ParseNode $n) => $o->setCombinedShippingRuleType($n->getStringValue()),
+            'combinedShippingRuleType' => fn(ParseNode $n) => $o->setCombinedShippingRuleType($n->getEnumValue(CombinedShippingRuleTypeEnum::class)),
         ];
     }
 
@@ -99,7 +99,7 @@ class FlatShippingRuleType implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeCollectionOfObjectValues('combinedShippingRules', $this->getCombinedShippingRules());
-        $writer->writeStringValue('combinedShippingRuleType', $this->getCombinedShippingRuleType());
+        $writer->writeEnumValue('combinedShippingRuleType', $this->getCombinedShippingRuleType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class FlatShippingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the combinedShippingRuleType property value. This container defines the type of discount rule applied (e.g., percentage-based, fixed-rate). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the combinedShippingRuleType property.
+     * Sets the combinedShippingRuleType property value. This container defines the type of discount rule applied (e.g., percentage-based, fixed-rate).
+     * @param CombinedShippingRuleTypeEnum|null $value Value to set for the combinedShippingRuleType property.
     */
-    public function setCombinedShippingRuleType(?string $value): void {
+    public function setCombinedShippingRuleType(?CombinedShippingRuleTypeEnum $value): void {
         $this->combinedShippingRuleType = $value;
     }
 

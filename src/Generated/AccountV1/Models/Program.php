@@ -32,9 +32,9 @@ class Program implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $programType The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request. When returned in an <b>getOptedInPrograms</b> response, a separate <b>programType</b> field is returned for each seller program that the seller is opted in to. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ProgramTypeEnum'>eBay API documentation</a>
+     * @var ProgramTypeEnum|null $programType This enumerated type defines the supported seller programs. | - **OUT_OF_STOCK_CONTROL**: If a seller's account is opted in to the out-of-stock control program, active fixed-price listings will be kept 'alive' (but not surfaced in search results) even when the quantity for the listing has been depleted to 0. This feature allows the seller to update/revise the listing with more quantity, and prevents the seller from having to relist the item. - **PARTNER_MOTORS_DEALER**: The Partner Motors Program that sellers can participate in by opting-in to the program. Sellers must be registered business users to opt-in to this program. - **SELLING_POLICY_MANAGEMENT**: If a seller's account is opted in to this program, sellers can associate business policies (payment, return policy, fulfillment) to their listings. Being opted in to business policies is a requirement for using the <strong>Inventory API</strong>.
     */
-    private ?string $programType = null;
+    private ?ProgramTypeEnum $programType = null;
     
     /**
      * Instantiates a new Program and sets the default values.
@@ -67,15 +67,15 @@ class Program implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'programType' => fn(ParseNode $n) => $o->setProgramType($n->getStringValue()),
+            'programType' => fn(ParseNode $n) => $o->setProgramType($n->getEnumValue(ProgramTypeEnum::class)),
         ];
     }
 
     /**
-     * Gets the programType property value. The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request. When returned in an <b>getOptedInPrograms</b> response, a separate <b>programType</b> field is returned for each seller program that the seller is opted in to. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ProgramTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the programType property value. This enumerated type defines the supported seller programs. | - **OUT_OF_STOCK_CONTROL**: If a seller's account is opted in to the out-of-stock control program, active fixed-price listings will be kept 'alive' (but not surfaced in search results) even when the quantity for the listing has been depleted to 0. This feature allows the seller to update/revise the listing with more quantity, and prevents the seller from having to relist the item. - **PARTNER_MOTORS_DEALER**: The Partner Motors Program that sellers can participate in by opting-in to the program. Sellers must be registered business users to opt-in to this program. - **SELLING_POLICY_MANAGEMENT**: If a seller's account is opted in to this program, sellers can associate business policies (payment, return policy, fulfillment) to their listings. Being opted in to business policies is a requirement for using the <strong>Inventory API</strong>.
+     * @return ProgramTypeEnum|null
     */
-    public function getProgramType(): ?string {
+    public function getProgramType(): ?ProgramTypeEnum {
         return $this->programType;
     }
 
@@ -84,7 +84,7 @@ class Program implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('programType', $this->getProgramType());
+        $writer->writeEnumValue('programType', $this->getProgramType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -97,10 +97,10 @@ class Program implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the programType property value. The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request. When returned in an <b>getOptedInPrograms</b> response, a separate <b>programType</b> field is returned for each seller program that the seller is opted in to. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ProgramTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the programType property.
+     * Sets the programType property value. This enumerated type defines the supported seller programs. | - **OUT_OF_STOCK_CONTROL**: If a seller's account is opted in to the out-of-stock control program, active fixed-price listings will be kept 'alive' (but not surfaced in search results) even when the quantity for the listing has been depleted to 0. This feature allows the seller to update/revise the listing with more quantity, and prevents the seller from having to relist the item. - **PARTNER_MOTORS_DEALER**: The Partner Motors Program that sellers can participate in by opting-in to the program. Sellers must be registered business users to opt-in to this program. - **SELLING_POLICY_MANAGEMENT**: If a seller's account is opted in to this program, sellers can associate business policies (payment, return policy, fulfillment) to their listings. Being opted in to business policies is a requirement for using the <strong>Inventory API</strong>.
+     * @param ProgramTypeEnum|null $value Value to set for the programType property.
     */
-    public function setProgramType(?string $value): void {
+    public function setProgramType(?ProgramTypeEnum $value): void {
         $this->programType = $value;
     }
 

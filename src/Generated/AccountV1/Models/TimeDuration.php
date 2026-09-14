@@ -32,9 +32,9 @@ class TimeDuration implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $unit These enum values represent the time measurement unit, such as <code>DAY</code>. A span of time is defined when you apply the value specified in the <b>value</b> field to the value specified for <b>unit</b>. <br><br>See <b>TimeDurationUnitEnum</b> for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:TimeDurationUnitEnum'>eBay API documentation</a>
+     * @var TimeDurationUnitEnum|null $unit This enumerated type specifies the time-measurement unit that's used to express a time span. | - **YEAR**: This value indicates that the time measurement unit used is based on a number of years. This enum is not currently used by the Account API v1. - **MONTH**: This value indicates that the time measurement unit used is based on a number of months. This enum is not currently used by the Account API v1. - **DAY**: This value indicates that the time measurement unit used is based on a number of days. This enum is used for handling time in fulfillment business policies, for <strong>fullPaymentDueIn</strong> field for motor vehicle listing payment business policies, and for the return period for return business policies. - **HOUR**: This value indicates that the time measurement unit used is based on a number of hours. This enum is used for a motor vehicle deposit due date for motor vehicle listing payment business policies. - **CALENDAR_DAY**: This value indicates that the time measurement unit used is based on a number of calendar days, including Saturday and Sunday. This time measurement unit does not exclude holidays. This enum is not currently used by the Account API v1. - **BUSINESS_DAY**: This value indicates that the time measurement unit used is based on a number of business days or 'working days'. This generally excludes Sunday and all holidays (for the marketplace) in the time duration and, depending on the location, can include or exclude Saturday. This enum is not currently used by the Account API v1. - **MINUTE**: This value indicates that the time measurement unit used is based on a number of minutes. This enum is not currently used by the Account API v1. - **SECOND**: This value indicates that the time measurement unit used is based on a number of seconds. This enum is not currently used by the Account API v1. - **MILLISECOND**: This value indicates that the time measurement unit used is based on a number of milliseconds. This enum is not currently used by the Account API v1.
     */
-    private ?string $unit = null;
+    private ?TimeDurationUnitEnum $unit = null;
     
     /**
      * @var int|null $value An integer that represents an amount of time, as measured by the time-measurement unit specified in the <b>unit</b> field.
@@ -72,16 +72,16 @@ class TimeDuration implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'unit' => fn(ParseNode $n) => $o->setUnit($n->getStringValue()),
+            'unit' => fn(ParseNode $n) => $o->setUnit($n->getEnumValue(TimeDurationUnitEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getIntegerValue()),
         ];
     }
 
     /**
-     * Gets the unit property value. These enum values represent the time measurement unit, such as <code>DAY</code>. A span of time is defined when you apply the value specified in the <b>value</b> field to the value specified for <b>unit</b>. <br><br>See <b>TimeDurationUnitEnum</b> for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:TimeDurationUnitEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the unit property value. This enumerated type specifies the time-measurement unit that's used to express a time span. | - **YEAR**: This value indicates that the time measurement unit used is based on a number of years. This enum is not currently used by the Account API v1. - **MONTH**: This value indicates that the time measurement unit used is based on a number of months. This enum is not currently used by the Account API v1. - **DAY**: This value indicates that the time measurement unit used is based on a number of days. This enum is used for handling time in fulfillment business policies, for <strong>fullPaymentDueIn</strong> field for motor vehicle listing payment business policies, and for the return period for return business policies. - **HOUR**: This value indicates that the time measurement unit used is based on a number of hours. This enum is used for a motor vehicle deposit due date for motor vehicle listing payment business policies. - **CALENDAR_DAY**: This value indicates that the time measurement unit used is based on a number of calendar days, including Saturday and Sunday. This time measurement unit does not exclude holidays. This enum is not currently used by the Account API v1. - **BUSINESS_DAY**: This value indicates that the time measurement unit used is based on a number of business days or 'working days'. This generally excludes Sunday and all holidays (for the marketplace) in the time duration and, depending on the location, can include or exclude Saturday. This enum is not currently used by the Account API v1. - **MINUTE**: This value indicates that the time measurement unit used is based on a number of minutes. This enum is not currently used by the Account API v1. - **SECOND**: This value indicates that the time measurement unit used is based on a number of seconds. This enum is not currently used by the Account API v1. - **MILLISECOND**: This value indicates that the time measurement unit used is based on a number of milliseconds. This enum is not currently used by the Account API v1.
+     * @return TimeDurationUnitEnum|null
     */
-    public function getUnit(): ?string {
+    public function getUnit(): ?TimeDurationUnitEnum {
         return $this->unit;
     }
 
@@ -98,7 +98,7 @@ class TimeDuration implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('unit', $this->getUnit());
+        $writer->writeEnumValue('unit', $this->getUnit());
         $writer->writeIntegerValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class TimeDuration implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the unit property value. These enum values represent the time measurement unit, such as <code>DAY</code>. A span of time is defined when you apply the value specified in the <b>value</b> field to the value specified for <b>unit</b>. <br><br>See <b>TimeDurationUnitEnum</b> for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:TimeDurationUnitEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the unit property.
+     * Sets the unit property value. This enumerated type specifies the time-measurement unit that's used to express a time span. | - **YEAR**: This value indicates that the time measurement unit used is based on a number of years. This enum is not currently used by the Account API v1. - **MONTH**: This value indicates that the time measurement unit used is based on a number of months. This enum is not currently used by the Account API v1. - **DAY**: This value indicates that the time measurement unit used is based on a number of days. This enum is used for handling time in fulfillment business policies, for <strong>fullPaymentDueIn</strong> field for motor vehicle listing payment business policies, and for the return period for return business policies. - **HOUR**: This value indicates that the time measurement unit used is based on a number of hours. This enum is used for a motor vehicle deposit due date for motor vehicle listing payment business policies. - **CALENDAR_DAY**: This value indicates that the time measurement unit used is based on a number of calendar days, including Saturday and Sunday. This time measurement unit does not exclude holidays. This enum is not currently used by the Account API v1. - **BUSINESS_DAY**: This value indicates that the time measurement unit used is based on a number of business days or 'working days'. This generally excludes Sunday and all holidays (for the marketplace) in the time duration and, depending on the location, can include or exclude Saturday. This enum is not currently used by the Account API v1. - **MINUTE**: This value indicates that the time measurement unit used is based on a number of minutes. This enum is not currently used by the Account API v1. - **SECOND**: This value indicates that the time measurement unit used is based on a number of seconds. This enum is not currently used by the Account API v1. - **MILLISECOND**: This value indicates that the time measurement unit used is based on a number of milliseconds. This enum is not currently used by the Account API v1.
+     * @param TimeDurationUnitEnum|null $value Value to set for the unit property.
     */
-    public function setUnit(?string $value): void {
+    public function setUnit(?TimeDurationUnitEnum $value): void {
         $this->unit = $value;
     }
 

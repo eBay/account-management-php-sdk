@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV1\Sales_tax;
 
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\SalesTaxes;
 use EBay\AccountManagement\Generated\AccountV1\Sales_tax\Item\WithCountryCodeItemRequestBuilder;
 use Exception;
@@ -63,7 +64,11 @@ class Sales_taxRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Sales_taxRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SalesTaxes::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SalesTaxes::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

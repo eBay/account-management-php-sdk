@@ -32,7 +32,7 @@ class Payout implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $amount This is the total amount of the seller payout. The container shows the dollar amount of the payout and the currency used. The value of the payout is always shown, even if the payout has failed.
     */
     private ?Amount $amount = null;
     
@@ -57,7 +57,7 @@ class Payout implements AdditionalDataHolder, Parsable
     private ?string $payoutId = null;
     
     /**
-     * @var PayoutInstrument|null $payoutInstrument This type is used to provide details about one or two of the seller's accounts that are enabled to receive payouts.
+     * @var PayoutInstrument|null $payoutInstrument This container provides details about the seller's account that received (or is scheduled to receive) the payout. This container is still returned even if the payout failed.
     */
     private ?PayoutInstrument $payoutInstrument = null;
     
@@ -67,14 +67,14 @@ class Payout implements AdditionalDataHolder, Parsable
     private ?string $payoutMemo = null;
     
     /**
-     * @var string|null $payoutReference This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout id(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account. <br><br><span class="tablenote"><b>Note: </b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
+     * @var string|null $payoutReference This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout ID(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account. <br><br><span class="tablenote"><b>Note: </b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
     */
     private ?string $payoutReference = null;
     
     /**
-     * @var string|null $payoutStatus This enumeration value indicates the current status of the seller payout. For a successful payout, the value returned will be <code>SUCCEEDED</code>. See the <strong>PayoutStatusEnum</strong> type for more details on each payout status value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:PayoutStatusEnum'>eBay API documentation</a>
+     * @var PayoutStatusEnum|null $payoutStatus This enumeration value indicates the current status of the seller payout. For a successful payout, the value returned will be <code>SUCCEEDED</code>. See the <strong>PayoutStatusEnum</strong> type for more details on each payout status value.
     */
-    private ?string $payoutStatus = null;
+    private ?PayoutStatusEnum $payoutStatus = null;
     
     /**
      * @var string|null $payoutStatusDescription This field provides more details about the current status of payout. The description returned here will correspond with enumeration value returned in the <strong>payoutStatus</strong> field. The following shows what description text might appear based on the different <strong>payoutStatus</strong> values:<ul><li><code>INITIATED</code>: <em>Preparing to send</em></li><li><code>SUCCEEDED</code>: <em>Funds sent</em></li><li><code>REVERSED</code>: <em>Waiting to retry : Money rejected by seller's bank</em></li><li><code>RETRYABLE_FAILED</code>: <em>Waiting to retry</em></li><li><code>TERMINAL_FAILED</code>: <em>Payout failed</em></li></ul>
@@ -82,12 +82,12 @@ class Payout implements AdditionalDataHolder, Parsable
     private ?string $payoutStatusDescription = null;
     
     /**
-     * @var Amount|null $totalAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $totalAmount This container indicates the sum of a seller's net payout amount plus the <code>EXPRESS_PAYOUT_FEE</code> charged by eBay. The is expressed as a numeric value and the currency used.
     */
     private ?Amount $totalAmount = null;
     
     /**
-     * @var Amount|null $totalFee This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $totalFee This container indicates the amount of the <code>EXPRESS_PAYOUT_FEE</code> charged by eBay when a seller requests payout to a debit card. The fee is expressed as a numeric value and the currency used.
     */
     private ?Amount $totalFee = null;
     
@@ -126,7 +126,7 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the amount property value. This is the total amount of the seller payout. The container shows the dollar amount of the payout and the currency used. The value of the payout is always shown, even if the payout has failed.
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -156,7 +156,7 @@ class Payout implements AdditionalDataHolder, Parsable
             'payoutInstrument' => fn(ParseNode $n) => $o->setPayoutInstrument($n->getObjectValue([PayoutInstrument::class, 'createFromDiscriminatorValue'])),
             'payoutMemo' => fn(ParseNode $n) => $o->setPayoutMemo($n->getStringValue()),
             'payoutReference' => fn(ParseNode $n) => $o->setPayoutReference($n->getStringValue()),
-            'payoutStatus' => fn(ParseNode $n) => $o->setPayoutStatus($n->getStringValue()),
+            'payoutStatus' => fn(ParseNode $n) => $o->setPayoutStatus($n->getEnumValue(PayoutStatusEnum::class)),
             'payoutStatusDescription' => fn(ParseNode $n) => $o->setPayoutStatusDescription($n->getStringValue()),
             'totalAmount' => fn(ParseNode $n) => $o->setTotalAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'totalFee' => fn(ParseNode $n) => $o->setTotalFee($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
@@ -190,7 +190,7 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the payoutInstrument property value. This type is used to provide details about one or two of the seller's accounts that are enabled to receive payouts.
+     * Gets the payoutInstrument property value. This container provides details about the seller's account that received (or is scheduled to receive) the payout. This container is still returned even if the payout failed.
      * @return PayoutInstrument|null
     */
     public function getPayoutInstrument(): ?PayoutInstrument {
@@ -206,7 +206,7 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the payoutReference property value. This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout id(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account. <br><br><span class="tablenote"><b>Note: </b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
+     * Gets the payoutReference property value. This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout ID(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account. <br><br><span class="tablenote"><b>Note: </b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
      * @return string|null
     */
     public function getPayoutReference(): ?string {
@@ -214,10 +214,10 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the payoutStatus property value. This enumeration value indicates the current status of the seller payout. For a successful payout, the value returned will be <code>SUCCEEDED</code>. See the <strong>PayoutStatusEnum</strong> type for more details on each payout status value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:PayoutStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the payoutStatus property value. This enumeration value indicates the current status of the seller payout. For a successful payout, the value returned will be <code>SUCCEEDED</code>. See the <strong>PayoutStatusEnum</strong> type for more details on each payout status value.
+     * @return PayoutStatusEnum|null
     */
-    public function getPayoutStatus(): ?string {
+    public function getPayoutStatus(): ?PayoutStatusEnum {
         return $this->payoutStatus;
     }
 
@@ -230,7 +230,7 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the totalAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the totalAmount property value. This container indicates the sum of a seller's net payout amount plus the <code>EXPRESS_PAYOUT_FEE</code> charged by eBay. The is expressed as a numeric value and the currency used.
      * @return Amount|null
     */
     public function getTotalAmount(): ?Amount {
@@ -238,7 +238,7 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the totalFee property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the totalFee property value. This container indicates the amount of the <code>EXPRESS_PAYOUT_FEE</code> charged by eBay when a seller requests payout to a debit card. The fee is expressed as a numeric value and the currency used.
      * @return Amount|null
     */
     public function getTotalFee(): ?Amount {
@@ -274,7 +274,7 @@ class Payout implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('payoutInstrument', $this->getPayoutInstrument());
         $writer->writeStringValue('payoutMemo', $this->getPayoutMemo());
         $writer->writeStringValue('payoutReference', $this->getPayoutReference());
-        $writer->writeStringValue('payoutStatus', $this->getPayoutStatus());
+        $writer->writeEnumValue('payoutStatus', $this->getPayoutStatus());
         $writer->writeStringValue('payoutStatusDescription', $this->getPayoutStatusDescription());
         $writer->writeObjectValue('totalAmount', $this->getTotalAmount());
         $writer->writeObjectValue('totalFee', $this->getTotalFee());
@@ -292,7 +292,7 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the amount property value. This is the total amount of the seller payout. The container shows the dollar amount of the payout and the currency used. The value of the payout is always shown, even if the payout has failed.
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {
@@ -332,7 +332,7 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the payoutInstrument property value. This type is used to provide details about one or two of the seller's accounts that are enabled to receive payouts.
+     * Sets the payoutInstrument property value. This container provides details about the seller's account that received (or is scheduled to receive) the payout. This container is still returned even if the payout failed.
      * @param PayoutInstrument|null $value Value to set for the payoutInstrument property.
     */
     public function setPayoutInstrument(?PayoutInstrument $value): void {
@@ -348,7 +348,7 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the payoutReference property value. This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout id(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account. <br><br><span class="tablenote"><b>Note: </b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
+     * Sets the payoutReference property value. This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout ID(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account. <br><br><span class="tablenote"><b>Note: </b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
      * @param string|null $value Value to set for the payoutReference property.
     */
     public function setPayoutReference(?string $value): void {
@@ -356,10 +356,10 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the payoutStatus property value. This enumeration value indicates the current status of the seller payout. For a successful payout, the value returned will be <code>SUCCEEDED</code>. See the <strong>PayoutStatusEnum</strong> type for more details on each payout status value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:PayoutStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the payoutStatus property.
+     * Sets the payoutStatus property value. This enumeration value indicates the current status of the seller payout. For a successful payout, the value returned will be <code>SUCCEEDED</code>. See the <strong>PayoutStatusEnum</strong> type for more details on each payout status value.
+     * @param PayoutStatusEnum|null $value Value to set for the payoutStatus property.
     */
-    public function setPayoutStatus(?string $value): void {
+    public function setPayoutStatus(?PayoutStatusEnum $value): void {
         $this->payoutStatus = $value;
     }
 
@@ -372,7 +372,7 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the totalAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the totalAmount property value. This container indicates the sum of a seller's net payout amount plus the <code>EXPRESS_PAYOUT_FEE</code> charged by eBay. The is expressed as a numeric value and the currency used.
      * @param Amount|null $value Value to set for the totalAmount property.
     */
     public function setTotalAmount(?Amount $value): void {
@@ -380,7 +380,7 @@ class Payout implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the totalFee property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the totalFee property value. This container indicates the amount of the <code>EXPRESS_PAYOUT_FEE</code> charged by eBay when a seller requests payout to a debit card. The fee is expressed as a numeric value and the currency used.
      * @param Amount|null $value Value to set for the totalFee property.
     */
     public function setTotalFee(?Amount $value): void {

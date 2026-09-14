@@ -32,19 +32,19 @@ class UpdateCalculatedShippingRulesRequest implements AdditionalDataHolder, Pars
     private ?array $additionalData = null;
     
     /**
-     * @var CalculatedHandlingRuleType|null $calculatedHandlingRule This type defines the structure for calculated handling fee discounts applicable when combining multiple orders.
+     * @var CalculatedHandlingRuleType|null $calculatedHandlingRule This container specifies the calculated handling rule that determines how handling fees are automatically computed based on order weight, quantity, or value in a combined shipment.
     */
     private ?CalculatedHandlingRuleType $calculatedHandlingRule = null;
     
     /**
-     * @var CalculatedShippingRuleType|null $calculatedShippingRule This type describes calculated discount rules determining total shipping cost reductions for combined items.
+     * @var CalculatedShippingRuleType|null $calculatedShippingRule This container defines the calculated shipping rule that determines shipping costs or discounts based on factors such as total weight, price, or item count in a combined order.
     */
     private ?CalculatedShippingRuleType $calculatedShippingRule = null;
     
     /**
-     * @var string|null $combinedDuration This container specifies the duration within which multiple unpaid orders may be combined into a single invoice, represented by one of the values in the CombinedPaymentPeriodEnum type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
+     * @var CombinedPaymentPeriodEnum|null $combinedDuration This enumerated value specifies the duration within which multiple unpaid orders may be combined into a single invoice, represented by one of the values in <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a>.
     */
-    private ?string $combinedDuration = null;
+    private ?CombinedPaymentPeriodEnum $combinedDuration = null;
     
     /**
      * Instantiates a new UpdateCalculatedShippingRulesRequest and sets the default values.
@@ -71,7 +71,7 @@ class UpdateCalculatedShippingRulesRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Gets the calculatedHandlingRule property value. This type defines the structure for calculated handling fee discounts applicable when combining multiple orders.
+     * Gets the calculatedHandlingRule property value. This container specifies the calculated handling rule that determines how handling fees are automatically computed based on order weight, quantity, or value in a combined shipment.
      * @return CalculatedHandlingRuleType|null
     */
     public function getCalculatedHandlingRule(): ?CalculatedHandlingRuleType {
@@ -79,7 +79,7 @@ class UpdateCalculatedShippingRulesRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Gets the calculatedShippingRule property value. This type describes calculated discount rules determining total shipping cost reductions for combined items.
+     * Gets the calculatedShippingRule property value. This container defines the calculated shipping rule that determines shipping costs or discounts based on factors such as total weight, price, or item count in a combined order.
      * @return CalculatedShippingRuleType|null
     */
     public function getCalculatedShippingRule(): ?CalculatedShippingRuleType {
@@ -87,10 +87,10 @@ class UpdateCalculatedShippingRulesRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Gets the combinedDuration property value. This container specifies the duration within which multiple unpaid orders may be combined into a single invoice, represented by one of the values in the CombinedPaymentPeriodEnum type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the combinedDuration property value. This enumerated value specifies the duration within which multiple unpaid orders may be combined into a single invoice, represented by one of the values in <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a>.
+     * @return CombinedPaymentPeriodEnum|null
     */
-    public function getCombinedDuration(): ?string {
+    public function getCombinedDuration(): ?CombinedPaymentPeriodEnum {
         return $this->combinedDuration;
     }
 
@@ -103,7 +103,7 @@ class UpdateCalculatedShippingRulesRequest implements AdditionalDataHolder, Pars
         return  [
             'calculatedHandlingRule' => fn(ParseNode $n) => $o->setCalculatedHandlingRule($n->getObjectValue([CalculatedHandlingRuleType::class, 'createFromDiscriminatorValue'])),
             'calculatedShippingRule' => fn(ParseNode $n) => $o->setCalculatedShippingRule($n->getObjectValue([CalculatedShippingRuleType::class, 'createFromDiscriminatorValue'])),
-            'combinedDuration' => fn(ParseNode $n) => $o->setCombinedDuration($n->getStringValue()),
+            'combinedDuration' => fn(ParseNode $n) => $o->setCombinedDuration($n->getEnumValue(CombinedPaymentPeriodEnum::class)),
         ];
     }
 
@@ -114,7 +114,7 @@ class UpdateCalculatedShippingRulesRequest implements AdditionalDataHolder, Pars
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('calculatedHandlingRule', $this->getCalculatedHandlingRule());
         $writer->writeObjectValue('calculatedShippingRule', $this->getCalculatedShippingRule());
-        $writer->writeStringValue('combinedDuration', $this->getCombinedDuration());
+        $writer->writeEnumValue('combinedDuration', $this->getCombinedDuration());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -127,7 +127,7 @@ class UpdateCalculatedShippingRulesRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Sets the calculatedHandlingRule property value. This type defines the structure for calculated handling fee discounts applicable when combining multiple orders.
+     * Sets the calculatedHandlingRule property value. This container specifies the calculated handling rule that determines how handling fees are automatically computed based on order weight, quantity, or value in a combined shipment.
      * @param CalculatedHandlingRuleType|null $value Value to set for the calculatedHandlingRule property.
     */
     public function setCalculatedHandlingRule(?CalculatedHandlingRuleType $value): void {
@@ -135,7 +135,7 @@ class UpdateCalculatedShippingRulesRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Sets the calculatedShippingRule property value. This type describes calculated discount rules determining total shipping cost reductions for combined items.
+     * Sets the calculatedShippingRule property value. This container defines the calculated shipping rule that determines shipping costs or discounts based on factors such as total weight, price, or item count in a combined order.
      * @param CalculatedShippingRuleType|null $value Value to set for the calculatedShippingRule property.
     */
     public function setCalculatedShippingRule(?CalculatedShippingRuleType $value): void {
@@ -143,10 +143,10 @@ class UpdateCalculatedShippingRulesRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Sets the combinedDuration property value. This container specifies the duration within which multiple unpaid orders may be combined into a single invoice, represented by one of the values in the CombinedPaymentPeriodEnum type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the combinedDuration property.
+     * Sets the combinedDuration property value. This enumerated value specifies the duration within which multiple unpaid orders may be combined into a single invoice, represented by one of the values in <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a>.
+     * @param CombinedPaymentPeriodEnum|null $value Value to set for the combinedDuration property.
     */
-    public function setCombinedDuration(?string $value): void {
+    public function setCombinedDuration(?CombinedPaymentPeriodEnum $value): void {
         $this->combinedDuration = $value;
     }
 

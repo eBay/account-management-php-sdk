@@ -23,13 +23,13 @@ class EmptyPathSegmentRequestBuilderGetQueryParameters
 {
     /**
      * @QueryParameter("policy_types")
-     * @var string|null $policyTypes This query parameter specifies the type of custom policies to be returned.<br><br>Multiple policy types may be requested in a single call by providing a comma-delimited set of all policy types to be returned.<br><br><span class="tablenote"><strong>Note:</strong> Omitting this query parameter from a request will also return policies of all policy types.</span><br> See the <a href="/api-docs/sell/account/types/api:CustomPolicyTypeEnum" target="_blank ">CustomPolicyTypeEnum</a> type for a list of supported values.
+     * @var string|null $policyTypes This query parameter specifies the type of custom policies to be returned.<br><br>Multiple policy types may be requested in a single call by providing a comma-delimited set of all policy types to be returned.<br><br><span class="tablenote"><strong>Note:</strong> Omitting this query parameter from a request will also return policies of all policy types.</span><br> See the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-custom_policy-createcustompolicy.custompolicytypeenum" target="_blank ">CustomPolicyTypeEnum</a> type for a list of supported values.
     */
     public ?string $policyTypes = null;
     
     /**
      * Instantiates a new EmptyPathSegmentRequestBuilderGetQueryParameters and sets the default values.
-     * @param string|null $policy_types This query parameter specifies the type of custom policies to be returned.<br><br>Multiple policy types may be requested in a single call by providing a comma-delimited set of all policy types to be returned.<br><br><span class="tablenote"><strong>Note:</strong> Omitting this query parameter from a request will also return policies of all policy types.</span><br> See the <a href="/api-docs/sell/account/types/api:CustomPolicyTypeEnum" target="_blank ">CustomPolicyTypeEnum</a> type for a list of supported values.
+     * @param string|null $policy_types This query parameter specifies the type of custom policies to be returned.<br><br>Multiple policy types may be requested in a single call by providing a comma-delimited set of all policy types to be returned.<br><br><span class="tablenote"><strong>Note:</strong> Omitting this query parameter from a request will also return policies of all policy types.</span><br> See the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-custom_policy-createcustompolicy.custompolicytypeenum" target="_blank ">CustomPolicyTypeEnum</a> type for a list of supported values.
     */
     public function __construct(?string $policy_types = null) {
         $this->policyTypes = $policy_types;

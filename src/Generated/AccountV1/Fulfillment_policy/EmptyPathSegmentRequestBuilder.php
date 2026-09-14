@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV1\Fulfillment_policy;
 
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\FulfillmentPolicyRequest;
 use EBay\AccountManagement\Generated\AccountV1\Models\SetFulfillmentPolicyResponse;
 use Exception;
@@ -53,7 +54,11 @@ class EmptyPathSegmentRequestBuilder extends BaseRequestBuilder
     */
     public function post(FulfillmentPolicyRequest $body, ?EmptyPathSegmentRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SetFulfillmentPolicyResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SetFulfillmentPolicyResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

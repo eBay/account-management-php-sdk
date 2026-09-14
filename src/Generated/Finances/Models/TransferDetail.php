@@ -32,7 +32,7 @@ class TransferDetail implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var BalanceAdjustment|null $balanceAdjustment This type is used by the <b>balanceAdjustment</b> container, which shows the seller payout balance that will be applied toward the charges outlined in the <b>charges</b> array.
+     * @var BalanceAdjustment|null $balanceAdjustment This container shows the seller payout balance that will be applied toward the charges outlined in the <b>charges</b> array.
     */
     private ?BalanceAdjustment $balanceAdjustment = null;
     
@@ -42,7 +42,7 @@ class TransferDetail implements AdditionalDataHolder, Parsable
     private ?array $charges = null;
     
     /**
-     * @var Amount|null $totalChargeNetAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $totalChargeNetAmount This container shows the total amount that the seller owes for all of the charges outlined in the <b>charges</b> array.
     */
     private ?Amount $totalChargeNetAmount = null;
     
@@ -71,7 +71,7 @@ class TransferDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the balanceAdjustment property value. This type is used by the <b>balanceAdjustment</b> container, which shows the seller payout balance that will be applied toward the charges outlined in the <b>charges</b> array.
+     * Gets the balanceAdjustment property value. This container shows the seller payout balance that will be applied toward the charges outlined in the <b>charges</b> array.
      * @return BalanceAdjustment|null
     */
     public function getBalanceAdjustment(): ?BalanceAdjustment {
@@ -100,7 +100,7 @@ class TransferDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the totalChargeNetAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the totalChargeNetAmount property value. This container shows the total amount that the seller owes for all of the charges outlined in the <b>charges</b> array.
      * @return Amount|null
     */
     public function getTotalChargeNetAmount(): ?Amount {
@@ -127,7 +127,7 @@ class TransferDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the balanceAdjustment property value. This type is used by the <b>balanceAdjustment</b> container, which shows the seller payout balance that will be applied toward the charges outlined in the <b>charges</b> array.
+     * Sets the balanceAdjustment property value. This container shows the seller payout balance that will be applied toward the charges outlined in the <b>charges</b> array.
      * @param BalanceAdjustment|null $value Value to set for the balanceAdjustment property.
     */
     public function setBalanceAdjustment(?BalanceAdjustment $value): void {
@@ -143,7 +143,7 @@ class TransferDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the totalChargeNetAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the totalChargeNetAmount property value. This container shows the total amount that the seller owes for all of the charges outlined in the <b>charges</b> array.
      * @param Amount|null $value Value to set for the totalChargeNetAmount property.
     */
     public function setTotalChargeNetAmount(?Amount $value): void {

@@ -32,27 +32,27 @@ class GetCombinedShippingRulesPublicApiResponse implements AdditionalDataHolder,
     private ?array $additionalData = null;
     
     /**
-     * @var CalculatedHandlingRuleType|null $calculatedHandlingRule This type defines the structure for calculated handling fee discounts applicable when combining multiple orders.
+     * @var CalculatedHandlingRuleType|null $calculatedHandlingRule This container will show one or more calculated shipping rules set up for that seller on that ebay marketplace.<br><br><span class="tablenote"><b>Note:</b> This will not be returned if a calculated handling rule is not set up for that seller on that eBay marketplace
     */
     private ?CalculatedHandlingRuleType $calculatedHandlingRule = null;
     
     /**
-     * @var CalculatedShippingRuleType|null $calculatedShippingRule This type describes calculated discount rules determining total shipping cost reductions for combined items.
+     * @var CalculatedShippingRuleType|null $calculatedShippingRule This container specifies the type of combined-shipping rule applied, such as flat-rate, weight-based, or cost-based.
     */
     private ?CalculatedShippingRuleType $calculatedShippingRule = null;
     
     /**
-     * @var string|null $combinedDuration This field is represented by one of the values in the CombinedPaymentPeriodEnum type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
+     * @var CombinedPaymentPeriodEnum|null $combinedDuration This field is represented by one of the values in the <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a>.
     */
-    private ?string $combinedDuration = null;
+    private ?CombinedPaymentPeriodEnum $combinedDuration = null;
     
     /**
-     * @var FlatShippingRuleType|null $flatShippingRule This type defines the flat-rate combined-shipping rule, which applies a fixed shipping cost for multiple items shipped together.
+     * @var FlatShippingRuleType|null $flatShippingRule This container will show one or more flat shipping rules set up for that seller on that ebay marketplace.
     */
     private ?FlatShippingRuleType $flatShippingRule = null;
     
     /**
-     * @var PromotionalShippingRuleType|null $promotionalShippingRule This type is used to represent a promotional shipping rule set up by the seller on an eBay marketplace.
+     * @var PromotionalShippingRuleType|null $promotionalShippingRule This container shows the promotional shipping rule that is currently set up on the seller's account for the eBay marketplace. <br><br>This container will not be returned if no promotional shipping rule is currently set up on the seller's account for the eBay marketplace.
     */
     private ?PromotionalShippingRuleType $promotionalShippingRule = null;
     
@@ -81,7 +81,7 @@ class GetCombinedShippingRulesPublicApiResponse implements AdditionalDataHolder,
     }
 
     /**
-     * Gets the calculatedHandlingRule property value. This type defines the structure for calculated handling fee discounts applicable when combining multiple orders.
+     * Gets the calculatedHandlingRule property value. This container will show one or more calculated shipping rules set up for that seller on that ebay marketplace.<br><br><span class="tablenote"><b>Note:</b> This will not be returned if a calculated handling rule is not set up for that seller on that eBay marketplace
      * @return CalculatedHandlingRuleType|null
     */
     public function getCalculatedHandlingRule(): ?CalculatedHandlingRuleType {
@@ -89,7 +89,7 @@ class GetCombinedShippingRulesPublicApiResponse implements AdditionalDataHolder,
     }
 
     /**
-     * Gets the calculatedShippingRule property value. This type describes calculated discount rules determining total shipping cost reductions for combined items.
+     * Gets the calculatedShippingRule property value. This container specifies the type of combined-shipping rule applied, such as flat-rate, weight-based, or cost-based.
      * @return CalculatedShippingRuleType|null
     */
     public function getCalculatedShippingRule(): ?CalculatedShippingRuleType {
@@ -97,10 +97,10 @@ class GetCombinedShippingRulesPublicApiResponse implements AdditionalDataHolder,
     }
 
     /**
-     * Gets the combinedDuration property value. This field is represented by one of the values in the CombinedPaymentPeriodEnum type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the combinedDuration property value. This field is represented by one of the values in the <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a>.
+     * @return CombinedPaymentPeriodEnum|null
     */
-    public function getCombinedDuration(): ?string {
+    public function getCombinedDuration(): ?CombinedPaymentPeriodEnum {
         return $this->combinedDuration;
     }
 
@@ -113,14 +113,14 @@ class GetCombinedShippingRulesPublicApiResponse implements AdditionalDataHolder,
         return  [
             'calculatedHandlingRule' => fn(ParseNode $n) => $o->setCalculatedHandlingRule($n->getObjectValue([CalculatedHandlingRuleType::class, 'createFromDiscriminatorValue'])),
             'calculatedShippingRule' => fn(ParseNode $n) => $o->setCalculatedShippingRule($n->getObjectValue([CalculatedShippingRuleType::class, 'createFromDiscriminatorValue'])),
-            'combinedDuration' => fn(ParseNode $n) => $o->setCombinedDuration($n->getStringValue()),
+            'combinedDuration' => fn(ParseNode $n) => $o->setCombinedDuration($n->getEnumValue(CombinedPaymentPeriodEnum::class)),
             'flatShippingRule' => fn(ParseNode $n) => $o->setFlatShippingRule($n->getObjectValue([FlatShippingRuleType::class, 'createFromDiscriminatorValue'])),
             'promotionalShippingRule' => fn(ParseNode $n) => $o->setPromotionalShippingRule($n->getObjectValue([PromotionalShippingRuleType::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the flatShippingRule property value. This type defines the flat-rate combined-shipping rule, which applies a fixed shipping cost for multiple items shipped together.
+     * Gets the flatShippingRule property value. This container will show one or more flat shipping rules set up for that seller on that ebay marketplace.
      * @return FlatShippingRuleType|null
     */
     public function getFlatShippingRule(): ?FlatShippingRuleType {
@@ -128,7 +128,7 @@ class GetCombinedShippingRulesPublicApiResponse implements AdditionalDataHolder,
     }
 
     /**
-     * Gets the promotionalShippingRule property value. This type is used to represent a promotional shipping rule set up by the seller on an eBay marketplace.
+     * Gets the promotionalShippingRule property value. This container shows the promotional shipping rule that is currently set up on the seller's account for the eBay marketplace. <br><br>This container will not be returned if no promotional shipping rule is currently set up on the seller's account for the eBay marketplace.
      * @return PromotionalShippingRuleType|null
     */
     public function getPromotionalShippingRule(): ?PromotionalShippingRuleType {
@@ -142,7 +142,7 @@ class GetCombinedShippingRulesPublicApiResponse implements AdditionalDataHolder,
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('calculatedHandlingRule', $this->getCalculatedHandlingRule());
         $writer->writeObjectValue('calculatedShippingRule', $this->getCalculatedShippingRule());
-        $writer->writeStringValue('combinedDuration', $this->getCombinedDuration());
+        $writer->writeEnumValue('combinedDuration', $this->getCombinedDuration());
         $writer->writeObjectValue('flatShippingRule', $this->getFlatShippingRule());
         $writer->writeObjectValue('promotionalShippingRule', $this->getPromotionalShippingRule());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -157,7 +157,7 @@ class GetCombinedShippingRulesPublicApiResponse implements AdditionalDataHolder,
     }
 
     /**
-     * Sets the calculatedHandlingRule property value. This type defines the structure for calculated handling fee discounts applicable when combining multiple orders.
+     * Sets the calculatedHandlingRule property value. This container will show one or more calculated shipping rules set up for that seller on that ebay marketplace.<br><br><span class="tablenote"><b>Note:</b> This will not be returned if a calculated handling rule is not set up for that seller on that eBay marketplace
      * @param CalculatedHandlingRuleType|null $value Value to set for the calculatedHandlingRule property.
     */
     public function setCalculatedHandlingRule(?CalculatedHandlingRuleType $value): void {
@@ -165,7 +165,7 @@ class GetCombinedShippingRulesPublicApiResponse implements AdditionalDataHolder,
     }
 
     /**
-     * Sets the calculatedShippingRule property value. This type describes calculated discount rules determining total shipping cost reductions for combined items.
+     * Sets the calculatedShippingRule property value. This container specifies the type of combined-shipping rule applied, such as flat-rate, weight-based, or cost-based.
      * @param CalculatedShippingRuleType|null $value Value to set for the calculatedShippingRule property.
     */
     public function setCalculatedShippingRule(?CalculatedShippingRuleType $value): void {
@@ -173,15 +173,15 @@ class GetCombinedShippingRulesPublicApiResponse implements AdditionalDataHolder,
     }
 
     /**
-     * Sets the combinedDuration property value. This field is represented by one of the values in the CombinedPaymentPeriodEnum type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the combinedDuration property.
+     * Sets the combinedDuration property value. This field is represented by one of the values in the <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a>.
+     * @param CombinedPaymentPeriodEnum|null $value Value to set for the combinedDuration property.
     */
-    public function setCombinedDuration(?string $value): void {
+    public function setCombinedDuration(?CombinedPaymentPeriodEnum $value): void {
         $this->combinedDuration = $value;
     }
 
     /**
-     * Sets the flatShippingRule property value. This type defines the flat-rate combined-shipping rule, which applies a fixed shipping cost for multiple items shipped together.
+     * Sets the flatShippingRule property value. This container will show one or more flat shipping rules set up for that seller on that ebay marketplace.
      * @param FlatShippingRuleType|null $value Value to set for the flatShippingRule property.
     */
     public function setFlatShippingRule(?FlatShippingRuleType $value): void {
@@ -189,7 +189,7 @@ class GetCombinedShippingRulesPublicApiResponse implements AdditionalDataHolder,
     }
 
     /**
-     * Sets the promotionalShippingRule property value. This type is used to represent a promotional shipping rule set up by the seller on an eBay marketplace.
+     * Sets the promotionalShippingRule property value. This container shows the promotional shipping rule that is currently set up on the seller's account for the eBay marketplace. <br><br>This container will not be returned if no promotional shipping rule is currently set up on the seller's account for the eBay marketplace.
      * @param PromotionalShippingRuleType|null $value Value to set for the promotionalShippingRule property.
     */
     public function setPromotionalShippingRule(?PromotionalShippingRuleType $value): void {

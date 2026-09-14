@@ -32,14 +32,14 @@ class OrderEarningFee implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $amount The monetary amount of the expense.
     */
     private ?Amount $amount = null;
     
     /**
-     * @var string|null $feeType The classification of the fee applied to the order. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay API documentation</a>
+     * @var FeeTypeEnum|null $feeType The classification of the fee applied to the order.
     */
-    private ?string $feeType = null;
+    private ?FeeTypeEnum $feeType = null;
     
     /**
      * Instantiates a new OrderEarningFee and sets the default values.
@@ -66,7 +66,7 @@ class OrderEarningFee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the amount property value. The monetary amount of the expense.
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -74,10 +74,10 @@ class OrderEarningFee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feeType property value. The classification of the fee applied to the order. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the feeType property value. The classification of the fee applied to the order.
+     * @return FeeTypeEnum|null
     */
-    public function getFeeType(): ?string {
+    public function getFeeType(): ?FeeTypeEnum {
         return $this->feeType;
     }
 
@@ -89,7 +89,7 @@ class OrderEarningFee implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'amount' => fn(ParseNode $n) => $o->setAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'feeType' => fn(ParseNode $n) => $o->setFeeType($n->getStringValue()),
+            'feeType' => fn(ParseNode $n) => $o->setFeeType($n->getEnumValue(FeeTypeEnum::class)),
         ];
     }
 
@@ -99,7 +99,7 @@ class OrderEarningFee implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('amount', $this->getAmount());
-        $writer->writeStringValue('feeType', $this->getFeeType());
+        $writer->writeEnumValue('feeType', $this->getFeeType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -112,7 +112,7 @@ class OrderEarningFee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the amount property value. The monetary amount of the expense.
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {
@@ -120,10 +120,10 @@ class OrderEarningFee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feeType property value. The classification of the fee applied to the order. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the feeType property.
+     * Sets the feeType property value. The classification of the fee applied to the order.
+     * @param FeeTypeEnum|null $value Value to set for the feeType property.
     */
-    public function setFeeType(?string $value): void {
+    public function setFeeType(?FeeTypeEnum $value): void {
         $this->feeType = $value;
     }
 

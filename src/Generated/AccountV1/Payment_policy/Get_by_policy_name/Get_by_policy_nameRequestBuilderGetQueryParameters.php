@@ -23,19 +23,19 @@ class Get_by_policy_nameRequestBuilderGetQueryParameters
 {
     /**
      * @QueryParameter("marketplace_id")
-     * @var string|null $marketplaceId This query parameter specifies the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
+     * @var string|null $marketplaceId This query parameter specifies the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/develop/api/sell/account_api_v1#sell-account_api_v1-payment_policy-getpaymentpolicies.marketplaceidenum
     */
     public ?string $marketplaceId = null;
     
     /**
-     * @var string|null $name This query parameter specifies the seller-defined name of the payment policy you want to retrieve.<br><br> This value can be retrieved for a payment policy by using the <a href="/api-docs/sell/account/resources/payment_policy/methods/getPaymentPolicies" target="_blank ">getPaymentPolicies</a> method.
+     * @var string|null $name This query parameter specifies the seller-defined name of the payment policy you want to retrieve.<br><br> This value can be retrieved for a payment policy by using the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-payment_policy-getpaymentpolicies" target="_blank ">getPaymentPolicies</a> method.
     */
     public ?string $name = null;
     
     /**
      * Instantiates a new Get_by_policy_nameRequestBuilderGetQueryParameters and sets the default values.
-     * @param string|null $marketplace_id This query parameter specifies the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
-     * @param string|null $name This query parameter specifies the seller-defined name of the payment policy you want to retrieve.<br><br> This value can be retrieved for a payment policy by using the <a href="/api-docs/sell/account/resources/payment_policy/methods/getPaymentPolicies" target="_blank ">getPaymentPolicies</a> method.
+     * @param string|null $marketplace_id This query parameter specifies the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/develop/api/sell/account_api_v1#sell-account_api_v1-payment_policy-getpaymentpolicies.marketplaceidenum
+     * @param string|null $name This query parameter specifies the seller-defined name of the payment policy you want to retrieve.<br><br> This value can be retrieved for a payment policy by using the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-payment_policy-getpaymentpolicies" target="_blank ">getPaymentPolicies</a> method.
     */
     public function __construct(?string $marketplace_id = null, ?string $name = null) {
         $this->marketplaceId = $marketplace_id;

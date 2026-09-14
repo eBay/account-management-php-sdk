@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV2\Rate_table\Item\Update_shipping_cost;
 
+use EBay\AccountManagement\Generated\AccountV2\Models\Error;
 use EBay\AccountManagement\Generated\AccountV2\Models\RateTableUpdate;
 use Exception;
 use Http\Promise\Promise;
@@ -45,19 +46,25 @@ class Update_shipping_costRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method allows sellers to update <b>shippingCost</b> and/or <b>additionalCost</b> information for an existing shipping rate table identified by the <b>rate_table_id</b> path parameter.<br><br>A successful call returns an HTTP status code of <b>204 No Content</b>.
-     * @param RateTableUpdate $body This type is used by the request payload of the <b>updateShippingCost</b> method to pass updated shipping cost information for a rate table identified by <b>rateTableId</b>.
+     * @param RateTableUpdate $body Request to update the shipping costs for the identified shipping rate table.
      * @param Update_shipping_costRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(RateTableUpdate $body, ?Update_shipping_costRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
      * This method allows sellers to update <b>shippingCost</b> and/or <b>additionalCost</b> information for an existing shipping rate table identified by the <b>rate_table_id</b> path parameter.<br><br>A successful call returns an HTTP status code of <b>204 No Content</b>.
-     * @param RateTableUpdate $body This type is used by the request payload of the <b>updateShippingCost</b> method to pass updated shipping cost information for a rate table identified by <b>rateTableId</b>.
+     * @param RateTableUpdate $body Request to update the shipping costs for the identified shipping rate table.
      * @param Update_shipping_costRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -70,6 +77,7 @@ class Update_shipping_costRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

@@ -32,9 +32,9 @@ class Expense implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $currency This field shows the three-letter currency code that represents the currency used for all of the order expenses For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/ba:CurrencyCodeEnum'>eBay API documentation</a>
+     * @var CurrencyCodeEnum|null $currency This field shows the three-letter currency code that represents the currency used for all of the order expenses.
     */
-    private ?string $currency = null;
+    private ?CurrencyCodeEnum $currency = null;
     
     /**
      * @var array<OrderEarningFee>|null $donations This array shows the amount(s) of one or more donations that are submitted to eBay charity organizations for one or more orders. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Donations are always tied to specific items. When an item is listed with a charity contribution (for example, 10%), the donation is calculated per item at the time of sale. Order earnings factor in only the items within the order that are eligible for donation.</span></p>
@@ -47,7 +47,7 @@ class Expense implements AdditionalDataHolder, Parsable
     private ?array $marketplaceFees = null;
     
     /**
-     * @var Amount|null $shippingLabels This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $shippingLabels This container shows the total amount paid by the seller for eBay shipping labels for one or more orders.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Charges and credits for shipping labels purchased with non-eBay payment methods (for example, PayPal) are excluded from the order earnings calculation.</span></p>
     */
     private ?Amount $shippingLabels = null;
     
@@ -81,10 +81,10 @@ class Expense implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the currency property value. This field shows the three-letter currency code that represents the currency used for all of the order expenses For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/ba:CurrencyCodeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the currency property value. This field shows the three-letter currency code that represents the currency used for all of the order expenses.
+     * @return CurrencyCodeEnum|null
     */
-    public function getCurrency(): ?string {
+    public function getCurrency(): ?CurrencyCodeEnum {
         return $this->currency;
     }
 
@@ -103,7 +103,7 @@ class Expense implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'currency' => fn(ParseNode $n) => $o->setCurrency($n->getStringValue()),
+            'currency' => fn(ParseNode $n) => $o->setCurrency($n->getEnumValue(CurrencyCodeEnum::class)),
             'donations' => fn(ParseNode $n) => $o->setDonations($n->getCollectionOfObjectValues([OrderEarningFee::class, 'createFromDiscriminatorValue'])),
             'marketplaceFees' => fn(ParseNode $n) => $o->setMarketplaceFees($n->getCollectionOfObjectValues([OrderEarningFee::class, 'createFromDiscriminatorValue'])),
             'shippingLabels' => fn(ParseNode $n) => $o->setShippingLabels($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
@@ -120,7 +120,7 @@ class Expense implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingLabels property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the shippingLabels property value. This container shows the total amount paid by the seller for eBay shipping labels for one or more orders.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Charges and credits for shipping labels purchased with non-eBay payment methods (for example, PayPal) are excluded from the order earnings calculation.</span></p>
      * @return Amount|null
     */
     public function getShippingLabels(): ?Amount {
@@ -140,7 +140,7 @@ class Expense implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('currency', $this->getCurrency());
+        $writer->writeEnumValue('currency', $this->getCurrency());
         $writer->writeCollectionOfObjectValues('donations', $this->getDonations());
         $writer->writeCollectionOfObjectValues('marketplaceFees', $this->getMarketplaceFees());
         $writer->writeObjectValue('shippingLabels', $this->getShippingLabels());
@@ -157,10 +157,10 @@ class Expense implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the currency property value. This field shows the three-letter currency code that represents the currency used for all of the order expenses For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/ba:CurrencyCodeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the currency property.
+     * Sets the currency property value. This field shows the three-letter currency code that represents the currency used for all of the order expenses.
+     * @param CurrencyCodeEnum|null $value Value to set for the currency property.
     */
-    public function setCurrency(?string $value): void {
+    public function setCurrency(?CurrencyCodeEnum $value): void {
         $this->currency = $value;
     }
 
@@ -181,7 +181,7 @@ class Expense implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingLabels property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the shippingLabels property value. This container shows the total amount paid by the seller for eBay shipping labels for one or more orders.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Charges and credits for shipping labels purchased with non-eBay payment methods (for example, PayPal) are excluded from the order earnings calculation.</span></p>
      * @param Amount|null $value Value to set for the shippingLabels property.
     */
     public function setShippingLabels(?Amount $value): void {

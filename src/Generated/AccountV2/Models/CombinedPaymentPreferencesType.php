@@ -32,9 +32,9 @@ class CombinedPaymentPreferencesType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $combinedPaymentOption This enum type defines the available options for handling combined payments when a seller allows multiple line items from the same buyer to be paid for with a single payment. See <code>CombinedPaymentOptionEnum</code> for a description of each value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentOptionEnum'>eBay API documentation</a>
+     * @var CombinedPaymentOptionEnum|null $combinedPaymentOption This enum type defines the available options for handling combined payments when a seller allows multiple line items from the same buyer to be paid for with a single payment. See <code>CombinedPaymentOptionEnum</code> for a description of each value.
     */
-    private ?string $combinedPaymentOption = null;
+    private ?CombinedPaymentOptionEnum $combinedPaymentOption = null;
     
     /**
      * Instantiates a new CombinedPaymentPreferencesType and sets the default values.
@@ -61,10 +61,10 @@ class CombinedPaymentPreferencesType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the combinedPaymentOption property value. This enum type defines the available options for handling combined payments when a seller allows multiple line items from the same buyer to be paid for with a single payment. See <code>CombinedPaymentOptionEnum</code> for a description of each value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentOptionEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the combinedPaymentOption property value. This enum type defines the available options for handling combined payments when a seller allows multiple line items from the same buyer to be paid for with a single payment. See <code>CombinedPaymentOptionEnum</code> for a description of each value.
+     * @return CombinedPaymentOptionEnum|null
     */
-    public function getCombinedPaymentOption(): ?string {
+    public function getCombinedPaymentOption(): ?CombinedPaymentOptionEnum {
         return $this->combinedPaymentOption;
     }
 
@@ -75,7 +75,7 @@ class CombinedPaymentPreferencesType implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'combinedPaymentOption' => fn(ParseNode $n) => $o->setCombinedPaymentOption($n->getStringValue()),
+            'combinedPaymentOption' => fn(ParseNode $n) => $o->setCombinedPaymentOption($n->getEnumValue(CombinedPaymentOptionEnum::class)),
         ];
     }
 
@@ -84,7 +84,7 @@ class CombinedPaymentPreferencesType implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('combinedPaymentOption', $this->getCombinedPaymentOption());
+        $writer->writeEnumValue('combinedPaymentOption', $this->getCombinedPaymentOption());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -97,10 +97,10 @@ class CombinedPaymentPreferencesType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the combinedPaymentOption property value. This enum type defines the available options for handling combined payments when a seller allows multiple line items from the same buyer to be paid for with a single payment. See <code>CombinedPaymentOptionEnum</code> for a description of each value. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentOptionEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the combinedPaymentOption property.
+     * Sets the combinedPaymentOption property value. This enum type defines the available options for handling combined payments when a seller allows multiple line items from the same buyer to be paid for with a single payment. See <code>CombinedPaymentOptionEnum</code> for a description of each value.
+     * @param CombinedPaymentOptionEnum|null $value Value to set for the combinedPaymentOption property.
     */
-    public function setCombinedPaymentOption(?string $value): void {
+    public function setCombinedPaymentOption(?CombinedPaymentOptionEnum $value): void {
         $this->combinedPaymentOption = $value;
     }
 

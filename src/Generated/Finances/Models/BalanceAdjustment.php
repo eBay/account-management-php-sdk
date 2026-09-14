@@ -32,14 +32,14 @@ class BalanceAdjustment implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $adjustmentAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $adjustmentAmount The seller payout balance amount that will be applied toward the charges outlined in the <b>charges</b> array.
     */
     private ?Amount $adjustmentAmount = null;
     
     /**
-     * @var string|null $adjustmentType The enumeration value returned here indicates if the charge is a <code>DEBIT</code> or a <code>CREDIT</code> to the seller. Generally, all transfer transaction types are going to be <code>DEBIT</code>, since the money is being tranferred from the seller to eBay. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $adjustmentType The enumeration value returned here indicates if the charge is a <code>DEBIT</code> or a <code>CREDIT</code> to the seller. Generally, all transfer transaction types are going to be <code>DEBIT</code>, since the money is being transferred from the seller to eBay.
     */
-    private ?string $adjustmentType = null;
+    private ?BookingEntryEnum $adjustmentType = null;
     
     /**
      * Instantiates a new BalanceAdjustment and sets the default values.
@@ -66,7 +66,7 @@ class BalanceAdjustment implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adjustmentAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the adjustmentAmount property value. The seller payout balance amount that will be applied toward the charges outlined in the <b>charges</b> array.
      * @return Amount|null
     */
     public function getAdjustmentAmount(): ?Amount {
@@ -74,10 +74,10 @@ class BalanceAdjustment implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the adjustmentType property value. The enumeration value returned here indicates if the charge is a <code>DEBIT</code> or a <code>CREDIT</code> to the seller. Generally, all transfer transaction types are going to be <code>DEBIT</code>, since the money is being tranferred from the seller to eBay. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the adjustmentType property value. The enumeration value returned here indicates if the charge is a <code>DEBIT</code> or a <code>CREDIT</code> to the seller. Generally, all transfer transaction types are going to be <code>DEBIT</code>, since the money is being transferred from the seller to eBay.
+     * @return BookingEntryEnum|null
     */
-    public function getAdjustmentType(): ?string {
+    public function getAdjustmentType(): ?BookingEntryEnum {
         return $this->adjustmentType;
     }
 
@@ -89,7 +89,7 @@ class BalanceAdjustment implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'adjustmentAmount' => fn(ParseNode $n) => $o->setAdjustmentAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'adjustmentType' => fn(ParseNode $n) => $o->setAdjustmentType($n->getStringValue()),
+            'adjustmentType' => fn(ParseNode $n) => $o->setAdjustmentType($n->getEnumValue(BookingEntryEnum::class)),
         ];
     }
 
@@ -99,7 +99,7 @@ class BalanceAdjustment implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('adjustmentAmount', $this->getAdjustmentAmount());
-        $writer->writeStringValue('adjustmentType', $this->getAdjustmentType());
+        $writer->writeEnumValue('adjustmentType', $this->getAdjustmentType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -112,7 +112,7 @@ class BalanceAdjustment implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adjustmentAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the adjustmentAmount property value. The seller payout balance amount that will be applied toward the charges outlined in the <b>charges</b> array.
      * @param Amount|null $value Value to set for the adjustmentAmount property.
     */
     public function setAdjustmentAmount(?Amount $value): void {
@@ -120,10 +120,10 @@ class BalanceAdjustment implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the adjustmentType property value. The enumeration value returned here indicates if the charge is a <code>DEBIT</code> or a <code>CREDIT</code> to the seller. Generally, all transfer transaction types are going to be <code>DEBIT</code>, since the money is being tranferred from the seller to eBay. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the adjustmentType property.
+     * Sets the adjustmentType property value. The enumeration value returned here indicates if the charge is a <code>DEBIT</code> or a <code>CREDIT</code> to the seller. Generally, all transfer transaction types are going to be <code>DEBIT</code>, since the money is being transferred from the seller to eBay.
+     * @param BookingEntryEnum|null $value Value to set for the adjustmentType property.
     */
-    public function setAdjustmentType(?string $value): void {
+    public function setAdjustmentType(?BookingEntryEnum $value): void {
         $this->adjustmentType = $value;
     }
 

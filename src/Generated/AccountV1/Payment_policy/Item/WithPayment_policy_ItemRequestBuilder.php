@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV1\Payment_policy\Item;
 
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\PaymentPolicy;
 use EBay\AccountManagement\Generated\AccountV1\Models\PaymentPolicyRequest;
 use EBay\AccountManagement\Generated\AccountV1\Models\SetPaymentPolicyResponse;
@@ -53,7 +54,13 @@ class WithPayment_policy_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function delete(?WithPayment_policy_ItemRequestBuilderDeleteRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toDeleteRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
@@ -64,7 +71,12 @@ class WithPayment_policy_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?WithPayment_policy_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [PaymentPolicy::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [PaymentPolicy::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -76,7 +88,12 @@ class WithPayment_policy_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function put(PaymentPolicyRequest $body, ?WithPayment_policy_ItemRequestBuilderPutRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPutRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SetPaymentPolicyResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SetPaymentPolicyResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -93,6 +110,7 @@ class WithPayment_policy_ItemRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         return $requestInfo;
     }
 

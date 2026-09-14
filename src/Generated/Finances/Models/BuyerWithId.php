@@ -32,12 +32,12 @@ class BuyerWithId implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $userId The public user id of the buyer
+     * @var string|null $userId The public user ID of the buyer.
     */
     private ?string $userId = null;
     
     /**
-     * @var string|null $username The username of the buyer. <br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>. </span>
+     * @var string|null $username The username of the buyer. <br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>. </span>
     */
     private ?string $username = null;
     
@@ -78,7 +78,7 @@ class BuyerWithId implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the userId property value. The public user id of the buyer
+     * Gets the userId property value. The public user ID of the buyer.
      * @return string|null
     */
     public function getUserId(): ?string {
@@ -86,7 +86,7 @@ class BuyerWithId implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the username property value. The username of the buyer. <br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>. </span>
+     * Gets the username property value. The username of the buyer. <br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>. </span>
      * @return string|null
     */
     public function getUsername(): ?string {
@@ -112,7 +112,7 @@ class BuyerWithId implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the userId property value. The public user id of the buyer
+     * Sets the userId property value. The public user ID of the buyer.
      * @param string|null $value Value to set for the userId property.
     */
     public function setUserId(?string $value): void {
@@ -120,7 +120,7 @@ class BuyerWithId implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the username property value. The username of the buyer. <br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>. </span>
+     * Sets the username property value. The username of the buyer. <br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>. </span>
      * @param string|null $value Value to set for the username property.
     */
     public function setUsername(?string $value): void {

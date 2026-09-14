@@ -42,7 +42,7 @@ class Fulfillment_policyRequestBuilderGetRequestConfiguration extends BaseReques
 
     /**
      * Instantiates a new Fulfillment_policyRequestBuilderGetQueryParameters.
-     * @param string|null $marketplace_id This query parameter specifies the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
+     * @param string|null $marketplace_id This query parameter specifies the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/develop/api/sell/account_api_v1#sell-account_api_v1-fulfillment_policy-getfulfillmentpolicies.marketplaceidenum
      * @return Fulfillment_policyRequestBuilderGetQueryParameters
     */
     public static function createQueryParameters(?string $marketplace_id = null): Fulfillment_policyRequestBuilderGetQueryParameters {

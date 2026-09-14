@@ -32,17 +32,17 @@ class CalculatedHandlingRuleType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $combinedShippingRuleType This enumeration type specifies the type of combined-shipping rule applied to handling fees <br><br>(for example, weight-based, flat-rate, or percentage-based calculation method). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeHandlingEnum'>eBay API documentation</a>
+     * @var CombinedShippingRuleTypeHandlingEnum|null $combinedShippingRuleType This enumeration value specifies the type of combined-shipping rule applied to handling fees (for example, weight-based, flat-rate, or percentage-based calculation method). 
     */
-    private ?string $combinedShippingRuleType = null;
+    private ?CombinedShippingRuleTypeHandlingEnum $combinedShippingRuleType = null;
     
     /**
-     * @var Amount|null $eachAdditionalAmount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $eachAdditionalAmount This container specifies the additional monetary charge applied for each extra item included in a combined shipment.
     */
     private ?Amount $eachAdditionalAmount = null;
     
     /**
-     * @var Amount|null $eachAdditionalAmountOffShippingCost A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $eachAdditionalAmountOffShippingCost This container represents the fixed monetary discount deducted from the total shipping cost for each additional item in a combined shipment.
     */
     private ?Amount $eachAdditionalAmountOffShippingCost = null;
     
@@ -52,7 +52,7 @@ class CalculatedHandlingRuleType implements AdditionalDataHolder, Parsable
     private ?float $eachAdditionalPercentOffShippingCost = null;
     
     /**
-     * @var Amount|null $orderHandlingAmount A complex type that describes the value of a monetary amount as represented by a global currency.
+     * @var Amount|null $orderHandlingAmount This container represents the handling fee charged for processing a combined order, if applicable.
     */
     private ?Amount $orderHandlingAmount = null;
     
@@ -81,15 +81,15 @@ class CalculatedHandlingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the combinedShippingRuleType property value. This enumeration type specifies the type of combined-shipping rule applied to handling fees <br><br>(for example, weight-based, flat-rate, or percentage-based calculation method). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeHandlingEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the combinedShippingRuleType property value. This enumeration value specifies the type of combined-shipping rule applied to handling fees (for example, weight-based, flat-rate, or percentage-based calculation method). 
+     * @return CombinedShippingRuleTypeHandlingEnum|null
     */
-    public function getCombinedShippingRuleType(): ?string {
+    public function getCombinedShippingRuleType(): ?CombinedShippingRuleTypeHandlingEnum {
         return $this->combinedShippingRuleType;
     }
 
     /**
-     * Gets the eachAdditionalAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the eachAdditionalAmount property value. This container specifies the additional monetary charge applied for each extra item included in a combined shipment.
      * @return Amount|null
     */
     public function getEachAdditionalAmount(): ?Amount {
@@ -97,7 +97,7 @@ class CalculatedHandlingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the eachAdditionalAmountOffShippingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the eachAdditionalAmountOffShippingCost property value. This container represents the fixed monetary discount deducted from the total shipping cost for each additional item in a combined shipment.
      * @return Amount|null
     */
     public function getEachAdditionalAmountOffShippingCost(): ?Amount {
@@ -119,7 +119,7 @@ class CalculatedHandlingRuleType implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'combinedShippingRuleType' => fn(ParseNode $n) => $o->setCombinedShippingRuleType($n->getStringValue()),
+            'combinedShippingRuleType' => fn(ParseNode $n) => $o->setCombinedShippingRuleType($n->getEnumValue(CombinedShippingRuleTypeHandlingEnum::class)),
             'eachAdditionalAmount' => fn(ParseNode $n) => $o->setEachAdditionalAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'eachAdditionalAmountOffShippingCost' => fn(ParseNode $n) => $o->setEachAdditionalAmountOffShippingCost($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'eachAdditionalPercentOffShippingCost' => fn(ParseNode $n) => $o->setEachAdditionalPercentOffShippingCost($n->getFloatValue()),
@@ -128,7 +128,7 @@ class CalculatedHandlingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the orderHandlingAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Gets the orderHandlingAmount property value. This container represents the handling fee charged for processing a combined order, if applicable.
      * @return Amount|null
     */
     public function getOrderHandlingAmount(): ?Amount {
@@ -140,7 +140,7 @@ class CalculatedHandlingRuleType implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('combinedShippingRuleType', $this->getCombinedShippingRuleType());
+        $writer->writeEnumValue('combinedShippingRuleType', $this->getCombinedShippingRuleType());
         $writer->writeObjectValue('eachAdditionalAmount', $this->getEachAdditionalAmount());
         $writer->writeObjectValue('eachAdditionalAmountOffShippingCost', $this->getEachAdditionalAmountOffShippingCost());
         $writer->writeFloatValue('eachAdditionalPercentOffShippingCost', $this->getEachAdditionalPercentOffShippingCost());
@@ -157,15 +157,15 @@ class CalculatedHandlingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the combinedShippingRuleType property value. This enumeration type specifies the type of combined-shipping rule applied to handling fees <br><br>(for example, weight-based, flat-rate, or percentage-based calculation method). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedShippingRuleTypeHandlingEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the combinedShippingRuleType property.
+     * Sets the combinedShippingRuleType property value. This enumeration value specifies the type of combined-shipping rule applied to handling fees (for example, weight-based, flat-rate, or percentage-based calculation method). 
+     * @param CombinedShippingRuleTypeHandlingEnum|null $value Value to set for the combinedShippingRuleType property.
     */
-    public function setCombinedShippingRuleType(?string $value): void {
+    public function setCombinedShippingRuleType(?CombinedShippingRuleTypeHandlingEnum $value): void {
         $this->combinedShippingRuleType = $value;
     }
 
     /**
-     * Sets the eachAdditionalAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the eachAdditionalAmount property value. This container specifies the additional monetary charge applied for each extra item included in a combined shipment.
      * @param Amount|null $value Value to set for the eachAdditionalAmount property.
     */
     public function setEachAdditionalAmount(?Amount $value): void {
@@ -173,7 +173,7 @@ class CalculatedHandlingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the eachAdditionalAmountOffShippingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the eachAdditionalAmountOffShippingCost property value. This container represents the fixed monetary discount deducted from the total shipping cost for each additional item in a combined shipment.
      * @param Amount|null $value Value to set for the eachAdditionalAmountOffShippingCost property.
     */
     public function setEachAdditionalAmountOffShippingCost(?Amount $value): void {
@@ -189,7 +189,7 @@ class CalculatedHandlingRuleType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the orderHandlingAmount property value. A complex type that describes the value of a monetary amount as represented by a global currency.
+     * Sets the orderHandlingAmount property value. This container represents the handling fee charged for processing a combined order, if applicable.
      * @param Amount|null $value Value to set for the orderHandlingAmount property.
     */
     public function setOrderHandlingAmount(?Amount $value): void {

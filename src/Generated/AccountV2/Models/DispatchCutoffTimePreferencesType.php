@@ -32,7 +32,7 @@ class DispatchCutoffTimePreferencesType implements AdditionalDataHolder, Parsabl
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $cutoffTime This field indicates the dispatch cut-off time in Zulu format (<code>HH:mm:ss.SSSZ</code>) - 24-hour format with milliseconds and Z timezone indicator. </br> <b>Note</b>: Despite the Z that is returned in the timestamp, the cut-off time is actually based on the default timezone of the eBay marketplace for the seller. </br> <b>Note</b>: If an eBay listing supports same-day shipping, and an order is paid for before the cut-off time, the seller is expected to ship the order out that same business day.
+     * @var string|null $cutoffTime This field indicates the dispatch cut-off time in Zulu format (<code>HH:mm:ss.SSSZ</code>) - 24-hour format with milliseconds and Z timezone indicator.<br><br><span class="tablenote"><b>Note:</b> Despite the Z that is returned in the timestamp, the cut-off time is actually based on the default timezone of the eBay marketplace for the seller.</span><br><br><span class="tablenote"><b>Note:</b> If an eBay listing supports same-day shipping, and an order is paid for before the cut-off time, the seller is expected to ship the order out that same business day.</span>
     */
     private ?string $cutoffTime = null;
     
@@ -61,7 +61,7 @@ class DispatchCutoffTimePreferencesType implements AdditionalDataHolder, Parsabl
     }
 
     /**
-     * Gets the cutoffTime property value. This field indicates the dispatch cut-off time in Zulu format (<code>HH:mm:ss.SSSZ</code>) - 24-hour format with milliseconds and Z timezone indicator. </br> <b>Note</b>: Despite the Z that is returned in the timestamp, the cut-off time is actually based on the default timezone of the eBay marketplace for the seller. </br> <b>Note</b>: If an eBay listing supports same-day shipping, and an order is paid for before the cut-off time, the seller is expected to ship the order out that same business day.
+     * Gets the cutoffTime property value. This field indicates the dispatch cut-off time in Zulu format (<code>HH:mm:ss.SSSZ</code>) - 24-hour format with milliseconds and Z timezone indicator.<br><br><span class="tablenote"><b>Note:</b> Despite the Z that is returned in the timestamp, the cut-off time is actually based on the default timezone of the eBay marketplace for the seller.</span><br><br><span class="tablenote"><b>Note:</b> If an eBay listing supports same-day shipping, and an order is paid for before the cut-off time, the seller is expected to ship the order out that same business day.</span>
      * @return string|null
     */
     public function getCutoffTime(): ?string {
@@ -97,7 +97,7 @@ class DispatchCutoffTimePreferencesType implements AdditionalDataHolder, Parsabl
     }
 
     /**
-     * Sets the cutoffTime property value. This field indicates the dispatch cut-off time in Zulu format (<code>HH:mm:ss.SSSZ</code>) - 24-hour format with milliseconds and Z timezone indicator. </br> <b>Note</b>: Despite the Z that is returned in the timestamp, the cut-off time is actually based on the default timezone of the eBay marketplace for the seller. </br> <b>Note</b>: If an eBay listing supports same-day shipping, and an order is paid for before the cut-off time, the seller is expected to ship the order out that same business day.
+     * Sets the cutoffTime property value. This field indicates the dispatch cut-off time in Zulu format (<code>HH:mm:ss.SSSZ</code>) - 24-hour format with milliseconds and Z timezone indicator.<br><br><span class="tablenote"><b>Note:</b> Despite the Z that is returned in the timestamp, the cut-off time is actually based on the default timezone of the eBay marketplace for the seller.</span><br><br><span class="tablenote"><b>Note:</b> If an eBay listing supports same-day shipping, and an order is paid for before the cut-off time, the seller is expected to ship the order out that same business day.</span>
      * @param string|null $value Value to set for the cutoffTime property.
     */
     public function setCutoffTime(?string $value): void {

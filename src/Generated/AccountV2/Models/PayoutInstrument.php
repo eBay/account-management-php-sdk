@@ -42,9 +42,9 @@ class PayoutInstrument implements AdditionalDataHolder, Parsable
     private ?string $instrumentId = null;
     
     /**
-     * @var string|null $instrumentStatus The status of a payout instrument. Valid payout instrument statuses include:<br/><ul><li><code>PENDING:</code> This status indicates that the account must be verified before it can be used.</li><li><code>ACTIVE:</code>This status indicates that payouts are enabled on this account.</li><li><code>VERIFICATION_FAILED:</code> This status indicates that verification has failed for this account and payouts are disabled.</li><li><code>INACTIVE:</code> This status indicates that this account has become inactive and payouts are disabled.</li></ul><br/>See <b>InstrumentStatusEnum</b> for more details on each instrument status value.<br><br><span class="tablenote"><b>Note:</b> Payment accounts can only receive payouts if the status of a payout instrument is <code>ACTIVE</code>.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/sel:InstrumentStatusEnum'>eBay API documentation</a>
+     * @var InstrumentStatusEnum|null $instrumentStatus The status of a payout instrument. Valid payout instrument statuses include:<br/><ul><li><code>PENDING:</code> This status indicates that the account must be verified before it can be used.</li><li><code>ACTIVE:</code>This status indicates that payouts are enabled on this account.</li><li><code>VERIFICATION_FAILED:</code> This status indicates that verification has failed for this account and payouts are disabled.</li><li><code>INACTIVE:</code> This status indicates that this account has become inactive and payouts are disabled.</li></ul><br/>See <b>InstrumentStatusEnum</b> for more details on each instrument status value.<br><br><span class="tablenote"><b>Note:</b> Payment accounts can only receive payouts if the status of a payout instrument is <code>ACTIVE</code>.</span>
     */
-    private ?string $instrumentStatus = null;
+    private ?InstrumentStatusEnum $instrumentStatus = null;
     
     /**
      * @var string|null $instrumentType The type of account that received payouts. The value returned in this field may be:<br/><ul><li><code>BANK</code>: Indicates that the payout was made to a seller's bank account.</li><li><code>CARD</code> (<b>Not Currently Available</b>): Indicates that the payout went to a seller's debit card.</li><li>The name of a digital wallet provider or payment processor (e.g., <code>PAYONEER</code>)</li></ul><br><span class="tablenote"><b>Note:</b> Only Payoneer is currently supported for sellers in mainland China. Card payouts are not currently available for sellers in mainland China.</span> 
@@ -102,7 +102,7 @@ class PayoutInstrument implements AdditionalDataHolder, Parsable
         return  [
             'accountLastFourDigits' => fn(ParseNode $n) => $o->setAccountLastFourDigits($n->getStringValue()),
             'instrumentId' => fn(ParseNode $n) => $o->setInstrumentId($n->getStringValue()),
-            'instrumentStatus' => fn(ParseNode $n) => $o->setInstrumentStatus($n->getStringValue()),
+            'instrumentStatus' => fn(ParseNode $n) => $o->setInstrumentStatus($n->getEnumValue(InstrumentStatusEnum::class)),
             'instrumentType' => fn(ParseNode $n) => $o->setInstrumentType($n->getStringValue()),
             'nickname' => fn(ParseNode $n) => $o->setNickname($n->getStringValue()),
             'payoutPercentage' => fn(ParseNode $n) => $o->setPayoutPercentage($n->getStringValue()),
@@ -118,10 +118,10 @@ class PayoutInstrument implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the instrumentStatus property value. The status of a payout instrument. Valid payout instrument statuses include:<br/><ul><li><code>PENDING:</code> This status indicates that the account must be verified before it can be used.</li><li><code>ACTIVE:</code>This status indicates that payouts are enabled on this account.</li><li><code>VERIFICATION_FAILED:</code> This status indicates that verification has failed for this account and payouts are disabled.</li><li><code>INACTIVE:</code> This status indicates that this account has become inactive and payouts are disabled.</li></ul><br/>See <b>InstrumentStatusEnum</b> for more details on each instrument status value.<br><br><span class="tablenote"><b>Note:</b> Payment accounts can only receive payouts if the status of a payout instrument is <code>ACTIVE</code>.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/sel:InstrumentStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the instrumentStatus property value. The status of a payout instrument. Valid payout instrument statuses include:<br/><ul><li><code>PENDING:</code> This status indicates that the account must be verified before it can be used.</li><li><code>ACTIVE:</code>This status indicates that payouts are enabled on this account.</li><li><code>VERIFICATION_FAILED:</code> This status indicates that verification has failed for this account and payouts are disabled.</li><li><code>INACTIVE:</code> This status indicates that this account has become inactive and payouts are disabled.</li></ul><br/>See <b>InstrumentStatusEnum</b> for more details on each instrument status value.<br><br><span class="tablenote"><b>Note:</b> Payment accounts can only receive payouts if the status of a payout instrument is <code>ACTIVE</code>.</span>
+     * @return InstrumentStatusEnum|null
     */
-    public function getInstrumentStatus(): ?string {
+    public function getInstrumentStatus(): ?InstrumentStatusEnum {
         return $this->instrumentStatus;
     }
 
@@ -156,7 +156,7 @@ class PayoutInstrument implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('accountLastFourDigits', $this->getAccountLastFourDigits());
         $writer->writeStringValue('instrumentId', $this->getInstrumentId());
-        $writer->writeStringValue('instrumentStatus', $this->getInstrumentStatus());
+        $writer->writeEnumValue('instrumentStatus', $this->getInstrumentStatus());
         $writer->writeStringValue('instrumentType', $this->getInstrumentType());
         $writer->writeStringValue('nickname', $this->getNickname());
         $writer->writeStringValue('payoutPercentage', $this->getPayoutPercentage());
@@ -188,10 +188,10 @@ class PayoutInstrument implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the instrumentStatus property value. The status of a payout instrument. Valid payout instrument statuses include:<br/><ul><li><code>PENDING:</code> This status indicates that the account must be verified before it can be used.</li><li><code>ACTIVE:</code>This status indicates that payouts are enabled on this account.</li><li><code>VERIFICATION_FAILED:</code> This status indicates that verification has failed for this account and payouts are disabled.</li><li><code>INACTIVE:</code> This status indicates that this account has become inactive and payouts are disabled.</li></ul><br/>See <b>InstrumentStatusEnum</b> for more details on each instrument status value.<br><br><span class="tablenote"><b>Note:</b> Payment accounts can only receive payouts if the status of a payout instrument is <code>ACTIVE</code>.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/sel:InstrumentStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the instrumentStatus property.
+     * Sets the instrumentStatus property value. The status of a payout instrument. Valid payout instrument statuses include:<br/><ul><li><code>PENDING:</code> This status indicates that the account must be verified before it can be used.</li><li><code>ACTIVE:</code>This status indicates that payouts are enabled on this account.</li><li><code>VERIFICATION_FAILED:</code> This status indicates that verification has failed for this account and payouts are disabled.</li><li><code>INACTIVE:</code> This status indicates that this account has become inactive and payouts are disabled.</li></ul><br/>See <b>InstrumentStatusEnum</b> for more details on each instrument status value.<br><br><span class="tablenote"><b>Note:</b> Payment accounts can only receive payouts if the status of a payout instrument is <code>ACTIVE</code>.</span>
+     * @param InstrumentStatusEnum|null $value Value to set for the instrumentStatus property.
     */
-    public function setInstrumentStatus(?string $value): void {
+    public function setInstrumentStatus(?InstrumentStatusEnum $value): void {
         $this->instrumentStatus = $value;
     }
 

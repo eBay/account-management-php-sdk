@@ -23,13 +23,13 @@ class Payment_policyRequestBuilderGetQueryParameters
 {
     /**
      * @QueryParameter("marketplace_id")
-     * @var string|null $marketplaceId This query parameter specifies the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
+     * @var string|null $marketplaceId This query parameter specifies the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/develop/api/sell/account_api_v1#sell-account_api_v1-payment_policy-getpaymentpolicies.marketplaceidenum
     */
     public ?string $marketplaceId = null;
     
     /**
      * Instantiates a new Payment_policyRequestBuilderGetQueryParameters and sets the default values.
-     * @param string|null $marketplace_id This query parameter specifies the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
+     * @param string|null $marketplace_id This query parameter specifies the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/develop/api/sell/account_api_v1#sell-account_api_v1-payment_policy-getpaymentpolicies.marketplaceidenum
     */
     public function __construct(?string $marketplace_id = null) {
         $this->marketplaceId = $marketplace_id;

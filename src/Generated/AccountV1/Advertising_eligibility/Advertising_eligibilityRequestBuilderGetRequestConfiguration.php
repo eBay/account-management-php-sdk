@@ -42,7 +42,7 @@ class Advertising_eligibilityRequestBuilderGetRequestConfiguration extends BaseR
 
     /**
      * Instantiates a new Advertising_eligibilityRequestBuilderGetQueryParameters.
-     * @param string|null $program_types A comma-separated list of eBay advertising programs for which eligibility status will be returned.<br><br> See the <a href="/api-docs/sell/account/types/plser:AdvertisingProgramEnum" target="_blank"> AdvertisingProgramEnum</a> type for a list of supported values.<br><br>If no programs are specified, the results will be returned for all programs.
+     * @param string|null $program_types A comma-separated list of eBay advertising programs for which eligibility status will be returned.<br><br> See the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-advertising_eligibility-getadvertisingeligibility.advertisingprogramenum" target="_blank">AdvertisingProgramEnum</a> type for a list of supported values.<br><br>If no programs are specified, the results will be returned for all programs.
      * @return Advertising_eligibilityRequestBuilderGetQueryParameters
     */
     public static function createQueryParameters(?string $program_types = null): Advertising_eligibilityRequestBuilderGetQueryParameters {

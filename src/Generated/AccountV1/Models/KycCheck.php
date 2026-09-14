@@ -37,9 +37,9 @@ class KycCheck implements AdditionalDataHolder, Parsable
     private ?string $alert = null;
     
     /**
-     * @var string|null $dataRequired The enumeration value returned in this field categorizes the type of details needed for the KYC check. More information about the check is shown in the <b>detailMessage</b> and other applicable, corresponding fields. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/kyc:DetailsType'>eBay API documentation</a>
+     * @var DetailsType|null $dataRequired This enumerated type lists the types of details that may be needed for a KYC check. | - **COMPANY_DETAILS**: This enumeration value indicates that the seller is required to provide information about their company. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **INDIVIDUAL_DETAILS**: This enumeration value indicates that the seller is required to provide personal information. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **BANK_DETAILS**: This enumeration value indicates that the seller is required to provide information about their bank. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields.
     */
-    private ?string $dataRequired = null;
+    private ?DetailsType $dataRequired = null;
     
     /**
      * @var string|null $detailMessage This field gives a detailed message about what is required from the seller. An example might be, '<code>Please upload a bank document by 2020-08-01 to get your account back in good standing.</code>'.
@@ -89,10 +89,10 @@ class KycCheck implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dataRequired property value. The enumeration value returned in this field categorizes the type of details needed for the KYC check. More information about the check is shown in the <b>detailMessage</b> and other applicable, corresponding fields. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/kyc:DetailsType'>eBay API documentation</a>
-     * @return string|null
+     * Gets the dataRequired property value. This enumerated type lists the types of details that may be needed for a KYC check. | - **COMPANY_DETAILS**: This enumeration value indicates that the seller is required to provide information about their company. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **INDIVIDUAL_DETAILS**: This enumeration value indicates that the seller is required to provide personal information. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **BANK_DETAILS**: This enumeration value indicates that the seller is required to provide information about their bank. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields.
+     * @return DetailsType|null
     */
-    public function getDataRequired(): ?string {
+    public function getDataRequired(): ?DetailsType {
         return $this->dataRequired;
     }
 
@@ -120,7 +120,7 @@ class KycCheck implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'alert' => fn(ParseNode $n) => $o->setAlert($n->getStringValue()),
-            'dataRequired' => fn(ParseNode $n) => $o->setDataRequired($n->getStringValue()),
+            'dataRequired' => fn(ParseNode $n) => $o->setDataRequired($n->getEnumValue(DetailsType::class)),
             'detailMessage' => fn(ParseNode $n) => $o->setDetailMessage($n->getStringValue()),
             'dueDate' => fn(ParseNode $n) => $o->setDueDate($n->getStringValue()),
             'remedyUrl' => fn(ParseNode $n) => $o->setRemedyUrl($n->getStringValue()),
@@ -141,7 +141,7 @@ class KycCheck implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('alert', $this->getAlert());
-        $writer->writeStringValue('dataRequired', $this->getDataRequired());
+        $writer->writeEnumValue('dataRequired', $this->getDataRequired());
         $writer->writeStringValue('detailMessage', $this->getDetailMessage());
         $writer->writeStringValue('dueDate', $this->getDueDate());
         $writer->writeStringValue('remedyUrl', $this->getRemedyUrl());
@@ -165,10 +165,10 @@ class KycCheck implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dataRequired property value. The enumeration value returned in this field categorizes the type of details needed for the KYC check. More information about the check is shown in the <b>detailMessage</b> and other applicable, corresponding fields. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/kyc:DetailsType'>eBay API documentation</a>
-     * @param string|null $value Value to set for the dataRequired property.
+     * Sets the dataRequired property value. This enumerated type lists the types of details that may be needed for a KYC check. | - **COMPANY_DETAILS**: This enumeration value indicates that the seller is required to provide information about their company. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **INDIVIDUAL_DETAILS**: This enumeration value indicates that the seller is required to provide personal information. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **BANK_DETAILS**: This enumeration value indicates that the seller is required to provide information about their bank. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields.
+     * @param DetailsType|null $value Value to set for the dataRequired property.
     */
-    public function setDataRequired(?string $value): void {
+    public function setDataRequired(?DetailsType $value): void {
         $this->dataRequired = $value;
     }
 

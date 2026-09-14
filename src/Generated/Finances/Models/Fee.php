@@ -32,12 +32,12 @@ class Fee implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $amount The monetary amount charged for the fee.
     */
     private ?Amount $amount = null;
     
     /**
-     * @var FeeJurisdiction|null $feeJurisdiction This type defines the jurisdiction information associated with a fee, identifying the geographic or regulatory region under which the fee is applied.
+     * @var FeeJurisdiction|null $feeJurisdiction This type defines the jurisdiction associated with a fee. It identifies the geographic or regulatory context under which a specific fee is applied to an order.
     */
     private ?FeeJurisdiction $feeJurisdiction = null;
     
@@ -47,9 +47,9 @@ class Fee implements AdditionalDataHolder, Parsable
     private ?string $feeMemo = null;
     
     /**
-     * @var string|null $feeType The enumeration value returned here indicates the type of fee that was deducted from the seller payout. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay API documentation</a>
+     * @var FeeTypeEnum|null $feeType The enumeration value returned here indicates the type of fee that was deducted from the seller payout.
     */
-    private ?string $feeType = null;
+    private ?FeeTypeEnum $feeType = null;
     
     /**
      * Instantiates a new Fee and sets the default values.
@@ -76,7 +76,7 @@ class Fee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the amount property value. The monetary amount charged for the fee.
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -84,7 +84,7 @@ class Fee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feeJurisdiction property value. This type defines the jurisdiction information associated with a fee, identifying the geographic or regulatory region under which the fee is applied.
+     * Gets the feeJurisdiction property value. This type defines the jurisdiction associated with a fee. It identifies the geographic or regulatory context under which a specific fee is applied to an order.
      * @return FeeJurisdiction|null
     */
     public function getFeeJurisdiction(): ?FeeJurisdiction {
@@ -100,10 +100,10 @@ class Fee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feeType property value. The enumeration value returned here indicates the type of fee that was deducted from the seller payout. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the feeType property value. The enumeration value returned here indicates the type of fee that was deducted from the seller payout.
+     * @return FeeTypeEnum|null
     */
-    public function getFeeType(): ?string {
+    public function getFeeType(): ?FeeTypeEnum {
         return $this->feeType;
     }
 
@@ -117,7 +117,7 @@ class Fee implements AdditionalDataHolder, Parsable
             'amount' => fn(ParseNode $n) => $o->setAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'feeJurisdiction' => fn(ParseNode $n) => $o->setFeeJurisdiction($n->getObjectValue([FeeJurisdiction::class, 'createFromDiscriminatorValue'])),
             'feeMemo' => fn(ParseNode $n) => $o->setFeeMemo($n->getStringValue()),
-            'feeType' => fn(ParseNode $n) => $o->setFeeType($n->getStringValue()),
+            'feeType' => fn(ParseNode $n) => $o->setFeeType($n->getEnumValue(FeeTypeEnum::class)),
         ];
     }
 
@@ -129,7 +129,7 @@ class Fee implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('amount', $this->getAmount());
         $writer->writeObjectValue('feeJurisdiction', $this->getFeeJurisdiction());
         $writer->writeStringValue('feeMemo', $this->getFeeMemo());
-        $writer->writeStringValue('feeType', $this->getFeeType());
+        $writer->writeEnumValue('feeType', $this->getFeeType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -142,7 +142,7 @@ class Fee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the amount property value. The monetary amount charged for the fee.
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {
@@ -150,7 +150,7 @@ class Fee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feeJurisdiction property value. This type defines the jurisdiction information associated with a fee, identifying the geographic or regulatory region under which the fee is applied.
+     * Sets the feeJurisdiction property value. This type defines the jurisdiction associated with a fee. It identifies the geographic or regulatory context under which a specific fee is applied to an order.
      * @param FeeJurisdiction|null $value Value to set for the feeJurisdiction property.
     */
     public function setFeeJurisdiction(?FeeJurisdiction $value): void {
@@ -166,10 +166,10 @@ class Fee implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feeType property value. The enumeration value returned here indicates the type of fee that was deducted from the seller payout. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the feeType property.
+     * Sets the feeType property value. The enumeration value returned here indicates the type of fee that was deducted from the seller payout.
+     * @param FeeTypeEnum|null $value Value to set for the feeType property.
     */
-    public function setFeeType(?string $value): void {
+    public function setFeeType(?FeeTypeEnum $value): void {
         $this->feeType = $value;
     }
 

@@ -32,22 +32,22 @@ class EarningsSummary implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Expense|null $expenses This type defines provides the total expenses associated with an order. Expenses represent cost components that reduce the seller's gross earnings and may include deductions such as marketplace fees, eBay shipping labels, and donations, applied during order processing.
+     * @var Expense|null $expenses This container provides the total expenses associated with an order, including:<br><ul><li>Fees and fee credits (transaction fees, other fees, and ad fees)</li><li>Shipping labels</li><li>Donations</li></ul>It is used by both the <b>getOrderEarnings</b> and <b>getOrderEarningsById</b> methods. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Expenses are always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
     */
     private ?Expense $expenses = null;
     
     /**
-     * @var Amount|null $grossAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $grossAmount This container shows the gross amount before any eBay deductions. This amount includes the item subtotal, buyer-paid shipping and handling, and seller-collected tax paid by the buyer. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>This amount does not include any taxes or fees that eBay collects from the buyer.</span></p><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Gross amount is always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
     */
     private ?Amount $grossAmount = null;
     
     /**
-     * @var Amount|null $orderEarnings This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $orderEarnings This container shows your earnings after deducting expenses and any refunds from your gross amount.<p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Order earnings are always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
     */
     private ?Amount $orderEarnings = null;
     
     /**
-     * @var Amount|null $refunds This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $refunds This container includes refunds for returns, cases, cancellations, requests, and disputes. It does not include fee credits.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Refunds are always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
     */
     private ?Amount $refunds = null;
     
@@ -76,7 +76,7 @@ class EarningsSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the expenses property value. This type defines provides the total expenses associated with an order. Expenses represent cost components that reduce the seller's gross earnings and may include deductions such as marketplace fees, eBay shipping labels, and donations, applied during order processing.
+     * Gets the expenses property value. This container provides the total expenses associated with an order, including:<br><ul><li>Fees and fee credits (transaction fees, other fees, and ad fees)</li><li>Shipping labels</li><li>Donations</li></ul>It is used by both the <b>getOrderEarnings</b> and <b>getOrderEarningsById</b> methods. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Expenses are always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
      * @return Expense|null
     */
     public function getExpenses(): ?Expense {
@@ -98,7 +98,7 @@ class EarningsSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the grossAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the grossAmount property value. This container shows the gross amount before any eBay deductions. This amount includes the item subtotal, buyer-paid shipping and handling, and seller-collected tax paid by the buyer. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>This amount does not include any taxes or fees that eBay collects from the buyer.</span></p><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Gross amount is always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
      * @return Amount|null
     */
     public function getGrossAmount(): ?Amount {
@@ -106,7 +106,7 @@ class EarningsSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the orderEarnings property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the orderEarnings property value. This container shows your earnings after deducting expenses and any refunds from your gross amount.<p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Order earnings are always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
      * @return Amount|null
     */
     public function getOrderEarnings(): ?Amount {
@@ -114,7 +114,7 @@ class EarningsSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the refunds property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the refunds property value. This container includes refunds for returns, cases, cancellations, requests, and disputes. It does not include fee credits.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Refunds are always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
      * @return Amount|null
     */
     public function getRefunds(): ?Amount {
@@ -142,7 +142,7 @@ class EarningsSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the expenses property value. This type defines provides the total expenses associated with an order. Expenses represent cost components that reduce the seller's gross earnings and may include deductions such as marketplace fees, eBay shipping labels, and donations, applied during order processing.
+     * Sets the expenses property value. This container provides the total expenses associated with an order, including:<br><ul><li>Fees and fee credits (transaction fees, other fees, and ad fees)</li><li>Shipping labels</li><li>Donations</li></ul>It is used by both the <b>getOrderEarnings</b> and <b>getOrderEarningsById</b> methods. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Expenses are always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
      * @param Expense|null $value Value to set for the expenses property.
     */
     public function setExpenses(?Expense $value): void {
@@ -150,7 +150,7 @@ class EarningsSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the grossAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the grossAmount property value. This container shows the gross amount before any eBay deductions. This amount includes the item subtotal, buyer-paid shipping and handling, and seller-collected tax paid by the buyer. <br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>This amount does not include any taxes or fees that eBay collects from the buyer.</span></p><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Gross amount is always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
      * @param Amount|null $value Value to set for the grossAmount property.
     */
     public function setGrossAmount(?Amount $value): void {
@@ -158,7 +158,7 @@ class EarningsSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the orderEarnings property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the orderEarnings property value. This container shows your earnings after deducting expenses and any refunds from your gross amount.<p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Order earnings are always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
      * @param Amount|null $value Value to set for the orderEarnings property.
     */
     public function setOrderEarnings(?Amount $value): void {
@@ -166,7 +166,7 @@ class EarningsSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the refunds property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the refunds property value. This container includes refunds for returns, cases, cancellations, requests, and disputes. It does not include fee credits.<br><p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Refunds are always in the seller's payout currency. Conversion-related fields (such as <b>exchangeRate</b> or converted from/to fields) in this container do not apply to the <b>order_earnings</b> resource.</span></p>
      * @param Amount|null $value Value to set for the refunds property.
     */
     public function setRefunds(?Amount $value): void {

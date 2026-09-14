@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV1\Return_policy;
 
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\ReturnPolicyRequest;
 use EBay\AccountManagement\Generated\AccountV1\Models\ReturnPolicyResponse;
 use EBay\AccountManagement\Generated\AccountV1\Models\SetReturnPolicyResponse;
@@ -42,7 +43,7 @@ class Return_policyRequestBuilder extends BaseRequestBuilder
     
     /**
      * Gets an item from the EBay/AccountManagement/Generated/AccountV1.return_policy.item collection
-     * @param string $return_policy_id This path parameter specifies the unique identifier of the return policy you want to retrieve. <br><br> This ID can be retrieved for a return policy by using the <a href="/api-docs/sell/account/resources/return_policy/methods/getReturnPolicies" target="_blank ">getReturnPolicies</a> method.
+     * @param string $return_policy_id This path parameter specifies the unique identifier of the return policy you want to retrieve. <br><br> This ID can be retrieved for a return policy by using the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-return_policy-getreturnpolicies" target="_blank ">getReturnPolicies</a> method.
      * @return WithReturn_policy_ItemRequestBuilder
     */
     public function byReturn_policy_id(string $return_policy_id): WithReturn_policy_ItemRequestBuilder {
@@ -57,7 +58,7 @@ class Return_policyRequestBuilder extends BaseRequestBuilder
      * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
     */
     public function __construct($pathParametersOrRawUrl, RequestAdapter $requestAdapter) {
-        parent::__construct($requestAdapter, [], '{+baseurl}/return_policy?marketplace_id={marketplace_id}');
+        parent::__construct($requestAdapter, [], '{+baseurl}/return_policy');
         if (is_array($pathParametersOrRawUrl)) {
             $this->pathParameters = $pathParametersOrRawUrl;
         } else {
@@ -73,7 +74,11 @@ class Return_policyRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Return_policyRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [ReturnPolicyResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [ReturnPolicyResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -85,7 +90,11 @@ class Return_policyRequestBuilder extends BaseRequestBuilder
     */
     public function post(ReturnPolicyRequest $body, ?Return_policyRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SetReturnPolicyResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SetReturnPolicyResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -95,7 +104,7 @@ class Return_policyRequestBuilder extends BaseRequestBuilder
     */
     public function toGetRequestInformation(?Return_policyRequestBuilderGetRequestConfiguration $requestConfiguration = null): RequestInformation {
         $requestInfo = new RequestInformation();
-        $requestInfo->urlTemplate = $this->urlTemplate;
+        $requestInfo->urlTemplate = '{+baseurl}/return_policy?marketplace_id={marketplace_id}';
         $requestInfo->pathParameters = $this->pathParameters;
         $requestInfo->httpMethod = HttpMethod::GET;
         if ($requestConfiguration !== null) {
@@ -117,7 +126,7 @@ class Return_policyRequestBuilder extends BaseRequestBuilder
     */
     public function toPostRequestInformation(ReturnPolicyRequest $body, ?Return_policyRequestBuilderPostRequestConfiguration $requestConfiguration = null): RequestInformation {
         $requestInfo = new RequestInformation();
-        $requestInfo->urlTemplate = '{+baseurl}/return_policy';
+        $requestInfo->urlTemplate = $this->urlTemplate;
         $requestInfo->pathParameters = $this->pathParameters;
         $requestInfo->httpMethod = HttpMethod::POST;
         if ($requestConfiguration !== null) {

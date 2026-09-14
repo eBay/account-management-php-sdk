@@ -37,9 +37,9 @@ class FeeJurisdiction implements AdditionalDataHolder, Parsable
     private ?string $regionName = null;
     
     /**
-     * @var string|null $regionType This enumeration value indicates the type of region that the fee jurisdiction represents, such as a country or a state. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:RegionTypeEnum'>eBay API documentation</a>
+     * @var RegionTypeEnum|null $regionType This enumeration value indicates the type of region that the fee jurisdiction represents, such as a country or a state.
     */
-    private ?string $regionType = null;
+    private ?RegionTypeEnum $regionType = null;
     
     /**
      * Instantiates a new FeeJurisdiction and sets the default values.
@@ -73,7 +73,7 @@ class FeeJurisdiction implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'regionName' => fn(ParseNode $n) => $o->setRegionName($n->getStringValue()),
-            'regionType' => fn(ParseNode $n) => $o->setRegionType($n->getStringValue()),
+            'regionType' => fn(ParseNode $n) => $o->setRegionType($n->getEnumValue(RegionTypeEnum::class)),
         ];
     }
 
@@ -86,10 +86,10 @@ class FeeJurisdiction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the regionType property value. This enumeration value indicates the type of region that the fee jurisdiction represents, such as a country or a state. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:RegionTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the regionType property value. This enumeration value indicates the type of region that the fee jurisdiction represents, such as a country or a state.
+     * @return RegionTypeEnum|null
     */
-    public function getRegionType(): ?string {
+    public function getRegionType(): ?RegionTypeEnum {
         return $this->regionType;
     }
 
@@ -99,7 +99,7 @@ class FeeJurisdiction implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('regionName', $this->getRegionName());
-        $writer->writeStringValue('regionType', $this->getRegionType());
+        $writer->writeEnumValue('regionType', $this->getRegionType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class FeeJurisdiction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the regionType property value. This enumeration value indicates the type of region that the fee jurisdiction represents, such as a country or a state. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:RegionTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the regionType property.
+     * Sets the regionType property value. This enumeration value indicates the type of region that the fee jurisdiction represents, such as a country or a state.
+     * @param RegionTypeEnum|null $value Value to set for the regionType property.
     */
-    public function setRegionType(?string $value): void {
+    public function setRegionType(?RegionTypeEnum $value): void {
         $this->regionType = $value;
     }
 

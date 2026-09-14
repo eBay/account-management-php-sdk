@@ -32,9 +32,9 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $costType This field defines whether the shipping cost model is <code>FLAT_RATE</code> (the same rate for all buyers, or buyers within a region if shipping rate tables are used) or <code>CALCULATED</code> (the shipping rate varies by the ship-to location and size and weight of the package). <br><br>This field is conditionally required if any shipping service options are specified (domestic and/or international). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingCostTypeEnum'>eBay API documentation</a>
+     * @var ShippingCostTypeEnum|null $costType This enumerated type defines the shipping cost models. | - **CALCULATED**: This value indicates that calculated shipping is used by the seller. With calculated shipping, the shipping cost varies according to the shipping location and the size and weight of the package. - **FLAT_RATE**: This value indicates that flat-rate shipping is used by the seller. With flat-rate shipping, the shipping cost will be the same for all buyers, or buyers within a specified region if the seller uses shipping rate tables. - **NOT_SPECIFIED**: This value indicates that the shipping cost type has not been specified.
     */
-    private ?string $costType = null;
+    private ?ShippingCostTypeEnum $costType = null;
     
     /**
      * @var Amount|null $insuranceFee A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
@@ -47,9 +47,9 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     private ?bool $insuranceOffered = null;
     
     /**
-     * @var string|null $optionType This field is used to indicate if the corresponding shipping service options (under <b>shippingServices</b> array) are domestic or international shipping service options. This field is conditionally required if any shipping service options are specified (domestic and/or international). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingOptionTypeEnum'>eBay API documentation</a>
+     * @var ShippingOptionTypeEnum|null $optionType This enumerated type defines whether the corresponding shipping service options are domestic or international shipping service options. a region that is either domestic (within the country from where the item is listed or shipped) or international (a country outside the country from where the item is listed or shipped). | - **DOMESTIC**: This value indicates that the corresponding shipping service options are domestic shipping service options. - **INTERNATIONAL**: This value indicates that the corresponding shipping service options are international shipping service options.
     */
-    private ?string $optionType = null;
+    private ?ShippingOptionTypeEnum $optionType = null;
     
     /**
      * @var Amount|null $packageHandlingCost A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
@@ -57,7 +57,7 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     private ?Amount $packageHandlingCost = null;
     
     /**
-     * @var string|null $rateTableId This field is used if the seller wants to associate a domestic or international shipping rate table to the fulfillment business policy. The <a href="/api-docs/sell/account/resources/rate_table/methods/getRateTables">getRateTables</a> method can be used to retrieve shipping rate table IDs.<br><br>With domestic and international shipping rate tables, the seller can set different shipping costs based on shipping regions and shipping speed/level of service (one-day, expedited, standard, economy). There are also options to add additional per-weight and handling charges.<br><br>Sellers need to be careful that shipping rate tables match the corresponding shipping service options. In other words, a domestic shipping rate table must not be specified in the same container where international shipping service options are being specified, and vice versa, and the shipping speed/level of service of the provided shipping service options should match the shipping speed/level of service options that are defined in the shipping rate tables. <br><br>For example, if the corresponding shipping rate table defines costs for one-day shipping services, there should be at least one one-day shipping service option specified under the <b>shippingServices</b> array.<br><br>This field is returned if set.
+     * @var string|null $rateTableId This field is used if the seller wants to associate a domestic or international shipping rate table to the fulfillment business policy. The <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-rate_table-getratetables">getRateTables</a> method can be used to retrieve shipping rate table IDs.<br><br>With domestic and international shipping rate tables, the seller can set different shipping costs based on shipping regions and shipping speed/level of service (one-day, expedited, standard, economy). There are also options to add additional per-weight and handling charges.<br><br>Sellers need to be careful that shipping rate tables match the corresponding shipping service options. In other words, a domestic shipping rate table must not be specified in the same container where international shipping service options are being specified, and vice versa, and the shipping speed/level of service of the provided shipping service options should match the shipping speed/level of service options that are defined in the shipping rate tables. <br><br>For example, if the corresponding shipping rate table defines costs for one-day shipping services, there should be at least one one-day shipping service option specified under the <b>shippingServices</b> array.<br><br>This field is returned if set.
     */
     private ?string $rateTableId = null;
     
@@ -101,10 +101,10 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the costType property value. This field defines whether the shipping cost model is <code>FLAT_RATE</code> (the same rate for all buyers, or buyers within a region if shipping rate tables are used) or <code>CALCULATED</code> (the shipping rate varies by the ship-to location and size and weight of the package). <br><br>This field is conditionally required if any shipping service options are specified (domestic and/or international). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingCostTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the costType property value. This enumerated type defines the shipping cost models. | - **CALCULATED**: This value indicates that calculated shipping is used by the seller. With calculated shipping, the shipping cost varies according to the shipping location and the size and weight of the package. - **FLAT_RATE**: This value indicates that flat-rate shipping is used by the seller. With flat-rate shipping, the shipping cost will be the same for all buyers, or buyers within a specified region if the seller uses shipping rate tables. - **NOT_SPECIFIED**: This value indicates that the shipping cost type has not been specified.
+     * @return ShippingCostTypeEnum|null
     */
-    public function getCostType(): ?string {
+    public function getCostType(): ?ShippingCostTypeEnum {
         return $this->costType;
     }
 
@@ -115,10 +115,10 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'costType' => fn(ParseNode $n) => $o->setCostType($n->getStringValue()),
+            'costType' => fn(ParseNode $n) => $o->setCostType($n->getEnumValue(ShippingCostTypeEnum::class)),
             'insuranceFee' => fn(ParseNode $n) => $o->setInsuranceFee($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'insuranceOffered' => fn(ParseNode $n) => $o->setInsuranceOffered($n->getBooleanValue()),
-            'optionType' => fn(ParseNode $n) => $o->setOptionType($n->getStringValue()),
+            'optionType' => fn(ParseNode $n) => $o->setOptionType($n->getEnumValue(ShippingOptionTypeEnum::class)),
             'packageHandlingCost' => fn(ParseNode $n) => $o->setPackageHandlingCost($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'rateTableId' => fn(ParseNode $n) => $o->setRateTableId($n->getStringValue()),
             'shippingDiscountProfileId' => fn(ParseNode $n) => $o->setShippingDiscountProfileId($n->getStringValue()),
@@ -144,10 +144,10 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the optionType property value. This field is used to indicate if the corresponding shipping service options (under <b>shippingServices</b> array) are domestic or international shipping service options. This field is conditionally required if any shipping service options are specified (domestic and/or international). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingOptionTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the optionType property value. This enumerated type defines whether the corresponding shipping service options are domestic or international shipping service options. a region that is either domestic (within the country from where the item is listed or shipped) or international (a country outside the country from where the item is listed or shipped). | - **DOMESTIC**: This value indicates that the corresponding shipping service options are domestic shipping service options. - **INTERNATIONAL**: This value indicates that the corresponding shipping service options are international shipping service options.
+     * @return ShippingOptionTypeEnum|null
     */
-    public function getOptionType(): ?string {
+    public function getOptionType(): ?ShippingOptionTypeEnum {
         return $this->optionType;
     }
 
@@ -160,7 +160,7 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the rateTableId property value. This field is used if the seller wants to associate a domestic or international shipping rate table to the fulfillment business policy. The <a href="/api-docs/sell/account/resources/rate_table/methods/getRateTables">getRateTables</a> method can be used to retrieve shipping rate table IDs.<br><br>With domestic and international shipping rate tables, the seller can set different shipping costs based on shipping regions and shipping speed/level of service (one-day, expedited, standard, economy). There are also options to add additional per-weight and handling charges.<br><br>Sellers need to be careful that shipping rate tables match the corresponding shipping service options. In other words, a domestic shipping rate table must not be specified in the same container where international shipping service options are being specified, and vice versa, and the shipping speed/level of service of the provided shipping service options should match the shipping speed/level of service options that are defined in the shipping rate tables. <br><br>For example, if the corresponding shipping rate table defines costs for one-day shipping services, there should be at least one one-day shipping service option specified under the <b>shippingServices</b> array.<br><br>This field is returned if set.
+     * Gets the rateTableId property value. This field is used if the seller wants to associate a domestic or international shipping rate table to the fulfillment business policy. The <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-rate_table-getratetables">getRateTables</a> method can be used to retrieve shipping rate table IDs.<br><br>With domestic and international shipping rate tables, the seller can set different shipping costs based on shipping regions and shipping speed/level of service (one-day, expedited, standard, economy). There are also options to add additional per-weight and handling charges.<br><br>Sellers need to be careful that shipping rate tables match the corresponding shipping service options. In other words, a domestic shipping rate table must not be specified in the same container where international shipping service options are being specified, and vice versa, and the shipping speed/level of service of the provided shipping service options should match the shipping speed/level of service options that are defined in the shipping rate tables. <br><br>For example, if the corresponding shipping rate table defines costs for one-day shipping services, there should be at least one one-day shipping service option specified under the <b>shippingServices</b> array.<br><br>This field is returned if set.
      * @return string|null
     */
     public function getRateTableId(): ?string {
@@ -196,10 +196,10 @@ class ShippingOption implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('costType', $this->getCostType());
+        $writer->writeEnumValue('costType', $this->getCostType());
         $writer->writeObjectValue('insuranceFee', $this->getInsuranceFee());
         $writer->writeBooleanValue('insuranceOffered', $this->getInsuranceOffered());
-        $writer->writeStringValue('optionType', $this->getOptionType());
+        $writer->writeEnumValue('optionType', $this->getOptionType());
         $writer->writeObjectValue('packageHandlingCost', $this->getPackageHandlingCost());
         $writer->writeStringValue('rateTableId', $this->getRateTableId());
         $writer->writeStringValue('shippingDiscountProfileId', $this->getShippingDiscountProfileId());
@@ -217,10 +217,10 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the costType property value. This field defines whether the shipping cost model is <code>FLAT_RATE</code> (the same rate for all buyers, or buyers within a region if shipping rate tables are used) or <code>CALCULATED</code> (the shipping rate varies by the ship-to location and size and weight of the package). <br><br>This field is conditionally required if any shipping service options are specified (domestic and/or international). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingCostTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the costType property.
+     * Sets the costType property value. This enumerated type defines the shipping cost models. | - **CALCULATED**: This value indicates that calculated shipping is used by the seller. With calculated shipping, the shipping cost varies according to the shipping location and the size and weight of the package. - **FLAT_RATE**: This value indicates that flat-rate shipping is used by the seller. With flat-rate shipping, the shipping cost will be the same for all buyers, or buyers within a specified region if the seller uses shipping rate tables. - **NOT_SPECIFIED**: This value indicates that the shipping cost type has not been specified.
+     * @param ShippingCostTypeEnum|null $value Value to set for the costType property.
     */
-    public function setCostType(?string $value): void {
+    public function setCostType(?ShippingCostTypeEnum $value): void {
         $this->costType = $value;
     }
 
@@ -241,10 +241,10 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the optionType property value. This field is used to indicate if the corresponding shipping service options (under <b>shippingServices</b> array) are domestic or international shipping service options. This field is conditionally required if any shipping service options are specified (domestic and/or international). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingOptionTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the optionType property.
+     * Sets the optionType property value. This enumerated type defines whether the corresponding shipping service options are domestic or international shipping service options. a region that is either domestic (within the country from where the item is listed or shipped) or international (a country outside the country from where the item is listed or shipped). | - **DOMESTIC**: This value indicates that the corresponding shipping service options are domestic shipping service options. - **INTERNATIONAL**: This value indicates that the corresponding shipping service options are international shipping service options.
+     * @param ShippingOptionTypeEnum|null $value Value to set for the optionType property.
     */
-    public function setOptionType(?string $value): void {
+    public function setOptionType(?ShippingOptionTypeEnum $value): void {
         $this->optionType = $value;
     }
 
@@ -257,7 +257,7 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the rateTableId property value. This field is used if the seller wants to associate a domestic or international shipping rate table to the fulfillment business policy. The <a href="/api-docs/sell/account/resources/rate_table/methods/getRateTables">getRateTables</a> method can be used to retrieve shipping rate table IDs.<br><br>With domestic and international shipping rate tables, the seller can set different shipping costs based on shipping regions and shipping speed/level of service (one-day, expedited, standard, economy). There are also options to add additional per-weight and handling charges.<br><br>Sellers need to be careful that shipping rate tables match the corresponding shipping service options. In other words, a domestic shipping rate table must not be specified in the same container where international shipping service options are being specified, and vice versa, and the shipping speed/level of service of the provided shipping service options should match the shipping speed/level of service options that are defined in the shipping rate tables. <br><br>For example, if the corresponding shipping rate table defines costs for one-day shipping services, there should be at least one one-day shipping service option specified under the <b>shippingServices</b> array.<br><br>This field is returned if set.
+     * Sets the rateTableId property value. This field is used if the seller wants to associate a domestic or international shipping rate table to the fulfillment business policy. The <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-rate_table-getratetables">getRateTables</a> method can be used to retrieve shipping rate table IDs.<br><br>With domestic and international shipping rate tables, the seller can set different shipping costs based on shipping regions and shipping speed/level of service (one-day, expedited, standard, economy). There are also options to add additional per-weight and handling charges.<br><br>Sellers need to be careful that shipping rate tables match the corresponding shipping service options. In other words, a domestic shipping rate table must not be specified in the same container where international shipping service options are being specified, and vice versa, and the shipping speed/level of service of the provided shipping service options should match the shipping speed/level of service options that are defined in the shipping rate tables. <br><br>For example, if the corresponding shipping rate table defines costs for one-day shipping services, there should be at least one one-day shipping service option specified under the <b>shippingServices</b> array.<br><br>This field is returned if set.
      * @param string|null $value Value to set for the rateTableId property.
     */
     public function setRateTableId(?string $value): void {

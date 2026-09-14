@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV1\Advertising_eligibility;
 
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\SellerEligibilityMultiProgramResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,11 @@ class Advertising_eligibilityRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Advertising_eligibilityRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [SellerEligibilityMultiProgramResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [SellerEligibilityMultiProgramResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

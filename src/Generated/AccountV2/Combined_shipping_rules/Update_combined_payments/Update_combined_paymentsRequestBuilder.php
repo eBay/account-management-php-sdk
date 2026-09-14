@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_combined_payments;
 
+use EBay\AccountManagement\Generated\AccountV2\Models\Error;
 use EBay\AccountManagement\Generated\AccountV2\Models\UpdateCombinedPaymentsRequest;
 use Exception;
 use Http\Promise\Promise;
@@ -45,19 +46,23 @@ class Update_combined_paymentsRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method configures or modifies combined payment settings that determine how unpaid orders can be merged for a single invoice within a defined duration for the seller.
-     * @param UpdateCombinedPaymentsRequest $body This type is used to update the combined payment duration
+     * @param UpdateCombinedPaymentsRequest $body This type is used for updating combined-payment settings. <br><br>It defines how multiple unpaid orders from the same buyer are combined into a single payment, including configuration parameters such as eligible duration, order-merge criteria, and marketplace context.
      * @param Update_combined_paymentsRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(UpdateCombinedPaymentsRequest $body, ?Update_combined_paymentsRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
      * This method configures or modifies combined payment settings that determine how unpaid orders can be merged for a single invoice within a defined duration for the seller.
-     * @param UpdateCombinedPaymentsRequest $body This type is used to update the combined payment duration
+     * @param UpdateCombinedPaymentsRequest $body This type is used for updating combined-payment settings. <br><br>It defines how multiple unpaid orders from the same buyer are combined into a single payment, including configuration parameters such as eligible duration, order-merge criteria, and marketplace context.
      * @param Update_combined_paymentsRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -70,6 +75,7 @@ class Update_combined_paymentsRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }

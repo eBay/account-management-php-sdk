@@ -37,9 +37,9 @@ class CategoryType implements AdditionalDataHolder, Parsable
     private ?bool $escapedDefault = null;
     
     /**
-     * @var string|null $name The category type to which the policy applies (motor vehicles or non-motor vehicles). <br><br><span class="tablenote"><strong>Note:</strong> The <code>MOTORS_VEHICLES</code> category type is not valid for return policies. eBay flows do not support the return of motor vehicles.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CategoryTypeEnum'>eBay API documentation</a>
+     * @var CategoryTypeEnum|null $name An enum type that describes the category type (motor vehicles or non-motor vehicles). | - **MOTORS_VEHICLES**: This values indicates that the business policy applies to motor vehicle listings. - **ALL_EXCLUDING_MOTORS_VEHICLES**: This values indicates that the business policy applies to all listings besides motor vehicle listings.
     */
-    private ?string $name = null;
+    private ?CategoryTypeEnum $name = null;
     
     /**
      * Instantiates a new CategoryType and sets the default values.
@@ -81,15 +81,15 @@ class CategoryType implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'default' => fn(ParseNode $n) => $o->setEscapedDefault($n->getBooleanValue()),
-            'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
+            'name' => fn(ParseNode $n) => $o->setName($n->getEnumValue(CategoryTypeEnum::class)),
         ];
     }
 
     /**
-     * Gets the name property value. The category type to which the policy applies (motor vehicles or non-motor vehicles). <br><br><span class="tablenote"><strong>Note:</strong> The <code>MOTORS_VEHICLES</code> category type is not valid for return policies. eBay flows do not support the return of motor vehicles.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CategoryTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the name property value. An enum type that describes the category type (motor vehicles or non-motor vehicles). | - **MOTORS_VEHICLES**: This values indicates that the business policy applies to motor vehicle listings. - **ALL_EXCLUDING_MOTORS_VEHICLES**: This values indicates that the business policy applies to all listings besides motor vehicle listings.
+     * @return CategoryTypeEnum|null
     */
-    public function getName(): ?string {
+    public function getName(): ?CategoryTypeEnum {
         return $this->name;
     }
 
@@ -99,7 +99,7 @@ class CategoryType implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeBooleanValue('default', $this->getEscapedDefault());
-        $writer->writeStringValue('name', $this->getName());
+        $writer->writeEnumValue('name', $this->getName());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class CategoryType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the name property value. The category type to which the policy applies (motor vehicles or non-motor vehicles). <br><br><span class="tablenote"><strong>Note:</strong> The <code>MOTORS_VEHICLES</code> category type is not valid for return policies. eBay flows do not support the return of motor vehicles.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CategoryTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the name property.
+     * Sets the name property value. An enum type that describes the category type (motor vehicles or non-motor vehicles). | - **MOTORS_VEHICLES**: This values indicates that the business policy applies to motor vehicle listings. - **ALL_EXCLUDING_MOTORS_VEHICLES**: This values indicates that the business policy applies to all listings besides motor vehicle listings.
+     * @param CategoryTypeEnum|null $value Value to set for the name property.
     */
-    public function setName(?string $value): void {
+    public function setName(?CategoryTypeEnum $value): void {
         $this->name = $value;
     }
 

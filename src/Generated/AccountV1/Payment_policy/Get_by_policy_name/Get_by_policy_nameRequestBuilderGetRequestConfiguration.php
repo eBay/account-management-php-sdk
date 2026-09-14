@@ -42,8 +42,8 @@ class Get_by_policy_nameRequestBuilderGetRequestConfiguration extends BaseReques
 
     /**
      * Instantiates a new Get_by_policy_nameRequestBuilderGetQueryParameters.
-     * @param string|null $marketplace_id This query parameter specifies the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
-     * @param string|null $name This query parameter specifies the seller-defined name of the payment policy you want to retrieve.<br><br> This value can be retrieved for a payment policy by using the <a href="/api-docs/sell/account/resources/payment_policy/methods/getPaymentPolicies" target="_blank ">getPaymentPolicies</a> method.
+     * @param string|null $marketplace_id This query parameter specifies the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/develop/api/sell/account_api_v1#sell-account_api_v1-payment_policy-getpaymentpolicies.marketplaceidenum
+     * @param string|null $name This query parameter specifies the seller-defined name of the payment policy you want to retrieve.<br><br> This value can be retrieved for a payment policy by using the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-payment_policy-getpaymentpolicies" target="_blank ">getPaymentPolicies</a> method.
      * @return Get_by_policy_nameRequestBuilderGetQueryParameters
     */
     public static function createQueryParameters(?string $marketplace_id = null, ?string $name = null): Get_by_policy_nameRequestBuilderGetQueryParameters {

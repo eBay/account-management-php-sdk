@@ -72,7 +72,7 @@ class ShippingService implements AdditionalDataHolder, Parsable
     private ?RegionSet $shipToLocations = null;
     
     /**
-     * @var int|null $sortOrder The integer value set in this field controls the order of the corresponding domestic or international shipping service option in the View Item and Checkout pages. <br><br>If the <b>sortOrder</b> field is not supplied, the order of domestic and international shipping service options is determined by the order in which they are listed in the API call. <br><br><b>Min</b>: 1. <b>Max</b>: 4 (for domestic shipping service) or 5 (for international shipping service).
+     * @var int|null $sortOrder The integer value set in this field controls the order of the corresponding domestic or international shipping service option in the View Item and Checkout pages. <br><br>If the <b>sortOrder</b> field is not supplied, the order of domestic and international shipping service options is determined by the order in which they are listed in the API call. <br><br><b>Minimum</b>: 1<br><b>Maximum</b>: 4 (for domestic shipping service) or 5 (for international shipping service).
     */
     private ?int $sortOrder = null;
     
@@ -190,7 +190,7 @@ class ShippingService implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sortOrder property value. The integer value set in this field controls the order of the corresponding domestic or international shipping service option in the View Item and Checkout pages. <br><br>If the <b>sortOrder</b> field is not supplied, the order of domestic and international shipping service options is determined by the order in which they are listed in the API call. <br><br><b>Min</b>: 1. <b>Max</b>: 4 (for domestic shipping service) or 5 (for international shipping service).
+     * Gets the sortOrder property value. The integer value set in this field controls the order of the corresponding domestic or international shipping service option in the View Item and Checkout pages. <br><br>If the <b>sortOrder</b> field is not supplied, the order of domestic and international shipping service options is determined by the order in which they are listed in the API call. <br><br><b>Minimum</b>: 1<br><b>Maximum</b>: 4 (for domestic shipping service) or 5 (for international shipping service).
      * @return int|null
     */
     public function getSortOrder(): ?int {
@@ -296,7 +296,7 @@ class ShippingService implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sortOrder property value. The integer value set in this field controls the order of the corresponding domestic or international shipping service option in the View Item and Checkout pages. <br><br>If the <b>sortOrder</b> field is not supplied, the order of domestic and international shipping service options is determined by the order in which they are listed in the API call. <br><br><b>Min</b>: 1. <b>Max</b>: 4 (for domestic shipping service) or 5 (for international shipping service).
+     * Sets the sortOrder property value. The integer value set in this field controls the order of the corresponding domestic or international shipping service option in the View Item and Checkout pages. <br><br>If the <b>sortOrder</b> field is not supplied, the order of domestic and international shipping service options is determined by the order in which they are listed in the API call. <br><br><b>Minimum</b>: 1<br><b>Maximum</b>: 4 (for domestic shipping service) or 5 (for international shipping service).
      * @param int|null $value Value to set for the sortOrder property.
     */
     public function setSortOrder(?int $value): void {

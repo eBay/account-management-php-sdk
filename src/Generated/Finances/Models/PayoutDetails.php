@@ -38,7 +38,7 @@ class PayoutDetails implements AdditionalDataHolder, Parsable
     private ?array $payoutIds = null;
     
     /**
-     * @var string|null $payoutReference This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout id(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account.  This value can be used by the <b>filter</b> query parameter of the <b>getPayouts</b> method to get the monetary details of each true(actual) payout associated with the payoutReference. <br><br><span class="tablenote"><b>Note:</b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
+     * @var string|null $payoutReference This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout ID(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account. This value can be used by the <b>filter</b> query parameter of the <b>getPayouts</b> method to get the monetary details of each true(actual) payout associated with the payoutReference. <br><br><span class="tablenote"><b>Note:</b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
     */
     private ?string $payoutReference = null;
     
@@ -94,7 +94,7 @@ class PayoutDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the payoutReference property value. This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout id(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account.  This value can be used by the <b>filter</b> query parameter of the <b>getPayouts</b> method to get the monetary details of each true(actual) payout associated with the payoutReference. <br><br><span class="tablenote"><b>Note:</b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
+     * Gets the payoutReference property value. This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout ID(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account. This value can be used by the <b>filter</b> query parameter of the <b>getPayouts</b> method to get the monetary details of each true(actual) payout associated with the payoutReference. <br><br><span class="tablenote"><b>Note:</b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
      * @return string|null
     */
     public function getPayoutReference(): ?string {
@@ -128,7 +128,7 @@ class PayoutDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the payoutReference property value. This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout id(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account.  This value can be used by the <b>filter</b> query parameter of the <b>getPayouts</b> method to get the monetary details of each true(actual) payout associated with the payoutReference. <br><br><span class="tablenote"><b>Note:</b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
+     * Sets the payoutReference property value. This field contains the unique identifier for the Payout Reference. In split-payout cases, this is the unique identifier reference (not true payout). This field is only returned and will show the associated true(actual) payout ID(s) when sellers in Mainland China enable split payouts between a Payoneer account and/or a bank account. This value can be used by the <b>filter</b> query parameter of the <b>getPayouts</b> method to get the monetary details of each true(actual) payout associated with the payoutReference. <br><br><span class="tablenote"><b>Note:</b>Split-payout functionality will <b>only</b> be available to mainland China sellers.</span>
      * @param string|null $value Value to set for the payoutReference property.
     */
     public function setPayoutReference(?string $value): void {

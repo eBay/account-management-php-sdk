@@ -52,9 +52,9 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     private ?InternationalReturnOverrideType $internationalOverride = null;
     
     /**
-     * @var string|null $marketplaceId The ID of the eBay marketplace to which this return business policy applies. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $marketplaceId This enumerated type contains a list of the standard codes that represent each of the eBay marketplaces. | - **EBAY_AT**: eBay Austria (ebay.at) - **EBAY_AU**: eBay Australia (ebay.com/au) - **EBAY_BE**: eBay Belgium (ebay.com/sch/Belgium) - **EBAY_CA**: eBay Canada (English) (ebay.ca) - **EBAY_CH**: eBay Switzerland (ebay.ch) - **EBAY_CN**: eBay China (ebay.com/sch/China) - **EBAY_CZ**: eBay Czech Republic (ebay.com/sch/Czech-Republic) - **EBAY_DE**: eBay Germany (ebay.de) - **EBAY_DK**: eBay Denmark (ebay.com/sch/Denmark) - **EBAY_ES**: eBay Spain (ebay.es) - **EBAY_FI**: eBay Finland (ebay.com/sch/Finland) - **EBAY_FR**: eBay France (ebay.fr) - **EBAY_GB**: eBay UK (ebay.co.uk) - **EBAY_GR**: eBay Greece (ebay.com/sch/Greece) - **EBAY_HK**: eBay Hong Kong (ebay.com.hk) - **EBAY_HU**: eBay Hungary (ebay.com/sch/Hungary) - **EBAY_ID**: eBay Indonesia (id.ebay.com) - **EBAY_IE**: eBay Ireland (ebay.ie) - **EBAY_IL**: eBay Israel (ebay.com/sch/Israel) - **EBAY_IN**: eBay India (ebay.in)<br><span class="tablenote"><strong>Note:</strong> eBay India is no longer a functioning eBay marketplace.</span> - **EBAY_IT**: eBay Italy (ebay.it) - **EBAY_JP**: eBay Japan (ebay.co.jp) - **EBAY_MY**: eBay Malaysia (ebay.com/my) - **EBAY_NL**: eBay Netherlands (ebay.nl) - **EBAY_NO**: eBay Norway (ebay.com/sch/Norway) - **EBAY_NZ**: eBay New Zealand (ebay.com/sch/New-Zealand) - **EBAY_PE**: eBay Peru (ebay.com/sch/Peru) - **EBAY_PH**: eBay Philippines (ebay.ph) - **EBAY_PL**: eBay Poland (ebay.pl) - **EBAY_PR**: eBay Puerto Rico (ebay.com/sch/Puerto-Rico) - **EBAY_PT**: eBay Portugal (ebay.com/sch/Portugal) - **EBAY_RU**: eBay Russia (ebay.com/sch/Russia) - **EBAY_SE**: eBay Sweden (ebay.com/sch/Sweden) - **EBAY_SG**: eBay Singapore (ebay.com/sg) - **EBAY_TH**: eBay Thailand (export.ebay.co.th) - **EBAY_TW**: eBay Taiwan (ebay.com/tw) - **EBAY_US**: eBay US (ebay.com) - **EBAY_VN**: eBay Vietnam (ebay.vn) - **EBAY_ZA**: eBay South Africa (ebay.com/sch/South-Africa) - **EBAY_HALF_US**: This enumeration value is no longer applicable as the Half.com site no longer exists. - **EBAY_MOTORS_US**: eBay Motors US (ebay.com/motors)
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceIdEnum $marketplaceId = null;
     
     /**
      * @var string|null $name A seller-defined name for this return business policy. Names must be unique for policies assigned to the same marketplace.<br><br><b>Max length:</b> 64
@@ -62,9 +62,9 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var string|null $refundMethod If a seller indicates that they will accept buyer returns, this value will be <code>MONEY_BACK</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:RefundMethodEnum'>eBay API documentation</a>
+     * @var RefundMethodEnum|null $refundMethod This enumerated type defines the supported refund types for buyer returns. | - **MERCHANDISE_CREDIT**: <strong>Do not use/No longer supported.</strong> - **MONEY_BACK**: This enumeration value indicates that the buyer will get their money back (refund) for a returned item.
     */
-    private ?string $refundMethod = null;
+    private ?RefundMethodEnum $refundMethod = null;
     
     /**
      * @var string|null $restockingFeePercentage <p class="tablenote"><span  style="color: #dd1e31;"><b>Important!</b></span> This field is deprecated, since eBay no longer allows sellers to charge a restocking fee for buyer remorse returns.</p>
@@ -72,14 +72,14 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     private ?string $restockingFeePercentage = null;
     
     /**
-     * @var string|null $returnInstructions This text-based field provides more details on seller-specified return instructions. <br><p class="tablenote"><span  style="color: #dd1e31;"><b>Important!</b></span> This field is no longer supported on many eBay marketplaces. To see if a marketplace and eBay category does support this field, call <a href="/api-docs/sell/metadata/resources/marketplace/methods/getReturnPolicies">getReturnPolicies</a> method of the <b>Metadata API</b>. Then you will look for the <b>policyDescriptionEnabled</b> field with a value of <code>true</code> for the eBay category.</span></p><br><b>Max length</b>: 5000 (8000 for DE)
+     * @var string|null $returnInstructions This text-based field provides more details on seller-specified return instructions. <br><p class="tablenote"><span  style="color: #dd1e31;"><b>Important!</b></span> This field is no longer supported on many eBay marketplaces. To see if a marketplace and eBay category does support this field, call <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getreturnpolicies">getReturnPolicies</a> method of the <b>Metadata API</b>. Then you will look for the <b>policyDescriptionEnabled</b> field with a value of <code>true</code> for the eBay category.</span></p><br><b>Max length</b>: 5000 (8000 for DE)
     */
     private ?string $returnInstructions = null;
     
     /**
-     * @var string|null $returnMethod This field will be returned if the seller is willing and able to offer a replacement item as an alternative to 'Money Back'. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnMethodEnum'>eBay API documentation</a>
+     * @var ReturnMethodEnum|null $returnMethod This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
     */
-    private ?string $returnMethod = null;
+    private ?ReturnMethodEnum $returnMethod = null;
     
     /**
      * @var TimeDuration|null $returnPeriod A type used to specify a period of time using a specified time-measurement unit. Payment, return, and fulfillment business policies all use this type to specify time windows.<br><br>Whenever a container that uses this type is used in a request, both of these fields are required. Similarly, whenever a container that uses this type is returned in a response, both of these fields are always returned.
@@ -97,12 +97,12 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     private ?bool $returnsAccepted = null;
     
     /**
-     * @var string|null $returnShippingCostPayer This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>.  <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Eligible Parts & Accessories (P&A) listings require sellers to offer buyers free returns with a minimum return period of 30 days. See <a href="/api-docs/user-guides/static/trading-user-guide/ebay-motors-parts-accessories-easy-returns.html"  target="_blank">Support for easy returns in Parts and Accessories</a> for details.</span></p> <br>Note that the seller is always responsible for return shipping costs for SNAD-related issues.  <br><br>This container will be returned unless the business policy states that the seller does not accept returns. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>
+     * @var ReturnShippingCostPayerEnum|null $returnShippingCostPayer This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
     */
-    private ?string $returnShippingCostPayer = null;
+    private ?ReturnShippingCostPayerEnum $returnShippingCostPayer = null;
     
     /**
-     * @var array<Error>|null $warnings An array of one or more errors or warnings that were generated during the processing of the request. If there were no issues with the request, this array will return empty.
+     * @var array<ErrorDetailV3>|null $warnings An array of one or more errors or warnings that were generated during the processing of the request. If there were no issues with the request, this array will return empty.
     */
     private ?array $warnings = null;
     
@@ -165,17 +165,17 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
             'description' => fn(ParseNode $n) => $o->setDescription($n->getStringValue()),
             'extendedHolidayReturnsOffered' => fn(ParseNode $n) => $o->setExtendedHolidayReturnsOffered($n->getBooleanValue()),
             'internationalOverride' => fn(ParseNode $n) => $o->setInternationalOverride($n->getObjectValue([InternationalReturnOverrideType::class, 'createFromDiscriminatorValue'])),
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
-            'refundMethod' => fn(ParseNode $n) => $o->setRefundMethod($n->getStringValue()),
+            'refundMethod' => fn(ParseNode $n) => $o->setRefundMethod($n->getEnumValue(RefundMethodEnum::class)),
             'restockingFeePercentage' => fn(ParseNode $n) => $o->setRestockingFeePercentage($n->getStringValue()),
             'returnInstructions' => fn(ParseNode $n) => $o->setReturnInstructions($n->getStringValue()),
-            'returnMethod' => fn(ParseNode $n) => $o->setReturnMethod($n->getStringValue()),
+            'returnMethod' => fn(ParseNode $n) => $o->setReturnMethod($n->getEnumValue(ReturnMethodEnum::class)),
             'returnPeriod' => fn(ParseNode $n) => $o->setReturnPeriod($n->getObjectValue([TimeDuration::class, 'createFromDiscriminatorValue'])),
             'returnPolicyId' => fn(ParseNode $n) => $o->setReturnPolicyId($n->getStringValue()),
             'returnsAccepted' => fn(ParseNode $n) => $o->setReturnsAccepted($n->getBooleanValue()),
-            'returnShippingCostPayer' => fn(ParseNode $n) => $o->setReturnShippingCostPayer($n->getStringValue()),
-            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([Error::class, 'createFromDiscriminatorValue'])),
+            'returnShippingCostPayer' => fn(ParseNode $n) => $o->setReturnShippingCostPayer($n->getEnumValue(ReturnShippingCostPayerEnum::class)),
+            'warnings' => fn(ParseNode $n) => $o->setWarnings($n->getCollectionOfObjectValues([ErrorDetailV3::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
@@ -188,10 +188,10 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the marketplaceId property value. The ID of the eBay marketplace to which this return business policy applies. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. This enumerated type contains a list of the standard codes that represent each of the eBay marketplaces. | - **EBAY_AT**: eBay Austria (ebay.at) - **EBAY_AU**: eBay Australia (ebay.com/au) - **EBAY_BE**: eBay Belgium (ebay.com/sch/Belgium) - **EBAY_CA**: eBay Canada (English) (ebay.ca) - **EBAY_CH**: eBay Switzerland (ebay.ch) - **EBAY_CN**: eBay China (ebay.com/sch/China) - **EBAY_CZ**: eBay Czech Republic (ebay.com/sch/Czech-Republic) - **EBAY_DE**: eBay Germany (ebay.de) - **EBAY_DK**: eBay Denmark (ebay.com/sch/Denmark) - **EBAY_ES**: eBay Spain (ebay.es) - **EBAY_FI**: eBay Finland (ebay.com/sch/Finland) - **EBAY_FR**: eBay France (ebay.fr) - **EBAY_GB**: eBay UK (ebay.co.uk) - **EBAY_GR**: eBay Greece (ebay.com/sch/Greece) - **EBAY_HK**: eBay Hong Kong (ebay.com.hk) - **EBAY_HU**: eBay Hungary (ebay.com/sch/Hungary) - **EBAY_ID**: eBay Indonesia (id.ebay.com) - **EBAY_IE**: eBay Ireland (ebay.ie) - **EBAY_IL**: eBay Israel (ebay.com/sch/Israel) - **EBAY_IN**: eBay India (ebay.in)<br><span class="tablenote"><strong>Note:</strong> eBay India is no longer a functioning eBay marketplace.</span> - **EBAY_IT**: eBay Italy (ebay.it) - **EBAY_JP**: eBay Japan (ebay.co.jp) - **EBAY_MY**: eBay Malaysia (ebay.com/my) - **EBAY_NL**: eBay Netherlands (ebay.nl) - **EBAY_NO**: eBay Norway (ebay.com/sch/Norway) - **EBAY_NZ**: eBay New Zealand (ebay.com/sch/New-Zealand) - **EBAY_PE**: eBay Peru (ebay.com/sch/Peru) - **EBAY_PH**: eBay Philippines (ebay.ph) - **EBAY_PL**: eBay Poland (ebay.pl) - **EBAY_PR**: eBay Puerto Rico (ebay.com/sch/Puerto-Rico) - **EBAY_PT**: eBay Portugal (ebay.com/sch/Portugal) - **EBAY_RU**: eBay Russia (ebay.com/sch/Russia) - **EBAY_SE**: eBay Sweden (ebay.com/sch/Sweden) - **EBAY_SG**: eBay Singapore (ebay.com/sg) - **EBAY_TH**: eBay Thailand (export.ebay.co.th) - **EBAY_TW**: eBay Taiwan (ebay.com/tw) - **EBAY_US**: eBay US (ebay.com) - **EBAY_VN**: eBay Vietnam (ebay.vn) - **EBAY_ZA**: eBay South Africa (ebay.com/sch/South-Africa) - **EBAY_HALF_US**: This enumeration value is no longer applicable as the Half.com site no longer exists. - **EBAY_MOTORS_US**: eBay Motors US (ebay.com/motors)
+     * @return MarketplaceIdEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceIdEnum {
         return $this->marketplaceId;
     }
 
@@ -204,10 +204,10 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the refundMethod property value. If a seller indicates that they will accept buyer returns, this value will be <code>MONEY_BACK</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:RefundMethodEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the refundMethod property value. This enumerated type defines the supported refund types for buyer returns. | - **MERCHANDISE_CREDIT**: <strong>Do not use/No longer supported.</strong> - **MONEY_BACK**: This enumeration value indicates that the buyer will get their money back (refund) for a returned item.
+     * @return RefundMethodEnum|null
     */
-    public function getRefundMethod(): ?string {
+    public function getRefundMethod(): ?RefundMethodEnum {
         return $this->refundMethod;
     }
 
@@ -220,7 +220,7 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the returnInstructions property value. This text-based field provides more details on seller-specified return instructions. <br><p class="tablenote"><span  style="color: #dd1e31;"><b>Important!</b></span> This field is no longer supported on many eBay marketplaces. To see if a marketplace and eBay category does support this field, call <a href="/api-docs/sell/metadata/resources/marketplace/methods/getReturnPolicies">getReturnPolicies</a> method of the <b>Metadata API</b>. Then you will look for the <b>policyDescriptionEnabled</b> field with a value of <code>true</code> for the eBay category.</span></p><br><b>Max length</b>: 5000 (8000 for DE)
+     * Gets the returnInstructions property value. This text-based field provides more details on seller-specified return instructions. <br><p class="tablenote"><span  style="color: #dd1e31;"><b>Important!</b></span> This field is no longer supported on many eBay marketplaces. To see if a marketplace and eBay category does support this field, call <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getreturnpolicies">getReturnPolicies</a> method of the <b>Metadata API</b>. Then you will look for the <b>policyDescriptionEnabled</b> field with a value of <code>true</code> for the eBay category.</span></p><br><b>Max length</b>: 5000 (8000 for DE)
      * @return string|null
     */
     public function getReturnInstructions(): ?string {
@@ -228,10 +228,10 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the returnMethod property value. This field will be returned if the seller is willing and able to offer a replacement item as an alternative to 'Money Back'. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnMethodEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the returnMethod property value. This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
+     * @return ReturnMethodEnum|null
     */
-    public function getReturnMethod(): ?string {
+    public function getReturnMethod(): ?ReturnMethodEnum {
         return $this->returnMethod;
     }
 
@@ -260,16 +260,16 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the returnShippingCostPayer property value. This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>.  <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Eligible Parts & Accessories (P&A) listings require sellers to offer buyers free returns with a minimum return period of 30 days. See <a href="/api-docs/user-guides/static/trading-user-guide/ebay-motors-parts-accessories-easy-returns.html"  target="_blank">Support for easy returns in Parts and Accessories</a> for details.</span></p> <br>Note that the seller is always responsible for return shipping costs for SNAD-related issues.  <br><br>This container will be returned unless the business policy states that the seller does not accept returns. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the returnShippingCostPayer property value. This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
+     * @return ReturnShippingCostPayerEnum|null
     */
-    public function getReturnShippingCostPayer(): ?string {
+    public function getReturnShippingCostPayer(): ?ReturnShippingCostPayerEnum {
         return $this->returnShippingCostPayer;
     }
 
     /**
      * Gets the warnings property value. An array of one or more errors or warnings that were generated during the processing of the request. If there were no issues with the request, this array will return empty.
-     * @return array<Error>|null
+     * @return array<ErrorDetailV3>|null
     */
     public function getWarnings(): ?array {
         return $this->warnings;
@@ -284,16 +284,16 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('description', $this->getDescription());
         $writer->writeBooleanValue('extendedHolidayReturnsOffered', $this->getExtendedHolidayReturnsOffered());
         $writer->writeObjectValue('internationalOverride', $this->getInternationalOverride());
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeStringValue('name', $this->getName());
-        $writer->writeStringValue('refundMethod', $this->getRefundMethod());
+        $writer->writeEnumValue('refundMethod', $this->getRefundMethod());
         $writer->writeStringValue('restockingFeePercentage', $this->getRestockingFeePercentage());
         $writer->writeStringValue('returnInstructions', $this->getReturnInstructions());
-        $writer->writeStringValue('returnMethod', $this->getReturnMethod());
+        $writer->writeEnumValue('returnMethod', $this->getReturnMethod());
         $writer->writeObjectValue('returnPeriod', $this->getReturnPeriod());
         $writer->writeStringValue('returnPolicyId', $this->getReturnPolicyId());
         $writer->writeBooleanValue('returnsAccepted', $this->getReturnsAccepted());
-        $writer->writeStringValue('returnShippingCostPayer', $this->getReturnShippingCostPayer());
+        $writer->writeEnumValue('returnShippingCostPayer', $this->getReturnShippingCostPayer());
         $writer->writeCollectionOfObjectValues('warnings', $this->getWarnings());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -339,10 +339,10 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. The ID of the eBay marketplace to which this return business policy applies. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. This enumerated type contains a list of the standard codes that represent each of the eBay marketplaces. | - **EBAY_AT**: eBay Austria (ebay.at) - **EBAY_AU**: eBay Australia (ebay.com/au) - **EBAY_BE**: eBay Belgium (ebay.com/sch/Belgium) - **EBAY_CA**: eBay Canada (English) (ebay.ca) - **EBAY_CH**: eBay Switzerland (ebay.ch) - **EBAY_CN**: eBay China (ebay.com/sch/China) - **EBAY_CZ**: eBay Czech Republic (ebay.com/sch/Czech-Republic) - **EBAY_DE**: eBay Germany (ebay.de) - **EBAY_DK**: eBay Denmark (ebay.com/sch/Denmark) - **EBAY_ES**: eBay Spain (ebay.es) - **EBAY_FI**: eBay Finland (ebay.com/sch/Finland) - **EBAY_FR**: eBay France (ebay.fr) - **EBAY_GB**: eBay UK (ebay.co.uk) - **EBAY_GR**: eBay Greece (ebay.com/sch/Greece) - **EBAY_HK**: eBay Hong Kong (ebay.com.hk) - **EBAY_HU**: eBay Hungary (ebay.com/sch/Hungary) - **EBAY_ID**: eBay Indonesia (id.ebay.com) - **EBAY_IE**: eBay Ireland (ebay.ie) - **EBAY_IL**: eBay Israel (ebay.com/sch/Israel) - **EBAY_IN**: eBay India (ebay.in)<br><span class="tablenote"><strong>Note:</strong> eBay India is no longer a functioning eBay marketplace.</span> - **EBAY_IT**: eBay Italy (ebay.it) - **EBAY_JP**: eBay Japan (ebay.co.jp) - **EBAY_MY**: eBay Malaysia (ebay.com/my) - **EBAY_NL**: eBay Netherlands (ebay.nl) - **EBAY_NO**: eBay Norway (ebay.com/sch/Norway) - **EBAY_NZ**: eBay New Zealand (ebay.com/sch/New-Zealand) - **EBAY_PE**: eBay Peru (ebay.com/sch/Peru) - **EBAY_PH**: eBay Philippines (ebay.ph) - **EBAY_PL**: eBay Poland (ebay.pl) - **EBAY_PR**: eBay Puerto Rico (ebay.com/sch/Puerto-Rico) - **EBAY_PT**: eBay Portugal (ebay.com/sch/Portugal) - **EBAY_RU**: eBay Russia (ebay.com/sch/Russia) - **EBAY_SE**: eBay Sweden (ebay.com/sch/Sweden) - **EBAY_SG**: eBay Singapore (ebay.com/sg) - **EBAY_TH**: eBay Thailand (export.ebay.co.th) - **EBAY_TW**: eBay Taiwan (ebay.com/tw) - **EBAY_US**: eBay US (ebay.com) - **EBAY_VN**: eBay Vietnam (ebay.vn) - **EBAY_ZA**: eBay South Africa (ebay.com/sch/South-Africa) - **EBAY_HALF_US**: This enumeration value is no longer applicable as the Half.com site no longer exists. - **EBAY_MOTORS_US**: eBay Motors US (ebay.com/motors)
+     * @param MarketplaceIdEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->marketplaceId = $value;
     }
 
@@ -355,10 +355,10 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the refundMethod property value. If a seller indicates that they will accept buyer returns, this value will be <code>MONEY_BACK</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:RefundMethodEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the refundMethod property.
+     * Sets the refundMethod property value. This enumerated type defines the supported refund types for buyer returns. | - **MERCHANDISE_CREDIT**: <strong>Do not use/No longer supported.</strong> - **MONEY_BACK**: This enumeration value indicates that the buyer will get their money back (refund) for a returned item.
+     * @param RefundMethodEnum|null $value Value to set for the refundMethod property.
     */
-    public function setRefundMethod(?string $value): void {
+    public function setRefundMethod(?RefundMethodEnum $value): void {
         $this->refundMethod = $value;
     }
 
@@ -371,7 +371,7 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the returnInstructions property value. This text-based field provides more details on seller-specified return instructions. <br><p class="tablenote"><span  style="color: #dd1e31;"><b>Important!</b></span> This field is no longer supported on many eBay marketplaces. To see if a marketplace and eBay category does support this field, call <a href="/api-docs/sell/metadata/resources/marketplace/methods/getReturnPolicies">getReturnPolicies</a> method of the <b>Metadata API</b>. Then you will look for the <b>policyDescriptionEnabled</b> field with a value of <code>true</code> for the eBay category.</span></p><br><b>Max length</b>: 5000 (8000 for DE)
+     * Sets the returnInstructions property value. This text-based field provides more details on seller-specified return instructions. <br><p class="tablenote"><span  style="color: #dd1e31;"><b>Important!</b></span> This field is no longer supported on many eBay marketplaces. To see if a marketplace and eBay category does support this field, call <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getreturnpolicies">getReturnPolicies</a> method of the <b>Metadata API</b>. Then you will look for the <b>policyDescriptionEnabled</b> field with a value of <code>true</code> for the eBay category.</span></p><br><b>Max length</b>: 5000 (8000 for DE)
      * @param string|null $value Value to set for the returnInstructions property.
     */
     public function setReturnInstructions(?string $value): void {
@@ -379,10 +379,10 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the returnMethod property value. This field will be returned if the seller is willing and able to offer a replacement item as an alternative to 'Money Back'. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnMethodEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the returnMethod property.
+     * Sets the returnMethod property value. This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
+     * @param ReturnMethodEnum|null $value Value to set for the returnMethod property.
     */
-    public function setReturnMethod(?string $value): void {
+    public function setReturnMethod(?ReturnMethodEnum $value): void {
         $this->returnMethod = $value;
     }
 
@@ -411,16 +411,16 @@ class SetReturnPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the returnShippingCostPayer property value. This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>.  <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Eligible Parts & Accessories (P&A) listings require sellers to offer buyers free returns with a minimum return period of 30 days. See <a href="/api-docs/user-guides/static/trading-user-guide/ebay-motors-parts-accessories-easy-returns.html"  target="_blank">Support for easy returns in Parts and Accessories</a> for details.</span></p> <br>Note that the seller is always responsible for return shipping costs for SNAD-related issues.  <br><br>This container will be returned unless the business policy states that the seller does not accept returns. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the returnShippingCostPayer property.
+     * Sets the returnShippingCostPayer property value. This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
+     * @param ReturnShippingCostPayerEnum|null $value Value to set for the returnShippingCostPayer property.
     */
-    public function setReturnShippingCostPayer(?string $value): void {
+    public function setReturnShippingCostPayer(?ReturnShippingCostPayerEnum $value): void {
         $this->returnShippingCostPayer = $value;
     }
 
     /**
      * Sets the warnings property value. An array of one or more errors or warnings that were generated during the processing of the request. If there were no issues with the request, this array will return empty.
-     * @param array<Error>|null $value Value to set for the warnings property.
+     * @param array<ErrorDetailV3>|null $value Value to set for the warnings property.
     */
     public function setWarnings(?array $value): void {
         $this->warnings = $value;

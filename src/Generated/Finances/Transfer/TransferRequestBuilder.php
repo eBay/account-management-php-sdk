@@ -16,7 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\Finances\Transfer;
 
-use EBay\AccountManagement\Generated\Finances\Transfer\Item\WithTransfer_ItemRequestBuilder;
+use EBay\AccountManagement\Generated\Finances\Transfer\Item\Transfer_ItemRequestBuilder;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
 use Microsoft\Kiota\Abstractions\RequestAdapter;
 
@@ -27,13 +27,13 @@ class TransferRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/AccountManagement/Generated/Finances.transfer.item collection
-     * @param string $transfer_Id This path parameter is used to specify the unique identifier of the <code>TRANSFER</code> transaction type you wish to retrieve.<br><br>Use the <a href="/api-docs/sell/finances/resources/transaction/methods/getTransactions" target="_blank ">getTransactions</a> method to retrieve this value by setting the <b>transactionType</b> filter to <code>TRANSFER</code>. The <b>transfer_id</b> value will then be returned in the <b>transaction_id</b> field of the response.
-     * @return WithTransfer_ItemRequestBuilder
+     * @param string $transfer_Id This path parameter is used to specify the unique identifier of the <code>TRANSFER</code> transaction type you wish to retrieve.<br><br>Use the <a href="/develop/api/sell/finances_api#sell-finances_api-transaction-gettransactions">getTransactions</a> method to retrieve this value by setting the <b>transactionType</b> filter to <code>TRANSFER</code>. The <b>transfer_id</b> value will then be returned in the <b>transaction_id</b> field of the response.
+     * @return Transfer_ItemRequestBuilder
     */
-    public function byTransfer_Id(string $transfer_Id): WithTransfer_ItemRequestBuilder {
+    public function byTransfer_Id(string $transfer_Id): Transfer_ItemRequestBuilder {
         $urlTplParams = $this->pathParameters;
-        $urlTplParams['transfer_Id'] = $transfer_Id;
-        return new WithTransfer_ItemRequestBuilder($urlTplParams, $this->requestAdapter);
+        $urlTplParams['transfer_%2Did'] = $transfer_Id;
+        return new Transfer_ItemRequestBuilder($urlTplParams, $this->requestAdapter);
     }
 
     /**

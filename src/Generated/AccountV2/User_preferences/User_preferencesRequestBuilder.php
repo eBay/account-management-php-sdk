@@ -16,14 +16,15 @@
 
 namespace EBay\AccountManagement\Generated\AccountV2\User_preferences;
 
+use EBay\AccountManagement\Generated\AccountV2\Models\Error;
 use EBay\AccountManagement\Generated\AccountV2\Models\GetUserPreferencesResponse;
+use EBay\AccountManagement\Generated\AccountV2\Models\SetUserPreferencesRequest;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
 use Microsoft\Kiota\Abstractions\HttpMethod;
 use Microsoft\Kiota\Abstractions\RequestAdapter;
 use Microsoft\Kiota\Abstractions\RequestInformation;
-use Psr\Http\Message\StreamInterface;
 
 /**
  * Builds and executes requests for operations under /user_preferences
@@ -52,19 +53,27 @@ class User_preferencesRequestBuilder extends BaseRequestBuilder
     */
     public function get(?User_preferencesRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetUserPreferencesResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetUserPreferencesResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
      * This method is used to modify one or more preferences for a seller on a specific marketplace. The preferences that can be modified include combined payment preferences, same-day shipping cutoff time, and opt-in status for Business Policies and Out-of-stock control. This is a PATCH operation, so you only need to include the fields that correspond to the preferences/settings that you are changing.
-     * @param StreamInterface $body The request body
+     * @param SetUserPreferencesRequest $body This type defines the request fields for the seller preferences configuration for eBay services.
      * @param User_preferencesRequestBuilderPatchRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
-    public function patch(StreamInterface $body, ?User_preferencesRequestBuilderPatchRequestConfiguration $requestConfiguration = null): Promise {
+    public function patch(SetUserPreferencesRequest $body, ?User_preferencesRequestBuilderPatchRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPatchRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
@@ -90,11 +99,11 @@ class User_preferencesRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method is used to modify one or more preferences for a seller on a specific marketplace. The preferences that can be modified include combined payment preferences, same-day shipping cutoff time, and opt-in status for Business Policies and Out-of-stock control. This is a PATCH operation, so you only need to include the fields that correspond to the preferences/settings that you are changing.
-     * @param UntypedNode $body The request body
+     * @param SetUserPreferencesRequest $body This type defines the request fields for the seller preferences configuration for eBay services.
      * @param User_preferencesRequestBuilderPatchRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
-    public function toPatchRequestInformation(UntypedNode $body, ?User_preferencesRequestBuilderPatchRequestConfiguration $requestConfiguration = null): RequestInformation {
+    public function toPatchRequestInformation(SetUserPreferencesRequest $body, ?User_preferencesRequestBuilderPatchRequestConfiguration $requestConfiguration = null): RequestInformation {
         $requestInfo = new RequestInformation();
         $requestInfo->urlTemplate = $this->urlTemplate;
         $requestInfo->pathParameters = $this->pathParameters;
@@ -103,7 +112,8 @@ class User_preferencesRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
-        $requestInfo->setContentFromScalar($this->requestAdapter, "application/json", $body);
+        $requestInfo->tryAddHeader('Accept', "application/json");
+        $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }
 

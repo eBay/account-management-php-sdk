@@ -32,12 +32,12 @@ class CreatePromotionalShippingRuleRequest implements AdditionalDataHolder, Pars
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $combinedDuration This container specifies the time window during which multiple unpaid orders can be combined into a single payment or invoice, represented by using one of the values in CombinedPaymentPeriodEnum type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
+     * @var CombinedPaymentPeriodEnum|null $combinedDuration This container specifies the time window during which multiple unpaid orders can be combined into a single payment or invoice, represented by using one of the values in <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a>.
     */
-    private ?string $combinedDuration = null;
+    private ?CombinedPaymentPeriodEnum $combinedDuration = null;
     
     /**
-     * @var PromotionalShippingRuleType|null $promotionalShippingRule This type is used to represent a promotional shipping rule set up by the seller on an eBay marketplace.
+     * @var PromotionalShippingRuleType|null $promotionalShippingRule This container defines the promotional combined-shipping rule that offers discounts or free shipping based on order value, item count, or other qualifying conditions.
     */
     private ?PromotionalShippingRuleType $promotionalShippingRule = null;
     
@@ -66,10 +66,10 @@ class CreatePromotionalShippingRuleRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Gets the combinedDuration property value. This container specifies the time window during which multiple unpaid orders can be combined into a single payment or invoice, represented by using one of the values in CombinedPaymentPeriodEnum type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the combinedDuration property value. This container specifies the time window during which multiple unpaid orders can be combined into a single payment or invoice, represented by using one of the values in <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a>.
+     * @return CombinedPaymentPeriodEnum|null
     */
-    public function getCombinedDuration(): ?string {
+    public function getCombinedDuration(): ?CombinedPaymentPeriodEnum {
         return $this->combinedDuration;
     }
 
@@ -80,13 +80,13 @@ class CreatePromotionalShippingRuleRequest implements AdditionalDataHolder, Pars
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'combinedDuration' => fn(ParseNode $n) => $o->setCombinedDuration($n->getStringValue()),
+            'combinedDuration' => fn(ParseNode $n) => $o->setCombinedDuration($n->getEnumValue(CombinedPaymentPeriodEnum::class)),
             'promotionalShippingRule' => fn(ParseNode $n) => $o->setPromotionalShippingRule($n->getObjectValue([PromotionalShippingRuleType::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the promotionalShippingRule property value. This type is used to represent a promotional shipping rule set up by the seller on an eBay marketplace.
+     * Gets the promotionalShippingRule property value. This container defines the promotional combined-shipping rule that offers discounts or free shipping based on order value, item count, or other qualifying conditions.
      * @return PromotionalShippingRuleType|null
     */
     public function getPromotionalShippingRule(): ?PromotionalShippingRuleType {
@@ -98,7 +98,7 @@ class CreatePromotionalShippingRuleRequest implements AdditionalDataHolder, Pars
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('combinedDuration', $this->getCombinedDuration());
+        $writer->writeEnumValue('combinedDuration', $this->getCombinedDuration());
         $writer->writeObjectValue('promotionalShippingRule', $this->getPromotionalShippingRule());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,15 +112,15 @@ class CreatePromotionalShippingRuleRequest implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Sets the combinedDuration property value. This container specifies the time window during which multiple unpaid orders can be combined into a single payment or invoice, represented by using one of the values in CombinedPaymentPeriodEnum type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CombinedPaymentPeriodEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the combinedDuration property.
+     * Sets the combinedDuration property value. This container specifies the time window during which multiple unpaid orders can be combined into a single payment or invoice, represented by using one of the values in <a href="/develop/api/sell/account_api_v2#sell-account_api_v2-combined_shipping_rules-getcombinedshippingrules.getcombinedshippingrulesresponse.combinedduration" target="_blank">CombinedPaymentPeriodEnum</a>.
+     * @param CombinedPaymentPeriodEnum|null $value Value to set for the combinedDuration property.
     */
-    public function setCombinedDuration(?string $value): void {
+    public function setCombinedDuration(?CombinedPaymentPeriodEnum $value): void {
         $this->combinedDuration = $value;
     }
 
     /**
-     * Sets the promotionalShippingRule property value. This type is used to represent a promotional shipping rule set up by the seller on an eBay marketplace.
+     * Sets the promotionalShippingRule property value. This container defines the promotional combined-shipping rule that offers discounts or free shipping based on order value, item count, or other qualifying conditions.
      * @param PromotionalShippingRuleType|null $value Value to set for the promotionalShippingRule property.
     */
     public function setPromotionalShippingRule(?PromotionalShippingRuleType $value): void {

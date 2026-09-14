@@ -32,9 +32,9 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $returnMethod This field sets/indicates if the seller offers replacement items to the buyer in the case of an international return. The buyer must be willing to accept a replacement item; otherwise, the seller will need to issue a refund for a return. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnMethodEnum'>eBay API documentation</a>
+     * @var ReturnMethodEnum|null $returnMethod This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
     */
-    private ?string $returnMethod = null;
+    private ?ReturnMethodEnum $returnMethod = null;
     
     /**
      * @var TimeDuration|null $returnPeriod A type used to specify a period of time using a specified time-measurement unit. Payment, return, and fulfillment business policies all use this type to specify time windows.<br><br>Whenever a container that uses this type is used in a request, both of these fields are required. Similarly, whenever a container that uses this type is returned in a response, both of these fields are always returned.
@@ -47,9 +47,9 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     private ?bool $returnsAccepted = null;
     
     /**
-     * @var string|null $returnShippingCostPayer This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>.  <br><br>Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for 'significantly not as described' (SNAD) issues.  <br><br>This field is conditionally required if the <b>internationalOverride.returnsAccepted</b> field is set to <code>true</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>
+     * @var ReturnShippingCostPayerEnum|null $returnShippingCostPayer This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
     */
-    private ?string $returnShippingCostPayer = null;
+    private ?ReturnShippingCostPayerEnum $returnShippingCostPayer = null;
     
     /**
      * Instantiates a new InternationalReturnOverrideType and sets the default values.
@@ -82,18 +82,18 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'returnMethod' => fn(ParseNode $n) => $o->setReturnMethod($n->getStringValue()),
+            'returnMethod' => fn(ParseNode $n) => $o->setReturnMethod($n->getEnumValue(ReturnMethodEnum::class)),
             'returnPeriod' => fn(ParseNode $n) => $o->setReturnPeriod($n->getObjectValue([TimeDuration::class, 'createFromDiscriminatorValue'])),
             'returnsAccepted' => fn(ParseNode $n) => $o->setReturnsAccepted($n->getBooleanValue()),
-            'returnShippingCostPayer' => fn(ParseNode $n) => $o->setReturnShippingCostPayer($n->getStringValue()),
+            'returnShippingCostPayer' => fn(ParseNode $n) => $o->setReturnShippingCostPayer($n->getEnumValue(ReturnShippingCostPayerEnum::class)),
         ];
     }
 
     /**
-     * Gets the returnMethod property value. This field sets/indicates if the seller offers replacement items to the buyer in the case of an international return. The buyer must be willing to accept a replacement item; otherwise, the seller will need to issue a refund for a return. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnMethodEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the returnMethod property value. This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
+     * @return ReturnMethodEnum|null
     */
-    public function getReturnMethod(): ?string {
+    public function getReturnMethod(): ?ReturnMethodEnum {
         return $this->returnMethod;
     }
 
@@ -114,10 +114,10 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the returnShippingCostPayer property value. This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>.  <br><br>Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for 'significantly not as described' (SNAD) issues.  <br><br>This field is conditionally required if the <b>internationalOverride.returnsAccepted</b> field is set to <code>true</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the returnShippingCostPayer property value. This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
+     * @return ReturnShippingCostPayerEnum|null
     */
-    public function getReturnShippingCostPayer(): ?string {
+    public function getReturnShippingCostPayer(): ?ReturnShippingCostPayerEnum {
         return $this->returnShippingCostPayer;
     }
 
@@ -126,10 +126,10 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('returnMethod', $this->getReturnMethod());
+        $writer->writeEnumValue('returnMethod', $this->getReturnMethod());
         $writer->writeObjectValue('returnPeriod', $this->getReturnPeriod());
         $writer->writeBooleanValue('returnsAccepted', $this->getReturnsAccepted());
-        $writer->writeStringValue('returnShippingCostPayer', $this->getReturnShippingCostPayer());
+        $writer->writeEnumValue('returnShippingCostPayer', $this->getReturnShippingCostPayer());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -142,10 +142,10 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the returnMethod property value. This field sets/indicates if the seller offers replacement items to the buyer in the case of an international return. The buyer must be willing to accept a replacement item; otherwise, the seller will need to issue a refund for a return. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnMethodEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the returnMethod property.
+     * Sets the returnMethod property value. This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
+     * @param ReturnMethodEnum|null $value Value to set for the returnMethod property.
     */
-    public function setReturnMethod(?string $value): void {
+    public function setReturnMethod(?ReturnMethodEnum $value): void {
         $this->returnMethod = $value;
     }
 
@@ -166,10 +166,10 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the returnShippingCostPayer property value. This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>.  <br><br>Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for 'significantly not as described' (SNAD) issues.  <br><br>This field is conditionally required if the <b>internationalOverride.returnsAccepted</b> field is set to <code>true</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the returnShippingCostPayer property.
+     * Sets the returnShippingCostPayer property value. This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
+     * @param ReturnShippingCostPayerEnum|null $value Value to set for the returnShippingCostPayer property.
     */
-    public function setReturnShippingCostPayer(?string $value): void {
+    public function setReturnShippingCostPayer(?ReturnShippingCostPayerEnum $value): void {
         $this->returnShippingCostPayer = $value;
     }
 

@@ -32,34 +32,34 @@ class Transaction implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $amount This container shows the dollar value and currency type of the monetary transaction. This field is always returned even when eBay has yet to initiate a payout for the order.
     */
     private ?Amount $amount = null;
     
     /**
-     * @var string|null $bookingEntry The enumeration value returned in this field indicates if the monetary transaction amount is a (<code>CREDIT</code>) or a (<code>DEBIT</code>) to the seller's account. Typically, the <code>SALE</code> and <code>CREDIT</code> transaction types are credits to the seller's account, and the <code>REFUND</code>, <code>DISPUTE</code>, <code>SHIPPING_LABEL</code>, and <code>TRANSFER</code> transaction types are debits to the seller's account. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+     * @var BookingEntryEnum|null $bookingEntry The enumeration value returned in this field indicates if the monetary transaction amount is a (<code>CREDIT</code>) or a (<code>DEBIT</code>) to the seller's account.
     */
-    private ?string $bookingEntry = null;
+    private ?BookingEntryEnum $bookingEntry = null;
     
     /**
-     * @var Buyer|null $buyer This type is used to express details about the buyer associated with an order. At this time, the only field in this type is the eBay user ID of the buyer, but more fields may get added at a later date.
+     * @var Buyer|null $buyer This is the unique eBay user ID for the buyer who purchased the order. This field is not returned for <code>TRANSFER</code> monetary transaction types.
     */
     private ?Buyer $buyer = null;
     
     /**
-     * @var Amount|null $eBayCollectedTaxAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $eBayCollectedTaxAmount This is the amount of sales tax that has been collected by eBay for an order.<br><br><span class="tablenote"><b>Note:</b> Sales tax applies only to <code>SALE</code> and <code>REFUND</code> transactions (<b>transactionType</b>).</span>
     */
     private ?Amount $eBayCollectedTaxAmount = null;
     
     /**
-     * @var FeeJurisdiction|null $feeJurisdiction This type defines the jurisdiction information associated with a fee, identifying the geographic or regulatory region under which the fee is applied.
+     * @var FeeJurisdiction|null $feeJurisdiction This container stores information about region-specific fees that are charged to sellers.
     */
     private ?FeeJurisdiction $feeJurisdiction = null;
     
     /**
-     * @var string|null $feeType The enumeration value returned in this field indicates the type of fee that was deducted from the seller payout. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay API documentation</a>
+     * @var FeeTypeEnum|null $feeType The enumeration value returned in this field indicates the type of fee that was deducted from the seller payout.
     */
-    private ?string $feeType = null;
+    private ?FeeTypeEnum $feeType = null;
     
     /**
      * @var string|null $orderId The unique identifier of the eBay order associated with the monetary transaction.
@@ -67,7 +67,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     private ?string $orderId = null;
     
     /**
-     * @var array<OrderLineItem>|null $orderLineItems This array either shows the order line item transactional fees related to a <code>SALE</code> transaction and deducted from the payout associated with that order, or it shows the transactional fee credits going back to the seller in the case of a <code>REFUND</code> transaction.<br><br><span class="tablenote"><strong>Note:</strong> In certain circumstances, transactional fees like <code>FINAL_VALUE_FEE</code> and <code>FINAL_VALUE_FEE_FIXED_PER_ORDER</code> are not deducted from a seller payout, but instead they are billed to the seller's account as "non-sale charges". When this happens, the <code>SALE</code> transaction entity will not have these fees under the <b>orderLineItems</b> array, but they will appear as separate <code>NON_SALE_CHARGE</code> transactions. When this happens, and you want to see those transactional fees for the order, one thing you can do is make another call to <b>getTransactions</b> and filter against the <b>orderId</b>. In the response, you will see the <code>SALE</code> transaction and the <code>NON_SALE_CHARGE</code> transactions applied against the order. See <a href="/api-docs/sell/finances/resources/transaction/methods/getTransactions#s0-1-28-4-7-5-6-Gettransactionalfeesforanorder-5" >Sample 6: Get transactional fees for an order</a> and <a href="/api-docs/sell/finances/resources/transaction/methods/getTransactions#s0-1-28-4-7-5-6-Getnon-salechargesforanorder-9">Sample 10: Get non-sale charges for an order</a> for examples.
+     * @var array<OrderLineItem>|null $orderLineItems This array either shows the order line item transactional fees related to a <code>SALE</code> transaction and deducted from the payout associated with that order, or it shows the transactional fee credits going back to the seller in the case of a <code>REFUND</code> transaction.
     */
     private ?array $orderLineItems = null;
     
@@ -77,12 +77,12 @@ class Transaction implements AdditionalDataHolder, Parsable
     private ?string $paymentsEntity = null;
     
     /**
-     * @var PayoutDetails|null $payoutDetails This type provide payout details for a split-payout case. This type is only applicable for split payouts.
+     * @var PayoutDetails|null $payoutDetails This container provides the payout details for a split-payout case. This container is only returned for split-payout use cases.
     */
     private ?PayoutDetails $payoutDetails = null;
     
     /**
-     * @var string|null $payoutId The unique identifier of the seller payout associated with the monetary transaction. This identifier is generated once eBay begins processing the payout for the corresponding order. This field will not be returned if eBay has not yet begun processing the payout for an order.<br><br>This value can be used by the <b>filter</b> query parameter to get monetary transactions associated with the true(actual) payout associated with the <b>PayoutId</b>.<br><br><span class="tablenote"><b>Note:</b> In case of a split payout, always pick the first true(actual) payout id.</span> 
+     * @var string|null $payoutId The unique identifier of the seller payout associated with the monetary transaction.
     */
     private ?string $payoutId = null;
     
@@ -102,12 +102,12 @@ class Transaction implements AdditionalDataHolder, Parsable
     private ?array $taxes = null;
     
     /**
-     * @var Amount|null $totalFeeAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $totalFeeAmount This amount is the total amount of selling fees paid for order.
     */
     private ?Amount $totalFeeAmount = null;
     
     /**
-     * @var Amount|null $totalFeeBasisAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $totalFeeBasisAmount This amount is the total amount for the order before selling fees are deducted from the seller payout associated with the order.
     */
     private ?Amount $totalFeeBasisAmount = null;
     
@@ -117,24 +117,29 @@ class Transaction implements AdditionalDataHolder, Parsable
     private ?string $transactionDate = null;
     
     /**
-     * @var string|null $transactionId This field, when combined with the <a href="#response.transactions.transactionType" >transactionType</a> field, provide a unique identifier of the monetary transaction. A monetary transaction can be a sales order, an order refund to the buyer, a credit to the seller's account, a debit to the seller for the purchase of a shipping label, or a transaction where eBay recouped money from the seller if the seller lost a buyer-initiated payment dispute.
+     * @var Amount|null $transactionEbayCollectedTaxAmount Sales tax collected by eBay, applicable only for SALE and REFUND.
+    */
+    private ?Amount $transactionEbayCollectedTaxAmount = null;
+    
+    /**
+     * @var string|null $transactionId This field, when combined with the <a href="#response.transactions.transactionType" >transactionType</a> field, provide a unique identifier of the monetary transaction.
     */
     private ?string $transactionId = null;
     
     /**
-     * @var string|null $transactionMemo This field applies to shipping label transactions, sales transactions where payout is on hold, and non-sale charge fees. The following are examples of how the field is used for each transaction type:<ul><li><b>Shipping label purchase</b>: the <b>transactionMemo</b> field gives details about a purchase, a refund, or a price adjustment to the cost of the shipping label.</li><li><b>Sales transactions with funds on hold</b>: the <b>transactionMemo</b> field provides information on the reason for the hold or when the hold will be released (e.g., "Funds on hold. Estimated release on Jun 1").</li><li><b>Non-sale charge fees</b>: the <b>transactionMemo</b> field will provide the type of fee that was charged, such as Promoted Offsite Fee.</li></ul>This field is only returned if applicable/available.
+     * @var string|null $transactionMemo This field applies to shipping label transactions, sales transactions where payout is on hold, and non-sale charge fees.
     */
     private ?string $transactionMemo = null;
     
     /**
-     * @var string|null $transactionStatus This enumeration value indicates the current status of the seller payout associated with the monetary transaction. See the <code>TransactionStatusEnum</code> type for more information on the different states. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:TransactionStatusEnum'>eBay API documentation</a>
+     * @var TransactionStatusEnum|null $transactionStatus This enumeration value indicates the current status of the seller payout associated with the monetary transaction.
     */
-    private ?string $transactionStatus = null;
+    private ?TransactionStatusEnum $transactionStatus = null;
     
     /**
-     * @var string|null $transactionType This enumeration value indicates the type of monetary transaction. Examples of monetary transactions include a buyer's payment for an order, a refund to the buyer for a returned item or cancelled order, or a credit issued by eBay to the seller's account. For a complete list of monetary transaction types within the <strong>Finances API</strong>, see the <a href="/api-docs/sell/finances/types/pay:TransactionTypeEnum">TransactionTypeEnum</a> type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:TransactionTypeEnum'>eBay API documentation</a>
+     * @var TransactionTypeEnum|null $transactionType This enumeration value indicates the type of monetary transaction.
     */
-    private ?string $transactionType = null;
+    private ?TransactionTypeEnum $transactionType = null;
     
     /**
      * Instantiates a new Transaction and sets the default values.
@@ -161,7 +166,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the amount property value. This container shows the dollar value and currency type of the monetary transaction. This field is always returned even when eBay has yet to initiate a payout for the order.
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -169,15 +174,15 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the bookingEntry property value. The enumeration value returned in this field indicates if the monetary transaction amount is a (<code>CREDIT</code>) or a (<code>DEBIT</code>) to the seller's account. Typically, the <code>SALE</code> and <code>CREDIT</code> transaction types are credits to the seller's account, and the <code>REFUND</code>, <code>DISPUTE</code>, <code>SHIPPING_LABEL</code>, and <code>TRANSFER</code> transaction types are debits to the seller's account. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the bookingEntry property value. The enumeration value returned in this field indicates if the monetary transaction amount is a (<code>CREDIT</code>) or a (<code>DEBIT</code>) to the seller's account.
+     * @return BookingEntryEnum|null
     */
-    public function getBookingEntry(): ?string {
+    public function getBookingEntry(): ?BookingEntryEnum {
         return $this->bookingEntry;
     }
 
     /**
-     * Gets the buyer property value. This type is used to express details about the buyer associated with an order. At this time, the only field in this type is the eBay user ID of the buyer, but more fields may get added at a later date.
+     * Gets the buyer property value. This is the unique eBay user ID for the buyer who purchased the order. This field is not returned for <code>TRANSFER</code> monetary transaction types.
      * @return Buyer|null
     */
     public function getBuyer(): ?Buyer {
@@ -185,7 +190,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the eBayCollectedTaxAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the eBayCollectedTaxAmount property value. This is the amount of sales tax that has been collected by eBay for an order.<br><br><span class="tablenote"><b>Note:</b> Sales tax applies only to <code>SALE</code> and <code>REFUND</code> transactions (<b>transactionType</b>).</span>
      * @return Amount|null
     */
     public function getEBayCollectedTaxAmount(): ?Amount {
@@ -193,7 +198,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feeJurisdiction property value. This type defines the jurisdiction information associated with a fee, identifying the geographic or regulatory region under which the fee is applied.
+     * Gets the feeJurisdiction property value. This container stores information about region-specific fees that are charged to sellers.
      * @return FeeJurisdiction|null
     */
     public function getFeeJurisdiction(): ?FeeJurisdiction {
@@ -201,10 +206,10 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the feeType property value. The enumeration value returned in this field indicates the type of fee that was deducted from the seller payout. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the feeType property value. The enumeration value returned in this field indicates the type of fee that was deducted from the seller payout.
+     * @return FeeTypeEnum|null
     */
-    public function getFeeType(): ?string {
+    public function getFeeType(): ?FeeTypeEnum {
         return $this->feeType;
     }
 
@@ -216,11 +221,11 @@ class Transaction implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'amount' => fn(ParseNode $n) => $o->setAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
-            'bookingEntry' => fn(ParseNode $n) => $o->setBookingEntry($n->getStringValue()),
+            'bookingEntry' => fn(ParseNode $n) => $o->setBookingEntry($n->getEnumValue(BookingEntryEnum::class)),
             'buyer' => fn(ParseNode $n) => $o->setBuyer($n->getObjectValue([Buyer::class, 'createFromDiscriminatorValue'])),
             'eBayCollectedTaxAmount' => fn(ParseNode $n) => $o->setEBayCollectedTaxAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'feeJurisdiction' => fn(ParseNode $n) => $o->setFeeJurisdiction($n->getObjectValue([FeeJurisdiction::class, 'createFromDiscriminatorValue'])),
-            'feeType' => fn(ParseNode $n) => $o->setFeeType($n->getStringValue()),
+            'feeType' => fn(ParseNode $n) => $o->setFeeType($n->getEnumValue(FeeTypeEnum::class)),
             'orderId' => fn(ParseNode $n) => $o->setOrderId($n->getStringValue()),
             'orderLineItems' => fn(ParseNode $n) => $o->setOrderLineItems($n->getCollectionOfObjectValues([OrderLineItem::class, 'createFromDiscriminatorValue'])),
             'paymentsEntity' => fn(ParseNode $n) => $o->setPaymentsEntity($n->getStringValue()),
@@ -232,10 +237,11 @@ class Transaction implements AdditionalDataHolder, Parsable
             'totalFeeAmount' => fn(ParseNode $n) => $o->setTotalFeeAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'totalFeeBasisAmount' => fn(ParseNode $n) => $o->setTotalFeeBasisAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'transactionDate' => fn(ParseNode $n) => $o->setTransactionDate($n->getStringValue()),
+            'ebayCollectedTaxAmount' => fn(ParseNode $n) => $o->setTransactionEbayCollectedTaxAmount($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
             'transactionId' => fn(ParseNode $n) => $o->setTransactionId($n->getStringValue()),
             'transactionMemo' => fn(ParseNode $n) => $o->setTransactionMemo($n->getStringValue()),
-            'transactionStatus' => fn(ParseNode $n) => $o->setTransactionStatus($n->getStringValue()),
-            'transactionType' => fn(ParseNode $n) => $o->setTransactionType($n->getStringValue()),
+            'transactionStatus' => fn(ParseNode $n) => $o->setTransactionStatus($n->getEnumValue(TransactionStatusEnum::class)),
+            'transactionType' => fn(ParseNode $n) => $o->setTransactionType($n->getEnumValue(TransactionTypeEnum::class)),
         ];
     }
 
@@ -248,7 +254,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the orderLineItems property value. This array either shows the order line item transactional fees related to a <code>SALE</code> transaction and deducted from the payout associated with that order, or it shows the transactional fee credits going back to the seller in the case of a <code>REFUND</code> transaction.<br><br><span class="tablenote"><strong>Note:</strong> In certain circumstances, transactional fees like <code>FINAL_VALUE_FEE</code> and <code>FINAL_VALUE_FEE_FIXED_PER_ORDER</code> are not deducted from a seller payout, but instead they are billed to the seller's account as "non-sale charges". When this happens, the <code>SALE</code> transaction entity will not have these fees under the <b>orderLineItems</b> array, but they will appear as separate <code>NON_SALE_CHARGE</code> transactions. When this happens, and you want to see those transactional fees for the order, one thing you can do is make another call to <b>getTransactions</b> and filter against the <b>orderId</b>. In the response, you will see the <code>SALE</code> transaction and the <code>NON_SALE_CHARGE</code> transactions applied against the order. See <a href="/api-docs/sell/finances/resources/transaction/methods/getTransactions#s0-1-28-4-7-5-6-Gettransactionalfeesforanorder-5" >Sample 6: Get transactional fees for an order</a> and <a href="/api-docs/sell/finances/resources/transaction/methods/getTransactions#s0-1-28-4-7-5-6-Getnon-salechargesforanorder-9">Sample 10: Get non-sale charges for an order</a> for examples.
+     * Gets the orderLineItems property value. This array either shows the order line item transactional fees related to a <code>SALE</code> transaction and deducted from the payout associated with that order, or it shows the transactional fee credits going back to the seller in the case of a <code>REFUND</code> transaction.
      * @return array<OrderLineItem>|null
     */
     public function getOrderLineItems(): ?array {
@@ -264,7 +270,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the payoutDetails property value. This type provide payout details for a split-payout case. This type is only applicable for split payouts.
+     * Gets the payoutDetails property value. This container provides the payout details for a split-payout case. This container is only returned for split-payout use cases.
      * @return PayoutDetails|null
     */
     public function getPayoutDetails(): ?PayoutDetails {
@@ -272,7 +278,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the payoutId property value. The unique identifier of the seller payout associated with the monetary transaction. This identifier is generated once eBay begins processing the payout for the corresponding order. This field will not be returned if eBay has not yet begun processing the payout for an order.<br><br>This value can be used by the <b>filter</b> query parameter to get monetary transactions associated with the true(actual) payout associated with the <b>PayoutId</b>.<br><br><span class="tablenote"><b>Note:</b> In case of a split payout, always pick the first true(actual) payout id.</span> 
+     * Gets the payoutId property value. The unique identifier of the seller payout associated with the monetary transaction.
      * @return string|null
     */
     public function getPayoutId(): ?string {
@@ -304,7 +310,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the totalFeeAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the totalFeeAmount property value. This amount is the total amount of selling fees paid for order.
      * @return Amount|null
     */
     public function getTotalFeeAmount(): ?Amount {
@@ -312,7 +318,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the totalFeeBasisAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the totalFeeBasisAmount property value. This amount is the total amount for the order before selling fees are deducted from the seller payout associated with the order.
      * @return Amount|null
     */
     public function getTotalFeeBasisAmount(): ?Amount {
@@ -328,7 +334,15 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the transactionId property value. This field, when combined with the <a href="#response.transactions.transactionType" >transactionType</a> field, provide a unique identifier of the monetary transaction. A monetary transaction can be a sales order, an order refund to the buyer, a credit to the seller's account, a debit to the seller for the purchase of a shipping label, or a transaction where eBay recouped money from the seller if the seller lost a buyer-initiated payment dispute.
+     * Gets the ebayCollectedTaxAmount property value. Sales tax collected by eBay, applicable only for SALE and REFUND.
+     * @return Amount|null
+    */
+    public function getTransactionEbayCollectedTaxAmount(): ?Amount {
+        return $this->transactionEbayCollectedTaxAmount;
+    }
+
+    /**
+     * Gets the transactionId property value. This field, when combined with the <a href="#response.transactions.transactionType" >transactionType</a> field, provide a unique identifier of the monetary transaction.
      * @return string|null
     */
     public function getTransactionId(): ?string {
@@ -336,7 +350,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the transactionMemo property value. This field applies to shipping label transactions, sales transactions where payout is on hold, and non-sale charge fees. The following are examples of how the field is used for each transaction type:<ul><li><b>Shipping label purchase</b>: the <b>transactionMemo</b> field gives details about a purchase, a refund, or a price adjustment to the cost of the shipping label.</li><li><b>Sales transactions with funds on hold</b>: the <b>transactionMemo</b> field provides information on the reason for the hold or when the hold will be released (e.g., "Funds on hold. Estimated release on Jun 1").</li><li><b>Non-sale charge fees</b>: the <b>transactionMemo</b> field will provide the type of fee that was charged, such as Promoted Offsite Fee.</li></ul>This field is only returned if applicable/available.
+     * Gets the transactionMemo property value. This field applies to shipping label transactions, sales transactions where payout is on hold, and non-sale charge fees.
      * @return string|null
     */
     public function getTransactionMemo(): ?string {
@@ -344,18 +358,18 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the transactionStatus property value. This enumeration value indicates the current status of the seller payout associated with the monetary transaction. See the <code>TransactionStatusEnum</code> type for more information on the different states. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:TransactionStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the transactionStatus property value. This enumeration value indicates the current status of the seller payout associated with the monetary transaction.
+     * @return TransactionStatusEnum|null
     */
-    public function getTransactionStatus(): ?string {
+    public function getTransactionStatus(): ?TransactionStatusEnum {
         return $this->transactionStatus;
     }
 
     /**
-     * Gets the transactionType property value. This enumeration value indicates the type of monetary transaction. Examples of monetary transactions include a buyer's payment for an order, a refund to the buyer for a returned item or cancelled order, or a credit issued by eBay to the seller's account. For a complete list of monetary transaction types within the <strong>Finances API</strong>, see the <a href="/api-docs/sell/finances/types/pay:TransactionTypeEnum">TransactionTypeEnum</a> type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:TransactionTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the transactionType property value. This enumeration value indicates the type of monetary transaction.
+     * @return TransactionTypeEnum|null
     */
-    public function getTransactionType(): ?string {
+    public function getTransactionType(): ?TransactionTypeEnum {
         return $this->transactionType;
     }
 
@@ -365,11 +379,11 @@ class Transaction implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('amount', $this->getAmount());
-        $writer->writeStringValue('bookingEntry', $this->getBookingEntry());
+        $writer->writeEnumValue('bookingEntry', $this->getBookingEntry());
         $writer->writeObjectValue('buyer', $this->getBuyer());
         $writer->writeObjectValue('eBayCollectedTaxAmount', $this->getEBayCollectedTaxAmount());
         $writer->writeObjectValue('feeJurisdiction', $this->getFeeJurisdiction());
-        $writer->writeStringValue('feeType', $this->getFeeType());
+        $writer->writeEnumValue('feeType', $this->getFeeType());
         $writer->writeStringValue('orderId', $this->getOrderId());
         $writer->writeCollectionOfObjectValues('orderLineItems', $this->getOrderLineItems());
         $writer->writeStringValue('paymentsEntity', $this->getPaymentsEntity());
@@ -381,10 +395,11 @@ class Transaction implements AdditionalDataHolder, Parsable
         $writer->writeObjectValue('totalFeeAmount', $this->getTotalFeeAmount());
         $writer->writeObjectValue('totalFeeBasisAmount', $this->getTotalFeeBasisAmount());
         $writer->writeStringValue('transactionDate', $this->getTransactionDate());
+        $writer->writeObjectValue('ebayCollectedTaxAmount', $this->getTransactionEbayCollectedTaxAmount());
         $writer->writeStringValue('transactionId', $this->getTransactionId());
         $writer->writeStringValue('transactionMemo', $this->getTransactionMemo());
-        $writer->writeStringValue('transactionStatus', $this->getTransactionStatus());
-        $writer->writeStringValue('transactionType', $this->getTransactionType());
+        $writer->writeEnumValue('transactionStatus', $this->getTransactionStatus());
+        $writer->writeEnumValue('transactionType', $this->getTransactionType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -397,7 +412,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the amount property value. This container shows the dollar value and currency type of the monetary transaction. This field is always returned even when eBay has yet to initiate a payout for the order.
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {
@@ -405,15 +420,15 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the bookingEntry property value. The enumeration value returned in this field indicates if the monetary transaction amount is a (<code>CREDIT</code>) or a (<code>DEBIT</code>) to the seller's account. Typically, the <code>SALE</code> and <code>CREDIT</code> transaction types are credits to the seller's account, and the <code>REFUND</code>, <code>DISPUTE</code>, <code>SHIPPING_LABEL</code>, and <code>TRANSFER</code> transaction types are debits to the seller's account. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the bookingEntry property.
+     * Sets the bookingEntry property value. The enumeration value returned in this field indicates if the monetary transaction amount is a (<code>CREDIT</code>) or a (<code>DEBIT</code>) to the seller's account.
+     * @param BookingEntryEnum|null $value Value to set for the bookingEntry property.
     */
-    public function setBookingEntry(?string $value): void {
+    public function setBookingEntry(?BookingEntryEnum $value): void {
         $this->bookingEntry = $value;
     }
 
     /**
-     * Sets the buyer property value. This type is used to express details about the buyer associated with an order. At this time, the only field in this type is the eBay user ID of the buyer, but more fields may get added at a later date.
+     * Sets the buyer property value. This is the unique eBay user ID for the buyer who purchased the order. This field is not returned for <code>TRANSFER</code> monetary transaction types.
      * @param Buyer|null $value Value to set for the buyer property.
     */
     public function setBuyer(?Buyer $value): void {
@@ -421,7 +436,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the eBayCollectedTaxAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the eBayCollectedTaxAmount property value. This is the amount of sales tax that has been collected by eBay for an order.<br><br><span class="tablenote"><b>Note:</b> Sales tax applies only to <code>SALE</code> and <code>REFUND</code> transactions (<b>transactionType</b>).</span>
      * @param Amount|null $value Value to set for the eBayCollectedTaxAmount property.
     */
     public function setEBayCollectedTaxAmount(?Amount $value): void {
@@ -429,7 +444,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feeJurisdiction property value. This type defines the jurisdiction information associated with a fee, identifying the geographic or regulatory region under which the fee is applied.
+     * Sets the feeJurisdiction property value. This container stores information about region-specific fees that are charged to sellers.
      * @param FeeJurisdiction|null $value Value to set for the feeJurisdiction property.
     */
     public function setFeeJurisdiction(?FeeJurisdiction $value): void {
@@ -437,10 +452,10 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the feeType property value. The enumeration value returned in this field indicates the type of fee that was deducted from the seller payout. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the feeType property.
+     * Sets the feeType property value. The enumeration value returned in this field indicates the type of fee that was deducted from the seller payout.
+     * @param FeeTypeEnum|null $value Value to set for the feeType property.
     */
-    public function setFeeType(?string $value): void {
+    public function setFeeType(?FeeTypeEnum $value): void {
         $this->feeType = $value;
     }
 
@@ -453,7 +468,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the orderLineItems property value. This array either shows the order line item transactional fees related to a <code>SALE</code> transaction and deducted from the payout associated with that order, or it shows the transactional fee credits going back to the seller in the case of a <code>REFUND</code> transaction.<br><br><span class="tablenote"><strong>Note:</strong> In certain circumstances, transactional fees like <code>FINAL_VALUE_FEE</code> and <code>FINAL_VALUE_FEE_FIXED_PER_ORDER</code> are not deducted from a seller payout, but instead they are billed to the seller's account as "non-sale charges". When this happens, the <code>SALE</code> transaction entity will not have these fees under the <b>orderLineItems</b> array, but they will appear as separate <code>NON_SALE_CHARGE</code> transactions. When this happens, and you want to see those transactional fees for the order, one thing you can do is make another call to <b>getTransactions</b> and filter against the <b>orderId</b>. In the response, you will see the <code>SALE</code> transaction and the <code>NON_SALE_CHARGE</code> transactions applied against the order. See <a href="/api-docs/sell/finances/resources/transaction/methods/getTransactions#s0-1-28-4-7-5-6-Gettransactionalfeesforanorder-5" >Sample 6: Get transactional fees for an order</a> and <a href="/api-docs/sell/finances/resources/transaction/methods/getTransactions#s0-1-28-4-7-5-6-Getnon-salechargesforanorder-9">Sample 10: Get non-sale charges for an order</a> for examples.
+     * Sets the orderLineItems property value. This array either shows the order line item transactional fees related to a <code>SALE</code> transaction and deducted from the payout associated with that order, or it shows the transactional fee credits going back to the seller in the case of a <code>REFUND</code> transaction.
      * @param array<OrderLineItem>|null $value Value to set for the orderLineItems property.
     */
     public function setOrderLineItems(?array $value): void {
@@ -469,7 +484,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the payoutDetails property value. This type provide payout details for a split-payout case. This type is only applicable for split payouts.
+     * Sets the payoutDetails property value. This container provides the payout details for a split-payout case. This container is only returned for split-payout use cases.
      * @param PayoutDetails|null $value Value to set for the payoutDetails property.
     */
     public function setPayoutDetails(?PayoutDetails $value): void {
@@ -477,7 +492,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the payoutId property value. The unique identifier of the seller payout associated with the monetary transaction. This identifier is generated once eBay begins processing the payout for the corresponding order. This field will not be returned if eBay has not yet begun processing the payout for an order.<br><br>This value can be used by the <b>filter</b> query parameter to get monetary transactions associated with the true(actual) payout associated with the <b>PayoutId</b>.<br><br><span class="tablenote"><b>Note:</b> In case of a split payout, always pick the first true(actual) payout id.</span> 
+     * Sets the payoutId property value. The unique identifier of the seller payout associated with the monetary transaction.
      * @param string|null $value Value to set for the payoutId property.
     */
     public function setPayoutId(?string $value): void {
@@ -509,7 +524,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the totalFeeAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the totalFeeAmount property value. This amount is the total amount of selling fees paid for order.
      * @param Amount|null $value Value to set for the totalFeeAmount property.
     */
     public function setTotalFeeAmount(?Amount $value): void {
@@ -517,7 +532,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the totalFeeBasisAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the totalFeeBasisAmount property value. This amount is the total amount for the order before selling fees are deducted from the seller payout associated with the order.
      * @param Amount|null $value Value to set for the totalFeeBasisAmount property.
     */
     public function setTotalFeeBasisAmount(?Amount $value): void {
@@ -533,7 +548,15 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the transactionId property value. This field, when combined with the <a href="#response.transactions.transactionType" >transactionType</a> field, provide a unique identifier of the monetary transaction. A monetary transaction can be a sales order, an order refund to the buyer, a credit to the seller's account, a debit to the seller for the purchase of a shipping label, or a transaction where eBay recouped money from the seller if the seller lost a buyer-initiated payment dispute.
+     * Sets the ebayCollectedTaxAmount property value. Sales tax collected by eBay, applicable only for SALE and REFUND.
+     * @param Amount|null $value Value to set for the ebayCollectedTaxAmount property.
+    */
+    public function setTransactionEbayCollectedTaxAmount(?Amount $value): void {
+        $this->transactionEbayCollectedTaxAmount = $value;
+    }
+
+    /**
+     * Sets the transactionId property value. This field, when combined with the <a href="#response.transactions.transactionType" >transactionType</a> field, provide a unique identifier of the monetary transaction.
      * @param string|null $value Value to set for the transactionId property.
     */
     public function setTransactionId(?string $value): void {
@@ -541,7 +564,7 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the transactionMemo property value. This field applies to shipping label transactions, sales transactions where payout is on hold, and non-sale charge fees. The following are examples of how the field is used for each transaction type:<ul><li><b>Shipping label purchase</b>: the <b>transactionMemo</b> field gives details about a purchase, a refund, or a price adjustment to the cost of the shipping label.</li><li><b>Sales transactions with funds on hold</b>: the <b>transactionMemo</b> field provides information on the reason for the hold or when the hold will be released (e.g., "Funds on hold. Estimated release on Jun 1").</li><li><b>Non-sale charge fees</b>: the <b>transactionMemo</b> field will provide the type of fee that was charged, such as Promoted Offsite Fee.</li></ul>This field is only returned if applicable/available.
+     * Sets the transactionMemo property value. This field applies to shipping label transactions, sales transactions where payout is on hold, and non-sale charge fees.
      * @param string|null $value Value to set for the transactionMemo property.
     */
     public function setTransactionMemo(?string $value): void {
@@ -549,18 +572,18 @@ class Transaction implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the transactionStatus property value. This enumeration value indicates the current status of the seller payout associated with the monetary transaction. See the <code>TransactionStatusEnum</code> type for more information on the different states. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:TransactionStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the transactionStatus property.
+     * Sets the transactionStatus property value. This enumeration value indicates the current status of the seller payout associated with the monetary transaction.
+     * @param TransactionStatusEnum|null $value Value to set for the transactionStatus property.
     */
-    public function setTransactionStatus(?string $value): void {
+    public function setTransactionStatus(?TransactionStatusEnum $value): void {
         $this->transactionStatus = $value;
     }
 
     /**
-     * Sets the transactionType property value. This enumeration value indicates the type of monetary transaction. Examples of monetary transactions include a buyer's payment for an order, a refund to the buyer for a returned item or cancelled order, or a credit issued by eBay to the seller's account. For a complete list of monetary transaction types within the <strong>Finances API</strong>, see the <a href="/api-docs/sell/finances/types/pay:TransactionTypeEnum">TransactionTypeEnum</a> type. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:TransactionTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the transactionType property.
+     * Sets the transactionType property value. This enumeration value indicates the type of monetary transaction.
+     * @param TransactionTypeEnum|null $value Value to set for the transactionType property.
     */
-    public function setTransactionType(?string $value): void {
+    public function setTransactionType(?TransactionTypeEnum $value): void {
         $this->transactionType = $value;
     }
 

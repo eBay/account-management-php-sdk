@@ -14,17 +14,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace EBay\AccountManagement\Generated\Finances\Models;
+namespace EBay\AccountManagement\Generated\AccountV2\Models;
 
 use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
-/**
- * The total number of orders included in the summary.
-*/
-class OrderEarningsSummary_orderCount implements AdditionalDataHolder, Parsable 
+class ErrorParameter implements AdditionalDataHolder, Parsable 
 {
     /**
      * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
@@ -32,7 +29,17 @@ class OrderEarningsSummary_orderCount implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * Instantiates a new OrderEarningsSummary_orderCount and sets the default values.
+     * @var string|null $name The object of the error.
+    */
+    private ?string $name = null;
+    
+    /**
+     * @var string|null $value The value of the object.
+    */
+    private ?string $value = null;
+    
+    /**
+     * Instantiates a new ErrorParameter and sets the default values.
     */
     public function __construct() {
         $this->setAdditionalData([]);
@@ -41,10 +48,10 @@ class OrderEarningsSummary_orderCount implements AdditionalDataHolder, Parsable
     /**
      * Creates a new instance of the appropriate class based on discriminator value
      * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
-     * @return OrderEarningsSummary_orderCount
+     * @return ErrorParameter
     */
-    public static function createFromDiscriminatorValue(ParseNode $parseNode): OrderEarningsSummary_orderCount {
-        return new OrderEarningsSummary_orderCount();
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): ErrorParameter {
+        return new ErrorParameter();
     }
 
     /**
@@ -62,7 +69,25 @@ class OrderEarningsSummary_orderCount implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
+            'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
+            'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
+    }
+
+    /**
+     * Gets the name property value. The object of the error.
+     * @return string|null
+    */
+    public function getName(): ?string {
+        return $this->name;
+    }
+
+    /**
+     * Gets the value property value. The value of the object.
+     * @return string|null
+    */
+    public function getValue(): ?string {
+        return $this->value;
     }
 
     /**
@@ -70,6 +95,8 @@ class OrderEarningsSummary_orderCount implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
+        $writer->writeStringValue('name', $this->getName());
+        $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -79,6 +106,22 @@ class OrderEarningsSummary_orderCount implements AdditionalDataHolder, Parsable
     */
     public function setAdditionalData(?array $value): void {
         $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the name property value. The object of the error.
+     * @param string|null $value Value to set for the name property.
+    */
+    public function setName(?string $value): void {
+        $this->name = $value;
+    }
+
+    /**
+     * Sets the value property value. The value of the object.
+     * @param string|null $value Value to set for the value property.
+    */
+    public function setValue(?string $value): void {
+        $this->value = $value;
     }
 
 }

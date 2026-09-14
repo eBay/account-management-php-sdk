@@ -32,12 +32,12 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var CombinedPaymentPreferencesType|null $combinedPaymentPreferences This container is used to change the combined payment option. Sellers have the option to combine multiple line items from the same buyer into a combined invoice that can be paid for with one payment. See CombinedPaymentOptionEnum for a description of each value.
+     * @var CombinedPaymentPreferencesType|null $combinedPaymentPreferences This container returns the combined payment preferences when the <code>COMBINED_PAYMENT</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>. It indicates if the seller allows multiple line items from the same buyer to be combined.
     */
     private ?CombinedPaymentPreferencesType $combinedPaymentPreferences = null;
     
     /**
-     * @var DispatchCutoffTimePreferencesType|null $dispatchCutoffTimePreference This container is used to change the order cut-off time for same-day shipping.
+     * @var DispatchCutoffTimePreferencesType|null $dispatchCutoffTimePreference This container is returned when the <code>DISPATCH_CUTOFF_TIME</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>.
     */
     private ?DispatchCutoffTimePreferencesType $dispatchCutoffTimePreference = null;
     
@@ -47,7 +47,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     private ?bool $emailShipmentTrackingNumberPreference = null;
     
     /**
-     * @var EndOfAuctionEmailPreferencesType|null $endOfAuctionEmailPreferences This container shows the seller's preferences for the end-of-auction email sent to the winning bidder.
+     * @var EndOfAuctionEmailPreferencesType|null $endOfAuctionEmailPreferences This container allows sellers to customize the email sent to buyers immediately after an auction listing is won.
     */
     private ?EndOfAuctionEmailPreferencesType $endOfAuctionEmailPreferences = null;
     
@@ -57,7 +57,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     private ?bool $globalShippingProgramListingPreference = null;
     
     /**
-     * @var GetItemsAwaitingPaymentPreferencesType|null $itemsAwaitingPaymentPreferences This container represents the seller's preferences for the list of items that are awaiting payment.
+     * @var GetItemsAwaitingPaymentPreferencesType|null $itemsAwaitingPaymentPreferences This container shows the seller’s preferences for automatically handling unpaid line items.
     */
     private ?GetItemsAwaitingPaymentPreferencesType $itemsAwaitingPaymentPreferences = null;
     
@@ -92,17 +92,17 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     private ?bool $requiredShipPhoneNumberPreference = null;
     
     /**
-     * @var SellerExcludeShipToLocationPreferencesType|null $sellerExcludeShipToLocationPreferences This container represents the list of locations that the seller wants to exclude from shipping.
+     * @var SellerExcludeShipToLocationPreferencesType|null $sellerExcludeShipToLocationPreferences This container shows the list of locations that the seller does not ship to. This list of shipping locations can only be updated in My eBay through Shipping Preferences and not with the <code>setUserPreferences</code> method.
     */
     private ?SellerExcludeShipToLocationPreferencesType $sellerExcludeShipToLocationPreferences = null;
     
     /**
-     * @var SellerProfilePreferencesType|null $sellerProfilePreferences This container indicates whether or not the seller is opted into Business Policies. If a seller is opted into Business Policies, they must use Payment,Return, and Shipping business policies instead of individual payment, return, and shipping fields.
+     * @var SellerProfilePreferencesType|null $sellerProfilePreferences This container is returned when the <code>SELLER_PROFILE</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>.
     */
     private ?SellerProfilePreferencesType $sellerProfilePreferences = null;
     
     /**
-     * @var ShippingCarrierRatePreferencesType|null $shippingCarrierRatePreferences This field is included if the seller wishes to add or modify the shipping carrier rate type that is available to the seller. This field is only returned if set. </br><b>Note</b>: This container is only applicable to the eBay US marketplace.
+     * @var ShippingCarrierRatePreferencesType|null $shippingCarrierRatePreferences This container indicates the FedEx, UPS, and US Post Office shipping rate types that are available to the seller. This container is returned when the <code>SHIPPING_CARRIER_RATE</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>. </br><b>Note</b>: This container is only applicable to the eBay US marketplace.
     */
     private ?ShippingCarrierRatePreferencesType $shippingCarrierRatePreferences = null;
     
@@ -131,7 +131,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the combinedPaymentPreferences property value. This container is used to change the combined payment option. Sellers have the option to combine multiple line items from the same buyer into a combined invoice that can be paid for with one payment. See CombinedPaymentOptionEnum for a description of each value.
+     * Gets the combinedPaymentPreferences property value. This container returns the combined payment preferences when the <code>COMBINED_PAYMENT</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>. It indicates if the seller allows multiple line items from the same buyer to be combined.
      * @return CombinedPaymentPreferencesType|null
     */
     public function getCombinedPaymentPreferences(): ?CombinedPaymentPreferencesType {
@@ -139,7 +139,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dispatchCutoffTimePreference property value. This container is used to change the order cut-off time for same-day shipping.
+     * Gets the dispatchCutoffTimePreference property value. This container is returned when the <code>DISPATCH_CUTOFF_TIME</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>.
      * @return DispatchCutoffTimePreferencesType|null
     */
     public function getDispatchCutoffTimePreference(): ?DispatchCutoffTimePreferencesType {
@@ -155,7 +155,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the endOfAuctionEmailPreferences property value. This container shows the seller's preferences for the end-of-auction email sent to the winning bidder.
+     * Gets the endOfAuctionEmailPreferences property value. This container allows sellers to customize the email sent to buyers immediately after an auction listing is won.
      * @return EndOfAuctionEmailPreferencesType|null
     */
     public function getEndOfAuctionEmailPreferences(): ?EndOfAuctionEmailPreferencesType {
@@ -196,7 +196,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the itemsAwaitingPaymentPreferences property value. This container represents the seller's preferences for the list of items that are awaiting payment.
+     * Gets the itemsAwaitingPaymentPreferences property value. This container shows the seller’s preferences for automatically handling unpaid line items.
      * @return GetItemsAwaitingPaymentPreferencesType|null
     */
     public function getItemsAwaitingPaymentPreferences(): ?GetItemsAwaitingPaymentPreferencesType {
@@ -252,7 +252,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sellerExcludeShipToLocationPreferences property value. This container represents the list of locations that the seller wants to exclude from shipping.
+     * Gets the sellerExcludeShipToLocationPreferences property value. This container shows the list of locations that the seller does not ship to. This list of shipping locations can only be updated in My eBay through Shipping Preferences and not with the <code>setUserPreferences</code> method.
      * @return SellerExcludeShipToLocationPreferencesType|null
     */
     public function getSellerExcludeShipToLocationPreferences(): ?SellerExcludeShipToLocationPreferencesType {
@@ -260,7 +260,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sellerProfilePreferences property value. This container indicates whether or not the seller is opted into Business Policies. If a seller is opted into Business Policies, they must use Payment,Return, and Shipping business policies instead of individual payment, return, and shipping fields.
+     * Gets the sellerProfilePreferences property value. This container is returned when the <code>SELLER_PROFILE</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>.
      * @return SellerProfilePreferencesType|null
     */
     public function getSellerProfilePreferences(): ?SellerProfilePreferencesType {
@@ -268,7 +268,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingCarrierRatePreferences property value. This field is included if the seller wishes to add or modify the shipping carrier rate type that is available to the seller. This field is only returned if set. </br><b>Note</b>: This container is only applicable to the eBay US marketplace.
+     * Gets the shippingCarrierRatePreferences property value. This container indicates the FedEx, UPS, and US Post Office shipping rate types that are available to the seller. This container is returned when the <code>SHIPPING_CARRIER_RATE</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>. </br><b>Note</b>: This container is only applicable to the eBay US marketplace.
      * @return ShippingCarrierRatePreferencesType|null
     */
     public function getShippingCarrierRatePreferences(): ?ShippingCarrierRatePreferencesType {
@@ -307,7 +307,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the combinedPaymentPreferences property value. This container is used to change the combined payment option. Sellers have the option to combine multiple line items from the same buyer into a combined invoice that can be paid for with one payment. See CombinedPaymentOptionEnum for a description of each value.
+     * Sets the combinedPaymentPreferences property value. This container returns the combined payment preferences when the <code>COMBINED_PAYMENT</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>. It indicates if the seller allows multiple line items from the same buyer to be combined.
      * @param CombinedPaymentPreferencesType|null $value Value to set for the combinedPaymentPreferences property.
     */
     public function setCombinedPaymentPreferences(?CombinedPaymentPreferencesType $value): void {
@@ -315,7 +315,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dispatchCutoffTimePreference property value. This container is used to change the order cut-off time for same-day shipping.
+     * Sets the dispatchCutoffTimePreference property value. This container is returned when the <code>DISPATCH_CUTOFF_TIME</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>.
      * @param DispatchCutoffTimePreferencesType|null $value Value to set for the dispatchCutoffTimePreference property.
     */
     public function setDispatchCutoffTimePreference(?DispatchCutoffTimePreferencesType $value): void {
@@ -331,7 +331,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the endOfAuctionEmailPreferences property value. This container shows the seller's preferences for the end-of-auction email sent to the winning bidder.
+     * Sets the endOfAuctionEmailPreferences property value. This container allows sellers to customize the email sent to buyers immediately after an auction listing is won.
      * @param EndOfAuctionEmailPreferencesType|null $value Value to set for the endOfAuctionEmailPreferences property.
     */
     public function setEndOfAuctionEmailPreferences(?EndOfAuctionEmailPreferencesType $value): void {
@@ -347,7 +347,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the itemsAwaitingPaymentPreferences property value. This container represents the seller's preferences for the list of items that are awaiting payment.
+     * Sets the itemsAwaitingPaymentPreferences property value. This container shows the seller’s preferences for automatically handling unpaid line items.
      * @param GetItemsAwaitingPaymentPreferencesType|null $value Value to set for the itemsAwaitingPaymentPreferences property.
     */
     public function setItemsAwaitingPaymentPreferences(?GetItemsAwaitingPaymentPreferencesType $value): void {
@@ -403,7 +403,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sellerExcludeShipToLocationPreferences property value. This container represents the list of locations that the seller wants to exclude from shipping.
+     * Sets the sellerExcludeShipToLocationPreferences property value. This container shows the list of locations that the seller does not ship to. This list of shipping locations can only be updated in My eBay through Shipping Preferences and not with the <code>setUserPreferences</code> method.
      * @param SellerExcludeShipToLocationPreferencesType|null $value Value to set for the sellerExcludeShipToLocationPreferences property.
     */
     public function setSellerExcludeShipToLocationPreferences(?SellerExcludeShipToLocationPreferencesType $value): void {
@@ -411,7 +411,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sellerProfilePreferences property value. This container indicates whether or not the seller is opted into Business Policies. If a seller is opted into Business Policies, they must use Payment,Return, and Shipping business policies instead of individual payment, return, and shipping fields.
+     * Sets the sellerProfilePreferences property value. This container is returned when the <code>SELLER_PROFILE</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>.
      * @param SellerProfilePreferencesType|null $value Value to set for the sellerProfilePreferences property.
     */
     public function setSellerProfilePreferences(?SellerProfilePreferencesType $value): void {
@@ -419,7 +419,7 @@ class GetUserPreferencesResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingCarrierRatePreferences property value. This field is included if the seller wishes to add or modify the shipping carrier rate type that is available to the seller. This field is only returned if set. </br><b>Note</b>: This container is only applicable to the eBay US marketplace.
+     * Sets the shippingCarrierRatePreferences property value. This container indicates the FedEx, UPS, and US Post Office shipping rate types that are available to the seller. This container is returned when the <code>SHIPPING_CARRIER_RATE</code> value is included through the <b>fieldgroups</b> query parameter or when <b>fieldgroups</b>=<code>ALL</code>. </br><b>Note</b>: This container is only applicable to the eBay US marketplace.
      * @param ShippingCarrierRatePreferencesType|null $value Value to set for the shippingCarrierRatePreferences property.
     */
     public function setShippingCarrierRatePreferences(?ShippingCarrierRatePreferencesType $value): void {

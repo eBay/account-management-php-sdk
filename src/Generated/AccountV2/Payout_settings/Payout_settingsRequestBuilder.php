@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV2\Payout_settings;
 
+use EBay\AccountManagement\Generated\AccountV2\Models\Error;
 use EBay\AccountManagement\Generated\AccountV2\Models\PayoutSettingsResponse;
 use EBay\AccountManagement\Generated\AccountV2\Payout_settings\Update_percentage\Update_percentageRequestBuilder;
 use Exception;
@@ -59,7 +60,10 @@ class Payout_settingsRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Payout_settingsRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [PayoutSettingsResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [PayoutSettingsResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

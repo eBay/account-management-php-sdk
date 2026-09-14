@@ -30,25 +30,12 @@ use EBay\AccountManagement\Generated\AccountV2\Models\GetUserPreferencesResponse
 use EBay\AccountManagement\Generated\AccountV2\Models\PayoutSettingsResponse;
 use EBay\AccountManagement\Generated\AccountV2\Models\RateTableDetails;
 use EBay\AccountManagement\Generated\AccountV2\Models\RateTableUpdate;
+use EBay\AccountManagement\Generated\AccountV2\Models\SetUserPreferencesRequest;
 use EBay\AccountManagement\Generated\AccountV2\Models\UpdateCalculatedShippingRulesRequest;
 use EBay\AccountManagement\Generated\AccountV2\Models\UpdateCombinedPaymentsRequest;
 use EBay\AccountManagement\Generated\AccountV2\Models\UpdateFlatShippingRulesRequest;
 use EBay\AccountManagement\Generated\AccountV2\Models\UpdatePayoutPercentageRequest;
 use EBay\AccountManagement\Generated\AccountV2\Models\UpdatePromotionalShippingRuleRequest;
-use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Combined_shipping_rulesRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Create_calculated_shipping_rules\Create_calculated_shipping_rulesRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Create_flat_shipping_rules\Create_flat_shipping_rulesRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Create_promotional_shipping_rule\Create_promotional_shipping_ruleRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_calculated_shipping_rules\Update_calculated_shipping_rulesRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_combined_payments\Update_combined_paymentsRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_flat_shipping_rules\Update_flat_shipping_rulesRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_promotional_shipping_rule\Update_promotional_shipping_ruleRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\Payout_settings\Payout_settingsRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\Payout_settings\Update_percentage\Update_percentageRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\Rate_table\Item\Update_shipping_cost\Update_shipping_costRequestBuilderPostRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\Rate_table\Item\WithRate_table_ItemRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\User_preferences\User_preferencesRequestBuilderGetRequestConfiguration;
-use EBay\AccountManagement\Generated\AccountV2\User_preferences\User_preferencesRequestBuilderPatchRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -74,7 +61,7 @@ final class AccountV2Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->rate_table()->byRate_table_id($rateTableId)->get(
-                new WithRate_table_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Rate_table\Item\WithRate_table_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -90,7 +77,7 @@ final class AccountV2Client
         $this->call($accessToken, fn($api) =>
             $api->rate_table()->byRate_table_id($rateTableId)->update_shipping_cost()->post(
                 $body,
-                new Update_shipping_costRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Rate_table\Item\Update_shipping_cost\Update_shipping_costRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -100,7 +87,7 @@ final class AccountV2Client
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->payout_settings()->get(
-                new Payout_settingsRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Payout_settings\Payout_settingsRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -111,7 +98,7 @@ final class AccountV2Client
         $this->call($accessToken, fn($api) =>
             $api->payout_settings()->update_percentage()->post(
                 $body,
-                new Update_percentageRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Payout_settings\Update_percentage\Update_percentageRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -130,7 +117,7 @@ final class AccountV2Client
         $this->call($accessToken, fn($api) =>
             $api->combined_shipping_rules()->create_calculated_shipping_rules()->post(
                 $body,
-                new Create_calculated_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Create_calculated_shipping_rules\Create_calculated_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -149,7 +136,7 @@ final class AccountV2Client
         $this->call($accessToken, fn($api) =>
             $api->combined_shipping_rules()->create_flat_shipping_rules()->post(
                 $body,
-                new Create_flat_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Create_flat_shipping_rules\Create_flat_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -168,7 +155,7 @@ final class AccountV2Client
         $this->call($accessToken, fn($api) =>
             $api->combined_shipping_rules()->create_promotional_shipping_rule()->post(
                 $body,
-                new Create_promotional_shipping_ruleRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Create_promotional_shipping_rule\Create_promotional_shipping_ruleRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -181,7 +168,7 @@ final class AccountV2Client
         }
         return $this->call($accessToken, fn($api) =>
             $api->combined_shipping_rules()->get(
-                new Combined_shipping_rulesRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Combined_shipping_rulesRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -200,7 +187,7 @@ final class AccountV2Client
         $this->call($accessToken, fn($api) =>
             $api->combined_shipping_rules()->update_calculated_shipping_rules()->post(
                 $body,
-                new Update_calculated_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_calculated_shipping_rules\Update_calculated_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -219,7 +206,7 @@ final class AccountV2Client
         $this->call($accessToken, fn($api) =>
             $api->combined_shipping_rules()->update_combined_payments()->post(
                 $body,
-                new Update_combined_paymentsRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_combined_payments\Update_combined_paymentsRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -238,7 +225,7 @@ final class AccountV2Client
         $this->call($accessToken, fn($api) =>
             $api->combined_shipping_rules()->update_flat_shipping_rules()->post(
                 $body,
-                new Update_flat_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_flat_shipping_rules\Update_flat_shipping_rulesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -257,7 +244,7 @@ final class AccountV2Client
         $this->call($accessToken, fn($api) =>
             $api->combined_shipping_rules()->update_promotional_shipping_rule()->post(
                 $body,
-                new Update_promotional_shipping_ruleRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_promotional_shipping_rule\Update_promotional_shipping_ruleRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -275,9 +262,9 @@ final class AccountV2Client
         }
         return $this->call($accessToken, fn($api) =>
             $api->user_preferences()->get(
-                new User_preferencesRequestBuilderGetRequestConfiguration(
+                new \EBay\AccountManagement\Generated\AccountV2\User_preferences\User_preferencesRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: User_preferencesRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\AccountManagement\Generated\AccountV2\User_preferences\User_preferencesRequestBuilderGetRequestConfiguration::createQueryParameters(
                         fieldgroups: $fieldgroups,
                     ),
                 )
@@ -286,7 +273,7 @@ final class AccountV2Client
     }
 
     public function setUserPreferences(
-        mixed $body,
+        SetUserPreferencesRequest $body,
         ?string $xEBAYCMARKETPLACEID = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
@@ -299,7 +286,7 @@ final class AccountV2Client
         $this->call($accessToken, fn($api) =>
             $api->user_preferences()->patch(
                 $body,
-                new User_preferencesRequestBuilderPatchRequestConfiguration(headers: $headers)
+                new \EBay\AccountManagement\Generated\AccountV2\User_preferences\User_preferencesRequestBuilderPatchRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

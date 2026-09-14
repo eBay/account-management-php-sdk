@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV1\Rate_table;
 
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use EBay\AccountManagement\Generated\AccountV1\Models\RateTableResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,11 @@ class Rate_tableRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Rate_tableRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [RateTableResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [RateTableResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

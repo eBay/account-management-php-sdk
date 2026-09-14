@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * BillingActivityLineItem
+ * This type defines the fees, credits, and promotional offers applied to a seller's account.
 */
 class BillingActivityLineItem implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class BillingActivityLineItem implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $amount This container shows the amount of the fee or credit. The value and currency are always returned. If the buyer is in one country and purchases from an eBay marketplace that uses a different currency, the response also includes the converted-from and converted-to fields, along with the exchange rate.
     */
     private ?Amount $amount = null;
     
@@ -101,7 +101,7 @@ class BillingActivityLineItem implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the amount property value. This container shows the amount of the fee or credit. The value and currency are always returned. If the buyer is in one country and purchases from an eBay marketplace that uses a different currency, the response also includes the converted-from and converted-to fields, along with the exchange rate.
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -217,7 +217,7 @@ class BillingActivityLineItem implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the amount property value. This container shows the amount of the fee or credit. The value and currency are always returned. If the buyer is in one country and purchases from an eBay marketplace that uses a different currency, the response also includes the converted-from and converted-to fields, along with the exchange rate.
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {

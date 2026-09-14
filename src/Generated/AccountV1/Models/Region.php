@@ -37,9 +37,9 @@ class Region implements AdditionalDataHolder, Parsable
     private ?string $regionName = null;
     
     /**
-     * @var string|null $regionType Reserved for future use. <!--The region's type, which can be one of the following: 'COUNTRY', 'COUNTRY_REGION', 'STATE_OR_PROVINCE', 'WORLD_REGION', or 'WORLDWIDE'.--> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:RegionTypeEnum'>eBay API documentation</a>
+     * @var RegionTypeEnum|null $regionType This enumerated type defines shipping region types.<br><span class="tablenote"> <strong>Note:</strong> These enumeration values are not currently being used by fulfillment policy methods, but may be used in the future.</span> | - **COUNTRY**: A single country. - **COUNTRY_REGION**: A domestic region or special location within a country. In the US, these domestic region/special location include 'Alaska/Hawaii' and 'PO Box'. - **STATE_OR_PROVINCE**: A state or province, such as California (CA) or New York (NY) in the US, or British Columbia (BC) or Ontario (ON) in Canada. - **WORLD_REGION**: A world region, such as Europe, the Middle East, or Southeast Asia. - **WORLDWIDE**: The entire world as we know it.
     */
-    private ?string $regionType = null;
+    private ?RegionTypeEnum $regionType = null;
     
     /**
      * Instantiates a new Region and sets the default values.
@@ -73,7 +73,7 @@ class Region implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'regionName' => fn(ParseNode $n) => $o->setRegionName($n->getStringValue()),
-            'regionType' => fn(ParseNode $n) => $o->setRegionType($n->getStringValue()),
+            'regionType' => fn(ParseNode $n) => $o->setRegionType($n->getEnumValue(RegionTypeEnum::class)),
         ];
     }
 
@@ -86,10 +86,10 @@ class Region implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the regionType property value. Reserved for future use. <!--The region's type, which can be one of the following: 'COUNTRY', 'COUNTRY_REGION', 'STATE_OR_PROVINCE', 'WORLD_REGION', or 'WORLDWIDE'.--> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:RegionTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the regionType property value. This enumerated type defines shipping region types.<br><span class="tablenote"> <strong>Note:</strong> These enumeration values are not currently being used by fulfillment policy methods, but may be used in the future.</span> | - **COUNTRY**: A single country. - **COUNTRY_REGION**: A domestic region or special location within a country. In the US, these domestic region/special location include 'Alaska/Hawaii' and 'PO Box'. - **STATE_OR_PROVINCE**: A state or province, such as California (CA) or New York (NY) in the US, or British Columbia (BC) or Ontario (ON) in Canada. - **WORLD_REGION**: A world region, such as Europe, the Middle East, or Southeast Asia. - **WORLDWIDE**: The entire world as we know it.
+     * @return RegionTypeEnum|null
     */
-    public function getRegionType(): ?string {
+    public function getRegionType(): ?RegionTypeEnum {
         return $this->regionType;
     }
 
@@ -99,7 +99,7 @@ class Region implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('regionName', $this->getRegionName());
-        $writer->writeStringValue('regionType', $this->getRegionType());
+        $writer->writeEnumValue('regionType', $this->getRegionType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class Region implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the regionType property value. Reserved for future use. <!--The region's type, which can be one of the following: 'COUNTRY', 'COUNTRY_REGION', 'STATE_OR_PROVINCE', 'WORLD_REGION', or 'WORLDWIDE'.--> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:RegionTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the regionType property.
+     * Sets the regionType property value. This enumerated type defines shipping region types.<br><span class="tablenote"> <strong>Note:</strong> These enumeration values are not currently being used by fulfillment policy methods, but may be used in the future.</span> | - **COUNTRY**: A single country. - **COUNTRY_REGION**: A domestic region or special location within a country. In the US, these domestic region/special location include 'Alaska/Hawaii' and 'PO Box'. - **STATE_OR_PROVINCE**: A state or province, such as California (CA) or New York (NY) in the US, or British Columbia (BC) or Ontario (ON) in Canada. - **WORLD_REGION**: A world region, such as Europe, the Middle East, or Southeast Asia. - **WORLDWIDE**: The entire world as we know it.
+     * @param RegionTypeEnum|null $value Value to set for the regionType property.
     */
-    public function setRegionType(?string $value): void {
+    public function setRegionType(?RegionTypeEnum $value): void {
         $this->regionType = $value;
     }
 

@@ -18,6 +18,7 @@ namespace EBay\AccountManagement\Generated\AccountV1\Custom_policy;
 
 use EBay\AccountManagement\Generated\AccountV1\Models\CustomPolicyCreateRequest;
 use EBay\AccountManagement\Generated\AccountV1\Models\CustomPolicyResponse;
+use EBay\AccountManagement\Generated\AccountV1\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -52,7 +53,11 @@ class EmptyPathSegmentRequestBuilder extends BaseRequestBuilder
     */
     public function get(?EmptyPathSegmentRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [CustomPolicyResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [CustomPolicyResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -64,7 +69,12 @@ class EmptyPathSegmentRequestBuilder extends BaseRequestBuilder
     */
     public function post(CustomPolicyCreateRequest $body, ?EmptyPathSegmentRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [PostResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '409' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [PostResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

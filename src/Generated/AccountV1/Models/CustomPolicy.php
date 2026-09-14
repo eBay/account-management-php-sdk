@@ -52,9 +52,9 @@ class CustomPolicy implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var string|null $policyType Specifies the type of Custom Policy being returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CustomPolicyTypeEnum'>eBay API documentation</a>
+     * @var CustomPolicyTypeEnum|null $policyType An enumeration type that defines the supported types of Custom Policies. | - **PRODUCT_COMPLIANCE**: This enumeration value indicates that the custom policy is a product compliance policy. - **TAKE_BACK**: This enumeration value indicates that the custom policy is a product takeback policy.
     */
-    private ?string $policyType = null;
+    private ?CustomPolicyTypeEnum $policyType = null;
     
     /**
      * Instantiates a new CustomPolicy and sets the default values.
@@ -107,7 +107,7 @@ class CustomPolicy implements AdditionalDataHolder, Parsable
             'description' => fn(ParseNode $n) => $o->setDescription($n->getStringValue()),
             'label' => fn(ParseNode $n) => $o->setLabel($n->getStringValue()),
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
-            'policyType' => fn(ParseNode $n) => $o->setPolicyType($n->getStringValue()),
+            'policyType' => fn(ParseNode $n) => $o->setPolicyType($n->getEnumValue(CustomPolicyTypeEnum::class)),
         ];
     }
 
@@ -128,10 +128,10 @@ class CustomPolicy implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the policyType property value. Specifies the type of Custom Policy being returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CustomPolicyTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the policyType property value. An enumeration type that defines the supported types of Custom Policies. | - **PRODUCT_COMPLIANCE**: This enumeration value indicates that the custom policy is a product compliance policy. - **TAKE_BACK**: This enumeration value indicates that the custom policy is a product takeback policy.
+     * @return CustomPolicyTypeEnum|null
     */
-    public function getPolicyType(): ?string {
+    public function getPolicyType(): ?CustomPolicyTypeEnum {
         return $this->policyType;
     }
 
@@ -144,7 +144,7 @@ class CustomPolicy implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('description', $this->getDescription());
         $writer->writeStringValue('label', $this->getLabel());
         $writer->writeStringValue('name', $this->getName());
-        $writer->writeStringValue('policyType', $this->getPolicyType());
+        $writer->writeEnumValue('policyType', $this->getPolicyType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -189,10 +189,10 @@ class CustomPolicy implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the policyType property value. Specifies the type of Custom Policy being returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CustomPolicyTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the policyType property.
+     * Sets the policyType property value. An enumeration type that defines the supported types of Custom Policies. | - **PRODUCT_COMPLIANCE**: This enumeration value indicates that the custom policy is a product compliance policy. - **TAKE_BACK**: This enumeration value indicates that the custom policy is a product takeback policy.
+     * @param CustomPolicyTypeEnum|null $value Value to set for the policyType property.
     */
-    public function setPolicyType(?string $value): void {
+    public function setPolicyType(?CustomPolicyTypeEnum $value): void {
         $this->policyType = $value;
     }
 

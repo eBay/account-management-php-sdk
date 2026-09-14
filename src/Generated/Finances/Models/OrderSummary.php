@@ -32,22 +32,22 @@ class OrderSummary implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $discounts This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $discounts The total amount of item-level promotions or discounts offered by the seller for a sale (order).
     */
     private ?Amount $discounts = null;
     
     /**
-     * @var Amount|null $itemSubtotal This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $itemSubtotal The sum of the listing price(s) for all items in the order, before applying any seller discounts.
     */
     private ?Amount $itemSubtotal = null;
     
     /**
-     * @var Amount|null $sellerCollectedTaxes This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $sellerCollectedTaxes The total amount of <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121" target="_blank">tax collected by the seller</a> on all sold items for the order.
     */
     private ?Amount $sellerCollectedTaxes = null;
     
     /**
-     * @var Amount|null $shippingAndHandlingCosts This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $shippingAndHandlingCosts The total amount collected from the buyer to cover shipping and handling for all items in the order.
     */
     private ?Amount $shippingAndHandlingCosts = null;
     
@@ -76,7 +76,7 @@ class OrderSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the discounts property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the discounts property value. The total amount of item-level promotions or discounts offered by the seller for a sale (order).
      * @return Amount|null
     */
     public function getDiscounts(): ?Amount {
@@ -98,7 +98,7 @@ class OrderSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the itemSubtotal property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the itemSubtotal property value. The sum of the listing price(s) for all items in the order, before applying any seller discounts.
      * @return Amount|null
     */
     public function getItemSubtotal(): ?Amount {
@@ -106,7 +106,7 @@ class OrderSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sellerCollectedTaxes property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the sellerCollectedTaxes property value. The total amount of <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121" target="_blank">tax collected by the seller</a> on all sold items for the order.
      * @return Amount|null
     */
     public function getSellerCollectedTaxes(): ?Amount {
@@ -114,7 +114,7 @@ class OrderSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingAndHandlingCosts property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the shippingAndHandlingCosts property value. The total amount collected from the buyer to cover shipping and handling for all items in the order.
      * @return Amount|null
     */
     public function getShippingAndHandlingCosts(): ?Amount {
@@ -142,7 +142,7 @@ class OrderSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the discounts property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the discounts property value. The total amount of item-level promotions or discounts offered by the seller for a sale (order).
      * @param Amount|null $value Value to set for the discounts property.
     */
     public function setDiscounts(?Amount $value): void {
@@ -150,7 +150,7 @@ class OrderSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the itemSubtotal property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the itemSubtotal property value. The sum of the listing price(s) for all items in the order, before applying any seller discounts.
      * @param Amount|null $value Value to set for the itemSubtotal property.
     */
     public function setItemSubtotal(?Amount $value): void {
@@ -158,7 +158,7 @@ class OrderSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sellerCollectedTaxes property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the sellerCollectedTaxes property value. The total amount of <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121" target="_blank">tax collected by the seller</a> on all sold items for the order.
      * @param Amount|null $value Value to set for the sellerCollectedTaxes property.
     */
     public function setSellerCollectedTaxes(?Amount $value): void {
@@ -166,7 +166,7 @@ class OrderSummary implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingAndHandlingCosts property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the shippingAndHandlingCosts property value. The total amount collected from the buyer to cover shipping and handling for all items in the order.
      * @param Amount|null $value Value to set for the shippingAndHandlingCosts property.
     */
     public function setShippingAndHandlingCosts(?Amount $value): void {

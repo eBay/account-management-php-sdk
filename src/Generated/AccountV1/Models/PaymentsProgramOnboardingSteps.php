@@ -37,9 +37,9 @@ class PaymentsProgramOnboardingSteps implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var string|null $status This enumeration value indicates the status of the associated step. <p> <span class="tablenote"><strong>Note:</strong> Only one step can be <code>IN_PROGRESS</code> at a time.</span></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:PaymentsProgramOnboardingStepStatus'>eBay API documentation</a>
+     * @var PaymentsProgramOnboardingStepStatus|null $status This enumeration value indicates the status of the present onboarding step. | - **NOT_STARTED**: This enumeration value indicates that the present step has not started. - **IN_PROGRESS**: This enumeration value indicates that the present step has started but has not completed. - **COMPLETED**: This enumeration value indicates that the present step has completed.
     */
-    private ?string $status = null;
+    private ?PaymentsProgramOnboardingStepStatus $status = null;
     
     /**
      * @var string|null $webUrl This URL provides access to the <code>IN_PROGRESS</code> step.
@@ -78,7 +78,7 @@ class PaymentsProgramOnboardingSteps implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(PaymentsProgramOnboardingStepStatus::class)),
             'webUrl' => fn(ParseNode $n) => $o->setWebUrl($n->getStringValue()),
         ];
     }
@@ -92,10 +92,10 @@ class PaymentsProgramOnboardingSteps implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. This enumeration value indicates the status of the associated step. <p> <span class="tablenote"><strong>Note:</strong> Only one step can be <code>IN_PROGRESS</code> at a time.</span></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:PaymentsProgramOnboardingStepStatus'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. This enumeration value indicates the status of the present onboarding step. | - **NOT_STARTED**: This enumeration value indicates that the present step has not started. - **IN_PROGRESS**: This enumeration value indicates that the present step has started but has not completed. - **COMPLETED**: This enumeration value indicates that the present step has completed.
+     * @return PaymentsProgramOnboardingStepStatus|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?PaymentsProgramOnboardingStepStatus {
         return $this->status;
     }
 
@@ -113,7 +113,7 @@ class PaymentsProgramOnboardingSteps implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('name', $this->getName());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeStringValue('webUrl', $this->getWebUrl());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -135,10 +135,10 @@ class PaymentsProgramOnboardingSteps implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. This enumeration value indicates the status of the associated step. <p> <span class="tablenote"><strong>Note:</strong> Only one step can be <code>IN_PROGRESS</code> at a time.</span></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:PaymentsProgramOnboardingStepStatus'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. This enumeration value indicates the status of the present onboarding step. | - **NOT_STARTED**: This enumeration value indicates that the present step has not started. - **IN_PROGRESS**: This enumeration value indicates that the present step has started but has not completed. - **COMPLETED**: This enumeration value indicates that the present step has completed.
+     * @param PaymentsProgramOnboardingStepStatus|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?PaymentsProgramOnboardingStepStatus $value): void {
         $this->status = $value;
     }
 

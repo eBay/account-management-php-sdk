@@ -22,21 +22,21 @@ echo "Regenerating REST clients via Kiota..."
 rm -rf src/Generated
 
 kiota generate -l php \
-  -d specs/openapi/account-v1.yaml \
+  -d specs/openapi/account-v1.json \
   -c AccountV1ApiClient \
   -n 'EBay\AccountManagement\Generated\AccountV1' \
   -o src/Generated/AccountV1 \
   --ebc --co
 
 kiota generate -l php \
-  -d specs/openapi/account-v2.yaml \
+  -d specs/openapi/account-v2.json \
   -c AccountV2ApiClient \
   -n 'EBay\AccountManagement\Generated\AccountV2' \
   -o src/Generated/AccountV2 \
   --ebc --co
 
 kiota generate -l php \
-  -d specs/openapi/finances.yaml \
+  -d specs/openapi/finances.json \
   -c FinancesApiClient \
   -n 'EBay\AccountManagement\Generated\Finances' \
   -o src/Generated/Finances \

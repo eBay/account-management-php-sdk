@@ -32,19 +32,19 @@ class SellerEligibilityResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $programType The eBay advertising program for which a seller may be eligible. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/plser:AdvertisingProgramEnum'>eBay API documentation</a>
+     * @var AdvertisingProgramEnum|null $programType An enumerated type that defines the eBay advertising program for which a seller may be eligible. | - **PROMOTED_LISTINGS_STANDARD**: This value indicates that the eBay advertising program is Promoted Listings general campaign strategy (formerly Promoted Listings Standard (PLS)). - **PROMOTED_LISTINGS_ADVANCED**: This value indicates that the eBay advertising program is Promoted listings priority campaign strategy (formerly Promoted Listings Advanced (PLA)). - **OFFSITE_ADS**: This value indicates that the eBay advertising program is Promoted Listings Promoted Offsite (formerly Offsite Ads).
     */
-    private ?string $programType = null;
+    private ?AdvertisingProgramEnum $programType = null;
     
     /**
-     * @var string|null $reason The reason why a seller is ineligible for the specified eBay advertising program.<br /><br />This field is only returned if the seller is ineligible for the eBay advertising program. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/plser:SellerIneligibleReasonEnum'>eBay API documentation</a>
+     * @var SellerIneligibleReasonEnum|null $reason This enumerated type defines the reason why a seller is ineligible for an eBay advertising program. | - **NOT_ENOUGH_ACTIVITY**: This value indicates that the seller is ineligible for the eBay advertising program due to lack of activity.<br><br>New accounts take a few weeks to become eligible for eBay Promoted Listings. If the seller account is in good standing (Above Standard or Top Rated), the account should become eligible within a few weeks. - **NOT_IN_GOOD_STANDING**: This value indicates that the seller is ineligible for the eBay advertising program because their account is not currently in good standing.<br><br>Below Standard sellers cannot use eBay advertising programs to create new campaigns or edit their existing campaigns. Existing campaigns will be paused by the system. - **RESTRICTED**: This value indicates that the seller is currently restricted from using the corresponding eBay advertising program.
     */
-    private ?string $reason = null;
+    private ?SellerIneligibleReasonEnum $reason = null;
     
     /**
-     * @var string|null $status The seller eligibility status for the specified eBay advertising program. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/cmlib:SellerEligibilityEnum'>eBay API documentation</a>
+     * @var SellerEligibilityEnum|null $status This enumerated type defines the seller eligibility status for a specified eBay advertising program. | - **ELIGIBLE**: This value indicates that the seller is eligible for the specified eBay advertising program. - **INELIGIBLE**: This value indicates that the seller is ineligible for the specified eBay advertising program.
     */
-    private ?string $status = null;
+    private ?SellerEligibilityEnum $status = null;
     
     /**
      * Instantiates a new SellerEligibilityResponse and sets the default values.
@@ -77,33 +77,33 @@ class SellerEligibilityResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'programType' => fn(ParseNode $n) => $o->setProgramType($n->getStringValue()),
-            'reason' => fn(ParseNode $n) => $o->setReason($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'programType' => fn(ParseNode $n) => $o->setProgramType($n->getEnumValue(AdvertisingProgramEnum::class)),
+            'reason' => fn(ParseNode $n) => $o->setReason($n->getEnumValue(SellerIneligibleReasonEnum::class)),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(SellerEligibilityEnum::class)),
         ];
     }
 
     /**
-     * Gets the programType property value. The eBay advertising program for which a seller may be eligible. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/plser:AdvertisingProgramEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the programType property value. An enumerated type that defines the eBay advertising program for which a seller may be eligible. | - **PROMOTED_LISTINGS_STANDARD**: This value indicates that the eBay advertising program is Promoted Listings general campaign strategy (formerly Promoted Listings Standard (PLS)). - **PROMOTED_LISTINGS_ADVANCED**: This value indicates that the eBay advertising program is Promoted listings priority campaign strategy (formerly Promoted Listings Advanced (PLA)). - **OFFSITE_ADS**: This value indicates that the eBay advertising program is Promoted Listings Promoted Offsite (formerly Offsite Ads).
+     * @return AdvertisingProgramEnum|null
     */
-    public function getProgramType(): ?string {
+    public function getProgramType(): ?AdvertisingProgramEnum {
         return $this->programType;
     }
 
     /**
-     * Gets the reason property value. The reason why a seller is ineligible for the specified eBay advertising program.<br /><br />This field is only returned if the seller is ineligible for the eBay advertising program. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/plser:SellerIneligibleReasonEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the reason property value. This enumerated type defines the reason why a seller is ineligible for an eBay advertising program. | - **NOT_ENOUGH_ACTIVITY**: This value indicates that the seller is ineligible for the eBay advertising program due to lack of activity.<br><br>New accounts take a few weeks to become eligible for eBay Promoted Listings. If the seller account is in good standing (Above Standard or Top Rated), the account should become eligible within a few weeks. - **NOT_IN_GOOD_STANDING**: This value indicates that the seller is ineligible for the eBay advertising program because their account is not currently in good standing.<br><br>Below Standard sellers cannot use eBay advertising programs to create new campaigns or edit their existing campaigns. Existing campaigns will be paused by the system. - **RESTRICTED**: This value indicates that the seller is currently restricted from using the corresponding eBay advertising program.
+     * @return SellerIneligibleReasonEnum|null
     */
-    public function getReason(): ?string {
+    public function getReason(): ?SellerIneligibleReasonEnum {
         return $this->reason;
     }
 
     /**
-     * Gets the status property value. The seller eligibility status for the specified eBay advertising program. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/cmlib:SellerEligibilityEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. This enumerated type defines the seller eligibility status for a specified eBay advertising program. | - **ELIGIBLE**: This value indicates that the seller is eligible for the specified eBay advertising program. - **INELIGIBLE**: This value indicates that the seller is ineligible for the specified eBay advertising program.
+     * @return SellerEligibilityEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?SellerEligibilityEnum {
         return $this->status;
     }
 
@@ -112,9 +112,9 @@ class SellerEligibilityResponse implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('programType', $this->getProgramType());
-        $writer->writeStringValue('reason', $this->getReason());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('programType', $this->getProgramType());
+        $writer->writeEnumValue('reason', $this->getReason());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -127,26 +127,26 @@ class SellerEligibilityResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the programType property value. The eBay advertising program for which a seller may be eligible. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/plser:AdvertisingProgramEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the programType property.
+     * Sets the programType property value. An enumerated type that defines the eBay advertising program for which a seller may be eligible. | - **PROMOTED_LISTINGS_STANDARD**: This value indicates that the eBay advertising program is Promoted Listings general campaign strategy (formerly Promoted Listings Standard (PLS)). - **PROMOTED_LISTINGS_ADVANCED**: This value indicates that the eBay advertising program is Promoted listings priority campaign strategy (formerly Promoted Listings Advanced (PLA)). - **OFFSITE_ADS**: This value indicates that the eBay advertising program is Promoted Listings Promoted Offsite (formerly Offsite Ads).
+     * @param AdvertisingProgramEnum|null $value Value to set for the programType property.
     */
-    public function setProgramType(?string $value): void {
+    public function setProgramType(?AdvertisingProgramEnum $value): void {
         $this->programType = $value;
     }
 
     /**
-     * Sets the reason property value. The reason why a seller is ineligible for the specified eBay advertising program.<br /><br />This field is only returned if the seller is ineligible for the eBay advertising program. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/plser:SellerIneligibleReasonEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the reason property.
+     * Sets the reason property value. This enumerated type defines the reason why a seller is ineligible for an eBay advertising program. | - **NOT_ENOUGH_ACTIVITY**: This value indicates that the seller is ineligible for the eBay advertising program due to lack of activity.<br><br>New accounts take a few weeks to become eligible for eBay Promoted Listings. If the seller account is in good standing (Above Standard or Top Rated), the account should become eligible within a few weeks. - **NOT_IN_GOOD_STANDING**: This value indicates that the seller is ineligible for the eBay advertising program because their account is not currently in good standing.<br><br>Below Standard sellers cannot use eBay advertising programs to create new campaigns or edit their existing campaigns. Existing campaigns will be paused by the system. - **RESTRICTED**: This value indicates that the seller is currently restricted from using the corresponding eBay advertising program.
+     * @param SellerIneligibleReasonEnum|null $value Value to set for the reason property.
     */
-    public function setReason(?string $value): void {
+    public function setReason(?SellerIneligibleReasonEnum $value): void {
         $this->reason = $value;
     }
 
     /**
-     * Sets the status property value. The seller eligibility status for the specified eBay advertising program. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/cmlib:SellerEligibilityEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. This enumerated type defines the seller eligibility status for a specified eBay advertising program. | - **ELIGIBLE**: This value indicates that the seller is eligible for the specified eBay advertising program. - **INELIGIBLE**: This value indicates that the seller is ineligible for the specified eBay advertising program.
+     * @param SellerEligibilityEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?SellerEligibilityEnum $value): void {
         $this->status = $value;
     }
 

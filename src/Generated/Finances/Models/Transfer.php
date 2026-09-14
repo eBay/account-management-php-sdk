@@ -32,7 +32,7 @@ class Transfer implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var FundingSource|null $fundingSource This type defines the source of funds used to finance a transfer, such as available seller funds, a credit card, or a bank account.
+     * @var FundingSource|null $fundingSource This container provides details about the seller's funding source to reimburse eBay for the transfer, such as a bank account, a credit card, or available seller payout funds.
     */
     private ?FundingSource $fundingSource = null;
     
@@ -42,12 +42,12 @@ class Transfer implements AdditionalDataHolder, Parsable
     private ?string $transactionDate = null;
     
     /**
-     * @var Amount|null $transferAmount This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * @var Amount|null $transferAmount The amount of the transfer being deducted from the funding source.
     */
     private ?Amount $transferAmount = null;
     
     /**
-     * @var TransferDetail|null $transferDetail This type is used by the <b>transferDetail</b> container, which provides more details about the transfer and the charge(s) associated with the transfer.
+     * @var TransferDetail|null $transferDetail This container provides more details about the transfer, including details on the charge(s) associated with the transfer. Multiple charges can be addressed with one transfer.
     */
     private ?TransferDetail $transferDetail = null;
     
@@ -96,7 +96,7 @@ class Transfer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the fundingSource property value. This type defines the source of funds used to finance a transfer, such as available seller funds, a credit card, or a bank account.
+     * Gets the fundingSource property value. This container provides details about the seller's funding source to reimburse eBay for the transfer, such as a bank account, a credit card, or available seller payout funds.
      * @return FundingSource|null
     */
     public function getFundingSource(): ?FundingSource {
@@ -112,7 +112,7 @@ class Transfer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the transferAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Gets the transferAmount property value. The amount of the transfer being deducted from the funding source.
      * @return Amount|null
     */
     public function getTransferAmount(): ?Amount {
@@ -120,7 +120,7 @@ class Transfer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the transferDetail property value. This type is used by the <b>transferDetail</b> container, which provides more details about the transfer and the charge(s) associated with the transfer.
+     * Gets the transferDetail property value. This container provides more details about the transfer, including details on the charge(s) associated with the transfer. Multiple charges can be addressed with one transfer.
      * @return TransferDetail|null
     */
     public function getTransferDetail(): ?TransferDetail {
@@ -157,7 +157,7 @@ class Transfer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the fundingSource property value. This type defines the source of funds used to finance a transfer, such as available seller funds, a credit card, or a bank account.
+     * Sets the fundingSource property value. This container provides details about the seller's funding source to reimburse eBay for the transfer, such as a bank account, a credit card, or available seller payout funds.
      * @param FundingSource|null $value Value to set for the fundingSource property.
     */
     public function setFundingSource(?FundingSource $value): void {
@@ -173,7 +173,7 @@ class Transfer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the transferAmount property value. This type is used to express the dollar value and currency used for any transaction retrieved with the <strong>Finances API</strong>, including an order total, a seller payout, a buyer refund, or a seller credit.
+     * Sets the transferAmount property value. The amount of the transfer being deducted from the funding source.
      * @param Amount|null $value Value to set for the transferAmount property.
     */
     public function setTransferAmount(?Amount $value): void {
@@ -181,7 +181,7 @@ class Transfer implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the transferDetail property value. This type is used by the <b>transferDetail</b> container, which provides more details about the transfer and the charge(s) associated with the transfer.
+     * Sets the transferDetail property value. This container provides more details about the transfer, including details on the charge(s) associated with the transfer. Multiple charges can be addressed with one transfer.
      * @param TransferDetail|null $value Value to set for the transferDetail property.
     */
     public function setTransferDetail(?TransferDetail $value): void {

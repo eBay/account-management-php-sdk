@@ -37,9 +37,9 @@ class RecipientAccountReference implements AdditionalDataHolder, Parsable
     private ?string $referenceId = null;
     
     /**
-     * @var string|null $referenceType <span class="tablenote"><b>Note</b>: DO NOT USE THIS FIELD. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:RecipientAccountReferenceTypeEnum'>eBay API documentation</a>
+     * @var RecipientAccountReferenceTypeEnum|null $referenceType <span class="tablenote"><b>Note</b>: This type is no longer applicable. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span> | - **PAYPAL_EMAIL**: This is the PayPal email address of the seller.
     */
-    private ?string $referenceType = null;
+    private ?RecipientAccountReferenceTypeEnum $referenceType = null;
     
     /**
      * Instantiates a new RecipientAccountReference and sets the default values.
@@ -73,7 +73,7 @@ class RecipientAccountReference implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'referenceId' => fn(ParseNode $n) => $o->setReferenceId($n->getStringValue()),
-            'referenceType' => fn(ParseNode $n) => $o->setReferenceType($n->getStringValue()),
+            'referenceType' => fn(ParseNode $n) => $o->setReferenceType($n->getEnumValue(RecipientAccountReferenceTypeEnum::class)),
         ];
     }
 
@@ -86,10 +86,10 @@ class RecipientAccountReference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the referenceType property value. <span class="tablenote"><b>Note</b>: DO NOT USE THIS FIELD. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:RecipientAccountReferenceTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the referenceType property value. <span class="tablenote"><b>Note</b>: This type is no longer applicable. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span> | - **PAYPAL_EMAIL**: This is the PayPal email address of the seller.
+     * @return RecipientAccountReferenceTypeEnum|null
     */
-    public function getReferenceType(): ?string {
+    public function getReferenceType(): ?RecipientAccountReferenceTypeEnum {
         return $this->referenceType;
     }
 
@@ -99,7 +99,7 @@ class RecipientAccountReference implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('referenceId', $this->getReferenceId());
-        $writer->writeStringValue('referenceType', $this->getReferenceType());
+        $writer->writeEnumValue('referenceType', $this->getReferenceType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class RecipientAccountReference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the referenceType property value. <span class="tablenote"><b>Note</b>: DO NOT USE THIS FIELD. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:RecipientAccountReferenceTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the referenceType property.
+     * Sets the referenceType property value. <span class="tablenote"><b>Note</b>: This type is no longer applicable. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span> | - **PAYPAL_EMAIL**: This is the PayPal email address of the seller.
+     * @param RecipientAccountReferenceTypeEnum|null $value Value to set for the referenceType property.
     */
-    public function setReferenceType(?string $value): void {
+    public function setReferenceType(?RecipientAccountReferenceTypeEnum $value): void {
         $this->referenceType = $value;
     }
 

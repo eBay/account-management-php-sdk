@@ -16,6 +16,7 @@
 
 namespace EBay\AccountManagement\Generated\AccountV2\Combined_shipping_rules\Update_promotional_shipping_rule;
 
+use EBay\AccountManagement\Generated\AccountV2\Models\Error;
 use EBay\AccountManagement\Generated\AccountV2\Models\UpdatePromotionalShippingRuleRequest;
 use Exception;
 use Http\Promise\Promise;
@@ -45,19 +46,23 @@ class Update_promotional_shipping_ruleRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method updates an existing promotional shipping rule to adjust discount thresholds, eligibility criteria, or duration for the seller.
-     * @param UpdatePromotionalShippingRuleRequest $body This type defines a request to update promotional shipping rule.
+     * @param UpdatePromotionalShippingRuleRequest $body This type is used for updating an existing promotional combined-shipping rules.
      * @param Update_promotional_shipping_ruleRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<void|null>
      * @throws Exception
     */
     public function post(UpdatePromotionalShippingRuleRequest $body, ?Update_promotional_shipping_ruleRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
      * This method updates an existing promotional shipping rule to adjust discount thresholds, eligibility criteria, or duration for the seller.
-     * @param UpdatePromotionalShippingRuleRequest $body This type defines a request to update promotional shipping rule.
+     * @param UpdatePromotionalShippingRuleRequest $body This type is used for updating an existing promotional combined-shipping rules.
      * @param Update_promotional_shipping_ruleRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
@@ -70,6 +75,7 @@ class Update_promotional_shipping_ruleRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         $requestInfo->setContentFromParsable($this->requestAdapter, "application/json", $body);
         return $requestInfo;
     }
