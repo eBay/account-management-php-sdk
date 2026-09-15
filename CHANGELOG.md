@@ -21,15 +21,15 @@
 
 | Operation | Previous parameters | Current parameters |
 | --- | --- | --- |
-| `setUserPreferences` | `(mixed, ?string, ?string, ?RequestOptions)` | `(SetUserPreferencesRequest, ?string, ?string, ?RequestOptions)` |
+| `setUserPreferences` | `(mixed $body, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` | `(SetUserPreferencesRequest $body, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
 
 `FinancesClient`:
 
 | Operation | Previous parameters | Current parameters |
 | --- | --- | --- |
-| `getOrderEarnings` | `(?string, ?string, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(?array, ?int, ?int, ?array, ?string, ?string, ?RequestOptions)` |
-| `getOrderEarningsSummary` | `(?string, ?string, ?string, ?RequestOptions)` | `(?array, ?string, ?string, ?RequestOptions)` |
-| `getPayouts` | `(?string, ?string, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(?array, ?int, ?int, ?array, ?string, ?string, ?RequestOptions)` |
-| `getPayoutSummary` | `(?string, ?string, ?string, ?RequestOptions)` | `(?array, ?string, ?string, ?RequestOptions)` |
-| `getTransactions` | `(?string, ?string, ?string, ?string, ?string, ?string, ?RequestOptions)` | `(?array, ?int, ?int, ?array, ?string, ?string, ?RequestOptions)` |
-| `getTransactionSummary` | `(?string, ?string, ?string, ?RequestOptions)` | `(?array, ?string, ?string, ?RequestOptions)` |
+| `getOrderEarnings` | `(?string $filter, ?string $limit, ?string $offset, ?string $sort, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?array $filter, ?int $limit, ?int $offset, ?array $sort, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getOrderEarningsSummary` | `(?string $filter, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?array $filter, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getPayouts` | `(?string $filter, ?string $limit, ?string $offset, ?string $sort, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?array $filter, ?int $limit, ?int $offset, ?array $sort, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getPayoutSummary` | `(?string $filter, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?array $filter, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getTransactions` | `(?string $filter, ?string $limit, ?string $offset, ?string $sort, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?array $filter, ?int $limit, ?int $offset, ?array $sort, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
+| `getTransactionSummary` | `(?string $filter, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` | `(?array $filter, ?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
