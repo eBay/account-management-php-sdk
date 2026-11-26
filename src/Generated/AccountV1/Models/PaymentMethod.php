@@ -37,12 +37,12 @@ class PaymentMethod implements AdditionalDataHolder, Parsable
     private ?array $brands = null;
     
     /**
-     * @var PaymentMethodTypeEnum|null $paymentMethodType An enumeration type that defines the supported payment methods.<br><br> <span class="tablenote"><b>Note</b>: eBay manages all electronic payment methods that are available to buyers, so sellers only need to specify one or more offline payment methods for listings that support or require payment that occurs off of the eBay platform. All electronic payment method enum values are no longer applicable, and are marked as such. </span> | - **CASH_IN_PERSON**: This enumeration value indicates that the payment method will be cash, and the transaction will occur in-person. - **CASH_ON_DELIVERY**: This enumeration value indicates that the payment method will be cash, and the transaction will occur after the item is delivered to the buyer. - **CASH_ON_PICKUP**: This enumeration value indicates that the payment method will be cash, and the transaction will occur when the buyer picks up the item. - **CASHIER_CHECK**: This enumeration value indicates that the payment method will be a Cashier Check. - **CREDIT_CARD**: This payment method is no longer valid. - **ESCROW**: This enumeration value indicates that escrow was used as the payment method to pay for the order. This form of payment is used for high-value orders. - **INTEGRATED_MERCHANT_CREDIT_CARD**: This payment method is no longer valid. - **LOAN_CHECK**: This payment method is no longer valid. - **MONEY_ORDER**: This enumeration value indicates that the payment method will be by a Money Order. - **PAISA_PAY**: This payment method is no longer valid. - **PAISA_PAY_ESCROW**: This payment method is no longer valid. - **PAISA_PAY_ESCROW_EMI**: This payment method is no longer valid. - **PAYPAL**: This payment method is no longer valid. - **PERSONAL_CHECK**: This enumeration value indicates that the payment method will be a Personal check. - **OTHER**: This enumeration value indicates that the seller is offering an offline payment method not otherwise covered.
+     * @var PaymentMethodTypeEnum|null $paymentMethodType This array is only applicable for listings supporting offline payment methods. See the <b>PaymentMethodTypeEnum</b> type for supported offline payment method enum values. If offline payments are enabled for the policy, provide at least one offline payment method.</p>
     */
     private ?PaymentMethodTypeEnum $paymentMethodType = null;
     
     /**
-     * @var RecipientAccountReference|null $recipientAccountReference <span class="tablenote"><b>Note</b>: This type is no longer applicable. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span>
+     * @var RecipientAccountReference|null $recipientAccountReference <span class="tablenote"><b>Note</b>: This container is no longer applicable and should not be used. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods, including PayPal. </span>
     */
     private ?RecipientAccountReference $recipientAccountReference = null;
     
@@ -92,7 +92,7 @@ class PaymentMethod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the paymentMethodType property value. An enumeration type that defines the supported payment methods.<br><br> <span class="tablenote"><b>Note</b>: eBay manages all electronic payment methods that are available to buyers, so sellers only need to specify one or more offline payment methods for listings that support or require payment that occurs off of the eBay platform. All electronic payment method enum values are no longer applicable, and are marked as such. </span> | - **CASH_IN_PERSON**: This enumeration value indicates that the payment method will be cash, and the transaction will occur in-person. - **CASH_ON_DELIVERY**: This enumeration value indicates that the payment method will be cash, and the transaction will occur after the item is delivered to the buyer. - **CASH_ON_PICKUP**: This enumeration value indicates that the payment method will be cash, and the transaction will occur when the buyer picks up the item. - **CASHIER_CHECK**: This enumeration value indicates that the payment method will be a Cashier Check. - **CREDIT_CARD**: This payment method is no longer valid. - **ESCROW**: This enumeration value indicates that escrow was used as the payment method to pay for the order. This form of payment is used for high-value orders. - **INTEGRATED_MERCHANT_CREDIT_CARD**: This payment method is no longer valid. - **LOAN_CHECK**: This payment method is no longer valid. - **MONEY_ORDER**: This enumeration value indicates that the payment method will be by a Money Order. - **PAISA_PAY**: This payment method is no longer valid. - **PAISA_PAY_ESCROW**: This payment method is no longer valid. - **PAISA_PAY_ESCROW_EMI**: This payment method is no longer valid. - **PAYPAL**: This payment method is no longer valid. - **PERSONAL_CHECK**: This enumeration value indicates that the payment method will be a Personal check. - **OTHER**: This enumeration value indicates that the seller is offering an offline payment method not otherwise covered.
+     * Gets the paymentMethodType property value. This array is only applicable for listings supporting offline payment methods. See the <b>PaymentMethodTypeEnum</b> type for supported offline payment method enum values. If offline payments are enabled for the policy, provide at least one offline payment method.</p>
      * @return PaymentMethodTypeEnum|null
     */
     public function getPaymentMethodType(): ?PaymentMethodTypeEnum {
@@ -100,7 +100,7 @@ class PaymentMethod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the recipientAccountReference property value. <span class="tablenote"><b>Note</b>: This type is no longer applicable. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span>
+     * Gets the recipientAccountReference property value. <span class="tablenote"><b>Note</b>: This container is no longer applicable and should not be used. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods, including PayPal. </span>
      * @return RecipientAccountReference|null
     */
     public function getRecipientAccountReference(): ?RecipientAccountReference {
@@ -135,7 +135,7 @@ class PaymentMethod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the paymentMethodType property value. An enumeration type that defines the supported payment methods.<br><br> <span class="tablenote"><b>Note</b>: eBay manages all electronic payment methods that are available to buyers, so sellers only need to specify one or more offline payment methods for listings that support or require payment that occurs off of the eBay platform. All electronic payment method enum values are no longer applicable, and are marked as such. </span> | - **CASH_IN_PERSON**: This enumeration value indicates that the payment method will be cash, and the transaction will occur in-person. - **CASH_ON_DELIVERY**: This enumeration value indicates that the payment method will be cash, and the transaction will occur after the item is delivered to the buyer. - **CASH_ON_PICKUP**: This enumeration value indicates that the payment method will be cash, and the transaction will occur when the buyer picks up the item. - **CASHIER_CHECK**: This enumeration value indicates that the payment method will be a Cashier Check. - **CREDIT_CARD**: This payment method is no longer valid. - **ESCROW**: This enumeration value indicates that escrow was used as the payment method to pay for the order. This form of payment is used for high-value orders. - **INTEGRATED_MERCHANT_CREDIT_CARD**: This payment method is no longer valid. - **LOAN_CHECK**: This payment method is no longer valid. - **MONEY_ORDER**: This enumeration value indicates that the payment method will be by a Money Order. - **PAISA_PAY**: This payment method is no longer valid. - **PAISA_PAY_ESCROW**: This payment method is no longer valid. - **PAISA_PAY_ESCROW_EMI**: This payment method is no longer valid. - **PAYPAL**: This payment method is no longer valid. - **PERSONAL_CHECK**: This enumeration value indicates that the payment method will be a Personal check. - **OTHER**: This enumeration value indicates that the seller is offering an offline payment method not otherwise covered.
+     * Sets the paymentMethodType property value. This array is only applicable for listings supporting offline payment methods. See the <b>PaymentMethodTypeEnum</b> type for supported offline payment method enum values. If offline payments are enabled for the policy, provide at least one offline payment method.</p>
      * @param PaymentMethodTypeEnum|null $value Value to set for the paymentMethodType property.
     */
     public function setPaymentMethodType(?PaymentMethodTypeEnum $value): void {
@@ -143,7 +143,7 @@ class PaymentMethod implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the recipientAccountReference property value. <span class="tablenote"><b>Note</b>: This type is no longer applicable. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span>
+     * Sets the recipientAccountReference property value. <span class="tablenote"><b>Note</b>: This container is no longer applicable and should not be used. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods, including PayPal. </span>
      * @param RecipientAccountReference|null $value Value to set for the recipientAccountReference property.
     */
     public function setRecipientAccountReference(?RecipientAccountReference $value): void {

@@ -81,7 +81,7 @@ class WithFulfillmentPolicyItemRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method updates an existing fulfillment policy. Specify the policy you want to update using the <b>fulfillment_policy_id</b> path parameter. Supply a complete policy payload with the updates you want to make; this call overwrites the existing policy with the new details specified in the payload.
-     * @param FulfillmentPolicyRequest $body This root container defines a seller's fulfillment policy for a specific marketplace and category group. This type is used when creating or updating a fulfillment business policy.
+     * @param FulfillmentPolicyRequest $body Fulfillment policy request
      * @param WithFulfillmentPolicyItemRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<SetFulfillmentPolicyResponse|null>
      * @throws Exception
@@ -134,7 +134,7 @@ class WithFulfillmentPolicyItemRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method updates an existing fulfillment policy. Specify the policy you want to update using the <b>fulfillment_policy_id</b> path parameter. Supply a complete policy payload with the updates you want to make; this call overwrites the existing policy with the new details specified in the payload.
-     * @param FulfillmentPolicyRequest $body This root container defines a seller's fulfillment policy for a specific marketplace and category group. This type is used when creating or updating a fulfillment business policy.
+     * @param FulfillmentPolicyRequest $body Fulfillment policy request
      * @param WithFulfillmentPolicyItemRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

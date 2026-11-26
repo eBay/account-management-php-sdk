@@ -32,12 +32,12 @@ class Deposit implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * @var Amount|null $amount This value indicates the initial deposit amount required from the buyer in order to purchase a motor vehicle. This value can be as high as $2,000.00 if immediate payment is not required, and up to $500.00 if immediate payment is required.<br><br><b>Max</b>: <code>2000.0</code>
     */
     private ?Amount $amount = null;
     
     /**
-     * @var TimeDuration|null $dueIn A type used to specify a period of time using a specified time-measurement unit. Payment, return, and fulfillment business policies all use this type to specify time windows.<br><br>Whenever a container that uses this type is used in a request, both of these fields are required. Similarly, whenever a container that uses this type is returned in a response, both of these fields are always returned.
+     * @var TimeDuration|null $dueIn This value indicates the number of hours that the buyer has (after they commit to buy) to pay the initial deposit on a motor vehicle. Valid <b>dueIn</b> times are 24, 48, and 72 hours. <code>HOUR</code> is set as the <b>unit</b> value, and <code>24</code>, <code>48</code> or <code>72</code> are set in the <b>value</b> field.<br><br><span class="tablenote"><b>Note</b>: The <b>dueIn</b> value is overridden if the seller has set the motor vehicle listing to require immediate payment. If the listing requires immediate payment, the buyer must pay the deposit immediately in order to be eligible to purchase the motor vehicle.</span><br><b>Minimum:</b> 24 (hours)<br><b>Maximum:</b> 72 (hours)<br><b>Default:</b> 48 (hours)
     */
     private ?TimeDuration $dueIn = null;
     
@@ -71,7 +71,7 @@ class Deposit implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * Gets the amount property value. This value indicates the initial deposit amount required from the buyer in order to purchase a motor vehicle. This value can be as high as $2,000.00 if immediate payment is not required, and up to $500.00 if immediate payment is required.<br><br><b>Max</b>: <code>2000.0</code>
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -79,7 +79,7 @@ class Deposit implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dueIn property value. A type used to specify a period of time using a specified time-measurement unit. Payment, return, and fulfillment business policies all use this type to specify time windows.<br><br>Whenever a container that uses this type is used in a request, both of these fields are required. Similarly, whenever a container that uses this type is returned in a response, both of these fields are always returned.
+     * Gets the dueIn property value. This value indicates the number of hours that the buyer has (after they commit to buy) to pay the initial deposit on a motor vehicle. Valid <b>dueIn</b> times are 24, 48, and 72 hours. <code>HOUR</code> is set as the <b>unit</b> value, and <code>24</code>, <code>48</code> or <code>72</code> are set in the <b>value</b> field.<br><br><span class="tablenote"><b>Note</b>: The <b>dueIn</b> value is overridden if the seller has set the motor vehicle listing to require immediate payment. If the listing requires immediate payment, the buyer must pay the deposit immediately in order to be eligible to purchase the motor vehicle.</span><br><b>Minimum:</b> 24 (hours)<br><b>Maximum:</b> 72 (hours)<br><b>Default:</b> 48 (hours)
      * @return TimeDuration|null
     */
     public function getDueIn(): ?TimeDuration {
@@ -127,7 +127,7 @@ class Deposit implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * Sets the amount property value. This value indicates the initial deposit amount required from the buyer in order to purchase a motor vehicle. This value can be as high as $2,000.00 if immediate payment is not required, and up to $500.00 if immediate payment is required.<br><br><b>Max</b>: <code>2000.0</code>
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {
@@ -135,7 +135,7 @@ class Deposit implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dueIn property value. A type used to specify a period of time using a specified time-measurement unit. Payment, return, and fulfillment business policies all use this type to specify time windows.<br><br>Whenever a container that uses this type is used in a request, both of these fields are required. Similarly, whenever a container that uses this type is returned in a response, both of these fields are always returned.
+     * Sets the dueIn property value. This value indicates the number of hours that the buyer has (after they commit to buy) to pay the initial deposit on a motor vehicle. Valid <b>dueIn</b> times are 24, 48, and 72 hours. <code>HOUR</code> is set as the <b>unit</b> value, and <code>24</code>, <code>48</code> or <code>72</code> are set in the <b>value</b> field.<br><br><span class="tablenote"><b>Note</b>: The <b>dueIn</b> value is overridden if the seller has set the motor vehicle listing to require immediate payment. If the listing requires immediate payment, the buyer must pay the deposit immediately in order to be eligible to purchase the motor vehicle.</span><br><b>Minimum:</b> 24 (hours)<br><b>Maximum:</b> 72 (hours)<br><b>Default:</b> 48 (hours)
      * @param TimeDuration|null $value Value to set for the dueIn property.
     */
     public function setDueIn(?TimeDuration $value): void {

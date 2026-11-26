@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * A complex type that indicates a parameter that caused an error and the value of the parameter which caused the error.
+*/
 class ErrorParameter implements AdditionalDataHolder, Parsable 
 {
     /**

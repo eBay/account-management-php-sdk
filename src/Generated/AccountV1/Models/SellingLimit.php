@@ -32,7 +32,7 @@ class SellingLimit implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * @var Amount|null $amount This container shows the monthly cap for total sales amount allowed for the seller's account. This container may not be returned if a seller does not have a monthly cap for total sales amount.
     */
     private ?Amount $amount = null;
     
@@ -66,7 +66,7 @@ class SellingLimit implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * Gets the amount property value. This container shows the monthly cap for total sales amount allowed for the seller's account. This container may not be returned if a seller does not have a monthly cap for total sales amount.
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -112,7 +112,7 @@ class SellingLimit implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * Sets the amount property value. This container shows the monthly cap for total sales amount allowed for the seller's account. This container may not be returned if a seller does not have a monthly cap for total sales amount.
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {

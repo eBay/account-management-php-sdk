@@ -37,7 +37,7 @@ class PaymentsProgramOnboardingSteps implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var PaymentsProgramOnboardingStepStatus|null $status This enumeration value indicates the status of the present onboarding step. | - **NOT_STARTED**: This enumeration value indicates that the present step has not started. - **IN_PROGRESS**: This enumeration value indicates that the present step has started but has not completed. - **COMPLETED**: This enumeration value indicates that the present step has completed.
+     * @var PaymentsProgramOnboardingStepStatus|null $status This enumeration value indicates the status of the associated step. <p> <span class="tablenote"><strong>Note:</strong> Only one step can be <code>IN_PROGRESS</code> at a time.</span></p>
     */
     private ?PaymentsProgramOnboardingStepStatus $status = null;
     
@@ -92,7 +92,7 @@ class PaymentsProgramOnboardingSteps implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. This enumeration value indicates the status of the present onboarding step. | - **NOT_STARTED**: This enumeration value indicates that the present step has not started. - **IN_PROGRESS**: This enumeration value indicates that the present step has started but has not completed. - **COMPLETED**: This enumeration value indicates that the present step has completed.
+     * Gets the status property value. This enumeration value indicates the status of the associated step. <p> <span class="tablenote"><strong>Note:</strong> Only one step can be <code>IN_PROGRESS</code> at a time.</span></p>
      * @return PaymentsProgramOnboardingStepStatus|null
     */
     public function getStatus(): ?PaymentsProgramOnboardingStepStatus {
@@ -135,7 +135,7 @@ class PaymentsProgramOnboardingSteps implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. This enumeration value indicates the status of the present onboarding step. | - **NOT_STARTED**: This enumeration value indicates that the present step has not started. - **IN_PROGRESS**: This enumeration value indicates that the present step has started but has not completed. - **COMPLETED**: This enumeration value indicates that the present step has completed.
+     * Sets the status property value. This enumeration value indicates the status of the associated step. <p> <span class="tablenote"><strong>Note:</strong> Only one step can be <code>IN_PROGRESS</code> at a time.</span></p>
      * @param PaymentsProgramOnboardingStepStatus|null $value Value to set for the status property.
     */
     public function setStatus(?PaymentsProgramOnboardingStepStatus $value): void {

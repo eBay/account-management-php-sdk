@@ -37,7 +37,7 @@ class KycCheck implements AdditionalDataHolder, Parsable
     private ?string $alert = null;
     
     /**
-     * @var DetailsType|null $dataRequired This enumerated type lists the types of details that may be needed for a KYC check. | - **COMPANY_DETAILS**: This enumeration value indicates that the seller is required to provide information about their company. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **INDIVIDUAL_DETAILS**: This enumeration value indicates that the seller is required to provide personal information. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **BANK_DETAILS**: This enumeration value indicates that the seller is required to provide information about their bank. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields.
+     * @var DetailsType|null $dataRequired The enumeration value returned in this field categorizes the type of details needed for the KYC check. More information about the check is shown in the <b>detailMessage</b> and other applicable, corresponding fields.
     */
     private ?DetailsType $dataRequired = null;
     
@@ -89,7 +89,7 @@ class KycCheck implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dataRequired property value. This enumerated type lists the types of details that may be needed for a KYC check. | - **COMPANY_DETAILS**: This enumeration value indicates that the seller is required to provide information about their company. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **INDIVIDUAL_DETAILS**: This enumeration value indicates that the seller is required to provide personal information. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **BANK_DETAILS**: This enumeration value indicates that the seller is required to provide information about their bank. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields.
+     * Gets the dataRequired property value. The enumeration value returned in this field categorizes the type of details needed for the KYC check. More information about the check is shown in the <b>detailMessage</b> and other applicable, corresponding fields.
      * @return DetailsType|null
     */
     public function getDataRequired(): ?DetailsType {
@@ -165,7 +165,7 @@ class KycCheck implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dataRequired property value. This enumerated type lists the types of details that may be needed for a KYC check. | - **COMPANY_DETAILS**: This enumeration value indicates that the seller is required to provide information about their company. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **INDIVIDUAL_DETAILS**: This enumeration value indicates that the seller is required to provide personal information. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields. - **BANK_DETAILS**: This enumeration value indicates that the seller is required to provide information about their bank. More information about the check is shown in the <strong>detailMessage</strong> and other applicable, corresponding fields.
+     * Sets the dataRequired property value. The enumeration value returned in this field categorizes the type of details needed for the KYC check. More information about the check is shown in the <b>detailMessage</b> and other applicable, corresponding fields.
      * @param DetailsType|null $value Value to set for the dataRequired property.
     */
     public function setDataRequired(?DetailsType $value): void {

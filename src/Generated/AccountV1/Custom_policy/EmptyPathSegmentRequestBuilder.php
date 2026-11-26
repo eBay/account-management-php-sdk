@@ -62,7 +62,7 @@ class EmptyPathSegmentRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method creates a new custom policy that specifies the seller's terms for complying with local governmental regulations. Each Custom Policy targets a <b>policyType</b>. Multiple policies may be created as using the following custom policy types:<ul><li>PRODUCT_COMPLIANCE: Product Compliance policies disclose product information as required for regulatory compliance. <br/><br/><span class="tablenote"><strong>Note:</strong> A maximum of 60 Product Compliance policies per seller may be created.</span></li><li>TAKE_BACK: Takeback policies describe the seller's legal obligation to take back a previously purchased item when the buyer purchases a new one. <br/><br/><span class="tablenote"><strong>Note:</strong> A maximum of 18 Takeback policies per seller may be created.</span></li></ul>A successful create policy call returns an HTTP status code of <b>201 Created</b> with the system-generated policy ID included in the Location response header.
-     * @param CustomPolicyCreateRequest $body This type is used by the request payload of the createCustomPolicy method to define a new custom policy for a specific marketplace.
+     * @param CustomPolicyCreateRequest $body Request to create a new Custom Policy.
      * @param EmptyPathSegmentRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<PostResponse|null>
      * @throws Exception
@@ -100,7 +100,7 @@ class EmptyPathSegmentRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method creates a new custom policy that specifies the seller's terms for complying with local governmental regulations. Each Custom Policy targets a <b>policyType</b>. Multiple policies may be created as using the following custom policy types:<ul><li>PRODUCT_COMPLIANCE: Product Compliance policies disclose product information as required for regulatory compliance. <br/><br/><span class="tablenote"><strong>Note:</strong> A maximum of 60 Product Compliance policies per seller may be created.</span></li><li>TAKE_BACK: Takeback policies describe the seller's legal obligation to take back a previously purchased item when the buyer purchases a new one. <br/><br/><span class="tablenote"><strong>Note:</strong> A maximum of 18 Takeback policies per seller may be created.</span></li></ul>A successful create policy call returns an HTTP status code of <b>201 Created</b> with the system-generated policy ID included in the Location response header.
-     * @param CustomPolicyCreateRequest $body This type is used by the request payload of the createCustomPolicy method to define a new custom policy for a specific marketplace.
+     * @param CustomPolicyCreateRequest $body Request to create a new Custom Policy.
      * @param EmptyPathSegmentRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

@@ -46,7 +46,7 @@ class Opt_outRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method opts the seller out of a seller program in which they are currently opted in to. A seller can retrieve a list of the seller programs they are opted-in to using the <b>getOptedInPrograms</b> method.
-     * @param Program $body The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request.
+     * @param Program $body Program being opted-out of.
      * @param Opt_outRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<Opt_outPostResponse|null>
      * @throws Exception
@@ -64,7 +64,7 @@ class Opt_outRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method opts the seller out of a seller program in which they are currently opted in to. A seller can retrieve a list of the seller programs they are opted-in to using the <b>getOptedInPrograms</b> method.
-     * @param Program $body The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request.
+     * @param Program $body Program being opted-out of.
      * @param Opt_outRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

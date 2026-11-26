@@ -32,12 +32,12 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var ReturnMethodEnum|null $returnMethod This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
+     * @var ReturnMethodEnum|null $returnMethod This field sets/indicates if the seller offers replacement items to the buyer in the case of an international return. The buyer must be willing to accept a replacement item; otherwise, the seller will need to issue a refund for a return.
     */
     private ?ReturnMethodEnum $returnMethod = null;
     
     /**
-     * @var TimeDuration|null $returnPeriod A type used to specify a period of time using a specified time-measurement unit. Payment, return, and fulfillment business policies all use this type to specify time windows.<br><br>Whenever a container that uses this type is used in a request, both of these fields are required. Similarly, whenever a container that uses this type is returned in a response, both of these fields are always returned.
+     * @var TimeDuration|null $returnPeriod This container indicates the number of calendar days that the buyer has to return an item. The return period begins when the item is marked "delivered" at the buyer's specified ship-to location.  <br><br>You must set the value to one that's accepted by the marketplace and category where the item is listed. Most categories support 30-day and 60-day return periods. For a definitive list of return periods for one or more categories, call <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getreturnpolicies">getReturnPolicies</a> method of the <b>Metadata API</b>. <br><br>The <b>TimeDuration</b> type is used to set/indicate the return period, and you set the <b>unit</b> value to <code>DAY</code> and the <b>value</b> field to either <code>30</code> or <code>60</code> (or other value, as appropriate).  <br><br>Note that this value cannot be modified if the listing has bids or sales, or if the listing ends within 12 hours.  <br><br>This field is conditionally required if the <b>internationalOverride.returnsAccepted</b> field is set to <code>true</code>.
     */
     private ?TimeDuration $returnPeriod = null;
     
@@ -47,7 +47,7 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     private ?bool $returnsAccepted = null;
     
     /**
-     * @var ReturnShippingCostPayerEnum|null $returnShippingCostPayer This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
+     * @var ReturnShippingCostPayerEnum|null $returnShippingCostPayer This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>.  <br><br>Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for 'significantly not as described' (SNAD) issues.  <br><br>This field is conditionally required if the <b>internationalOverride.returnsAccepted</b> field is set to <code>true</code>.
     */
     private ?ReturnShippingCostPayerEnum $returnShippingCostPayer = null;
     
@@ -90,7 +90,7 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the returnMethod property value. This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
+     * Gets the returnMethod property value. This field sets/indicates if the seller offers replacement items to the buyer in the case of an international return. The buyer must be willing to accept a replacement item; otherwise, the seller will need to issue a refund for a return.
      * @return ReturnMethodEnum|null
     */
     public function getReturnMethod(): ?ReturnMethodEnum {
@@ -98,7 +98,7 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the returnPeriod property value. A type used to specify a period of time using a specified time-measurement unit. Payment, return, and fulfillment business policies all use this type to specify time windows.<br><br>Whenever a container that uses this type is used in a request, both of these fields are required. Similarly, whenever a container that uses this type is returned in a response, both of these fields are always returned.
+     * Gets the returnPeriod property value. This container indicates the number of calendar days that the buyer has to return an item. The return period begins when the item is marked "delivered" at the buyer's specified ship-to location.  <br><br>You must set the value to one that's accepted by the marketplace and category where the item is listed. Most categories support 30-day and 60-day return periods. For a definitive list of return periods for one or more categories, call <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getreturnpolicies">getReturnPolicies</a> method of the <b>Metadata API</b>. <br><br>The <b>TimeDuration</b> type is used to set/indicate the return period, and you set the <b>unit</b> value to <code>DAY</code> and the <b>value</b> field to either <code>30</code> or <code>60</code> (or other value, as appropriate).  <br><br>Note that this value cannot be modified if the listing has bids or sales, or if the listing ends within 12 hours.  <br><br>This field is conditionally required if the <b>internationalOverride.returnsAccepted</b> field is set to <code>true</code>.
      * @return TimeDuration|null
     */
     public function getReturnPeriod(): ?TimeDuration {
@@ -114,7 +114,7 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the returnShippingCostPayer property value. This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
+     * Gets the returnShippingCostPayer property value. This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>.  <br><br>Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for 'significantly not as described' (SNAD) issues.  <br><br>This field is conditionally required if the <b>internationalOverride.returnsAccepted</b> field is set to <code>true</code>.
      * @return ReturnShippingCostPayerEnum|null
     */
     public function getReturnShippingCostPayer(): ?ReturnShippingCostPayerEnum {
@@ -142,7 +142,7 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the returnMethod property value. This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
+     * Sets the returnMethod property value. This field sets/indicates if the seller offers replacement items to the buyer in the case of an international return. The buyer must be willing to accept a replacement item; otherwise, the seller will need to issue a refund for a return.
      * @param ReturnMethodEnum|null $value Value to set for the returnMethod property.
     */
     public function setReturnMethod(?ReturnMethodEnum $value): void {
@@ -150,7 +150,7 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the returnPeriod property value. A type used to specify a period of time using a specified time-measurement unit. Payment, return, and fulfillment business policies all use this type to specify time windows.<br><br>Whenever a container that uses this type is used in a request, both of these fields are required. Similarly, whenever a container that uses this type is returned in a response, both of these fields are always returned.
+     * Sets the returnPeriod property value. This container indicates the number of calendar days that the buyer has to return an item. The return period begins when the item is marked "delivered" at the buyer's specified ship-to location.  <br><br>You must set the value to one that's accepted by the marketplace and category where the item is listed. Most categories support 30-day and 60-day return periods. For a definitive list of return periods for one or more categories, call <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getreturnpolicies">getReturnPolicies</a> method of the <b>Metadata API</b>. <br><br>The <b>TimeDuration</b> type is used to set/indicate the return period, and you set the <b>unit</b> value to <code>DAY</code> and the <b>value</b> field to either <code>30</code> or <code>60</code> (or other value, as appropriate).  <br><br>Note that this value cannot be modified if the listing has bids or sales, or if the listing ends within 12 hours.  <br><br>This field is conditionally required if the <b>internationalOverride.returnsAccepted</b> field is set to <code>true</code>.
      * @param TimeDuration|null $value Value to set for the returnPeriod property.
     */
     public function setReturnPeriod(?TimeDuration $value): void {
@@ -166,7 +166,7 @@ class InternationalReturnOverrideType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the returnShippingCostPayer property value. This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
+     * Sets the returnShippingCostPayer property value. This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>.  <br><br>Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for 'significantly not as described' (SNAD) issues.  <br><br>This field is conditionally required if the <b>internationalOverride.returnsAccepted</b> field is set to <code>true</code>.
      * @param ReturnShippingCostPayerEnum|null $value Value to set for the returnShippingCostPayer property.
     */
     public function setReturnShippingCostPayer(?ReturnShippingCostPayerEnum $value): void {

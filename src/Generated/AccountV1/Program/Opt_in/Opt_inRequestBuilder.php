@@ -46,7 +46,7 @@ class Opt_inRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method opts the seller in to an eBay seller program. Refer to the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-program-optintoprogram.programtypeenum" target="_blank">ProgramTypeEnum</a> for information about available eBay seller programs.<br><br><span class="tablenote"><b>Note:</b> It can take up to 24-hours for eBay to process your request to opt-in to a Seller Program. Use the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-program-getoptedinprograms" target="_blank">getOptedInPrograms</a> call to check the status of your request after the processing period has passed.</span>
-     * @param Program $body The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request.
+     * @param Program $body Program being opted-in to.
      * @param Opt_inRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<Opt_inPostResponse|null>
      * @throws Exception
@@ -64,7 +64,7 @@ class Opt_inRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method opts the seller in to an eBay seller program. Refer to the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-program-optintoprogram.programtypeenum" target="_blank">ProgramTypeEnum</a> for information about available eBay seller programs.<br><br><span class="tablenote"><b>Note:</b> It can take up to 24-hours for eBay to process your request to opt-in to a Seller Program. Use the <a href="/develop/api/sell/account_api_v1#sell-account_api_v1-program-getoptedinprograms" target="_blank">getOptedInPrograms</a> call to check the status of your request after the processing period has passed.</span>
-     * @param Program $body The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request.
+     * @param Program $body Program being opted-in to.
      * @param Opt_inRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

@@ -37,7 +37,7 @@ class CategoryType implements AdditionalDataHolder, Parsable
     private ?bool $escapedDefault = null;
     
     /**
-     * @var CategoryTypeEnum|null $name An enum type that describes the category type (motor vehicles or non-motor vehicles). | - **MOTORS_VEHICLES**: This values indicates that the business policy applies to motor vehicle listings. - **ALL_EXCLUDING_MOTORS_VEHICLES**: This values indicates that the business policy applies to all listings besides motor vehicle listings.
+     * @var CategoryTypeEnum|null $name The category type to which the policy applies (motor vehicles or non-motor vehicles). <br><br><span class="tablenote"><strong>Note:</strong> The <code>MOTORS_VEHICLES</code> category type is not valid for return policies. eBay flows do not support the return of motor vehicles.</span>
     */
     private ?CategoryTypeEnum $name = null;
     
@@ -86,7 +86,7 @@ class CategoryType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the name property value. An enum type that describes the category type (motor vehicles or non-motor vehicles). | - **MOTORS_VEHICLES**: This values indicates that the business policy applies to motor vehicle listings. - **ALL_EXCLUDING_MOTORS_VEHICLES**: This values indicates that the business policy applies to all listings besides motor vehicle listings.
+     * Gets the name property value. The category type to which the policy applies (motor vehicles or non-motor vehicles). <br><br><span class="tablenote"><strong>Note:</strong> The <code>MOTORS_VEHICLES</code> category type is not valid for return policies. eBay flows do not support the return of motor vehicles.</span>
      * @return CategoryTypeEnum|null
     */
     public function getName(): ?CategoryTypeEnum {
@@ -120,7 +120,7 @@ class CategoryType implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the name property value. An enum type that describes the category type (motor vehicles or non-motor vehicles). | - **MOTORS_VEHICLES**: This values indicates that the business policy applies to motor vehicle listings. - **ALL_EXCLUDING_MOTORS_VEHICLES**: This values indicates that the business policy applies to all listings besides motor vehicle listings.
+     * Sets the name property value. The category type to which the policy applies (motor vehicles or non-motor vehicles). <br><br><span class="tablenote"><strong>Note:</strong> The <code>MOTORS_VEHICLES</code> category type is not valid for return policies. eBay flows do not support the return of motor vehicles.</span>
      * @param CategoryTypeEnum|null $value Value to set for the name property.
     */
     public function setName(?CategoryTypeEnum $value): void {

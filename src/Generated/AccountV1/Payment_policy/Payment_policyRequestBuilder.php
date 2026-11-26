@@ -83,7 +83,7 @@ class Payment_policyRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method creates a new payment policy where the policy encapsulates seller's terms for order payments. <br><br>A successful request returns the <b>getPaymentPolicy</b> URI to the new policy in the <b>Location</b> response header and the ID for the new policy is returned in the response payload.  <p class="tablenote"><b>Tip:</b> For details on creating and using the business policies supported by the Account API, see <a href="/api-docs/sell/static/seller-accounts/business-policies.html">eBay business policies</a>.</p>
-     * @param PaymentPolicyRequest $body This root container defines a seller's payment business policy for a specific marketplace and category group. This type is used when creating or updating a payment business policy.
+     * @param PaymentPolicyRequest $body Payment policy request
      * @param Payment_policyRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<SetPaymentPolicyResponse|null>
      * @throws Exception
@@ -120,7 +120,7 @@ class Payment_policyRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method creates a new payment policy where the policy encapsulates seller's terms for order payments. <br><br>A successful request returns the <b>getPaymentPolicy</b> URI to the new policy in the <b>Location</b> response header and the ID for the new policy is returned in the response payload.  <p class="tablenote"><b>Tip:</b> For details on creating and using the business policies supported by the Account API, see <a href="/api-docs/sell/static/seller-accounts/business-policies.html">eBay business policies</a>.</p>
-     * @param PaymentPolicyRequest $body This root container defines a seller's payment business policy for a specific marketplace and category group. This type is used when creating or updating a payment business policy.
+     * @param PaymentPolicyRequest $body Payment policy request
      * @param Payment_policyRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */
