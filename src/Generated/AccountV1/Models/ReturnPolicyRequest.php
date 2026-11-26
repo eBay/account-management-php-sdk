@@ -47,12 +47,12 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     private ?bool $extendedHolidayReturnsOffered = null;
     
     /**
-     * @var InternationalReturnOverrideType|null $internationalOverride This type defines the fields for a seller's international return policy. Sellers have the ability to set separate domestic and international return policies, but if an international return policy is not set, the same return policy settings specified for the domestic return policy are also used for returns for international buyers. 
+     * @var InternationalReturnOverrideType|null $internationalOverride This container is used by the seller to specify a separate  international return policy. If a separate international return policy is not defined by a seller, all of the domestic return policy settings will also apply to international orders.
     */
     private ?InternationalReturnOverrideType $internationalOverride = null;
     
     /**
-     * @var MarketplaceIdEnum|null $marketplaceId This enumerated type contains a list of the standard codes that represent each of the eBay marketplaces. | - **EBAY_AT**: eBay Austria (ebay.at) - **EBAY_AU**: eBay Australia (ebay.com/au) - **EBAY_BE**: eBay Belgium (ebay.com/sch/Belgium) - **EBAY_CA**: eBay Canada (English) (ebay.ca) - **EBAY_CH**: eBay Switzerland (ebay.ch) - **EBAY_CN**: eBay China (ebay.com/sch/China) - **EBAY_CZ**: eBay Czech Republic (ebay.com/sch/Czech-Republic) - **EBAY_DE**: eBay Germany (ebay.de) - **EBAY_DK**: eBay Denmark (ebay.com/sch/Denmark) - **EBAY_ES**: eBay Spain (ebay.es) - **EBAY_FI**: eBay Finland (ebay.com/sch/Finland) - **EBAY_FR**: eBay France (ebay.fr) - **EBAY_GB**: eBay UK (ebay.co.uk) - **EBAY_GR**: eBay Greece (ebay.com/sch/Greece) - **EBAY_HK**: eBay Hong Kong (ebay.com.hk) - **EBAY_HU**: eBay Hungary (ebay.com/sch/Hungary) - **EBAY_ID**: eBay Indonesia (id.ebay.com) - **EBAY_IE**: eBay Ireland (ebay.ie) - **EBAY_IL**: eBay Israel (ebay.com/sch/Israel) - **EBAY_IN**: eBay India (ebay.in)<br><span class="tablenote"><strong>Note:</strong> eBay India is no longer a functioning eBay marketplace.</span> - **EBAY_IT**: eBay Italy (ebay.it) - **EBAY_JP**: eBay Japan (ebay.co.jp) - **EBAY_MY**: eBay Malaysia (ebay.com/my) - **EBAY_NL**: eBay Netherlands (ebay.nl) - **EBAY_NO**: eBay Norway (ebay.com/sch/Norway) - **EBAY_NZ**: eBay New Zealand (ebay.com/sch/New-Zealand) - **EBAY_PE**: eBay Peru (ebay.com/sch/Peru) - **EBAY_PH**: eBay Philippines (ebay.ph) - **EBAY_PL**: eBay Poland (ebay.pl) - **EBAY_PR**: eBay Puerto Rico (ebay.com/sch/Puerto-Rico) - **EBAY_PT**: eBay Portugal (ebay.com/sch/Portugal) - **EBAY_RU**: eBay Russia (ebay.com/sch/Russia) - **EBAY_SE**: eBay Sweden (ebay.com/sch/Sweden) - **EBAY_SG**: eBay Singapore (ebay.com/sg) - **EBAY_TH**: eBay Thailand (export.ebay.co.th) - **EBAY_TW**: eBay Taiwan (ebay.com/tw) - **EBAY_US**: eBay US (ebay.com) - **EBAY_VN**: eBay Vietnam (ebay.vn) - **EBAY_ZA**: eBay South Africa (ebay.com/sch/South-Africa) - **EBAY_HALF_US**: This enumeration value is no longer applicable as the Half.com site no longer exists. - **EBAY_MOTORS_US**: eBay Motors US (ebay.com/motors)
+     * @var MarketplaceIdEnum|null $marketplaceId The ID of the eBay marketplace to which this return business policy applies. 
     */
     private ?MarketplaceIdEnum $marketplaceId = null;
     
@@ -62,7 +62,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var RefundMethodEnum|null $refundMethod This enumerated type defines the supported refund types for buyer returns. | - **MERCHANDISE_CREDIT**: <strong>Do not use/No longer supported.</strong> - **MONEY_BACK**: This enumeration value indicates that the buyer will get their money back (refund) for a returned item.
+     * @var RefundMethodEnum|null $refundMethod This field sets the refund method to use for returned items. Its value defaults to <code>MONEY_BACK</code> if omitted, so this field is only needed for <b>Click and Collect</b> items where the seller is willing to offer merchandise credit as an additional refund method to buyers. Getting their money back for returned items is always an option for buyers, regardless of what the seller sets in this field.<p class="tablenote"><span  style="color: #dd1e31;"><b>Important!</b></span> If this field is not included in a return business policy, it will default to <code>MONEY_BACK</code>.</p>
     */
     private ?RefundMethodEnum $refundMethod = null;
     
@@ -77,12 +77,12 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     private ?string $returnInstructions = null;
     
     /**
-     * @var ReturnMethodEnum|null $returnMethod This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
+     * @var ReturnMethodEnum|null $returnMethod This field can be used if the seller is willing and able to offer a replacement item as an alternative to 'Money Back'.
     */
     private ?ReturnMethodEnum $returnMethod = null;
     
     /**
-     * @var TimeDuration|null $returnPeriod A type used to specify a period of time using a specified time-measurement unit. Payment, return, and fulfillment business policies all use this type to specify time windows.<br><br>Whenever a container that uses this type is used in a request, both of these fields are required. Similarly, whenever a container that uses this type is returned in a response, both of these fields are always returned.
+     * @var TimeDuration|null $returnPeriod This container is used to specify the number of days that the buyer has to return an item. The return period begins when the item is marked "delivered" at the buyer's specified ship-to location.  <br><br>You must set the value to one that's accepted by the marketplace and category where the item is listed. Most categories support 30-day and 60-day return periods.  <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Eligible Parts & Accessories (P&A) listings require sellers to offer buyers free returns with a minimum return period of 30 days. See <a href="/api-docs/user-guides/static/trading-user-guide/ebay-motors-parts-accessories-easy-returns.html"  target="_blank">Support for easy returns in Parts and Accessories</a> for details.</span></p> <br>For a definitive list of return periods for one or more categories, call <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getreturnpolicies">getReturnPolicies</a> method of the <b>Metadata API</b>.<br><br>The return period is set using the <b>TimeDuration</b> type, where you set <b>unit</b> to <code>DAY</code> and <b>value</b> to either <code>30</code> or <code>60</code> (or other value, as appropriate).  <br><br>Note that this value cannot be modified if the listing has bids or sales, or if the listing ends within 12 hours.  <br><br><i>Required if </i> <b>returnsAccepted</b> is set to <code>true</code>.
     */
     private ?TimeDuration $returnPeriod = null;
     
@@ -92,7 +92,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     private ?bool $returnsAccepted = null;
     
     /**
-     * @var ReturnShippingCostPayerEnum|null $returnShippingCostPayer This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
+     * @var ReturnShippingCostPayerEnum|null $returnShippingCostPayer This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Eligible Parts & Accessories (P&A) listings require sellers to offer buyers free returns with a minimum return period of 30 days. See <a href="/api-docs/user-guides/static/trading-user-guide/ebay-motors-parts-accessories-easy-returns.html"  target="_blank">Support for easy returns in Parts and Accessories</a> for details.</span></p> <br>Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for SNAD-related issues.  <br><br>This field is conditionally required if <b>returnsAccepted</b> is set to <code>true</code>.
     */
     private ?ReturnShippingCostPayerEnum $returnShippingCostPayer = null;
     
@@ -168,7 +168,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the internationalOverride property value. This type defines the fields for a seller's international return policy. Sellers have the ability to set separate domestic and international return policies, but if an international return policy is not set, the same return policy settings specified for the domestic return policy are also used for returns for international buyers. 
+     * Gets the internationalOverride property value. This container is used by the seller to specify a separate  international return policy. If a separate international return policy is not defined by a seller, all of the domestic return policy settings will also apply to international orders.
      * @return InternationalReturnOverrideType|null
     */
     public function getInternationalOverride(): ?InternationalReturnOverrideType {
@@ -176,7 +176,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the marketplaceId property value. This enumerated type contains a list of the standard codes that represent each of the eBay marketplaces. | - **EBAY_AT**: eBay Austria (ebay.at) - **EBAY_AU**: eBay Australia (ebay.com/au) - **EBAY_BE**: eBay Belgium (ebay.com/sch/Belgium) - **EBAY_CA**: eBay Canada (English) (ebay.ca) - **EBAY_CH**: eBay Switzerland (ebay.ch) - **EBAY_CN**: eBay China (ebay.com/sch/China) - **EBAY_CZ**: eBay Czech Republic (ebay.com/sch/Czech-Republic) - **EBAY_DE**: eBay Germany (ebay.de) - **EBAY_DK**: eBay Denmark (ebay.com/sch/Denmark) - **EBAY_ES**: eBay Spain (ebay.es) - **EBAY_FI**: eBay Finland (ebay.com/sch/Finland) - **EBAY_FR**: eBay France (ebay.fr) - **EBAY_GB**: eBay UK (ebay.co.uk) - **EBAY_GR**: eBay Greece (ebay.com/sch/Greece) - **EBAY_HK**: eBay Hong Kong (ebay.com.hk) - **EBAY_HU**: eBay Hungary (ebay.com/sch/Hungary) - **EBAY_ID**: eBay Indonesia (id.ebay.com) - **EBAY_IE**: eBay Ireland (ebay.ie) - **EBAY_IL**: eBay Israel (ebay.com/sch/Israel) - **EBAY_IN**: eBay India (ebay.in)<br><span class="tablenote"><strong>Note:</strong> eBay India is no longer a functioning eBay marketplace.</span> - **EBAY_IT**: eBay Italy (ebay.it) - **EBAY_JP**: eBay Japan (ebay.co.jp) - **EBAY_MY**: eBay Malaysia (ebay.com/my) - **EBAY_NL**: eBay Netherlands (ebay.nl) - **EBAY_NO**: eBay Norway (ebay.com/sch/Norway) - **EBAY_NZ**: eBay New Zealand (ebay.com/sch/New-Zealand) - **EBAY_PE**: eBay Peru (ebay.com/sch/Peru) - **EBAY_PH**: eBay Philippines (ebay.ph) - **EBAY_PL**: eBay Poland (ebay.pl) - **EBAY_PR**: eBay Puerto Rico (ebay.com/sch/Puerto-Rico) - **EBAY_PT**: eBay Portugal (ebay.com/sch/Portugal) - **EBAY_RU**: eBay Russia (ebay.com/sch/Russia) - **EBAY_SE**: eBay Sweden (ebay.com/sch/Sweden) - **EBAY_SG**: eBay Singapore (ebay.com/sg) - **EBAY_TH**: eBay Thailand (export.ebay.co.th) - **EBAY_TW**: eBay Taiwan (ebay.com/tw) - **EBAY_US**: eBay US (ebay.com) - **EBAY_VN**: eBay Vietnam (ebay.vn) - **EBAY_ZA**: eBay South Africa (ebay.com/sch/South-Africa) - **EBAY_HALF_US**: This enumeration value is no longer applicable as the Half.com site no longer exists. - **EBAY_MOTORS_US**: eBay Motors US (ebay.com/motors)
+     * Gets the marketplaceId property value. The ID of the eBay marketplace to which this return business policy applies. 
      * @return MarketplaceIdEnum|null
     */
     public function getMarketplaceId(): ?MarketplaceIdEnum {
@@ -192,7 +192,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the refundMethod property value. This enumerated type defines the supported refund types for buyer returns. | - **MERCHANDISE_CREDIT**: <strong>Do not use/No longer supported.</strong> - **MONEY_BACK**: This enumeration value indicates that the buyer will get their money back (refund) for a returned item.
+     * Gets the refundMethod property value. This field sets the refund method to use for returned items. Its value defaults to <code>MONEY_BACK</code> if omitted, so this field is only needed for <b>Click and Collect</b> items where the seller is willing to offer merchandise credit as an additional refund method to buyers. Getting their money back for returned items is always an option for buyers, regardless of what the seller sets in this field.<p class="tablenote"><span  style="color: #dd1e31;"><b>Important!</b></span> If this field is not included in a return business policy, it will default to <code>MONEY_BACK</code>.</p>
      * @return RefundMethodEnum|null
     */
     public function getRefundMethod(): ?RefundMethodEnum {
@@ -216,7 +216,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the returnMethod property value. This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
+     * Gets the returnMethod property value. This field can be used if the seller is willing and able to offer a replacement item as an alternative to 'Money Back'.
      * @return ReturnMethodEnum|null
     */
     public function getReturnMethod(): ?ReturnMethodEnum {
@@ -224,7 +224,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the returnPeriod property value. A type used to specify a period of time using a specified time-measurement unit. Payment, return, and fulfillment business policies all use this type to specify time windows.<br><br>Whenever a container that uses this type is used in a request, both of these fields are required. Similarly, whenever a container that uses this type is returned in a response, both of these fields are always returned.
+     * Gets the returnPeriod property value. This container is used to specify the number of days that the buyer has to return an item. The return period begins when the item is marked "delivered" at the buyer's specified ship-to location.  <br><br>You must set the value to one that's accepted by the marketplace and category where the item is listed. Most categories support 30-day and 60-day return periods.  <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Eligible Parts & Accessories (P&A) listings require sellers to offer buyers free returns with a minimum return period of 30 days. See <a href="/api-docs/user-guides/static/trading-user-guide/ebay-motors-parts-accessories-easy-returns.html"  target="_blank">Support for easy returns in Parts and Accessories</a> for details.</span></p> <br>For a definitive list of return periods for one or more categories, call <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getreturnpolicies">getReturnPolicies</a> method of the <b>Metadata API</b>.<br><br>The return period is set using the <b>TimeDuration</b> type, where you set <b>unit</b> to <code>DAY</code> and <b>value</b> to either <code>30</code> or <code>60</code> (or other value, as appropriate).  <br><br>Note that this value cannot be modified if the listing has bids or sales, or if the listing ends within 12 hours.  <br><br><i>Required if </i> <b>returnsAccepted</b> is set to <code>true</code>.
      * @return TimeDuration|null
     */
     public function getReturnPeriod(): ?TimeDuration {
@@ -240,7 +240,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the returnShippingCostPayer property value. This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
+     * Gets the returnShippingCostPayer property value. This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Eligible Parts & Accessories (P&A) listings require sellers to offer buyers free returns with a minimum return period of 30 days. See <a href="/api-docs/user-guides/static/trading-user-guide/ebay-motors-parts-accessories-easy-returns.html"  target="_blank">Support for easy returns in Parts and Accessories</a> for details.</span></p> <br>Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for SNAD-related issues.  <br><br>This field is conditionally required if <b>returnsAccepted</b> is set to <code>true</code>.
      * @return ReturnShippingCostPayerEnum|null
     */
     public function getReturnShippingCostPayer(): ?ReturnShippingCostPayerEnum {
@@ -301,7 +301,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the internationalOverride property value. This type defines the fields for a seller's international return policy. Sellers have the ability to set separate domestic and international return policies, but if an international return policy is not set, the same return policy settings specified for the domestic return policy are also used for returns for international buyers. 
+     * Sets the internationalOverride property value. This container is used by the seller to specify a separate  international return policy. If a separate international return policy is not defined by a seller, all of the domestic return policy settings will also apply to international orders.
      * @param InternationalReturnOverrideType|null $value Value to set for the internationalOverride property.
     */
     public function setInternationalOverride(?InternationalReturnOverrideType $value): void {
@@ -309,7 +309,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. This enumerated type contains a list of the standard codes that represent each of the eBay marketplaces. | - **EBAY_AT**: eBay Austria (ebay.at) - **EBAY_AU**: eBay Australia (ebay.com/au) - **EBAY_BE**: eBay Belgium (ebay.com/sch/Belgium) - **EBAY_CA**: eBay Canada (English) (ebay.ca) - **EBAY_CH**: eBay Switzerland (ebay.ch) - **EBAY_CN**: eBay China (ebay.com/sch/China) - **EBAY_CZ**: eBay Czech Republic (ebay.com/sch/Czech-Republic) - **EBAY_DE**: eBay Germany (ebay.de) - **EBAY_DK**: eBay Denmark (ebay.com/sch/Denmark) - **EBAY_ES**: eBay Spain (ebay.es) - **EBAY_FI**: eBay Finland (ebay.com/sch/Finland) - **EBAY_FR**: eBay France (ebay.fr) - **EBAY_GB**: eBay UK (ebay.co.uk) - **EBAY_GR**: eBay Greece (ebay.com/sch/Greece) - **EBAY_HK**: eBay Hong Kong (ebay.com.hk) - **EBAY_HU**: eBay Hungary (ebay.com/sch/Hungary) - **EBAY_ID**: eBay Indonesia (id.ebay.com) - **EBAY_IE**: eBay Ireland (ebay.ie) - **EBAY_IL**: eBay Israel (ebay.com/sch/Israel) - **EBAY_IN**: eBay India (ebay.in)<br><span class="tablenote"><strong>Note:</strong> eBay India is no longer a functioning eBay marketplace.</span> - **EBAY_IT**: eBay Italy (ebay.it) - **EBAY_JP**: eBay Japan (ebay.co.jp) - **EBAY_MY**: eBay Malaysia (ebay.com/my) - **EBAY_NL**: eBay Netherlands (ebay.nl) - **EBAY_NO**: eBay Norway (ebay.com/sch/Norway) - **EBAY_NZ**: eBay New Zealand (ebay.com/sch/New-Zealand) - **EBAY_PE**: eBay Peru (ebay.com/sch/Peru) - **EBAY_PH**: eBay Philippines (ebay.ph) - **EBAY_PL**: eBay Poland (ebay.pl) - **EBAY_PR**: eBay Puerto Rico (ebay.com/sch/Puerto-Rico) - **EBAY_PT**: eBay Portugal (ebay.com/sch/Portugal) - **EBAY_RU**: eBay Russia (ebay.com/sch/Russia) - **EBAY_SE**: eBay Sweden (ebay.com/sch/Sweden) - **EBAY_SG**: eBay Singapore (ebay.com/sg) - **EBAY_TH**: eBay Thailand (export.ebay.co.th) - **EBAY_TW**: eBay Taiwan (ebay.com/tw) - **EBAY_US**: eBay US (ebay.com) - **EBAY_VN**: eBay Vietnam (ebay.vn) - **EBAY_ZA**: eBay South Africa (ebay.com/sch/South-Africa) - **EBAY_HALF_US**: This enumeration value is no longer applicable as the Half.com site no longer exists. - **EBAY_MOTORS_US**: eBay Motors US (ebay.com/motors)
+     * Sets the marketplaceId property value. The ID of the eBay marketplace to which this return business policy applies. 
      * @param MarketplaceIdEnum|null $value Value to set for the marketplaceId property.
     */
     public function setMarketplaceId(?MarketplaceIdEnum $value): void {
@@ -325,7 +325,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the refundMethod property value. This enumerated type defines the supported refund types for buyer returns. | - **MERCHANDISE_CREDIT**: <strong>Do not use/No longer supported.</strong> - **MONEY_BACK**: This enumeration value indicates that the buyer will get their money back (refund) for a returned item.
+     * Sets the refundMethod property value. This field sets the refund method to use for returned items. Its value defaults to <code>MONEY_BACK</code> if omitted, so this field is only needed for <b>Click and Collect</b> items where the seller is willing to offer merchandise credit as an additional refund method to buyers. Getting their money back for returned items is always an option for buyers, regardless of what the seller sets in this field.<p class="tablenote"><span  style="color: #dd1e31;"><b>Important!</b></span> If this field is not included in a return business policy, it will default to <code>MONEY_BACK</code>.</p>
      * @param RefundMethodEnum|null $value Value to set for the refundMethod property.
     */
     public function setRefundMethod(?RefundMethodEnum $value): void {
@@ -349,7 +349,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the returnMethod property value. This enumerated type lists the return options (other than 'money back') that a seller may offer to the buyer for a return request. | - **EXCHANGE**: <strong>Do not use/No longer supported.</strong> - **REPLACEMENT**: This value indicates that the seller offers a replacement (identical) item as an alternative to 'money back' when the buyer is returning an item.
+     * Sets the returnMethod property value. This field can be used if the seller is willing and able to offer a replacement item as an alternative to 'Money Back'.
      * @param ReturnMethodEnum|null $value Value to set for the returnMethod property.
     */
     public function setReturnMethod(?ReturnMethodEnum $value): void {
@@ -357,7 +357,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the returnPeriod property value. A type used to specify a period of time using a specified time-measurement unit. Payment, return, and fulfillment business policies all use this type to specify time windows.<br><br>Whenever a container that uses this type is used in a request, both of these fields are required. Similarly, whenever a container that uses this type is returned in a response, both of these fields are always returned.
+     * Sets the returnPeriod property value. This container is used to specify the number of days that the buyer has to return an item. The return period begins when the item is marked "delivered" at the buyer's specified ship-to location.  <br><br>You must set the value to one that's accepted by the marketplace and category where the item is listed. Most categories support 30-day and 60-day return periods.  <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Eligible Parts & Accessories (P&A) listings require sellers to offer buyers free returns with a minimum return period of 30 days. See <a href="/api-docs/user-guides/static/trading-user-guide/ebay-motors-parts-accessories-easy-returns.html"  target="_blank">Support for easy returns in Parts and Accessories</a> for details.</span></p> <br>For a definitive list of return periods for one or more categories, call <a href="/develop/api/sell/metadata_api#sell-metadata_api-marketplace-getreturnpolicies">getReturnPolicies</a> method of the <b>Metadata API</b>.<br><br>The return period is set using the <b>TimeDuration</b> type, where you set <b>unit</b> to <code>DAY</code> and <b>value</b> to either <code>30</code> or <code>60</code> (or other value, as appropriate).  <br><br>Note that this value cannot be modified if the listing has bids or sales, or if the listing ends within 12 hours.  <br><br><i>Required if </i> <b>returnsAccepted</b> is set to <code>true</code>.
      * @param TimeDuration|null $value Value to set for the returnPeriod property.
     */
     public function setReturnPeriod(?TimeDuration $value): void {
@@ -373,7 +373,7 @@ class ReturnPolicyRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the returnShippingCostPayer property value. This enumerated type defines who is responsible for the return shipping cost. Note that the seller is always responsible for the return shipping cost of SNAD-related returns. | - **BUYER**: Return shipping cost paid by BUYER. - **SELLER**: Return shipping cost paid by SELLER.
+     * Sets the returnShippingCostPayer property value. This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either <code>BUYER</code> or <code>SELLER</code>. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>Eligible Parts & Accessories (P&A) listings require sellers to offer buyers free returns with a minimum return period of 30 days. See <a href="/api-docs/user-guides/static/trading-user-guide/ebay-motors-parts-accessories-easy-returns.html"  target="_blank">Support for easy returns in Parts and Accessories</a> for details.</span></p> <br>Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for SNAD-related issues.  <br><br>This field is conditionally required if <b>returnsAccepted</b> is set to <code>true</code>.
      * @param ReturnShippingCostPayerEnum|null $value Value to set for the returnShippingCostPayer property.
     */
     public function setReturnShippingCostPayer(?ReturnShippingCostPayerEnum $value): void {

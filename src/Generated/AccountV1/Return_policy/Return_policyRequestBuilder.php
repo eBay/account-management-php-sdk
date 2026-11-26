@@ -83,7 +83,7 @@ class Return_policyRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method creates a new return policy where the policy encapsulates seller's terms for returning items.  <br><br>Each policy targets a specific marketplace, and you can create multiple policies for each marketplace. Return policies are not applicable to motor-vehicle listings.<br><br>A successful request returns the <b>getReturnPolicy</b> URI to the new policy in the <b>Location</b> response header and the ID for the new policy is returned in the response payload.  <p class="tablenote"><b>Tip:</b> For details on creating and using the business policies supported by the Account API, see <a href="/api-docs/sell/static/seller-accounts/business-policies.html">eBay business policies</a>.</p>
-     * @param ReturnPolicyRequest $body This root container defines a seller's return business policy for a specific marketplace and category group. This type is used when creating or updating a return business policy.
+     * @param ReturnPolicyRequest $body Return policy request
      * @param Return_policyRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<SetReturnPolicyResponse|null>
      * @throws Exception
@@ -120,7 +120,7 @@ class Return_policyRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method creates a new return policy where the policy encapsulates seller's terms for returning items.  <br><br>Each policy targets a specific marketplace, and you can create multiple policies for each marketplace. Return policies are not applicable to motor-vehicle listings.<br><br>A successful request returns the <b>getReturnPolicy</b> URI to the new policy in the <b>Location</b> response header and the ID for the new policy is returned in the response payload.  <p class="tablenote"><b>Tip:</b> For details on creating and using the business policies supported by the Account API, see <a href="/api-docs/sell/static/seller-accounts/business-policies.html">eBay business policies</a>.</p>
-     * @param ReturnPolicyRequest $body This root container defines a seller's return business policy for a specific marketplace and category group. This type is used when creating or updating a return business policy.
+     * @param ReturnPolicyRequest $body Return policy request
      * @param Return_policyRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

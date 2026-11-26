@@ -37,7 +37,7 @@ class SellingPrivileges implements AdditionalDataHolder, Parsable
     private ?bool $sellerRegistrationCompleted = null;
     
     /**
-     * @var SellingLimit|null $sellingLimit Type used by the <b>sellingLimit</b> container, a container that lists the monthly cap for the quantity of items sold and total sales amount allowed for the seller's account.
+     * @var SellingLimit|null $sellingLimit This container lists the monthly cap for the quantity of items sold and total sales amount allowed for the seller's account. This container may not be returned if a seller does not have a monthly cap for total quantity sold and total sales amount. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>The selling limit value returned in <b>getPrivileges</b> may vary slightly from the value displayed in Seller Hub. The value in Seller Hub is an abbreviated figure, where rounding is applied.</span></p>
     */
     private ?SellingLimit $sellingLimit = null;
     
@@ -86,7 +86,7 @@ class SellingPrivileges implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sellingLimit property value. Type used by the <b>sellingLimit</b> container, a container that lists the monthly cap for the quantity of items sold and total sales amount allowed for the seller's account.
+     * Gets the sellingLimit property value. This container lists the monthly cap for the quantity of items sold and total sales amount allowed for the seller's account. This container may not be returned if a seller does not have a monthly cap for total quantity sold and total sales amount. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>The selling limit value returned in <b>getPrivileges</b> may vary slightly from the value displayed in Seller Hub. The value in Seller Hub is an abbreviated figure, where rounding is applied.</span></p>
      * @return SellingLimit|null
     */
     public function getSellingLimit(): ?SellingLimit {
@@ -120,7 +120,7 @@ class SellingPrivileges implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sellingLimit property value. Type used by the <b>sellingLimit</b> container, a container that lists the monthly cap for the quantity of items sold and total sales amount allowed for the seller's account.
+     * Sets the sellingLimit property value. This container lists the monthly cap for the quantity of items sold and total sales amount allowed for the seller's account. This container may not be returned if a seller does not have a monthly cap for total quantity sold and total sales amount. <p><span class="tablenote"><span style="color:#004680"><strong>Note: </strong>The selling limit value returned in <b>getPrivileges</b> may vary slightly from the value displayed in Seller Hub. The value in Seller Hub is an abbreviated figure, where rounding is applied.</span></p>
      * @param SellingLimit|null $value Value to set for the sellingLimit property.
     */
     public function setSellingLimit(?SellingLimit $value): void {

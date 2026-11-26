@@ -54,6 +54,9 @@ class Advertising_eligibilityRequestBuilder extends BaseRequestBuilder
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
         $errorMappings = [
                 '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '403' => [Error::class, 'createFromDiscriminatorValue'],
+                '429' => [Error::class, 'createFromDiscriminatorValue'],
                 '500' => [Error::class, 'createFromDiscriminatorValue'],
         ];
         return $this->requestAdapter->sendAsync($requestInfo, [SellerEligibilityMultiProgramResponse::class, 'createFromDiscriminatorValue'], $errorMappings);

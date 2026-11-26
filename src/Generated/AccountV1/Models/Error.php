@@ -34,9 +34,9 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $category Identifies the type of error.
+     * @var ErrorCategoryEnum|null $category Identifies the category of error.
     */
-    private ?string $category = null;
+    private ?ErrorCategoryEnum $category = null;
     
     /**
      * @var string|null $domain Name for the primary system where the error occurred. This is relevant for application errors.
@@ -111,10 +111,10 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the category property value. Identifies the type of error.
-     * @return string|null
+     * Gets the category property value. Identifies the category of error.
+     * @return ErrorCategoryEnum|null
     */
-    public function getCategory(): ?string {
+    public function getCategory(): ?ErrorCategoryEnum {
         return $this->category;
     }
 
@@ -141,7 +141,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'category' => fn(ParseNode $n) => $o->setCategory($n->getStringValue()),
+            'category' => fn(ParseNode $n) => $o->setCategory($n->getEnumValue(ErrorCategoryEnum::class)),
             'domain' => fn(ParseNode $n) => $o->setDomain($n->getStringValue()),
             'errorId' => fn(ParseNode $n) => $o->setErrorId($n->getIntegerValue()),
             'message' => fn(ParseNode $n) => $o->setMessage($n->getStringValue()),
@@ -220,7 +220,7 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('category', $this->getCategory());
+        $writer->writeEnumValue('category', $this->getCategory());
         $writer->writeStringValue('domain', $this->getDomain());
         $writer->writeIntegerValue('errorId', $this->getErrorId());
         $writer->writeStringValue('message', $this->escapedGetMessage());
@@ -241,10 +241,10 @@ class Error extends ApiException implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the category property value. Identifies the type of error.
-     * @param string|null $value Value to set for the category property.
+     * Sets the category property value. Identifies the category of error.
+     * @param ErrorCategoryEnum|null $value Value to set for the category property.
     */
-    public function setCategory(?string $value): void {
+    public function setCategory(?ErrorCategoryEnum $value): void {
         $this->category = $value;
     }
 

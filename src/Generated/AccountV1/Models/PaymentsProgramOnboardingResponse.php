@@ -32,7 +32,7 @@ class PaymentsProgramOnboardingResponse implements AdditionalDataHolder, Parsabl
     private ?array $additionalData = null;
     
     /**
-     * @var PaymentsProgramOnboardingStatus|null $onboardingStatus This enumeration value indicates the eligibility of payment onboarding for the registered site. | - **ELIGIBLE_TO_ONBOARD**: This enumeration value indicates that the seller can start or continue the onboarding process. When starting the onboarding process, the first step in the registration process is returned in the steps array with a <strong>status</strong> of <code>NOT_STARTED<code>. A link in the webUrl field opens a page for the seller to complete the first step. When the seller has completed all steps, the payments capability becomes available to the seller. - **NOT_ELIGIBLE**: This enumeration value indicates that the seller's marketplace supports eBay managed payments, but the seller is not yet eligible. Eligibility is determined by eBay daily. Check onboardingStatus regularly. - **PREBOARDED**: This enumeration value indicates that the seller has completed all the necessary onboarding steps for eBay managed payments. The seller must wait for eBay to activate eBay managed payments for their account. - **ONBOARDED**: This enumeration value indicates that the seller is fully onboarded and that eBay managed payments has been activated on the seller's account.
+     * @var PaymentsProgramOnboardingStatus|null $onboardingStatus This enumeration value indicates the eligibility of payment onboarding for the registered site.
     */
     private ?PaymentsProgramOnboardingStatus $onboardingStatus = null;
     
@@ -78,7 +78,7 @@ class PaymentsProgramOnboardingResponse implements AdditionalDataHolder, Parsabl
     }
 
     /**
-     * Gets the onboardingStatus property value. This enumeration value indicates the eligibility of payment onboarding for the registered site. | - **ELIGIBLE_TO_ONBOARD**: This enumeration value indicates that the seller can start or continue the onboarding process. When starting the onboarding process, the first step in the registration process is returned in the steps array with a <strong>status</strong> of <code>NOT_STARTED<code>. A link in the webUrl field opens a page for the seller to complete the first step. When the seller has completed all steps, the payments capability becomes available to the seller. - **NOT_ELIGIBLE**: This enumeration value indicates that the seller's marketplace supports eBay managed payments, but the seller is not yet eligible. Eligibility is determined by eBay daily. Check onboardingStatus regularly. - **PREBOARDED**: This enumeration value indicates that the seller has completed all the necessary onboarding steps for eBay managed payments. The seller must wait for eBay to activate eBay managed payments for their account. - **ONBOARDED**: This enumeration value indicates that the seller is fully onboarded and that eBay managed payments has been activated on the seller's account.
+     * Gets the onboardingStatus property value. This enumeration value indicates the eligibility of payment onboarding for the registered site.
      * @return PaymentsProgramOnboardingStatus|null
     */
     public function getOnboardingStatus(): ?PaymentsProgramOnboardingStatus {
@@ -112,7 +112,7 @@ class PaymentsProgramOnboardingResponse implements AdditionalDataHolder, Parsabl
     }
 
     /**
-     * Sets the onboardingStatus property value. This enumeration value indicates the eligibility of payment onboarding for the registered site. | - **ELIGIBLE_TO_ONBOARD**: This enumeration value indicates that the seller can start or continue the onboarding process. When starting the onboarding process, the first step in the registration process is returned in the steps array with a <strong>status</strong> of <code>NOT_STARTED<code>. A link in the webUrl field opens a page for the seller to complete the first step. When the seller has completed all steps, the payments capability becomes available to the seller. - **NOT_ELIGIBLE**: This enumeration value indicates that the seller's marketplace supports eBay managed payments, but the seller is not yet eligible. Eligibility is determined by eBay daily. Check onboardingStatus regularly. - **PREBOARDED**: This enumeration value indicates that the seller has completed all the necessary onboarding steps for eBay managed payments. The seller must wait for eBay to activate eBay managed payments for their account. - **ONBOARDED**: This enumeration value indicates that the seller is fully onboarded and that eBay managed payments has been activated on the seller's account.
+     * Sets the onboardingStatus property value. This enumeration value indicates the eligibility of payment onboarding for the registered site.
      * @param PaymentsProgramOnboardingStatus|null $value Value to set for the onboardingStatus property.
     */
     public function setOnboardingStatus(?PaymentsProgramOnboardingStatus $value): void {

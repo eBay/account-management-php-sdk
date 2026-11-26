@@ -37,7 +37,7 @@ class RecipientAccountReference implements AdditionalDataHolder, Parsable
     private ?string $referenceId = null;
     
     /**
-     * @var RecipientAccountReferenceTypeEnum|null $referenceType <span class="tablenote"><b>Note</b>: This type is no longer applicable. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span> | - **PAYPAL_EMAIL**: This is the PayPal email address of the seller.
+     * @var RecipientAccountReferenceTypeEnum|null $referenceType <span class="tablenote"><b>Note</b>: DO NOT USE THIS FIELD. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span>
     */
     private ?RecipientAccountReferenceTypeEnum $referenceType = null;
     
@@ -86,7 +86,7 @@ class RecipientAccountReference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the referenceType property value. <span class="tablenote"><b>Note</b>: This type is no longer applicable. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span> | - **PAYPAL_EMAIL**: This is the PayPal email address of the seller.
+     * Gets the referenceType property value. <span class="tablenote"><b>Note</b>: DO NOT USE THIS FIELD. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span>
      * @return RecipientAccountReferenceTypeEnum|null
     */
     public function getReferenceType(): ?RecipientAccountReferenceTypeEnum {
@@ -120,7 +120,7 @@ class RecipientAccountReference implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the referenceType property value. <span class="tablenote"><b>Note</b>: This type is no longer applicable. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span> | - **PAYPAL_EMAIL**: This is the PayPal email address of the seller.
+     * Sets the referenceType property value. <span class="tablenote"><b>Note</b>: DO NOT USE THIS FIELD. eBay now controls all electronic payment methods available for a marketplace, and a seller never has to specify any electronic payment methods.</span>
      * @param RecipientAccountReferenceTypeEnum|null $value Value to set for the referenceType property.
     */
     public function setReferenceType(?RecipientAccountReferenceTypeEnum $value): void {

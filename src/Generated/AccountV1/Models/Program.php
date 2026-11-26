@@ -32,7 +32,7 @@ class Program implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var ProgramTypeEnum|null $programType This enumerated type defines the supported seller programs. | - **OUT_OF_STOCK_CONTROL**: If a seller's account is opted in to the out-of-stock control program, active fixed-price listings will be kept 'alive' (but not surfaced in search results) even when the quantity for the listing has been depleted to 0. This feature allows the seller to update/revise the listing with more quantity, and prevents the seller from having to relist the item. - **PARTNER_MOTORS_DEALER**: The Partner Motors Program that sellers can participate in by opting-in to the program. Sellers must be registered business users to opt-in to this program. - **SELLING_POLICY_MANAGEMENT**: If a seller's account is opted in to this program, sellers can associate business policies (payment, return policy, fulfillment) to their listings. Being opted in to business policies is a requirement for using the <strong>Inventory API</strong>.
+     * @var ProgramTypeEnum|null $programType The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request. When returned in an <b>getOptedInPrograms</b> response, a separate <b>programType</b> field is returned for each seller program that the seller is opted in to.
     */
     private ?ProgramTypeEnum $programType = null;
     
@@ -72,7 +72,7 @@ class Program implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the programType property value. This enumerated type defines the supported seller programs. | - **OUT_OF_STOCK_CONTROL**: If a seller's account is opted in to the out-of-stock control program, active fixed-price listings will be kept 'alive' (but not surfaced in search results) even when the quantity for the listing has been depleted to 0. This feature allows the seller to update/revise the listing with more quantity, and prevents the seller from having to relist the item. - **PARTNER_MOTORS_DEALER**: The Partner Motors Program that sellers can participate in by opting-in to the program. Sellers must be registered business users to opt-in to this program. - **SELLING_POLICY_MANAGEMENT**: If a seller's account is opted in to this program, sellers can associate business policies (payment, return policy, fulfillment) to their listings. Being opted in to business policies is a requirement for using the <strong>Inventory API</strong>.
+     * Gets the programType property value. The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request. When returned in an <b>getOptedInPrograms</b> response, a separate <b>programType</b> field is returned for each seller program that the seller is opted in to.
      * @return ProgramTypeEnum|null
     */
     public function getProgramType(): ?ProgramTypeEnum {
@@ -97,7 +97,7 @@ class Program implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the programType property value. This enumerated type defines the supported seller programs. | - **OUT_OF_STOCK_CONTROL**: If a seller's account is opted in to the out-of-stock control program, active fixed-price listings will be kept 'alive' (but not surfaced in search results) even when the quantity for the listing has been depleted to 0. This feature allows the seller to update/revise the listing with more quantity, and prevents the seller from having to relist the item. - **PARTNER_MOTORS_DEALER**: The Partner Motors Program that sellers can participate in by opting-in to the program. Sellers must be registered business users to opt-in to this program. - **SELLING_POLICY_MANAGEMENT**: If a seller's account is opted in to this program, sellers can associate business policies (payment, return policy, fulfillment) to their listings. Being opted in to business policies is a requirement for using the <strong>Inventory API</strong>.
+     * Sets the programType property value. The seller program to opt in to when part of an <b>optInToProgram</b> request, or out of when part of an  <b>optOutOfProgram</b> request. When returned in an <b>getOptedInPrograms</b> response, a separate <b>programType</b> field is returned for each seller program that the seller is opted in to.
      * @param ProgramTypeEnum|null $value Value to set for the programType property.
     */
     public function setProgramType(?ProgramTypeEnum $value): void {

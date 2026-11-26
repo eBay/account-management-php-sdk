@@ -47,7 +47,7 @@ class CompactCustomPolicyResponse implements AdditionalDataHolder, Parsable
     private ?string $name = null;
     
     /**
-     * @var CustomPolicyTypeEnum|null $policyType An enumeration type that defines the supported types of Custom Policies. | - **PRODUCT_COMPLIANCE**: This enumeration value indicates that the custom policy is a product compliance policy. - **TAKE_BACK**: This enumeration value indicates that the custom policy is a product takeback policy.
+     * @var CustomPolicyTypeEnum|null $policyType Specifies the type of Custom Policy being returned.
     */
     private ?CustomPolicyTypeEnum $policyType = null;
     
@@ -114,7 +114,7 @@ class CompactCustomPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the policyType property value. An enumeration type that defines the supported types of Custom Policies. | - **PRODUCT_COMPLIANCE**: This enumeration value indicates that the custom policy is a product compliance policy. - **TAKE_BACK**: This enumeration value indicates that the custom policy is a product takeback policy.
+     * Gets the policyType property value. Specifies the type of Custom Policy being returned.
      * @return CustomPolicyTypeEnum|null
     */
     public function getPolicyType(): ?CustomPolicyTypeEnum {
@@ -166,7 +166,7 @@ class CompactCustomPolicyResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the policyType property value. An enumeration type that defines the supported types of Custom Policies. | - **PRODUCT_COMPLIANCE**: This enumeration value indicates that the custom policy is a product compliance policy. - **TAKE_BACK**: This enumeration value indicates that the custom policy is a product takeback policy.
+     * Sets the policyType property value. Specifies the type of Custom Policy being returned.
      * @param CustomPolicyTypeEnum|null $value Value to set for the policyType property.
     */
     public function setPolicyType(?CustomPolicyTypeEnum $value): void {

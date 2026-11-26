@@ -81,7 +81,7 @@ class WithReturn_policy_ItemRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method updates an existing return policy. Specify the policy you want to update using the <b>return_policy_id</b> path parameter. Supply a complete policy payload with the updates you want to make; this call overwrites the existing policy with the new details specified in the payload.
-     * @param ReturnPolicyRequest $body This root container defines a seller's return business policy for a specific marketplace and category group. This type is used when creating or updating a return business policy.
+     * @param ReturnPolicyRequest $body Container for a return policy request.
      * @param WithReturn_policy_ItemRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<SetReturnPolicyResponse|null>
      * @throws Exception
@@ -134,7 +134,7 @@ class WithReturn_policy_ItemRequestBuilder extends BaseRequestBuilder
 
     /**
      * This method updates an existing return policy. Specify the policy you want to update using the <b>return_policy_id</b> path parameter. Supply a complete policy payload with the updates you want to make; this call overwrites the existing policy with the new details specified in the payload.
-     * @param ReturnPolicyRequest $body This root container defines a seller's return business policy for a specific marketplace and category group. This type is used when creating or updating a return business policy.
+     * @param ReturnPolicyRequest $body Container for a return policy request.
      * @param WithReturn_policy_ItemRequestBuilderPutRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

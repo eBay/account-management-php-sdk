@@ -37,7 +37,7 @@ class Region implements AdditionalDataHolder, Parsable
     private ?string $regionName = null;
     
     /**
-     * @var RegionTypeEnum|null $regionType This enumerated type defines shipping region types.<br><span class="tablenote"> <strong>Note:</strong> These enumeration values are not currently being used by fulfillment policy methods, but may be used in the future.</span> | - **COUNTRY**: A single country. - **COUNTRY_REGION**: A domestic region or special location within a country. In the US, these domestic region/special location include 'Alaska/Hawaii' and 'PO Box'. - **STATE_OR_PROVINCE**: A state or province, such as California (CA) or New York (NY) in the US, or British Columbia (BC) or Ontario (ON) in Canada. - **WORLD_REGION**: A world region, such as Europe, the Middle East, or Southeast Asia. - **WORLDWIDE**: The entire world as we know it.
+     * @var RegionTypeEnum|null $regionType Reserved for future use. <!--The region's type, which can be one of the following: 'COUNTRY', 'COUNTRY_REGION', 'STATE_OR_PROVINCE', 'WORLD_REGION', or 'WORLDWIDE'.-->
     */
     private ?RegionTypeEnum $regionType = null;
     
@@ -86,7 +86,7 @@ class Region implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the regionType property value. This enumerated type defines shipping region types.<br><span class="tablenote"> <strong>Note:</strong> These enumeration values are not currently being used by fulfillment policy methods, but may be used in the future.</span> | - **COUNTRY**: A single country. - **COUNTRY_REGION**: A domestic region or special location within a country. In the US, these domestic region/special location include 'Alaska/Hawaii' and 'PO Box'. - **STATE_OR_PROVINCE**: A state or province, such as California (CA) or New York (NY) in the US, or British Columbia (BC) or Ontario (ON) in Canada. - **WORLD_REGION**: A world region, such as Europe, the Middle East, or Southeast Asia. - **WORLDWIDE**: The entire world as we know it.
+     * Gets the regionType property value. Reserved for future use. <!--The region's type, which can be one of the following: 'COUNTRY', 'COUNTRY_REGION', 'STATE_OR_PROVINCE', 'WORLD_REGION', or 'WORLDWIDE'.-->
      * @return RegionTypeEnum|null
     */
     public function getRegionType(): ?RegionTypeEnum {
@@ -120,7 +120,7 @@ class Region implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the regionType property value. This enumerated type defines shipping region types.<br><span class="tablenote"> <strong>Note:</strong> These enumeration values are not currently being used by fulfillment policy methods, but may be used in the future.</span> | - **COUNTRY**: A single country. - **COUNTRY_REGION**: A domestic region or special location within a country. In the US, these domestic region/special location include 'Alaska/Hawaii' and 'PO Box'. - **STATE_OR_PROVINCE**: A state or province, such as California (CA) or New York (NY) in the US, or British Columbia (BC) or Ontario (ON) in Canada. - **WORLD_REGION**: A world region, such as Europe, the Middle East, or Southeast Asia. - **WORLDWIDE**: The entire world as we know it.
+     * Sets the regionType property value. Reserved for future use. <!--The region's type, which can be one of the following: 'COUNTRY', 'COUNTRY_REGION', 'STATE_OR_PROVINCE', 'WORLD_REGION', or 'WORLDWIDE'.-->
      * @param RegionTypeEnum|null $value Value to set for the regionType property.
     */
     public function setRegionType(?RegionTypeEnum $value): void {

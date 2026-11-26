@@ -32,12 +32,12 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var ShippingCostTypeEnum|null $costType This enumerated type defines the shipping cost models. | - **CALCULATED**: This value indicates that calculated shipping is used by the seller. With calculated shipping, the shipping cost varies according to the shipping location and the size and weight of the package. - **FLAT_RATE**: This value indicates that flat-rate shipping is used by the seller. With flat-rate shipping, the shipping cost will be the same for all buyers, or buyers within a specified region if the seller uses shipping rate tables. - **NOT_SPECIFIED**: This value indicates that the shipping cost type has not been specified.
+     * @var ShippingCostTypeEnum|null $costType This field defines whether the shipping cost model is <code>FLAT_RATE</code> (the same rate for all buyers, or buyers within a region if shipping rate tables are used) or <code>CALCULATED</code> (the shipping rate varies by the ship-to location and size and weight of the package). <br><br>This field is conditionally required if any shipping service options are specified (domestic and/or international).
     */
     private ?ShippingCostTypeEnum $costType = null;
     
     /**
-     * @var Amount|null $insuranceFee A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * @var Amount|null $insuranceFee This field has been deprecated. <br><br>Shipping insurance is offered only via a shipping carrier's shipping services and is no longer available via eBay shipping policies.
     */
     private ?Amount $insuranceFee = null;
     
@@ -47,12 +47,12 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     private ?bool $insuranceOffered = null;
     
     /**
-     * @var ShippingOptionTypeEnum|null $optionType This enumerated type defines whether the corresponding shipping service options are domestic or international shipping service options. a region that is either domestic (within the country from where the item is listed or shipped) or international (a country outside the country from where the item is listed or shipped). | - **DOMESTIC**: This value indicates that the corresponding shipping service options are domestic shipping service options. - **INTERNATIONAL**: This value indicates that the corresponding shipping service options are international shipping service options.
+     * @var ShippingOptionTypeEnum|null $optionType This field is used to indicate if the corresponding shipping service options (under <b>shippingServices</b> array) are domestic or international shipping service options. This field is conditionally required if any shipping service options are specified (domestic and/or international).
     */
     private ?ShippingOptionTypeEnum $optionType = null;
     
     /**
-     * @var Amount|null $packageHandlingCost A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * @var Amount|null $packageHandlingCost This container is used if the seller adds handling charges to domestic and/or international shipments. <br><br>Sellers can not specify any domestic handling charges if they offered 'free shipping' in the policy.<br><br>This container will only be returned if set for the policy.
     */
     private ?Amount $packageHandlingCost = null;
     
@@ -101,7 +101,7 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the costType property value. This enumerated type defines the shipping cost models. | - **CALCULATED**: This value indicates that calculated shipping is used by the seller. With calculated shipping, the shipping cost varies according to the shipping location and the size and weight of the package. - **FLAT_RATE**: This value indicates that flat-rate shipping is used by the seller. With flat-rate shipping, the shipping cost will be the same for all buyers, or buyers within a specified region if the seller uses shipping rate tables. - **NOT_SPECIFIED**: This value indicates that the shipping cost type has not been specified.
+     * Gets the costType property value. This field defines whether the shipping cost model is <code>FLAT_RATE</code> (the same rate for all buyers, or buyers within a region if shipping rate tables are used) or <code>CALCULATED</code> (the shipping rate varies by the ship-to location and size and weight of the package). <br><br>This field is conditionally required if any shipping service options are specified (domestic and/or international).
      * @return ShippingCostTypeEnum|null
     */
     public function getCostType(): ?ShippingCostTypeEnum {
@@ -128,7 +128,7 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the insuranceFee property value. A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * Gets the insuranceFee property value. This field has been deprecated. <br><br>Shipping insurance is offered only via a shipping carrier's shipping services and is no longer available via eBay shipping policies.
      * @return Amount|null
     */
     public function getInsuranceFee(): ?Amount {
@@ -144,7 +144,7 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the optionType property value. This enumerated type defines whether the corresponding shipping service options are domestic or international shipping service options. a region that is either domestic (within the country from where the item is listed or shipped) or international (a country outside the country from where the item is listed or shipped). | - **DOMESTIC**: This value indicates that the corresponding shipping service options are domestic shipping service options. - **INTERNATIONAL**: This value indicates that the corresponding shipping service options are international shipping service options.
+     * Gets the optionType property value. This field is used to indicate if the corresponding shipping service options (under <b>shippingServices</b> array) are domestic or international shipping service options. This field is conditionally required if any shipping service options are specified (domestic and/or international).
      * @return ShippingOptionTypeEnum|null
     */
     public function getOptionType(): ?ShippingOptionTypeEnum {
@@ -152,7 +152,7 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the packageHandlingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * Gets the packageHandlingCost property value. This container is used if the seller adds handling charges to domestic and/or international shipments. <br><br>Sellers can not specify any domestic handling charges if they offered 'free shipping' in the policy.<br><br>This container will only be returned if set for the policy.
      * @return Amount|null
     */
     public function getPackageHandlingCost(): ?Amount {
@@ -217,7 +217,7 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the costType property value. This enumerated type defines the shipping cost models. | - **CALCULATED**: This value indicates that calculated shipping is used by the seller. With calculated shipping, the shipping cost varies according to the shipping location and the size and weight of the package. - **FLAT_RATE**: This value indicates that flat-rate shipping is used by the seller. With flat-rate shipping, the shipping cost will be the same for all buyers, or buyers within a specified region if the seller uses shipping rate tables. - **NOT_SPECIFIED**: This value indicates that the shipping cost type has not been specified.
+     * Sets the costType property value. This field defines whether the shipping cost model is <code>FLAT_RATE</code> (the same rate for all buyers, or buyers within a region if shipping rate tables are used) or <code>CALCULATED</code> (the shipping rate varies by the ship-to location and size and weight of the package). <br><br>This field is conditionally required if any shipping service options are specified (domestic and/or international).
      * @param ShippingCostTypeEnum|null $value Value to set for the costType property.
     */
     public function setCostType(?ShippingCostTypeEnum $value): void {
@@ -225,7 +225,7 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the insuranceFee property value. A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * Sets the insuranceFee property value. This field has been deprecated. <br><br>Shipping insurance is offered only via a shipping carrier's shipping services and is no longer available via eBay shipping policies.
      * @param Amount|null $value Value to set for the insuranceFee property.
     */
     public function setInsuranceFee(?Amount $value): void {
@@ -241,7 +241,7 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the optionType property value. This enumerated type defines whether the corresponding shipping service options are domestic or international shipping service options. a region that is either domestic (within the country from where the item is listed or shipped) or international (a country outside the country from where the item is listed or shipped). | - **DOMESTIC**: This value indicates that the corresponding shipping service options are domestic shipping service options. - **INTERNATIONAL**: This value indicates that the corresponding shipping service options are international shipping service options.
+     * Sets the optionType property value. This field is used to indicate if the corresponding shipping service options (under <b>shippingServices</b> array) are domestic or international shipping service options. This field is conditionally required if any shipping service options are specified (domestic and/or international).
      * @param ShippingOptionTypeEnum|null $value Value to set for the optionType property.
     */
     public function setOptionType(?ShippingOptionTypeEnum $value): void {
@@ -249,7 +249,7 @@ class ShippingOption implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the packageHandlingCost property value. A complex type that describes the value of a monetary amount as represented by a global currency. When passing in an amount in a request payload, both <b>currency</b> and <b>value</b> fields are required, and both fields are also always returned for an amount in a response field.
+     * Sets the packageHandlingCost property value. This container is used if the seller adds handling charges to domestic and/or international shipments. <br><br>Sellers can not specify any domestic handling charges if they offered 'free shipping' in the policy.<br><br>This container will only be returned if set for the policy.
      * @param Amount|null $value Value to set for the packageHandlingCost property.
     */
     public function setPackageHandlingCost(?Amount $value): void {
